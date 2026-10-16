@@ -133,7 +133,8 @@ svg { display: block; }
   border-bottom: 1px solid var(--fk-line);
 }
 .fk-header__row {
-  height: var(--fk-header-h);
+  /* Нижняя граница шапки (1 px) входит в --fk-header-h: полная высота не больше 72 px (H-01, критерий 5) */
+  height: calc(var(--fk-header-h) - 1px);
   display: flex; align-items: center; gap: 8px;
 }
 .fk-logo {
@@ -170,6 +171,8 @@ svg { display: block; }
 .fk-nav__link[aria-current="true"], .fk-nav__link:hover { text-decoration: underline; text-underline-offset: 6px; }
 .fk-catalog-btn { display: none; }
 .fk-catalog-panel { display: block; padding: 16px 0 8px; }
+/* В мобильной панели боковой отступ уже задан у .fk-nav; на десктопе контейнер возвращается ниже */
+.fk-catalog-panel .fk-container { padding-inline: 0; }
 .fk-catalog-cols { display: grid; gap: 24px; }
 .fk-catalog-title { font-size: var(--fk-fs-small); font-weight: 600; color: var(--fk-ink-muted); margin-bottom: 4px; }
 .fk-catalog-list a {
@@ -187,7 +190,7 @@ svg { display: block; }
 .no-js .fk-nav__link { width: auto; min-height: 44px; border-bottom: 0; font-size: 1rem; }
 .no-js .fk-catalog-panel { display: none; }
 .no-js .fk-nav-fallback { display: contents; }
-.no-js .fk-header__row { flex-wrap: wrap; height: auto; min-height: var(--fk-header-h); }
+.no-js .fk-header__row { flex-wrap: wrap; height: auto; min-height: calc(var(--fk-header-h) - 1px); }
 
 @media (min-width: 1024px) {
   .fk-menu-btn { display: none; }
@@ -212,6 +215,7 @@ svg { display: block; }
     box-shadow: 0 8px 24px rgba(30, 32, 34, 0.12); padding: 32px 0 40px;
   }
   .fk-catalog-btn[aria-expanded="true"] ~ .fk-catalog-panel { display: block; }
+  .fk-catalog-panel .fk-container { padding-inline: var(--fk-margin); }
   .fk-catalog-cols { grid-template-columns: repeat(12, 1fr); gap: var(--fk-col-gap); }
   .fk-catalog-cols > div:nth-child(1) { grid-column: 1 / span 4; }
   .fk-catalog-cols > div:nth-child(2) { grid-column: 5 / span 4; }
