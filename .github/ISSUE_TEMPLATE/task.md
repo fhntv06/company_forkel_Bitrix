@@ -1,4 +1,10 @@
-# RES-001 — Исследование главной страницы FORKEL
+---
+name: FORKEL Task
+about: Исследование главной страницы FORKEL
+title: "RES-001 — Исследование главной страницы FORKEL"
+labels: task
+assignees: ""
+---
 
 **Роль:** Research & Design System  
 **Приоритет:** P1
