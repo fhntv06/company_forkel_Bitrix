@@ -136,5 +136,6 @@
 `docs/workflow/current-state.md`, `docs/design/homepage-spec.md` (разделы 2, 10, 11, 12), `docs/design/design-system.md`, `docs/project/decisions.md`, `docs/workflow/roles.md`.
 
 ### Git
-- Ветка: `role/implementation/ui-001-homepage` (локальная, от `main` `4a0588b`).
-- Коммит: см. ниже; в удалённый репозиторий не отправлялся.
+- Ветка: `role/implementation/ui-001-homepage` (от `main` `4a0588b`).
+- Обычный `git push` из сессии отклонён (403), ветка опубликована через GitHub-коннектор (MCP) под аккаунтом владельца; хеш коммита на GitHub отличается от локального.
+- Pull Request не создавался.
