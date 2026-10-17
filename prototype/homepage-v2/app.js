@@ -124,23 +124,37 @@
     if (menuBtn && menuBtn.getAttribute('aria-expanded') === 'true') setMenu(false, true);
   });
 
-  /* Блок «Подбор» (демо): радиогруппы образцов. Меняется только состояние выбора и подпись;
-     превью не меняется, потому что реальных изображений комбинаций нет (H-05). */
+  /* Блок «Подбор» (демо): четыре шага (коллекция, тип изделия, цвет механизма, цвет рамки).
+     Меняются превью и таблица результата. Это иллюстрация: данных о составе, артикулах и ценах нет,
+     коллекции различаются только названием. */
   (function () {
-    var groups = [].slice.call(document.querySelectorAll('.fk-swatches'));
+    var groups = [].slice.call(document.querySelectorAll('#cfg [role="radiogroup"]'));
+    if (!groups.length) return;
     var summary = document.getElementById('cfg-summary');
+    var frameG = document.getElementById('cfg-frame');
+    var mechG = document.getElementById('cfg-mech');
+    var mechUse = document.getElementById('cfg-mech-use');
     var chosen = {};
-    function update() {
-      if (summary) summary.textContent = 'Выбрано (демо): рамка — ' + (chosen.frame || '') + ', механизм — ' + (chosen.mech || '') + '.';
+    function out(part) {
+      [].forEach.call(document.querySelectorAll('[data-out="' + part + '"]'), function (el) { el.textContent = chosen[part]; });
     }
+    function setFin(g, cls) { g.setAttribute('class', cls); }
     function select(group, radio, focus) {
+      var part = group.getAttribute('data-part');
       [].forEach.call(group.querySelectorAll('[role="radio"]'), function (r) {
         r.setAttribute('aria-checked', String(r === radio));
         r.tabIndex = r === radio ? 0 : -1;
       });
-      chosen[group.getAttribute('data-part')] = radio.getAttribute('data-name');
+      chosen[part] = radio.getAttribute('data-name');
+      if (part === 'frame' && frameG) setFin(frameG, radio.getAttribute('data-fin'));
+      if (part === 'mech' && mechG) setFin(mechG, radio.getAttribute('data-fin'));
+      if (part === 'type' && mechUse) mechUse.setAttribute('href', '#' + radio.getAttribute('data-symbol'));
+      out(part);
       if (focus) radio.focus();
-      update();
+      if (summary && chosen.collection && chosen.type && chosen.mech && chosen.frame) {
+        summary.textContent = 'Выбрано (демо): ' + chosen.collection + ', ' + chosen.type +
+          ', механизм — ' + chosen.mech + ', рамка — ' + chosen.frame + '.';
+      }
     }
     groups.forEach(function (group) {
       var radios = [].slice.call(group.querySelectorAll('[role="radio"]'));
