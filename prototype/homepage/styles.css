@@ -91,6 +91,12 @@ svg { display: block; }
   color: var(--fk-ink-muted);
 }
 .fk-proto-bar .fk-container { padding-block: 8px; }
+/* До 767 px баннер прототипа показывается внизу страницы: он не часть макета и не должен занимать
+   первый экран (мобильное фото 4:3, заголовок и кнопка должны помещаться на 360×640). */
+@media (max-width: 767px) {
+  body { display: flex; flex-direction: column; }
+  .fk-proto-bar { order: 10; border-bottom: 0; border-top: 1px solid var(--fk-line); }
+}
 
 .fk-skip {
   position: absolute; left: var(--fk-margin); top: 8px; z-index: 100;
@@ -227,7 +233,7 @@ svg { display: block; }
 .fk-hero__media {
   order: -1;
   margin-inline: calc(var(--fk-margin) * -1);
-  height: clamp(168px, 30svh, 270px);
+  aspect-ratio: 4 / 3; /* мобильное фото 4:3 — homepage-spec, H-02 «Макет» */
   background: var(--fk-surface); overflow: hidden;
 }
 .fk-hero__media svg { width: 100%; height: 100%; animation: fk-fade 400ms ease-out both; }
@@ -242,7 +248,8 @@ svg { display: block; }
 .fk-hero__actions .fk-btn { width: 100%; }
 
 @media (min-width: 768px) {
-  .fk-hero__media { height: clamp(320px, 62vw, 560px); }
+  /* 768–1023 px: формат для планшета в спецификации не задан; сохранена прежняя высота с ограничением */
+  .fk-hero__media { aspect-ratio: auto; height: clamp(320px, 62vw, 560px); }
   .fk-hero__actions { width: auto; }
   .fk-hero__actions .fk-btn { width: auto; }
 }
@@ -262,6 +269,8 @@ svg { display: block; }
   font-size: var(--fk-fs-h2); line-height: 1.15; font-weight: 600; letter-spacing: -0.01em;
 }
 .fk-note { font-size: var(--fk-fs-small); line-height: 1.45; color: var(--fk-ink-muted); max-width: 70ch; }
+/* Явная пометка условного или временного блока прототипа (не компонент дизайн-системы) */
+.fk-note--proto { color: var(--fk-ink); border: 1px dashed var(--fk-edge); border-radius: var(--fk-radius); padding: 8px 12px; align-self: flex-start; }
 
 /* ---------- H-03 Коллекции ---------- */
 .fk-grid { display: grid; gap: 24px var(--fk-col-gap); }

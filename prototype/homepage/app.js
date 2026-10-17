@@ -7,7 +7,9 @@
   var nav = document.getElementById('site-nav');
   var menuBtn = document.querySelector('.fk-menu-btn');
   var catalogBtn = document.querySelector('.fk-catalog-btn');
-  var inertTargets = [document.getElementById('main'), document.querySelector('.fk-footer')];
+  var header = document.querySelector('.fk-header');
+  /* Пока меню открыто, недоступны для клавиатуры и скринридера все части страницы вне шапки и панели меню */
+  var inertTargets = [document.getElementById('main'), document.querySelector('.fk-footer'), document.querySelector('.fk-skip')];
   var note = document.getElementById('proto-note');
   var noteTimer;
 
@@ -48,8 +50,40 @@
     menuBtn.textContent = open ? 'Закрыть' : 'Меню';
     document.body.style.overflow = open ? 'hidden' : '';
     inertTargets.forEach(function (el) { if (el) el.inert = open; });
-    if (!open && returnFocus) menuBtn.focus();
+    if (open) {
+      /* Фокус переносится внутрь панели: на первый видимый пункт меню
+         (кнопка «Каталог» в мобильной панели скрыта и фокус принять не может) */
+      var first = [].slice.call(nav.querySelectorAll('a[href], button')).filter(function (el) {
+        return el.getClientRects().length > 0;
+      })[0];
+      if (first) first.focus();
+    } else if (returnFocus) {
+      menuBtn.focus();
+    }
   }
+
+  /* Порядок обхода при открытом меню совпадает с визуальным: логотип, кнопки шапки, затем пункты панели.
+     В разметке панель стоит между логотипом и кнопками, поэтому порядок задаётся здесь. */
+  function visibleFocusables() {
+    return [].slice.call(header.querySelectorAll('a[href], button:not([disabled])')).filter(function (el) {
+      return el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden';
+    }).sort(function (a, b) {
+      var ra = a.getBoundingClientRect(), rb = b.getBoundingClientRect();
+      return Math.abs(ra.top - rb.top) > 20 ? ra.top - rb.top : ra.left - rb.left;
+    });
+  }
+  function trapTab(e) {
+    if (e.key !== 'Tab' || !menuBtn || menuBtn.getAttribute('aria-expanded') !== 'true' || desktop.matches) return;
+    var items = visibleFocusables();
+    if (!items.length) return;
+    var i = items.indexOf(document.activeElement), next;
+    if (i < 0) next = e.shiftKey ? items.length - 1 : 0;
+    else if (e.shiftKey) next = i === 0 ? items.length - 1 : i - 1;
+    else next = i === items.length - 1 ? 0 : i + 1;
+    e.preventDefault();
+    items[next].focus();
+  }
+  document.addEventListener('keydown', trapTab);
   if (menuBtn) {
     menuBtn.addEventListener('click', function () {
       setMenu(menuBtn.getAttribute('aria-expanded') !== 'true');
