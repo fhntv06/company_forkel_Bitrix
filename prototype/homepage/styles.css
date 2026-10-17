@@ -187,6 +187,16 @@ svg { display: block; }
 .fk-catalog-list a:hover { text-decoration: underline; text-underline-offset: 4px; }
 .fk-nav-fallback { display: none; }
 
+/* Телефон: номера нет, показана явная заглушка (контакты предоставит владелец) */
+.fk-phone {
+  display: inline-block; padding: 4px 8px; white-space: nowrap;
+  font-size: var(--fk-fs-small); line-height: 1.3; color: var(--fk-ink);
+  border: 1px dashed var(--fk-edge); border-radius: var(--fk-radius);
+}
+.fk-phone--header { display: none; }
+@media (min-width: 1280px) { .fk-phone--header { display: inline-block; margin-right: 8px; } }
+.fk-nav__phone { margin-top: 16px; }
+
 /* Без JavaScript: навигация обычным списком, без панелей и без неработающих кнопок */
 .no-js .fk-nav__list > li:first-child,
 .no-js .fk-actions { display: none; }
@@ -200,6 +210,7 @@ svg { display: block; }
 
 @media (min-width: 1024px) {
   .fk-menu-btn { display: none; }
+  .fk-nav__mobile-only, .fk-nav__phone { display: none; }
   .fk-icon-btn--account { display: inline-flex; }
   .fk-header__row { gap: 32px; }
   .fk-logo { margin-right: 0; }
@@ -244,13 +255,13 @@ svg { display: block; }
   text-wrap: balance;
 }
 .fk-hero__lead { max-width: 34ch; color: var(--fk-ink-muted); }
-.fk-hero__actions { display: flex; flex-direction: column; width: 100%; margin-top: 8px; }
+.fk-hero__actions { display: flex; flex-direction: column; gap: 12px; width: 100%; margin-top: 8px; }
 .fk-hero__actions .fk-btn { width: 100%; }
 
 @media (min-width: 768px) {
   /* 768–1023 px: формат для планшета в спецификации не задан; сохранена прежняя высота с ограничением */
   .fk-hero__media { aspect-ratio: auto; height: clamp(320px, 62vw, 560px); }
-  .fk-hero__actions { width: auto; }
+  .fk-hero__actions { width: auto; flex-direction: row; flex-wrap: wrap; gap: 16px; }
   .fk-hero__actions .fk-btn { width: auto; }
 }
 @media (min-width: 1024px) {
@@ -301,6 +312,54 @@ svg { display: block; }
 .fk-category-tile:hover { background: var(--fk-line); }
 @media (min-width: 768px) { .fk-category-tile { font-size: 1.125rem; padding: 16px; } }
 .fk-category-tile:hover span { text-decoration: underline; text-underline-offset: 4px; }
+
+/* ---------- Общее для блоков H-05, H-06, H-10 (демонстрационные) ---------- */
+.fk-section-head__row { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; }
+.fk-link--tap { display: inline-flex; align-items: center; min-height: 44px; }
+/* Заглушка фото: нейтральная подложка с подписью, не изображение продукции */
+.fk-ph { display: grid; place-items: center; aspect-ratio: 4 / 3; padding: 16px; text-align: center; color: var(--fk-ink-muted); font-size: var(--fk-fs-small); line-height: 1.45; }
+
+/* ---------- H-05 Подбор ---------- */
+.fk-cfg { display: grid; gap: 24px var(--fk-col-gap); }
+.fk-cfg__preview { aspect-ratio: 4 / 3; background: var(--fk-surface); overflow: hidden; }
+.fk-cfg__preview svg { width: 100%; height: 100%; }
+.fk-cfg__controls { display: grid; gap: 24px; align-content: start; }
+.fk-cfg__label { font-size: var(--fk-fs-small); line-height: 1.45; font-weight: 600; margin-bottom: 4px; }
+.fk-swatches { display: flex; flex-wrap: wrap; gap: 4px; }
+/* Образец: квадрат 32 px внутри зоны касания 44 px; контур --fk-edge, выбранный — кольцо 2 px (design-system 6.8) */
+.fk-swatch {
+  display: grid; place-items: center; width: 44px; height: 44px; padding: 0;
+  background: transparent; border: 0; border-radius: var(--fk-radius); cursor: pointer;
+}
+.fk-swatch::before {
+  content: ""; width: 32px; height: 32px; background: var(--finish);
+  border: 1px solid var(--fk-edge); border-radius: var(--fk-radius);
+}
+.fk-swatch[aria-checked="true"]::before { box-shadow: 0 0 0 2px var(--fk-canvas), 0 0 0 4px var(--fk-ink); }
+.fk-cfg__action .fk-btn { width: 100%; }
+.no-js .fk-cfg__group { display: none; }
+@media (min-width: 768px) { .fk-cfg__action .fk-btn { width: auto; } }
+@media (min-width: 1024px) {
+  .fk-cfg { grid-template-columns: repeat(12, 1fr); align-items: center; }
+  .fk-cfg__preview { grid-column: 1 / span 7; }
+  .fk-cfg__controls { grid-column: 9 / span 4; }
+}
+
+/* ---------- H-06 Новинки (демонстрационные карточки) ---------- */
+.fk-grid--products { grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 768px) { .fk-grid--products { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1280px) { .fk-grid--products { grid-template-columns: repeat(4, 1fr); } }
+.fk-product-card { display: flex; flex-direction: column; gap: 8px; }
+.fk-product-card__media { display: block; aspect-ratio: 1 / 1; background: var(--fk-surface); overflow: hidden; }
+.fk-product-card__media svg { width: 100%; height: 100%; }
+.fk-product-card__name { margin-top: 4px; font-size: 1rem; font-weight: 600; line-height: 1.3; overflow-wrap: anywhere; }
+.fk-product-card__price { font-size: 1.125rem; font-weight: 600; line-height: 1.2; }
+.fk-product-card__stock { font-size: var(--fk-fs-small); line-height: 1.45; color: var(--fk-ink-muted); }
+.fk-product-card .fk-link--tap { margin-top: auto; align-self: flex-start; }
+
+/* ---------- H-10 Проекты (демонстрационные карточки) ---------- */
+.fk-grid--projects { grid-template-columns: 1fr; }
+@media (min-width: 768px) { .fk-grid--projects { grid-template-columns: repeat(3, 1fr); } }
 
 /* ---------- H-07 Профессионалам ---------- */
 .fk-pro { background: var(--fk-surface); padding-block: var(--fk-section-gap); margin-bottom: 0; }

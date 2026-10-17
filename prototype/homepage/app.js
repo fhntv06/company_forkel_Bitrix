@@ -65,12 +65,15 @@
   /* Порядок обхода при открытом меню совпадает с визуальным: логотип, кнопки шапки, затем пункты панели.
      В разметке панель стоит между логотипом и кнопками, поэтому порядок задаётся здесь. */
   function visibleFocusables() {
-    return [].slice.call(header.querySelectorAll('a[href], button:not([disabled])')).filter(function (el) {
+    var vis = function (el) {
       return el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden';
-    }).sort(function (a, b) {
-      var ra = a.getBoundingClientRect(), rb = b.getBoundingClientRect();
-      return Math.abs(ra.top - rb.top) > 20 ? ra.top - rb.top : ra.left - rb.left;
+    };
+    var all = [].slice.call(header.querySelectorAll('a[href], button:not([disabled])')).filter(vis);
+    var inNav = all.filter(function (el) { return nav.contains(el); });
+    var bar = all.filter(function (el) { return !nav.contains(el); }).sort(function (a, b) {
+      return a.getBoundingClientRect().left - b.getBoundingClientRect().left;
     });
+    return bar.concat(inNav); /* не зависит от прокрутки панели */
   }
   function trapTab(e) {
     if (e.key !== 'Tab' || !menuBtn || menuBtn.getAttribute('aria-expanded') !== 'true' || desktop.matches) return;
@@ -120,6 +123,42 @@
     if (catalogBtn && catalogBtn.getAttribute('aria-expanded') === 'true') { setCatalog(false, true); return; }
     if (menuBtn && menuBtn.getAttribute('aria-expanded') === 'true') setMenu(false, true);
   });
+
+  /* Блок «Подбор» (демо): радиогруппы образцов. Меняется только состояние выбора и подпись;
+     превью не меняется, потому что реальных изображений комбинаций нет (H-05). */
+  (function () {
+    var groups = [].slice.call(document.querySelectorAll('.fk-swatches'));
+    var summary = document.getElementById('cfg-summary');
+    var chosen = {};
+    function update() {
+      if (summary) summary.textContent = 'Выбрано (демо): рамка — ' + (chosen.frame || '') + ', механизм — ' + (chosen.mech || '') + '.';
+    }
+    function select(group, radio, focus) {
+      [].forEach.call(group.querySelectorAll('[role="radio"]'), function (r) {
+        r.setAttribute('aria-checked', String(r === radio));
+        r.tabIndex = r === radio ? 0 : -1;
+      });
+      chosen[group.getAttribute('data-part')] = radio.getAttribute('data-name');
+      if (focus) radio.focus();
+      update();
+    }
+    groups.forEach(function (group) {
+      var radios = [].slice.call(group.querySelectorAll('[role="radio"]'));
+      var start = radios.filter(function (r) { return r.getAttribute('aria-checked') === 'true'; })[0] || radios[0];
+      select(group, start, false);
+      group.addEventListener('click', function (e) {
+        var r = e.target.closest('[role="radio"]');
+        if (r) select(group, r, false);
+      });
+      group.addEventListener('keydown', function (e) {
+        var i = radios.indexOf(document.activeElement);
+        var step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+        if (i < 0 || !step) return;
+        e.preventDefault();
+        select(group, radios[(i + step + radios.length) % radios.length], true);
+      });
+    });
+  })();
 
   /* При переходе на широкий экран сбросить состояние мобильного меню */
   desktop.addEventListener('change', function () {
