@@ -88,10 +88,11 @@
                   <div>
                     <p class="fk-catalog-title">Категории</p>
                     <ul class="fk-catalog-list">
-                      <li><a href="#categories">Розетки</a></li>
-                      <li><a href="#categories">Выключатели</a></li>
-                      <li><a href="#categories">Рамки</a></li>
+                      <li><a href="catalog.html?category=sockets">Розетки</a></li>
+                      <li><a href="catalog.html?category=switches">Выключатели</a></li>
+                      <li><a href="catalog.html?category=frames">Рамки</a></li>
                     </ul>
+                    <p class="fk-catalog-all"><a class="fk-link" href="catalog.html">Весь каталог</a></p>
                   </div>
                 </div>
               </div>
@@ -380,19 +381,19 @@
         </div>
         <ul class="fk-grid fk-grid--categories">
           <li>
-            <a class="fk-category-tile tone-graphite" href="#" data-stub="Страница категории не создана.">
+            <a class="fk-category-tile tone-graphite" href="catalog.html?category=sockets">
               <span class="fk-category-tile__media"><svg class="fin-white" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-socket" x="45" y="45" width="150" height="150"/></svg></span>
               <span class="fk-category-tile__cap"><span class="fk-idx" aria-hidden="true">01</span><span class="fk-category-tile__name">Розетки</span><span class="fk-arrow" aria-hidden="true">→</span></span>
             </a>
           </li>
           <li>
-            <a class="fk-category-tile tone-light" href="#" data-stub="Страница категории не создана.">
+            <a class="fk-category-tile tone-light" href="catalog.html?category=switches">
               <span class="fk-category-tile__media"><svg class="fin-black" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-switch" x="45" y="45" width="150" height="150"/></svg></span>
               <span class="fk-category-tile__cap"><span class="fk-idx" aria-hidden="true">02</span><span class="fk-category-tile__name">Выключатели</span><span class="fk-arrow" aria-hidden="true">→</span></span>
             </a>
           </li>
           <li>
-            <a class="fk-category-tile tone-sand" href="#" data-stub="Страница категории не создана.">
+            <a class="fk-category-tile tone-sand" href="catalog.html?category=frames">
               <span class="fk-category-tile__media"><svg class="fin-white" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-frame" x="45" y="45" width="150" height="150"/></svg></span>
               <span class="fk-category-tile__cap"><span class="fk-idx" aria-hidden="true">03</span><span class="fk-category-tile__name">Рамки</span><span class="fk-arrow" aria-hidden="true">→</span></span>
             </a>
@@ -412,14 +413,14 @@
         <div class="fk-section-head">
           <div class="fk-section-head__row">
             <h2 id="new-title">Новинки</h2>
-            <a class="fk-link fk-link--tap" href="#" data-stub="Страница новинок не создана.">Все новинки</a>
+            <a class="fk-link fk-link--tap" href="catalog.html">Все новинки</a>
           </div>
           <p class="fk-note fk-note--proto">Демонстрационные данные. Товаров, артикулов, цен и остатков нет; изображения — условные иллюстрации. Действие «В корзину» не работает.</p>
         </div>
         <ul class="fk-grid fk-grid--products">
           <li class="fk-product-card">
             <span class="fk-product-card__media tone-light"><svg class="fin-white" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-switch" x="45" y="45" width="150" height="150"/></svg></span>
-            <h3 class="fk-product-card__name">Демонстрационный выключатель</h3>
+            <h3 class="fk-product-card__name"><a href="product.html?id=1">Демонстрационный выключатель</a></h3>
             <p class="fk-product-card__sku">Арт. <span class="fk-stub">ХХХ-001</span> <span class="fk-tag">заглушка</span></p>
             <p class="fk-product-card__price"><span class="fk-stub">ХХХХ ₽</span> <span class="fk-tag">заглушка</span></p>
             <p class="fk-product-card__stock">Наличие уточняется</p>
@@ -427,7 +428,7 @@
           </li>
           <li class="fk-product-card">
             <span class="fk-product-card__media tone-sand"><svg class="fin-black" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-socket" x="45" y="45" width="150" height="150"/></svg></span>
-            <h3 class="fk-product-card__name">Демонстрационная розетка</h3>
+            <h3 class="fk-product-card__name"><a href="product.html?id=2">Демонстрационная розетка</a></h3>
             <p class="fk-product-card__sku">Арт. <span class="fk-stub">ХХХ-002</span> <span class="fk-tag">заглушка</span></p>
             <p class="fk-product-card__price"><span class="fk-stub">ХХХХ ₽</span> <span class="fk-tag">заглушка</span></p>
             <p class="fk-product-card__stock">Наличие уточняется</p>
@@ -435,7 +436,7 @@
           </li>
           <li class="fk-product-card">
             <span class="fk-product-card__media tone-light"><svg class="fin-nickel" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-double" x="45" y="45" width="150" height="150"/></svg></span>
-            <h3 class="fk-product-card__name">Демонстрационный двойной выключатель</h3>
+            <h3 class="fk-product-card__name"><a href="product.html?id=3">Демонстрационный двойной выключатель</a></h3>
             <p class="fk-product-card__sku">Арт. <span class="fk-stub">ХХХ-003</span> <span class="fk-tag">заглушка</span></p>
             <p class="fk-product-card__price"><span class="fk-stub">ХХХХ ₽</span> <span class="fk-tag">заглушка</span></p>
             <p class="fk-product-card__stock">Наличие уточняется</p>
@@ -443,7 +444,7 @@
           </li>
           <li class="fk-product-card">
             <span class="fk-product-card__media tone-stone"><svg class="fin-cashmere" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-frame" x="45" y="45" width="150" height="150"/></svg></span>
-            <h3 class="fk-product-card__name">Демонстрационная рамка</h3>
+            <h3 class="fk-product-card__name"><a href="product.html?id=4">Демонстрационная рамка</a></h3>
             <p class="fk-product-card__sku">Арт. <span class="fk-stub">ХХХ-004</span> <span class="fk-tag">заглушка</span></p>
             <p class="fk-product-card__price"><span class="fk-stub">ХХХХ ₽</span> <span class="fk-tag">заглушка</span></p>
             <p class="fk-product-card__stock">Наличие уточняется</p>
@@ -551,6 +552,7 @@
         <nav class="fk-footer__nav" aria-label="Разделы">
           <h2>Разделы</h2>
           <ul>
+            <li><a href="catalog.html">Каталог</a></li>
             <li><a href="#collections">Коллекции</a></li>
             <li><a href="#categories">Категории</a></li>
             <li><a href="#new">Новинки</a></li>

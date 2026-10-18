@@ -537,6 +537,80 @@ a:hover > * > .fk-arrow, a:hover > .fk-arrow { transform: translateX(4px); }
 .fin-anthracite { --finish: #4A4F55; --finish-2: #3B4046; --edge: #6D7278; --hole: #0F1011; }
 .fin-bronze     { --finish: #8A6F55; --finish-2: #7A6049; --edge: rgba(30, 32, 34, 0.45); --hole: #1E2022; }
 
+/* ---------- Страницы каталога и товара (v2) ---------- */
+.fk-catalog-all { margin-top: 8px; }
+.fk-catalog-all .fk-link { display: inline-flex; align-items: center; min-height: 44px; }
+.fk-product-card__name a { display: block; padding-block: 12px; margin-block: -12px; color: inherit; text-decoration: none; }
+.fk-product-card__name a:hover { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 2px; }
+.fk-page { padding-bottom: var(--fk-section-gap); }
+.fk-crumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: 0 8px; padding: 0; margin: 0; list-style: none; font-size: var(--fk-fs-small); color: var(--fk-ink-muted); }
+.fk-crumbs li + li::before { content: "/"; margin-right: 8px; }
+.fk-crumbs a { display: inline-flex; align-items: center; min-height: 44px; color: var(--fk-ink); }
+.fk-crumbs [aria-current="page"] { color: var(--fk-ink-muted); overflow-wrap: anywhere; }
+.fk-page .fk-section-head { margin-top: 8px; }
+.fk-page-title { font-size: clamp(2rem, 1.2rem + 2vw, 3rem); line-height: 1.05; font-weight: 600; letter-spacing: -0.02em; }
+.fk-cat-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.fk-cat-nav .fk-chip { display: inline-flex; align-items: center; text-decoration: none; }
+.fk-cat-nav .fk-chip[aria-current="page"] { background: var(--fk-ink); color: var(--fk-ink-inverse); border-color: var(--fk-ink); }
+.fk-toolbar { display: grid; gap: 16px; margin-bottom: 24px; }
+.fk-field__label { display: block; margin-bottom: 4px; font-size: var(--fk-fs-small); font-weight: 600; }
+.fk-field {
+  width: 100%; min-height: 44px; padding: 0 12px; font: inherit; color: var(--fk-ink);
+  background: var(--fk-canvas); border: 1px solid var(--fk-edge); border-radius: var(--fk-radius);
+}
+.fk-field::placeholder { color: var(--fk-ink-muted); opacity: 1; }
+.fk-catalog { display: grid; gap: 24px var(--fk-col-gap); grid-template-columns: minmax(0, 1fr); }
+.fk-filters { display: none; }
+.fk-filters.is-open { display: block; padding: 16px; border: 1px solid var(--fk-line); border-radius: var(--fk-radius); }
+.fk-filter { margin: 0 0 20px; padding: 0; border: 0; min-width: 0; }
+.fk-filter legend { padding: 0; margin-bottom: 4px; font-weight: 600; }
+.fk-check { display: flex; align-items: center; gap: 10px; min-height: 44px; cursor: pointer; }
+.fk-check input { width: 20px; height: 20px; margin: 0; accent-color: var(--fk-ink); flex: none; }
+.fk-check__chip { width: 20px; height: 20px; flex: none; background: var(--finish); border: 1px solid var(--fk-edge); border-radius: 2px; }
+.fk-results__count { margin-bottom: 16px; font-size: var(--fk-fs-small); color: var(--fk-ink-muted); }
+.fk-grid--catalog { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.fk-empty { display: grid; gap: 12px; justify-items: start; padding: 32px 0; }
+.fk-empty[hidden] { display: none; }
+.fk-empty h2 { font-size: var(--fk-fs-h3); }
+@media (min-width: 768px) {
+  .fk-toolbar { grid-template-columns: 1fr 1fr; align-items: end; }
+  .fk-filters-toggle { justify-self: start; }
+  .fk-grid--catalog { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) {
+  .fk-toolbar { grid-template-columns: minmax(0, 1fr) 280px; }
+  .fk-filters-toggle { display: none; }
+  .fk-catalog { grid-template-columns: 260px minmax(0, 1fr); align-items: start; }
+  .fk-filters, .fk-filters.is-open { display: block; padding: 0; border: 0; position: sticky; top: calc(var(--fk-header-h) + 16px); }
+  .fk-grid--catalog { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1280px) { .fk-grid--catalog { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* Карточка товара */
+.fk-pdp { display: grid; gap: 24px var(--fk-col-gap); grid-template-columns: minmax(0, 1fr); margin-bottom: var(--fk-section-gap); }
+.fk-pdp__media { position: relative; aspect-ratio: 1 / 1; background: var(--tone); border-radius: var(--fk-radius); overflow: hidden; }
+.fk-pdp__media svg { width: 100%; height: 100%; }
+.fk-pdp__info { display: grid; gap: 12px; align-content: start; min-width: 0; }
+.fk-pdp__title { font-size: var(--fk-fs-h2); line-height: 1.1; font-weight: 600; letter-spacing: -0.01em; overflow-wrap: break-word; }
+.fk-pdp__sku, .fk-pdp__stock { color: var(--fk-ink-muted); }
+.fk-pdp__price { font-size: 1.75rem; line-height: 1.2; font-weight: 600; }
+.fk-pdp__lead { max-width: 52ch; }
+.fk-pdp__buy { display: flex; gap: 12px; align-items: stretch; margin-top: 8px; }
+.fk-pdp__cart { flex: 1; white-space: nowrap; padding: 0 12px; }
+.fk-qty { display: inline-flex; border: 1px solid var(--fk-edge); border-radius: var(--fk-radius); }
+.fk-qty__btn { width: 44px; min-height: 44px; padding: 0; font: inherit; font-size: 1.25rem; background: transparent; color: var(--fk-ink); border: 0; cursor: pointer; }
+.fk-qty__btn:hover { background: var(--fk-surface); }
+.fk-qty__input { width: 56px; padding: 0; font: inherit; text-align: center; color: var(--fk-ink); background: transparent; border: 0; border-inline: 1px solid var(--fk-line); -moz-appearance: textfield; appearance: textfield; }
+.fk-qty__input::-webkit-outer-spin-button, .fk-qty__input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.fk-pdp__oneclick { width: 100%; }
+.fk-pdp__h { display: flex; align-items: center; gap: 8px; margin-top: 24px; font-size: var(--fk-fs-h3); line-height: 1.25; font-weight: 600; }
+.fk-pdp__proto { margin-bottom: 16px; }
+@media (min-width: 1024px) {
+  .fk-pdp { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: start; }
+  .fk-pdp__media { grid-column: 1 / span 7; aspect-ratio: 5 / 4; position: sticky; top: calc(var(--fk-header-h) + 16px); }
+  .fk-pdp__info { grid-column: 8 / span 5; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
