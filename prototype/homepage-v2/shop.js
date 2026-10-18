@@ -14,9 +14,13 @@
       '<h3 class="fk-product-card__name"><a href="' + url + '">' + p.name + '</a></h3>' +
       '<p class="fk-product-card__sku">Арт. <span class="fk-stub">' + p.sku + '</span></p>' +
       '<p class="fk-product-card__sku">Цвет: ' + COLORS[p.color] + '</p>' +
+      '<div class="fk-variants">' + D.dots(p) + '</div>' +
       '<p class="fk-product-card__price"><span class="fk-stub">' + D.fmt(D.price(p)) + '</span> ' + tag('демо') + '</p>' +
       '<p class="fk-product-card__stock">' + STOCKS[p.stock] + ' (демо)</p>' +
+      '<div class="fk-product-card__actions">' +
       '<button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="' + p.id + '">В корзину<span class="fk-vh"> (демо) — ' + p.name + ', ' + COLORS[p.color] + '</span><span aria-hidden="true">&nbsp;(демо)</span></button>' +
+      '<a class="fk-btn fk-btn--secondary fk-btn--card" href="' + url + '">Подробнее<span class="fk-vh"> — ' + p.name + '</span></a>' +
+      '</div>' +
       '</li>';
   }
   function param(name) {
@@ -112,6 +116,48 @@
     render();
   }
 
+  /* Характеристики: структура из примера заказчика (три группы). Значения — демонстрационные, подробно показаны только
+     для одного товара (id 4), чтобы показать плотность страницы; у остальных — «Уточняется владельцем». Это не данные FORKEL
+     и не данные Kollinger Eclipse. Поля, не относящиеся к типу изделия, не показываются. */
+  var DEMO_FULL_ID = 4;
+  function chars(p) {
+    var frame = p.type === 'frame', full = p.id === DEMO_FULL_ID;
+    var U = '<span class="fk-stub">Уточняется владельцем</span>';
+    function dm(v) { return v + ' ' + tag('демо'); }
+    function val(v) { return full ? dm(v) : U; }
+    var sku = '<span class="fk-stub" id="pdp-sku-val">' + p.sku + '</span> ' + tag('заглушка') +
+      '<button type="button" class="fk-copy" data-copy="' + p.sku + '" aria-label="Копировать артикул ' + p.sku + '">Копировать</button>';
+    var groups = [
+      ['Основные', [
+        ['Бренд', 'FORKEL'], ['Серия', dm(p.collection)], ['Артикул', sku],
+        ['Страна', U], ['Страна производства', U]
+      ]],
+      ['Размеры и габариты', [
+        ['Длина, мм', val('90')], ['Ширина, мм', val('90')], ['Глубина, мм', val('10')],
+        ['Вес нетто, г', val('40')], ['Вес брутто, г', val('55')], ['Размер упаковки, мм', val('100 × 100 × 20')]
+      ]],
+      ['Дополнительно', [
+        frame ? ['Материал рамки', val('Пластик')] : null,
+        frame ? ['Цвет рамки', dm(COLORS[p.color])] : null,
+        frame ? ['Количество постов', val('1')] : null,
+        ['Вид/марка материала', val('Демо-материал')],
+        ['Отделка поверхности', val('Матовая')],
+        ['Не содержит галогенов', val('Да')],
+        frame ? null : ['Степень защиты (IP)', U],
+        frame ? null : ['Способ монтажа', U],
+        frame ? null : ['Тип крепления', U]
+      ]]
+    ];
+    return '<section class="fk-pdp__specs" aria-labelledby="specs-title">' +
+      '<h2 id="specs-title">Характеристики ' + tag('демо-данные') + '</h2>' +
+      '<p class="fk-note fk-note--proto">Структура — по примеру заказчика. Значения показывают плотность страницы и не подтверждены: это не данные FORKEL и не характеристики Kollinger Eclipse. «Уточняется владельцем» — данных нет, значение не придумано.</p>' +
+      '<div class="fk-chars-groups">' + groups.map(function (g) {
+        return '<div class="fk-chars"><h3>' + g[0] + '</h3><dl>' + g[1].filter(Boolean).map(function (r) {
+          return '<div class="fk-char"><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>';
+        }).join('') + '</dl></div>';
+      }).join('') + '</div></section>';
+  }
+
   /* ---------- Карточка товара ---------- */
   function initProduct() {
     var root = document.getElementById('pdp');
@@ -151,17 +197,18 @@
         '<button class="fk-btn fk-btn--secondary fk-pdp__oneclick" type="button" data-stub="Демонстрационное действие: покупка в один клик не реализована.">Купить в один клик (демо)</button>' +
         '<p class="fk-pdp__more fk-pdp__cartlink" id="pdp-cartlink" hidden><a class="fk-link fk-link--tap" href="cart.html">Перейти в корзину</a></p>' +
         '<p class="fk-pdp__more"><a class="fk-link fk-link--tap" href="index.html#configurator">Собрать в подборе</a></p>' +
-        '<h2 class="fk-pdp__h">Характеристики ' + tag('демо') + '</h2>' +
-        '<dl class="fk-spec">' +
-          '<div><dt>Категория</dt><dd>' + cname + '</dd></div>' +
-          '<div><dt>Коллекция</dt><dd>' + p.collection + ' ' + tag('демо') + '</dd></div>' +
-          '<div><dt>Цвет</dt><dd>' + COLORS[p.color] + ' ' + tag('демо') + '</dd></div>' +
-          '<div><dt>Материал</dt><dd>' + unk + '</dd></div>' +
-          '<div><dt>Размеры</dt><dd>' + unk + '</dd></div>' +
-          '<div><dt>Технические параметры</dt><dd>' + unk + '</dd></div>' +
-        '</dl>' +
-      '</div>';
+        '<div class="fk-variants">Цвета: ' + D.dots(p) + '</div>' +
+      '</div>' +
+      chars(p);
     document.getElementById('pdp-related').innerHTML = rel.map(card).join('');
+    root.addEventListener('click', function (e) {
+      var c = e.target.closest('[data-copy]');
+      if (!c) return;
+      var v = c.getAttribute('data-copy');
+      function done() { if (window.fkNote) window.fkNote('Демо-артикул скопирован: ' + v); }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(v).then(done, done);
+      else done();
+    });
     var input = document.getElementById('pdp-qty');
     root.addEventListener('click', function (e) {
       var b = e.target.closest('[data-qty]');

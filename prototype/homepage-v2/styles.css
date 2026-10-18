@@ -532,6 +532,7 @@ a:hover > * > .fk-arrow, a:hover > .fk-arrow { transform: translateX(4px); }
 .fin-white      { --finish: #FBFBFA; --finish-2: #EEEFEF; --edge: rgba(30, 32, 34, 0.32); }
 .fin-black      { --finish: #2A2C2F; --finish-2: #1E2022; --edge: #53575C; --hole: #0F1011; }
 .fin-gray       { --finish: #9AA0A6; --finish-2: #8B9197; --edge: rgba(30, 32, 34, 0.38); }
+.fin-whitem     { --finish: #EDEDEA; --finish-2: #DEDEDA; --edge: rgba(30, 32, 34, 0.32); }
 .fin-nickel     { --finish: #CBCED1; --finish-2: #B8BCC0; --edge: rgba(30, 32, 34, 0.35); }
 .fin-cashmere   { --finish: #CDBFAA; --finish-2: #BCAE98; --edge: rgba(30, 32, 34, 0.35); }
 .fin-gold       { --finish: #C3A464; --finish-2: #B39455; --edge: rgba(30, 32, 34, 0.35); }
@@ -662,3 +663,27 @@ a:hover > * > .fk-arrow, a:hover > .fk-arrow { transform: translateX(4px); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* ---------- Цветовые варианты в карточках, значение шага подбора ---------- */
+.fk-variants { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; min-height: 22px; margin: 2px 0 4px; }
+.fk-dots { display: flex; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.fk-dots li { width: 18px; height: 18px; background: var(--finish); border: 1px solid var(--fk-edge); border-radius: 50%; }
+.fk-product-card__actions { display: grid; gap: 8px; margin-top: auto; }
+.fk-product-card__actions .fk-btn--card { margin-top: 0; }
+.fk-step__val { margin-left: auto; font-weight: 400; color: var(--fk-ink-muted); text-align: right; }
+
+/* ---------- Характеристики товара ---------- */
+.fk-pdp__specs { grid-column: 1 / -1; min-width: 0; display: grid; gap: 24px; margin-top: 8px; }
+.fk-pdp__specs > h2 { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-size: var(--fk-fs-h2); line-height: 1.15; font-weight: 600; }
+.fk-chars-groups { display: grid; gap: 32px var(--fk-col-gap); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 1024px) { .fk-chars-groups { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; } }
+.fk-chars h3 { font-size: var(--fk-fs-h3); line-height: 1.25; font-weight: 600; padding-bottom: 8px; border-bottom: 1px solid var(--fk-ink); }
+.fk-chars dl { margin: 0; }
+.fk-char { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; padding: 8px 0; min-height: 44px; }
+.fk-char dt { display: flex; align-items: baseline; gap: 8px; flex: 1 1 8rem; min-width: 0; color: var(--fk-ink-muted); font-size: var(--fk-fs-small); }
+.fk-char dt::after { content: ""; flex: 1 1 12px; min-width: 12px; border-bottom: 1px dotted var(--fk-edge); transform: translateY(-3px); }
+.fk-char dd { margin: 0; flex: 0 1 auto; max-width: 100%; min-width: 0; font-weight: 600; text-align: right; overflow-wrap: anywhere; margin-left: auto; }
+.fk-copy { min-height: 44px; min-width: 44px; padding: 0 12px; margin: -8px 0 -8px 4px; font: inherit; font-size: var(--fk-fs-small); font-weight: 600; color: var(--fk-ink); background: transparent; border: 1px solid var(--fk-edge); border-radius: var(--fk-radius); cursor: pointer; }
+.fk-copy:hover { background: var(--fk-surface, #f1f1ef); }
+/* Блок характеристик занимает всю ширину под фото, поэтому фото не закрепляется при прокрутке */
+@media (min-width: 1024px) { .fk-pdp__media { position: relative; top: auto; } }

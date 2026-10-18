@@ -45,6 +45,10 @@
         r.tabIndex = on ? 0 : -1;
       });
     });
+    ['frame', 'mech'].forEach(function (k) {
+      var el = root.querySelector('[data-val="' + k + '"]');
+      if (el) el.textContent = D.COLORS[state[k]];
+    });
     frameG.setAttribute('class', 'fin-' + state.frame);
     mechG.setAttribute('class', 'fin-' + state.mech);
     mechUse.setAttribute('href', '#' + D.TYPES[state.type].symbol);

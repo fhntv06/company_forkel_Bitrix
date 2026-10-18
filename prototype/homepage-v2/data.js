@@ -8,8 +8,8 @@
     { key: 'switches', name: 'Выключатели' },
     { key: 'frames', name: 'Рамки' }
   ];
-  var COLORS = { white: 'Белый', black: 'Чёрный', gray: 'Серый', nickel: 'Никель', cashmere: 'Кашемир', gold: 'Золото' };
-  var COLOR_CODE = { white: 'WHT', black: 'BLK', gray: 'GRY', nickel: 'NCK', cashmere: 'CSH', gold: 'GLD' };
+  var COLORS = { white: 'Белый глянцевый', whitem: 'Белый матовый', gold: 'Золотой', cashmere: 'Кашемир матовый', gray: 'Серый', black: 'Чёрный матовый' };
+  var COLOR_CODE = { white: 'WHG', whitem: 'WHM', gold: 'GLD', cashmere: 'CSH', gray: 'GRY', black: 'BLM' };
   var STOCKS = { in: 'В наличии', order: 'Под заказ' };
   /* Демонстрационные цены по условной ценовой группе */
   var PRICE_BY_GROUP = { 1: 100, 2: 200, 3: 300 };
@@ -22,9 +22,9 @@
   var FRAME_PRICE = 100;
   var TONES = ['light', 'sand', 'stone', 'light', 'stone', 'sand'];
   var ROWS = [
-    ['switch', 'white', 'A', 2, 'in'], ['socket', 'black', 'B', 1, 'in'], ['double', 'nickel', 'C', 3, 'order'], ['frame', 'cashmere', 'D', 2, 'in'],
+    ['switch', 'white', 'A', 2, 'in'], ['socket', 'black', 'B', 1, 'in'], ['double', 'whitem', 'C', 3, 'order'], ['frame', 'cashmere', 'D', 2, 'in'],
     ['switch', 'black', 'B', 1, 'order'], ['socket', 'white', 'A', 3, 'in'], ['double', 'gray', 'C', 2, 'in'], ['frame', 'white', 'A', 1, 'order'],
-    ['switch', 'gold', 'D', 3, 'in'], ['socket', 'nickel', 'B', 2, 'in'], ['double', 'black', 'A', 1, 'order'], ['frame', 'black', 'C', 3, 'in']
+    ['switch', 'gold', 'D', 3, 'in'], ['socket', 'whitem', 'B', 2, 'in'], ['double', 'black', 'A', 1, 'order'], ['frame', 'black', 'C', 3, 'in']
   ];
   var PRODUCTS = ROWS.map(function (r, i) {
     var t = TYPES[r[0]];
@@ -33,15 +33,22 @@
       group: r[3], stock: r[4], sku: 'ХХХ-' + ('00' + (i + 1)).slice(-3), tone: TONES[i % TONES.length]
     };
   });
-  /* Демонстрационные правила совместимости подбора: какие цвета и типы механизмов доступны в коллекции */
-  var ALL = ['white', 'black', 'gray', 'nickel', 'cashmere', 'gold'];
-  var COMPAT = {
-    A: { colors: ALL, types: ['switch', 'double', 'socket'] },
-    B: { colors: ['white', 'black', 'gray'], types: ['switch', 'socket'] },
-    C: { colors: ['white', 'nickel', 'cashmere', 'gold'], types: ['switch', 'double'] },
-    D: { colors: ['black', 'gray', 'nickel', 'gold'], types: ['double', 'socket'] }
-  };
+  /* Правила совместимости рамок и механизмов в исходных данных неизвестны, поэтому в демо-режиме ограничений нет:
+     в каждой коллекции доступны все шесть цветов и все три типа изделий. Цвета и их порядок — по примеру фильтра, присланного заказчиком. */
+  var ALL = ['white', 'whitem', 'gold', 'cashmere', 'gray', 'black'];
+  var ALLTYPES = ['switch', 'double', 'socket'];
+  var COMPAT = { A: { colors: ALL, types: ALLTYPES }, B: { colors: ALL, types: ALLTYPES }, C: { colors: ALL, types: ALLTYPES }, D: { colors: ALL, types: ALLTYPES } };
 
+  /* Демонстрационные цветовые варианты: собственный цвет и два следующих из списка. Реальных вариантов товара нет. */
+  function variants(p) {
+    var i = ALL.indexOf(p.color);
+    return [0, 1, 2].map(function (k) { return ALL[(i + k) % ALL.length]; });
+  }
+  function dots(p) {
+    return '<ul class="fk-dots" aria-label="Цветовые варианты (демо)">' + variants(p).map(function (c) {
+      return '<li class="fin-' + c + '" title="' + COLORS[c] + '"><span class="fk-vh">' + COLORS[c] + '</span></li>';
+    }).join('') + '</ul><span class="fk-tag">демо</span>';
+  }
   function byId(id) { return PRODUCTS.filter(function (p) { return p.id === id; })[0]; }
   function catName(key) { return CATEGORIES.filter(function (c) { return c.key === key; })[0].name; }
   function price(p) { return PRICE_BY_GROUP[p.group]; }
@@ -78,6 +85,10 @@
   window.FKData = {
     CATEGORIES: CATEGORIES, COLORS: COLORS, COLOR_CODE: COLOR_CODE, STOCKS: STOCKS, PRICE_BY_GROUP: PRICE_BY_GROUP, TYPES: TYPES,
     PRODUCTS: PRODUCTS, COMPAT: COMPAT, byId: byId, catName: catName, price: price, fmt: fmt, tag: tag, illu: illu,
-    kitValid: kitValid, kit: kit, kitIllu: kitIllu
+    kitValid: kitValid, kit: kit, kitIllu: kitIllu, ALL: ALL, variants: variants, dots: dots
   };
+  [].forEach.call(document.querySelectorAll('[data-variants]'), function (el) {
+    var p = byId(parseInt(el.getAttribute('data-variants'), 10));
+    if (p) el.innerHTML = dots(p);
+  });
 })();
