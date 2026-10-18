@@ -172,6 +172,7 @@
                 </g>
               </g>
             </svg>
+            <span class="fk-tag fk-tag--float">Иллюстрация, не фото</span>
           </div>
         </div>
       </div>
@@ -186,7 +187,7 @@
         </div>
         <ul class="fk-grid fk-grid--collections">
           <li class="is-a">
-            <a class="fk-collection-card tone-graphite" href="#" data-stub="Страница коллекции не создана.">
+            <a class="fk-collection-card tone-graphite" href="#configurator" data-collection="A">
               <span class="fk-collection-card__media">
                 <svg class="fin-white" viewBox="0 0 400 280" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(36 90) scale(.6667)"/><use href="#p-switch" x="36" y="90" width="100" height="100"/><use href="#shade150" transform="translate(150 90) scale(.6667)"/><use href="#p-double" x="150" y="90" width="100" height="100"/><use href="#shade150" transform="translate(264 90) scale(.6667)"/><use href="#p-socket" x="264" y="90" width="100" height="100"/></svg>
               </span>
@@ -198,7 +199,7 @@
             </a>
           </li>
           <li class="">
-            <a class="fk-collection-card tone-light" href="#" data-stub="Страница коллекции не создана.">
+            <a class="fk-collection-card tone-light" href="#configurator" data-collection="B">
               <span class="fk-collection-card__media">
                 <svg class="fin-black" viewBox="0 0 240 300" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 75)"/><use href="#p-socket" x="45" y="75" width="150" height="150"/></svg>
               </span>
@@ -210,7 +211,7 @@
             </a>
           </li>
           <li class="">
-            <a class="fk-collection-card tone-sand" href="#" data-stub="Страница коллекции не создана.">
+            <a class="fk-collection-card tone-sand" href="#configurator" data-collection="C">
               <span class="fk-collection-card__media">
                 <svg class="fin-gray" viewBox="0 0 240 300" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 75)"/><use href="#p-double" x="45" y="75" width="150" height="150"/></svg>
               </span>
@@ -222,7 +223,7 @@
             </a>
           </li>
           <li class="">
-            <a class="fk-collection-card tone-graphite" href="#" data-stub="Страница коллекции не создана.">
+            <a class="fk-collection-card tone-graphite" href="#configurator" data-collection="D">
               <span class="fk-collection-card__media">
                 <svg class="fin-nickel" viewBox="0 0 240 300" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 75)"/><use href="#p-frame" x="45" y="75" width="150" height="150"/></svg>
               </span>
@@ -240,7 +241,7 @@
               </span>
               <span class="fk-collection-card__cap">
                 <span class="fk-idx" aria-hidden="true">05</span>
-                <h3 class="fk-collection-card__name">Коллекция E</h3>
+                <h3 class="fk-collection-card__name">Коллекция E <span class="fk-tag">демо</span></h3>
                 <span class="fk-arrow" aria-hidden="true">→</span>
               </span>
             </a>
@@ -252,7 +253,7 @@
               </span>
               <span class="fk-collection-card__cap">
                 <span class="fk-idx" aria-hidden="true">06</span>
-                <h3 class="fk-collection-card__name">Коллекция F</h3>
+                <h3 class="fk-collection-card__name">Коллекция F <span class="fk-tag">демо</span></h3>
                 <span class="fk-arrow" aria-hidden="true">→</span>
               </span>
             </a>
@@ -264,7 +265,7 @@
               </span>
               <span class="fk-collection-card__cap">
                 <span class="fk-idx" aria-hidden="true">07</span>
-                <h3 class="fk-collection-card__name">Коллекция G</h3>
+                <h3 class="fk-collection-card__name">Коллекция G <span class="fk-tag">демо</span></h3>
                 <span class="fk-arrow" aria-hidden="true">→</span>
               </span>
             </a>
@@ -276,7 +277,7 @@
               </span>
               <span class="fk-collection-card__cap">
                 <span class="fk-idx" aria-hidden="true">08</span>
-                <h3 class="fk-collection-card__name">Коллекция H</h3>
+                <h3 class="fk-collection-card__name">Коллекция H <span class="fk-tag">демо</span></h3>
                 <span class="fk-arrow" aria-hidden="true">→</span>
               </span>
             </a>
@@ -285,7 +286,7 @@
       </div>
     </section>
 
-    <!-- H-05 Подбор: коллекция → тип механизма → цвет механизма → цвет рамки; результат добавляется в корзину одной позицией «Комплект». Данные демонстрационные -->
+    <!-- H-05 Подбор: коллекция → тип изделия → цвет рамки → цвет механизма; результат добавляется в корзину одной позицией «Комплект». Данные демонстрационные -->
     <section class="fk-section" id="configurator" aria-labelledby="configurator-title" data-proto-status="demo">
       <div class="fk-container">
         <div class="fk-section-head">
@@ -316,7 +317,7 @@
                 </div>
               </li>
               <li class="fk-step">
-                <p class="fk-step__label" id="cfg-type-label"><span class="fk-step__n" aria-hidden="true">2</span>Тип механизма</p>
+                <p class="fk-step__label" id="cfg-type-label"><span class="fk-step__n" aria-hidden="true">2</span>Тип изделия</p>
                 <div class="fk-types" role="radiogroup" aria-labelledby="cfg-type-label" data-part="type">
                   <button type="button" role="radio" aria-checked="true" class="fk-type fin-white" data-symbol="p-switch" data-name="Выключатель">
                     <svg viewBox="0 0 150 150" aria-hidden="true" focusable="false"><use href="#p-switch" width="150" height="150"/></svg>
@@ -333,29 +334,29 @@
                 </div>
               </li>
               <li class="fk-step">
-                <p class="fk-step__label" id="cfg-mech-label"><span class="fk-step__n" aria-hidden="true">3</span>Цвет механизма</p>
-                <div class="fk-swatches" role="radiogroup" aria-labelledby="cfg-mech-label" data-part="mech">
-                  <button type="button" role="radio" aria-checked="true" class="fk-swatch fin-white" data-fin="fin-white" data-name="Белый"><span class="fk-vh">Белый</span></button>
-                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-black" data-fin="fin-black" data-name="Чёрный"><span class="fk-vh">Чёрный</span></button>
-                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-gray" data-fin="fin-gray" data-name="Серый"><span class="fk-vh">Серый</span></button>
-                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-nickel" data-fin="fin-nickel" data-name="Никель"><span class="fk-vh">Никель</span></button>
-                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-cashmere" data-fin="fin-cashmere" data-name="Кашемир"><span class="fk-vh">Кашемир</span></button>
-                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-gold" data-fin="fin-gold" data-name="Золото"><span class="fk-vh">Золото</span></button>
+                <p class="fk-step__label" id="cfg-frame-label"><span class="fk-step__n" aria-hidden="true">3</span>Цвет рамки<span class="fk-step__val" data-val="frame"></span></p>
+                <div class="fk-swatches" role="radiogroup" aria-labelledby="cfg-frame-label" data-part="frame">
+                  <button type="button" role="radio" aria-checked="true" class="fk-swatch fin-white" data-fin="fin-white" data-name="Белый глянцевый" title="Белый глянцевый"><span class="fk-vh">Белый глянцевый</span></button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-whitem" data-fin="fin-whitem" data-name="Белый матовый" title="Белый матовый"><span class="fk-vh">Белый матовый</span></button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-gold" data-fin="fin-gold" data-name="Золотой" title="Золотой"><span class="fk-vh">Золотой</span></button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-cashmere" data-fin="fin-cashmere" data-name="Кашемир матовый" title="Кашемир матовый"><span class="fk-vh">Кашемир матовый</span></button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-gray" data-fin="fin-gray" data-name="Серый" title="Серый"><span class="fk-vh">Серый</span></button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-black" data-fin="fin-black" data-name="Чёрный матовый" title="Чёрный матовый"><span class="fk-vh">Чёрный матовый</span></button>
                 </div>
               </li>
               <li class="fk-step">
-                <p class="fk-step__label" id="cfg-frame-label"><span class="fk-step__n" aria-hidden="true">4</span>Цвет рамки</p>
-                <div class="fk-swatches" role="radiogroup" aria-labelledby="cfg-frame-label" data-part="frame">
-                  <button type="button" role="radio" aria-checked="true" class="fk-swatch fin-white" data-fin="fin-white" data-name="Белый"><span class="fk-vh">Белый</span></button>
-                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-black" data-fin="fin-black" data-name="Чёрный"><span class="fk-vh">Чёрный</span></button>
-                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-gray" data-fin="fin-gray" data-name="Серый"><span class="fk-vh">Серый</span></button>
-                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-nickel" data-fin="fin-nickel" data-name="Никель"><span class="fk-vh">Никель</span></button>
-                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-cashmere" data-fin="fin-cashmere" data-name="Кашемир"><span class="fk-vh">Кашемир</span></button>
-                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-gold" data-fin="fin-gold" data-name="Золото"><span class="fk-vh">Золото</span></button>
+                <p class="fk-step__label" id="cfg-mech-label"><span class="fk-step__n" aria-hidden="true">4</span>Цвет механизма<span class="fk-step__val" data-val="mech"></span></p>
+                <div class="fk-swatches" role="radiogroup" aria-labelledby="cfg-mech-label" data-part="mech">
+                  <button type="button" role="radio" aria-checked="true" class="fk-swatch fin-white" data-fin="fin-white" data-name="Белый глянцевый" title="Белый глянцевый"><span class="fk-vh">Белый глянцевый</span></button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-whitem" data-fin="fin-whitem" data-name="Белый матовый" title="Белый матовый"><span class="fk-vh">Белый матовый</span></button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-gold" data-fin="fin-gold" data-name="Золотой" title="Золотой"><span class="fk-vh">Золотой</span></button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-cashmere" data-fin="fin-cashmere" data-name="Кашемир матовый" title="Кашемир матовый"><span class="fk-vh">Кашемир матовый</span></button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-gray" data-fin="fin-gray" data-name="Серый" title="Серый"><span class="fk-vh">Серый</span></button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-black" data-fin="fin-black" data-name="Чёрный матовый" title="Чёрный матовый"><span class="fk-vh">Чёрный матовый</span></button>
                 </div>
               </li>
             </ol>
-            <p class="fk-note">Недоступные в выбранной коллекции варианты затемнены (демонстрационные правила совместимости).</p>
+            <p class="fk-note">Демо-режим: правила совместимости рамок и механизмов неизвестны, поэтому доступны все сочетания. Цвета и порядок — по примеру фильтра, присланного заказчиком; образцы цвета нарисованы, это не фото изделий.</p>
             <div class="fk-result" role="group" aria-labelledby="cfg-result-title">
               <h3 id="cfg-result-title">Комплект <span class="fk-tag">демо</span></h3>
               <dl class="fk-spec">
@@ -367,6 +368,7 @@
               </dl>
               <p class="fk-vh" id="cfg-summary" role="status"></p>
               <button class="fk-btn fk-btn--primary fk-result__btn" id="cfg-add" type="button">Добавить комплект в корзину</button>
+              <p class="fk-pdp__more"><a class="fk-link fk-link--tap" id="cfg-catalog-link" href="catalog.html">Подобрать отдельные изделия в каталоге</a></p>
               <p class="fk-pdp__more" id="cfg-cart-link" hidden><a class="fk-link fk-link--tap" href="cart.html">Перейти в корзину</a></p>
             </div>
           </div>
@@ -417,40 +419,56 @@
             <h2 id="new-title">Новинки</h2>
             <a class="fk-link fk-link--tap" href="catalog.html">Все новинки</a>
           </div>
-          <p class="fk-note fk-note--proto">Демонстрационные данные. Товаров, артикулов, цен и остатков нет; изображения — условные иллюстрации. Действие «В корзину» не работает.</p>
+          <p class="fk-note fk-note--proto">Демонстрационные данные. Товаров, артикулов, цен и остатков нет; изображения — условные иллюстрации. Кнопка «В корзину» добавляет демонстрационную позицию в корзину этого прототипа; заказ не оформляется.</p>
         </div>
         <ul class="fk-grid fk-grid--products">
           <li class="fk-product-card">
             <span class="fk-product-card__media tone-light"><svg class="fin-white" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-switch" x="45" y="45" width="150" height="150"/></svg></span>
             <h3 class="fk-product-card__name"><a href="product.html?id=1">Демонстрационный выключатель</a></h3>
             <p class="fk-product-card__sku">Арт. <span class="fk-stub">ХХХ-001</span> <span class="fk-tag">заглушка</span></p>
+            <div class="fk-variants" data-variants="1"></div>
             <p class="fk-product-card__price"><span class="fk-stub">200&nbsp;₽</span> <span class="fk-tag">демо</span></p>
             <p class="fk-product-card__stock">Наличие уточняется</p>
-            <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="1">В корзину<span class="fk-vh"> (демо) — Демонстрационный выключатель</span><span aria-hidden="true">&nbsp;(демо)</span></button>
+            <div class="fk-product-card__actions">
+              <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="1">В корзину<span class="fk-vh"> (демо) — Демонстрационный выключатель</span><span aria-hidden="true">&nbsp;(демо)</span></button>
+              <a class="fk-btn fk-btn--secondary fk-btn--card" href="product.html?id=1">Подробнее<span class="fk-vh"> — товар 1</span></a>
+            </div>
           </li>
           <li class="fk-product-card">
             <span class="fk-product-card__media tone-sand"><svg class="fin-black" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-socket" x="45" y="45" width="150" height="150"/></svg></span>
             <h3 class="fk-product-card__name"><a href="product.html?id=2">Демонстрационная розетка</a></h3>
             <p class="fk-product-card__sku">Арт. <span class="fk-stub">ХХХ-002</span> <span class="fk-tag">заглушка</span></p>
+            <div class="fk-variants" data-variants="2"></div>
             <p class="fk-product-card__price"><span class="fk-stub">100&nbsp;₽</span> <span class="fk-tag">демо</span></p>
             <p class="fk-product-card__stock">Наличие уточняется</p>
-            <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="2">В корзину<span class="fk-vh"> (демо) — Демонстрационная розетка</span><span aria-hidden="true">&nbsp;(демо)</span></button>
+            <div class="fk-product-card__actions">
+              <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="2">В корзину<span class="fk-vh"> (демо) — Демонстрационная розетка</span><span aria-hidden="true">&nbsp;(демо)</span></button>
+              <a class="fk-btn fk-btn--secondary fk-btn--card" href="product.html?id=2">Подробнее<span class="fk-vh"> — товар 2</span></a>
+            </div>
           </li>
           <li class="fk-product-card">
             <span class="fk-product-card__media tone-light"><svg class="fin-nickel" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-double" x="45" y="45" width="150" height="150"/></svg></span>
             <h3 class="fk-product-card__name"><a href="product.html?id=3">Демонстрационный двойной выключатель</a></h3>
             <p class="fk-product-card__sku">Арт. <span class="fk-stub">ХХХ-003</span> <span class="fk-tag">заглушка</span></p>
+            <div class="fk-variants" data-variants="3"></div>
             <p class="fk-product-card__price"><span class="fk-stub">300&nbsp;₽</span> <span class="fk-tag">демо</span></p>
             <p class="fk-product-card__stock">Наличие уточняется</p>
-            <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="3">В корзину<span class="fk-vh"> (демо) — Демонстрационный двойной выключатель</span><span aria-hidden="true">&nbsp;(демо)</span></button>
+            <div class="fk-product-card__actions">
+              <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="3">В корзину<span class="fk-vh"> (демо) — Демонстрационный двойной выключатель</span><span aria-hidden="true">&nbsp;(демо)</span></button>
+              <a class="fk-btn fk-btn--secondary fk-btn--card" href="product.html?id=3">Подробнее<span class="fk-vh"> — товар 3</span></a>
+            </div>
           </li>
           <li class="fk-product-card">
             <span class="fk-product-card__media tone-stone"><svg class="fin-cashmere" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-frame" x="45" y="45" width="150" height="150"/></svg></span>
             <h3 class="fk-product-card__name"><a href="product.html?id=4">Демонстрационная рамка</a></h3>
             <p class="fk-product-card__sku">Арт. <span class="fk-stub">ХХХ-004</span> <span class="fk-tag">заглушка</span></p>
+            <div class="fk-variants" data-variants="4"></div>
             <p class="fk-product-card__price"><span class="fk-stub">200&nbsp;₽</span> <span class="fk-tag">демо</span></p>
             <p class="fk-product-card__stock">Наличие уточняется</p>
-            <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="4">В корзину<span class="fk-vh"> (демо) — Демонстрационная рамка</span><span aria-hidden="true">&nbsp;(демо)</span></button>
+            <div class="fk-product-card__actions">
+              <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="4">В корзину<span class="fk-vh"> (демо) — Демонстрационная рамка</span><span aria-hidden="true">&nbsp;(демо)</span></button>
+              <a class="fk-btn fk-btn--secondary fk-btn--card" href="product.html?id=4">Подробнее<span class="fk-vh"> — товар 4</span></a>
+            </div>
           </li>
         </ul>
       </div>
