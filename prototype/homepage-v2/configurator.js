@@ -1,4 +1,4 @@
-/* FORKEL — демонстрационный подбор: коллекция → тип механизма → цвет механизма → цвет рамки.
+/* FORKEL — демонстрационный подбор: коллекция → тип изделия → цвет рамки → цвет механизма.
    Правила совместимости, артикулы и цены — демонстрационные (data.js). Результат добавляется в корзину одной позицией «Комплект». */
 (function () {
   'use strict';
@@ -54,6 +54,8 @@
     out('mech', D.TYPES[state.type].mech + ', ' + D.COLORS[state.mech].toLowerCase() + ' · ' + D.fmt(k.parts[1].price) + ' ' + D.tag('демо'));
     out('kit-sku', '<span class="fk-stub">' + k.sku + '</span> ' + D.tag('заглушка'));
     out('kit-price', D.fmt(k.price) + ' ' + D.tag('демо'));
+    var cl = document.getElementById('cfg-catalog-link');
+    if (cl) cl.setAttribute('href', 'catalog.html?category=' + (state.type === 'socket' ? 'sockets' : 'switches'));
     summary.textContent = 'Выбрано (демо): ' + k.collection + ', ' + D.TYPES[state.type].mech.toLowerCase() + ', механизм — ' +
       D.COLORS[state.mech] + ', рамка — ' + D.COLORS[state.frame] + '. Цена комплекта: ' + D.fmt(k.price) + ' (демо).' +
       (changed ? ' Недоступные в этой коллекции варианты заменены.' : '');
@@ -77,6 +79,14 @@
       state[part] = keyOf(part, next);
       sync();
       next.focus();
+    });
+  });
+
+  // Карточки коллекций A–D ведут в подбор с выбранной коллекцией (E–H — демонстрационные заглушки)
+  [].forEach.call(document.querySelectorAll('[data-collection]'), function (a) {
+    a.addEventListener('click', function () {
+      state.collection = a.getAttribute('data-collection');
+      sync();
     });
   });
 

@@ -258,6 +258,7 @@ a:hover > * > .fk-arrow, a:hover > .fk-arrow { transform: translateX(4px); }
 .fk-hero { padding-block: 0 var(--fk-section-gap); }
 .fk-hero__grid { display: grid; gap: 24px; }
 .fk-hero__media {
+  position: relative;
   order: -1;
   margin-inline: calc(var(--fk-margin) * -1);
   aspect-ratio: 4 / 3; /* мобильное фото 4:3 — homepage-spec, H-02 «Макет» */
