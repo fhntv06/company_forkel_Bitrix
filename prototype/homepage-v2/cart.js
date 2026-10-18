@@ -137,7 +137,7 @@
         '<ul class="fk-cart__list">' + list.map(line).join('') + '</ul>' +
         '<aside class="fk-cart__summary" aria-labelledby="cart-sum-title">' +
           '<h2 id="cart-sum-title">Итого ' + tag('демо') + '</h2>' +
-          '<dl class="fk-spec"><div><dt>Позиций</dt><dd>' + list.length + '</dd></div><div><dt>Товаров</dt><dd>' + units + '</dd></div>' +
+          '<dl class="fk-spec"><div><dt>Позиций</dt><dd data-sum="positions">' + list.length + '</dd></div><div><dt>Товаров</dt><dd data-sum="units">' + units + '</dd></div>' +
           '<div><dt>Доставка</dt><dd>не рассчитана</dd></div>' +
           '<div class="fk-cart__total"><dt>Сумма</dt><dd data-sum="total">' + fmt(total()) + '</dd></div></dl>' +
           '<button class="fk-btn fk-btn--primary" type="button" data-stub="Демонстрационное действие: оформление заказа не реализовано.">Оформить заказ (демо)</button>' +

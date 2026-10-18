@@ -57,6 +57,26 @@
       'price-asc': function (a, b) { return a.group - b.group || a.id - b.id; },
       'price-desc': function (a, b) { return b.group - a.group || a.id - b.id; }
     };
+    /* Поиск, фильтры и сортировка хранятся в адресе: после перехода в товар и возврата они сохраняются */
+    function persist(q, colors, stocks, groups) {
+      var parts = [];
+      if (category) parts.push('category=' + category);
+      if (q) parts.push('q=' + encodeURIComponent(q));
+      if (sort.value !== 'default') parts.push('sort=' + sort.value);
+      if (colors.length) parts.push('color=' + colors.join(','));
+      if (stocks.length) parts.push('stock=' + stocks.join(','));
+      if (groups.length) parts.push('group=' + groups.join(','));
+      try { history.replaceState(null, '', location.pathname + (parts.length ? '?' + parts.join('&') : '')); } catch (e) { /* адрес не обновляется */ }
+    }
+    (function restore() {
+      search.value = param('q');
+      var sv = param('sort');
+      if ([].some.call(sort.options, function (o) { return o.value === sv; })) sort.value = sv;
+      ['color', 'stock', 'group'].forEach(function (name) {
+        var vals = param(name).split(',');
+        [].forEach.call(panel.querySelectorAll('input[name="' + name + '"]'), function (i) { i.checked = vals.indexOf(i.value) >= 0; });
+      });
+    })();
     function render() {
       var q = search.value.trim().toLowerCase();
       var colors = checked('color'), stocks = checked('stock'), groups = checked('group');
@@ -70,6 +90,7 @@
       }).sort(sorters[sort.value] || sorters.default);
       list.innerHTML = items.map(card).join('');
       empty.hidden = items.length > 0;
+      persist(q ? search.value.trim() : '', colors, stocks, groups);
       count.textContent = 'Показано демонстрационных товаров: ' + items.length + ' из ' + PRODUCTS.filter(function (p) { return !category || p.cat === category; }).length;
     }
     panel.addEventListener('change', render);
