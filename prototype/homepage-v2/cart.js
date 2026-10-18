@@ -34,7 +34,7 @@
   function describe(it) {
     if (it.kind === 'kit') {
       var k = D.kit(it);
-      return { key: k.key, kind: 'kit', name: k.name, sku: k.sku, unit: k.price, url: '', parts: k.parts, media: D.kitIllu(it), meta: k.collection };
+      return { key: k.key, kind: 'kit', name: k.name, sku: k.sku, unit: k.price, url: '', parts: k.parts, media: D.kitImg(it), meta: k.collection };
     }
     var p = D.byId(it.id);
     return { key: 'p:' + p.id, kind: 'product', name: p.name, sku: p.sku, unit: D.price(p), url: 'product.html?id=' + p.id,

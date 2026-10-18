@@ -75,6 +75,18 @@
       parts: parts, price: parts[0].price + parts[1].price
     };
   }
+  /* Образцы цвета из присланных заказчиком файлов (prototype/assets/images, список — about_photo.md).
+     Это слои из примера Kollinger Eclipse, а не продукция FORKEL. Механизм — нижний слой, рамка — верхний. */
+  var IMG_BASE = '../assets/images/';
+  var IMG = {
+    frame: { white: 'tcvet_ramki_belyy_glyantsevyy', whitem: 'tcvet_ramki_belyy_matovyy', gold: 'tcvet_ramki_zolotoy', cashmere: 'tcvet_ramki_kashemir-matovyy', gray: 'tcvet_ramki_seryy', black: 'tcvet_ramki_chernyy_matovyy' },
+    mech: { white: 'tcvet_mehanizma_belyy_glyantsevyy', whitem: 'tcvet_mehanizma_belyy_matovyy', gold: 'tcvet_mehanizma_zolotoy', cashmere: 'tcvet_mehanizma_kashemir-matovyy', gray: 'tcvet_mehanizma_seryy', black: 'tcvet_mehanizma_chyernyy_matovyy' }
+  };
+  function imgUrl(part, color) { return IMG_BASE + IMG[part][color] + '.png'; }
+  function kitImg(s) {
+    return '<span class="fk-kitimg" aria-hidden="true"><img src="' + imgUrl('mech', s.mc) + '" alt="" width="500" height="500" loading="lazy">' +
+      '<img src="' + imgUrl('frame', s.fc) + '" alt="" width="500" height="500" loading="lazy"></span>';
+  }
   function kitIllu(s) {
     var t = TYPES[s.mech];
     return '<svg viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(30 30) scale(1.2)"/>' +
@@ -85,7 +97,7 @@
   window.FKData = {
     CATEGORIES: CATEGORIES, COLORS: COLORS, COLOR_CODE: COLOR_CODE, STOCKS: STOCKS, PRICE_BY_GROUP: PRICE_BY_GROUP, TYPES: TYPES,
     PRODUCTS: PRODUCTS, COMPAT: COMPAT, byId: byId, catName: catName, price: price, fmt: fmt, tag: tag, illu: illu,
-    kitValid: kitValid, kit: kit, kitIllu: kitIllu, ALL: ALL, variants: variants, dots: dots
+    kitValid: kitValid, kit: kit, kitIllu: kitIllu, kitImg: kitImg, imgUrl: imgUrl, ALL: ALL, variants: variants, dots: dots
   };
   [].forEach.call(document.querySelectorAll('[data-variants]'), function (el) {
     var p = byId(parseInt(el.getAttribute('data-variants'), 10));

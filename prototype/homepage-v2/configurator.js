@@ -7,9 +7,9 @@
   if (!root || !D || !C) return;
 
   var groups = [].slice.call(root.querySelectorAll('[role="radiogroup"]'));
-  var frameG = document.getElementById('cfg-frame');
-  var mechG = document.getElementById('cfg-mech');
-  var mechUse = document.getElementById('cfg-mech-use');
+  var imgFrame = document.getElementById('cfg-img-frame');
+  var imgMech = document.getElementById('cfg-img-mech');
+  var photo = document.getElementById('cfg-photo');
   var summary = document.getElementById('cfg-summary');
   var cartLink = document.getElementById('cfg-cart-link');
   var state = { collection: 'A', type: 'switch', mech: 'white', frame: 'white' };
@@ -49,9 +49,9 @@
       var el = root.querySelector('[data-val="' + k + '"]');
       if (el) el.textContent = D.COLORS[state[k]];
     });
-    frameG.setAttribute('class', 'fin-' + state.frame);
-    mechG.setAttribute('class', 'fin-' + state.mech);
-    mechUse.setAttribute('href', '#' + D.TYPES[state.type].symbol);
+    imgFrame.src = D.imgUrl('frame', state.frame);
+    imgMech.src = D.imgUrl('mech', state.mech);
+    photo.setAttribute('aria-label', 'Превью (образцы цвета): рамка — ' + D.COLORS[state.frame].toLowerCase() + ', механизм — ' + D.COLORS[state.mech].toLowerCase());
     var k = D.kit(spec());
     out('collection', k.collection);
     out('frame', D.COLORS[state.frame] + ' · ' + D.fmt(k.parts[0].price) + ' ' + D.tag('демо'));
@@ -64,6 +64,13 @@
       D.COLORS[state.mech] + ', рамка — ' + D.COLORS[state.frame] + '. Цена комплекта: ' + D.fmt(k.price) + ' (демо).' +
       (changed ? ' Недоступные в этой коллекции варианты заменены.' : '');
   }
+
+  // Образцы цвета в кнопках — те же изображения слоёв
+  groups.forEach(function (g) {
+    var part = g.getAttribute('data-part');
+    if (part !== 'frame' && part !== 'mech') return;
+    radios(g).forEach(function (r) { r.style.setProperty('--img', 'url(' + D.imgUrl(part, keyOf(part, r)) + ')'); });
+  });
 
   groups.forEach(function (g) {
     var part = g.getAttribute('data-part');
