@@ -3,42 +3,10 @@
 (function () {
   'use strict';
 
-  var CATEGORIES = [
-    { key: 'sockets', name: 'Розетки' },
-    { key: 'switches', name: 'Выключатели' },
-    { key: 'frames', name: 'Рамки' }
-  ];
-  var COLORS = { white: 'Белый', black: 'Чёрный', gray: 'Серый', nickel: 'Никель', cashmere: 'Кашемир', gold: 'Золото' };
-  var STOCKS = { in: 'В наличии', order: 'Под заказ' };
-  /* Ценовая группа вместо цены: настоящих цен нет, числа не придумываются */
-  var PRICE_GROUPS = { 1: 'Группа 1', 2: 'Группа 2', 3: 'Группа 3' };
-  var TYPES = {
-    switch: { symbol: 'p-switch', cat: 'switches', name: 'Демонстрационный выключатель' },
-    double: { symbol: 'p-double', cat: 'switches', name: 'Демонстрационный двойной выключатель' },
-    socket: { symbol: 'p-socket', cat: 'sockets', name: 'Демонстрационная розетка' },
-    frame: { symbol: 'p-frame', cat: 'frames', name: 'Демонстрационная рамка' }
-  };
-  var TONES = ['light', 'sand', 'stone', 'light', 'stone', 'sand'];
-  var ROWS = [
-    ['switch', 'white', 'A', 2, 'in'], ['socket', 'black', 'B', 1, 'in'], ['double', 'nickel', 'C', 3, 'order'], ['frame', 'cashmere', 'D', 2, 'in'],
-    ['switch', 'black', 'B', 1, 'order'], ['socket', 'white', 'A', 3, 'in'], ['double', 'gray', 'C', 2, 'in'], ['frame', 'white', 'A', 1, 'order'],
-    ['switch', 'gold', 'D', 3, 'in'], ['socket', 'nickel', 'B', 2, 'in'], ['double', 'black', 'A', 1, 'order'], ['frame', 'black', 'C', 3, 'in']
-  ];
-  var PRODUCTS = ROWS.map(function (r, i) {
-    var t = TYPES[r[0]];
-    return {
-      id: i + 1, type: r[0], symbol: t.symbol, cat: t.cat, name: t.name, color: r[1], collection: 'Коллекция ' + r[2],
-      group: r[3], stock: r[4], sku: 'ХХХ-' + ('00' + (i + 1)).slice(-3), tone: TONES[i % TONES.length]
-    };
-  });
-  var STUB_CART = 'Демонстрационное действие: корзина не реализована, товар не добавлен.';
+  var D = window.FKData, C = window.FKCart;
+  var CATEGORIES = D.CATEGORIES, COLORS = D.COLORS, STOCKS = D.STOCKS, PRODUCTS = D.PRODUCTS;
+  var catName = D.catName, tag = D.tag, illu = D.illu;
 
-  function catName(key) { return CATEGORIES.filter(function (c) { return c.key === key; })[0].name; }
-  function tag(t) { return '<span class="fk-tag">' + t + '</span>'; }
-  function illu(p) {
-    return '<svg class="fin-' + p.color + '" viewBox="0 0 240 240" aria-hidden="true" focusable="false">' +
-      '<use href="#shade150" transform="translate(45 45)"/><use href="#' + p.symbol + '" x="45" y="45" width="150" height="150"/></svg>';
-  }
   function card(p) {
     var url = 'product.html?id=' + p.id;
     return '<li class="fk-product-card">' +
@@ -46,9 +14,9 @@
       '<h3 class="fk-product-card__name"><a href="' + url + '">' + p.name + '</a></h3>' +
       '<p class="fk-product-card__sku">Арт. <span class="fk-stub">' + p.sku + '</span></p>' +
       '<p class="fk-product-card__sku">Цвет: ' + COLORS[p.color] + '</p>' +
-      '<p class="fk-product-card__price"><span class="fk-stub">ХХХХ ₽</span></p>' +
+      '<p class="fk-product-card__price"><span class="fk-stub">' + D.fmt(D.price(p)) + '</span> ' + tag('демо') + '</p>' +
       '<p class="fk-product-card__stock">' + STOCKS[p.stock] + ' (демо)</p>' +
-      '<button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-stub="' + STUB_CART + '">В корзину<span class="fk-vh"> (демо) — ' + p.name + ', ' + COLORS[p.color] + '</span><span aria-hidden="true">&nbsp;(демо)</span></button>' +
+      '<button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="' + p.id + '">В корзину<span class="fk-vh"> (демо) — ' + p.name + ', ' + COLORS[p.color] + '</span><span aria-hidden="true">&nbsp;(демо)</span></button>' +
       '</li>';
   }
   function param(name) {
@@ -148,7 +116,7 @@
       '<div class="fk-pdp__info">' +
         '<h1 class="fk-pdp__title">' + p.name + '</h1>' +
         '<p class="fk-pdp__sku">Артикул: <span class="fk-stub">' + p.sku + '</span> ' + tag('заглушка') + '</p>' +
-        '<p class="fk-pdp__price"><span class="fk-stub">ХХХХ ₽</span> ' + tag('заглушка') + '</p>' +
+        '<p class="fk-pdp__price"><span class="fk-stub">' + D.fmt(D.price(p)) + '</span> ' + tag('демо') + '</p>' +
         '<p class="fk-pdp__stock">' + STOCKS[p.stock] + ' ' + tag('демо') + '</p>' +
         '<p class="fk-pdp__lead">Демонстрационное описание: текст товара предоставит владелец. ' + tag('заглушка') + '</p>' +
         '<div class="fk-pdp__buy">' +
@@ -157,9 +125,10 @@
             '<input class="fk-qty__input" id="pdp-qty" type="number" inputmode="numeric" min="1" max="99" value="1" aria-label="Количество">' +
             '<button type="button" class="fk-qty__btn" data-qty="1" aria-label="Увеличить количество">+</button>' +
           '</div>' +
-          '<button class="fk-btn fk-btn--primary fk-pdp__cart" type="button" data-stub="' + STUB_CART + '">В корзину (демо)</button>' +
+          '<button class="fk-btn fk-btn--primary fk-pdp__cart" type="button" id="pdp-add">В корзину (демо)</button>' +
         '</div>' +
         '<button class="fk-btn fk-btn--secondary fk-pdp__oneclick" type="button" data-stub="Демонстрационное действие: покупка в один клик не реализована.">Купить в один клик (демо)</button>' +
+        '<p class="fk-pdp__more fk-pdp__cartlink" id="pdp-cartlink" hidden><a class="fk-link fk-link--tap" href="cart.html">Перейти в корзину</a></p>' +
         '<p class="fk-pdp__more"><a class="fk-link fk-link--tap" href="index.html#configurator">Собрать в подборе</a></p>' +
         '<h2 class="fk-pdp__h">Характеристики ' + tag('демо') + '</h2>' +
         '<dl class="fk-spec">' +
@@ -178,6 +147,12 @@
       if (!b) return;
       var v = (parseInt(input.value, 10) || 1) + parseInt(b.getAttribute('data-qty'), 10);
       input.value = Math.min(99, Math.max(1, v));
+    });
+    document.getElementById('pdp-add').addEventListener('click', function () {
+      var q = Math.min(99, Math.max(1, parseInt(input.value, 10) || 1));
+      input.value = q;
+      C.announceAdd(C.add({ kind: 'product', id: p.id }, q));
+      document.getElementById('pdp-cartlink').hidden = false;
     });
     input.addEventListener('change', function () {
       var v = parseInt(input.value, 10);

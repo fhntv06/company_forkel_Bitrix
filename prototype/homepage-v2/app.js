@@ -21,6 +21,7 @@
     clearTimeout(noteTimer);
     noteTimer = setTimeout(function () { note.classList.remove('is-on'); }, 3500);
   }
+  window.fkNote = showNote;
   document.addEventListener('click', function (e) {
     var stub = e.target.closest('[data-stub]');
     if (!stub) return;
@@ -123,56 +124,6 @@
     if (catalogBtn && catalogBtn.getAttribute('aria-expanded') === 'true') { setCatalog(false, true); return; }
     if (menuBtn && menuBtn.getAttribute('aria-expanded') === 'true') setMenu(false, true);
   });
-
-  /* Блок «Подбор» (демо): четыре шага (коллекция, тип изделия, цвет механизма, цвет рамки).
-     Меняются превью и таблица результата. Это иллюстрация: данных о составе, артикулах и ценах нет,
-     коллекции различаются только названием. */
-  (function () {
-    var groups = [].slice.call(document.querySelectorAll('#cfg [role="radiogroup"]'));
-    if (!groups.length) return;
-    var summary = document.getElementById('cfg-summary');
-    var frameG = document.getElementById('cfg-frame');
-    var mechG = document.getElementById('cfg-mech');
-    var mechUse = document.getElementById('cfg-mech-use');
-    var chosen = {};
-    function out(part) {
-      [].forEach.call(document.querySelectorAll('[data-out="' + part + '"]'), function (el) { el.textContent = chosen[part]; });
-    }
-    function setFin(g, cls) { g.setAttribute('class', cls); }
-    function select(group, radio, focus) {
-      var part = group.getAttribute('data-part');
-      [].forEach.call(group.querySelectorAll('[role="radio"]'), function (r) {
-        r.setAttribute('aria-checked', String(r === radio));
-        r.tabIndex = r === radio ? 0 : -1;
-      });
-      chosen[part] = radio.getAttribute('data-name');
-      if (part === 'frame' && frameG) setFin(frameG, radio.getAttribute('data-fin'));
-      if (part === 'mech' && mechG) setFin(mechG, radio.getAttribute('data-fin'));
-      if (part === 'type' && mechUse) mechUse.setAttribute('href', '#' + radio.getAttribute('data-symbol'));
-      out(part);
-      if (focus) radio.focus();
-      if (summary && chosen.collection && chosen.type && chosen.mech && chosen.frame) {
-        summary.textContent = 'Выбрано (демо): ' + chosen.collection + ', ' + chosen.type +
-          ', механизм — ' + chosen.mech + ', рамка — ' + chosen.frame + '.';
-      }
-    }
-    groups.forEach(function (group) {
-      var radios = [].slice.call(group.querySelectorAll('[role="radio"]'));
-      var start = radios.filter(function (r) { return r.getAttribute('aria-checked') === 'true'; })[0] || radios[0];
-      select(group, start, false);
-      group.addEventListener('click', function (e) {
-        var r = e.target.closest('[role="radio"]');
-        if (r) select(group, r, false);
-      });
-      group.addEventListener('keydown', function (e) {
-        var i = radios.indexOf(document.activeElement);
-        var step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
-        if (i < 0 || !step) return;
-        e.preventDefault();
-        select(group, radios[(i + step + radios.length) % radios.length], true);
-      });
-    });
-  })();
 
   /* При переходе на широкий экран сбросить состояние мобильного меню */
   desktop.addEventListener('change', function () {
