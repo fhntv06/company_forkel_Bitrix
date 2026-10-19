@@ -255,50 +255,7 @@ a:hover > * > .fk-arrow, a:hover > .fk-arrow { transform: translateX(4px); }
 .tone-graphite { --tone: #2A2C2F; --tone-ink: #FFFFFF; --tone-muted: #B8BCC0; --wall: #2A2C2F; --shade: rgba(0, 0, 0, 0.34); }
 
 /* ---------- H-02 Первый экран ---------- */
-.fk-hero { padding-block: 0 var(--fk-section-gap); }
-.fk-hero__grid { display: grid; gap: 24px; }
-.fk-hero__media {
-  position: relative;
-  order: -1;
-  margin-inline: calc(var(--fk-margin) * -1);
-  aspect-ratio: 4 / 3; /* мобильное фото 4:3 — homepage-spec, H-02 «Макет» */
-  background: #2A2C2F; overflow: hidden;
-  --wall: #2A2C2F; --shade: rgba(0, 0, 0, 0.34);
-}
-.fk-hero__media .pl-floor { fill: #202225; }
-.fk-hero__media svg { width: 100%; height: 100%; animation: fk-fade 400ms ease-out both; }
-.fk-callouts { display: none; }
-@keyframes fk-fade { from { opacity: 0; } to { opacity: 1; } }
-.fk-hero__text { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; padding-bottom: 8px; }
-.fk-hero__eyebrow { display: none; }
-.fk-hero h1 {
-  font-size: clamp(2.25rem, 1.1rem + 3.6vw, 4.5rem); line-height: 1.02; font-weight: 600; letter-spacing: -0.02em;
-  text-wrap: balance;
-}
-.fk-hero__lead { max-width: 34ch; color: var(--fk-ink-muted); }
-.fk-hero__actions { display: flex; flex-direction: column; gap: 12px; width: 100%; margin-top: 8px; }
-.fk-hero__actions .fk-btn { width: 100%; }
-
-@media (min-width: 768px) {
-  .fk-hero__media { aspect-ratio: auto; height: clamp(320px, 62vw, 560px); }
-  .fk-callouts { display: inline; }
-  .fk-hero__actions { width: auto; flex-direction: row; flex-wrap: wrap; gap: 16px; }
-  .fk-hero__actions .fk-btn { width: auto; }
-  .fk-hero__eyebrow {
-    display: flex; align-items: center; gap: 12px; font-size: var(--fk-fs-small); font-weight: 600;
-    letter-spacing: 0.08em; text-transform: uppercase; color: var(--fk-ink-muted);
-  }
-  .fk-hero__eyebrow::before { content: ""; width: 32px; height: 1px; background: var(--fk-ink); }
-}
-@media (min-width: 1024px) {
-  .fk-hero__grid { grid-template-columns: repeat(12, 1fr); gap: var(--fk-col-gap); align-items: stretch; }
-  .fk-hero__text { grid-column: 1 / span 5; justify-content: center; padding: 48px 0; gap: 24px; }
-  .fk-hero__media { order: 0; grid-column: 6 / span 7; margin: 0; height: min(80vh, 720px); border-radius: var(--fk-radius); }
-}
-/* 1024–1279 px: пропорции 4:3, чтобы подписи у выключателя не обрезались */
-@media (min-width: 1024px) and (max-width: 1279px) {
-  .fk-hero__media { height: auto; aspect-ratio: 4 / 3; align-self: center; }
-}
+/* Первый экран: блок Hero — см. hero.css (V3) */
 
 /* ---------- Заголовок секции ---------- */
 .fk-section { padding-block: 0 var(--fk-section-gap); }
