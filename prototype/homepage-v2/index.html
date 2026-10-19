@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="ru" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FORKEL — прототип главной страницы</title>
+  <meta name="description" content="Визуальный прототип главной страницы FORKEL: композиция, типографика, сетка. Не является рабочим сайтом.">
+  <meta name="robots" content="noindex, nofollow">
+  <script>document.documentElement.className = 'js';</script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Спрайт изделий. Цвета берутся из CSS-переменных (--finish, --finish-2, --edge) — см. styles.css, .fin-* -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <!-- Плоская длинная тень накладки 150×150 (косой свет слева сверху) -->
+      <polygon id="shade150" class="pl-shade" points="150,0 270,120 270,270 120,270 0,150 150,150"/>
+    </defs>
+    <symbol id="p-switch" viewBox="0 0 150 150">
+      <rect class="pl-face" x="0.5" y="0.5" width="149" height="149" rx="3"/>
+      <rect class="pl-inner" x="14" y="14" width="122" height="122" rx="2"/>
+      <rect class="pl-key" x="28" y="28" width="94" height="94" rx="2"/>
+      <path class="pl-line" d="M28 52H122"/>
+    </symbol>
+    <symbol id="p-double" viewBox="0 0 150 150">
+      <rect class="pl-face" x="0.5" y="0.5" width="149" height="149" rx="3"/>
+      <rect class="pl-inner" x="14" y="14" width="122" height="122" rx="2"/>
+      <rect class="pl-key" x="24" y="28" width="47" height="94" rx="2"/>
+      <rect class="pl-key" x="79" y="28" width="47" height="94" rx="2"/>
+      <path class="pl-line" d="M24 52H71M79 52H126"/>
+    </symbol>
+    <symbol id="p-socket" viewBox="0 0 150 150">
+      <rect class="pl-face" x="0.5" y="0.5" width="149" height="149" rx="3"/>
+      <circle class="pl-inner" cx="75" cy="75" r="50"/>
+      <circle class="pl-key" cx="75" cy="75" r="38"/>
+      <circle class="pl-hole" cx="62" cy="75" r="4.5"/>
+      <circle class="pl-hole" cx="88" cy="75" r="4.5"/>
+      <rect class="pl-hole" x="71" y="40" width="8" height="7" rx="1"/>
+      <rect class="pl-hole" x="71" y="103" width="8" height="7" rx="1"/>
+    </symbol>
+    <symbol id="p-frame" viewBox="0 0 150 150">
+      <rect class="pl-face" x="0.5" y="0.5" width="149" height="149" rx="3"/>
+      <rect class="pl-open" x="22" y="22" width="106" height="106" rx="1"/>
+    </symbol>
+    <symbol id="room" viewBox="0 0 400 300">
+      <path class="pl-room" d="M0 250H400M0 236H400"/>
+      <rect class="pl-room" x="36" y="58" width="92" height="178"/>
+      <path class="pl-room" d="M36 58h92M112 150v8"/>
+      <rect class="pl-room" x="236" y="64" width="120" height="104"/>
+      <path class="pl-room" d="M296 64v104M236 116h120"/>
+    </symbol>
+    <clipPath id="wall-clip"><rect x="0" y="0" width="840" height="540"/></clipPath>
+  </svg>
+
+  <a class="fk-skip" href="#main">К содержимому</a>
+
+  <div class="fk-proto-bar">
+    <div class="fk-container">
+      Прототип: тексты и изображения временные, поиск не работает, корзина демонстрационная.
+    </div>
+  </div>
+
+  <!-- H-01 Шапка -->
+  <header class="fk-header" id="top">
+    <div class="fk-container fk-header__row">
+      <a class="fk-logo" href="#top" aria-label="FORKEL, на главную">FORKEL</a>
+
+      <nav class="fk-nav" id="site-nav" aria-label="Основная навигация">
+        <ul class="fk-nav__list">
+          <li>
+            <button class="fk-catalog-btn" type="button" aria-expanded="false" aria-controls="catalog-panel">
+              Каталог
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5"/></svg>
+            </button>
+            <div class="fk-catalog-panel" id="catalog-panel">
+              <div class="fk-container">
+                <div class="fk-catalog-cols">
+                  <div>
+                    <p class="fk-catalog-title">Коллекции</p>
+                    <ul class="fk-catalog-list">
+                      <li><a href="#collections">Коллекция A</a></li>
+                      <li><a href="#collections">Коллекция B</a></li>
+                      <li><a href="#collections">Коллекция C</a></li>
+                      <li><a href="#collections">Коллекция D</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="fk-catalog-title">Категории</p>
+                    <ul class="fk-catalog-list">
+                      <li><a href="catalog.html?category=sockets">Розетки</a></li>
+                      <li><a href="catalog.html?category=switches">Выключатели</a></li>
+                      <li><a href="catalog.html?category=frames">Рамки</a></li>
+                    </ul>
+                    <p class="fk-catalog-all"><a class="fk-link" href="catalog.html">Весь каталог</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <!-- Запасные ссылки, если JavaScript недоступен -->
+          <li class="fk-nav-fallback"><a class="fk-nav__link" href="#collections">Коллекции</a></li>
+          <li class="fk-nav-fallback"><a class="fk-nav__link" href="#categories">Категории</a></li>
+          <li><a class="fk-nav__link" href="#new">Новинки</a></li>
+          <li><a class="fk-nav__link" href="#configurator">Подбор</a></li>
+          <li><a class="fk-nav__link" href="#projects">Проекты</a></li>
+          <li><a class="fk-nav__link" href="#pro">Сотрудничество</a></li>
+          <!-- В спецификации (H-01) этого пункта в шапке нет: оставлен только в мобильной панели -->
+          <li class="fk-nav__mobile-only"><a class="fk-nav__link" href="#delivery">Доставка и оплата</a></li>
+          <li><a class="fk-nav__link" href="#contacts">Контакты</a></li>
+          <li class="fk-nav__phone"><span class="fk-phone">Телефон (заглушка)</span></li>
+        </ul>
+      </nav>
+
+      <div class="fk-actions">
+        <button class="fk-icon-btn" type="button" data-stub="Поиск не реализован в прототипе.">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+          <span class="fk-vh">Поиск</span>
+        </button>
+        <button class="fk-icon-btn fk-icon-btn--account" type="button" data-stub="Личный кабинет не реализован в прототипе.">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.75"/><path d="M4.5 20c.9-3.6 3.8-5.5 7.5-5.5s6.6 1.9 7.5 5.5"/></svg>
+          <span class="fk-vh">Личный кабинет</span>
+        </button>
+        <a class="fk-icon-btn fk-cart-link" href="cart.html">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6.5a3 3 0 016 0V8"/></svg>
+          <span class="fk-vh">Корзина<span data-cart-sr></span></span>
+          <span class="fk-badge" data-cart-count hidden aria-hidden="true">0</span>
+        </a>
+        <span class="fk-phone fk-phone--header">Телефон (заглушка)</span>
+        <button class="fk-menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Меню</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- H-02 Первый экран -->
+    <section class="fk-hero" aria-labelledby="hero-title">
+      <div class="fk-container">
+        <div class="fk-hero__grid">
+          <div class="fk-hero__text">
+            <p class="fk-hero__eyebrow">Рамки · Механизмы · Подбор</p>
+            <h1 id="hero-title">Розетки и выключатели для интерьера</h1>
+            <p class="fk-hero__lead">Рамки и механизмы в одной серии: выбирайте коллекцию и смотрите изделия.</p>
+            <div class="fk-hero__actions">
+              <a class="fk-btn fk-btn--primary" href="#collections">Смотреть коллекции</a>
+              <a class="fk-btn fk-btn--secondary" href="#configurator">Собрать в подборе</a>
+            </div>
+          </div>
+          <div class="fk-hero__media">
+            <svg viewBox="0 0 840 640" preserveAspectRatio="xMidYMid slice" role="img"
+                 aria-label="Иллюстрация: светлый выключатель с подписями рамки, механизма и клавиши и розетка цвета кашемир на тёмной стене">
+              <defs>
+                <pattern id="hero-grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="1"/></pattern>
+              </defs>
+              <rect class="pl-wall" x="0" y="0" width="840" height="540"/>
+              <rect x="0" y="0" width="840" height="540" fill="url(#hero-grid)"/>
+              <rect class="pl-floor" x="0" y="540" width="840" height="100"/>
+              <g clip-path="url(#wall-clip)">
+                <use href="#shade150" transform="translate(360 110) scale(1.6667)"/>
+                <use href="#shade150" transform="translate(110 340) scale(1.1333)"/>
+              </g>
+              <use class="fin-white" href="#p-switch" x="360" y="110" width="250" height="250"/>
+              <use class="fin-cashmere" href="#p-socket" x="110" y="340" width="170" height="170"/>
+              <g class="fk-callouts" fill="none" stroke="#D9A441" stroke-width="1.5" stroke-linecap="round">
+                <path d="M366 200L622 168M390 250L622 250M470 310L622 332"/>
+                <g fill="#D9A441" stroke="none"><circle cx="366" cy="200" r="4"/><circle cx="390" cy="250" r="4"/><circle cx="470" cy="310" r="4"/></g>
+                <g fill="#FFFFFF" stroke="none" font-size="22" font-weight="600" font-family="inherit">
+                  <text x="634" y="168" dominant-baseline="middle">Рамка</text>
+                  <text x="634" y="250" dominant-baseline="middle">Механизм</text>
+                  <text x="634" y="332" dominant-baseline="middle">Клавиша</text>
+                </g>
+              </g>
+            </svg>
+            <span class="fk-tag fk-tag--float">Иллюстрация, не фото</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- H-03 Коллекции -->
+    <section class="fk-section" id="collections" aria-labelledby="collections-title">
+      <div class="fk-container">
+        <div class="fk-section-head">
+          <h2 id="collections-title">Коллекции</h2>
+          <p class="fk-note">Названия, изображения и цвета временные: список коллекций предоставит владелец.</p>
+        </div>
+        <ul class="fk-grid fk-grid--collections">
+          <li class="is-a">
+            <a class="fk-collection-card tone-graphite" href="#configurator" data-collection="A">
+              <span class="fk-collection-card__media">
+                <svg class="fin-white" viewBox="0 0 400 280" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(36 90) scale(.6667)"/><use href="#p-switch" x="36" y="90" width="100" height="100"/><use href="#shade150" transform="translate(150 90) scale(.6667)"/><use href="#p-double" x="150" y="90" width="100" height="100"/><use href="#shade150" transform="translate(264 90) scale(.6667)"/><use href="#p-socket" x="264" y="90" width="100" height="100"/></svg>
+              </span>
+              <span class="fk-collection-card__cap">
+                <span class="fk-idx" aria-hidden="true">01</span>
+                <h3 class="fk-collection-card__name">Коллекция A</h3>
+                <span class="fk-arrow" aria-hidden="true">→</span>
+              </span>
+            </a>
+          </li>
+          <li class="">
+            <a class="fk-collection-card tone-light" href="#configurator" data-collection="B">
+              <span class="fk-collection-card__media">
+                <svg class="fin-black" viewBox="0 0 240 300" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 75)"/><use href="#p-socket" x="45" y="75" width="150" height="150"/></svg>
+              </span>
+              <span class="fk-collection-card__cap">
+                <span class="fk-idx" aria-hidden="true">02</span>
+                <h3 class="fk-collection-card__name">Коллекция B</h3>
+                <span class="fk-arrow" aria-hidden="true">→</span>
+              </span>
+            </a>
+          </li>
+          <li class="">
+            <a class="fk-collection-card tone-sand" href="#configurator" data-collection="C">
+              <span class="fk-collection-card__media">
+                <svg class="fin-gray" viewBox="0 0 240 300" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 75)"/><use href="#p-double" x="45" y="75" width="150" height="150"/></svg>
+              </span>
+              <span class="fk-collection-card__cap">
+                <span class="fk-idx" aria-hidden="true">03</span>
+                <h3 class="fk-collection-card__name">Коллекция C</h3>
+                <span class="fk-arrow" aria-hidden="true">→</span>
+              </span>
+            </a>
+          </li>
+          <li class="">
+            <a class="fk-collection-card tone-graphite" href="#configurator" data-collection="D">
+              <span class="fk-collection-card__media">
+                <svg class="fin-nickel" viewBox="0 0 240 300" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 75)"/><use href="#p-frame" x="45" y="75" width="150" height="150"/></svg>
+              </span>
+              <span class="fk-collection-card__cap">
+                <span class="fk-idx" aria-hidden="true">04</span>
+                <h3 class="fk-collection-card__name">Коллекция D</h3>
+                <span class="fk-arrow" aria-hidden="true">→</span>
+              </span>
+            </a>
+          </li>
+          <li class="">
+            <a class="fk-collection-card tone-stone" href="#" data-stub="Страница коллекции не создана.">
+              <span class="fk-collection-card__media">
+                <svg class="fin-cashmere" viewBox="0 0 240 300" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 75)"/><use href="#p-switch" x="45" y="75" width="150" height="150"/></svg>
+              </span>
+              <span class="fk-collection-card__cap">
+                <span class="fk-idx" aria-hidden="true">05</span>
+                <h3 class="fk-collection-card__name">Коллекция E <span class="fk-tag">демо</span></h3>
+                <span class="fk-arrow" aria-hidden="true">→</span>
+              </span>
+            </a>
+          </li>
+          <li class="is-f">
+            <a class="fk-collection-card tone-light" href="#" data-stub="Страница коллекции не создана.">
+              <span class="fk-collection-card__media">
+                <svg class="fin-gold" viewBox="0 0 400 190" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(110 50) scale(.6)"/><use href="#p-socket" x="110" y="50" width="90" height="90"/><use href="#shade150" transform="translate(220 50) scale(.6)"/><use href="#p-switch" x="220" y="50" width="90" height="90"/></svg>
+              </span>
+              <span class="fk-collection-card__cap">
+                <span class="fk-idx" aria-hidden="true">06</span>
+                <h3 class="fk-collection-card__name">Коллекция F <span class="fk-tag">демо</span></h3>
+                <span class="fk-arrow" aria-hidden="true">→</span>
+              </span>
+            </a>
+          </li>
+          <li class="">
+            <a class="fk-collection-card tone-sand" href="#" data-stub="Страница коллекции не создана.">
+              <span class="fk-collection-card__media">
+                <svg class="fin-anthracite" viewBox="0 0 240 300" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 75)"/><use href="#p-double" x="45" y="75" width="150" height="150"/></svg>
+              </span>
+              <span class="fk-collection-card__cap">
+                <span class="fk-idx" aria-hidden="true">07</span>
+                <h3 class="fk-collection-card__name">Коллекция G <span class="fk-tag">демо</span></h3>
+                <span class="fk-arrow" aria-hidden="true">→</span>
+              </span>
+            </a>
+          </li>
+          <li class="is-h">
+            <a class="fk-collection-card tone-graphite" href="#" data-stub="Страница коллекции не создана.">
+              <span class="fk-collection-card__media">
+                <svg class="fin-bronze" viewBox="0 0 240 300" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 75)"/><use href="#p-switch" x="45" y="75" width="150" height="150"/></svg>
+              </span>
+              <span class="fk-collection-card__cap">
+                <span class="fk-idx" aria-hidden="true">08</span>
+                <h3 class="fk-collection-card__name">Коллекция H <span class="fk-tag">демо</span></h3>
+                <span class="fk-arrow" aria-hidden="true">→</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- H-05 Подбор: коллекция → тип изделия → цвет рамки → цвет механизма; результат добавляется в корзину одной позицией «Комплект». Данные демонстрационные -->
+    <section class="fk-section" id="configurator" aria-labelledby="configurator-title" data-proto-status="demo">
+      <div class="fk-container">
+        <div class="fk-section-head">
+          <h2 id="configurator-title">Подбор</h2>
+          <p class="fk-note fk-note--proto">Демонстрационный подбор. Правила совместимости, артикулы и цены — условные, не данные продукции; коллекции пока различаются только названием. Комплект кладётся в демонстрационную корзину одной позицией.</p>
+        </div>
+        <div class="fk-cfg" id="cfg">
+          <div class="fk-cfg__stage">
+            <div class="fk-cfg__preview">
+              <div class="fk-cfg__photo" id="cfg-photo" role="img" aria-label="Превью выбранной комбинации">
+                <img id="cfg-img-mech" src="../assets/images/tcvet_mehanizma_belyy_glyantsevyy.png" alt="" width="500" height="500">
+                <img id="cfg-img-frame" src="../assets/images/tcvet_ramki_belyy_glyantsevyy.png" alt="" width="500" height="500">
+              </div>
+            </div>
+          </div>
+          <div class="fk-cfg__side">
+            <ol class="fk-steps">
+              <li class="fk-step">
+                <p class="fk-step__label" id="cfg-collection-label"><span class="fk-step__n" aria-hidden="true">1</span>Коллекция</p>
+                <div class="fk-chips" role="radiogroup" aria-labelledby="cfg-collection-label" data-part="collection">
+                  <button type="button" role="radio" aria-checked="true" class="fk-chip" data-key="A" data-name="Коллекция A">Коллекция A</button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-chip" data-key="B" data-name="Коллекция B">Коллекция B</button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-chip" data-key="C" data-name="Коллекция C">Коллекция C</button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-chip" data-key="D" data-name="Коллекция D">Коллекция D</button>
+                </div>
+              </li>
+              <li class="fk-step">
+                <p class="fk-step__label" id="cfg-type-label"><span class="fk-step__n" aria-hidden="true">2</span>Тип изделия</p>
+                <div class="fk-types" role="radiogroup" aria-labelledby="cfg-type-label" data-part="type">
+                  <button type="button" role="radio" aria-checked="true" class="fk-type fin-white" data-symbol="p-switch" data-name="Выключатель">
+                    <svg viewBox="0 0 150 150" aria-hidden="true" focusable="false"><use href="#p-switch" width="150" height="150"/></svg>
+                    <span>Выключатель</span>
+                  </button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-type fin-white" data-symbol="p-double" data-name="Двойной выключатель">
+                    <svg viewBox="0 0 150 150" aria-hidden="true" focusable="false"><use href="#p-double" width="150" height="150"/></svg>
+                    <span>Двойной выключатель</span>
+                  </button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-type fin-white" data-symbol="p-socket" data-name="Розетка">
+                    <svg viewBox="0 0 150 150" aria-hidden="true" focusable="false"><use href="#p-socket" width="150" height="150"/></svg>
+                    <span>Розетка</span>
+                  </button>
+                </div>
+              </li>
+              <li class="fk-step">
+                <p class="fk-step__label" id="cfg-frame-label"><span class="fk-step__n" aria-hidden="true">3</span>Цвет рамки<span class="fk-step__val" data-val="frame"></span></p>
+                <div class="fk-swatches" role="radiogroup" aria-labelledby="cfg-frame-label" data-part="frame">
+                  <button type="button" role="radio" aria-checked="true" class="fk-swatch fin-white" data-fin="fin-white" data-name="Белый глянцевый" title="Белый глянцевый"><span class="fk-vh">Белый глянцевый</span></button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-whitem" data-fin="fin-whitem" data-name="Белый матовый" title="Белый матовый"><span class="fk-vh">Белый матовый</span></button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-gold" data-fin="fin-gold" data-name="Золотой" title="Золотой"><span class="fk-vh">Золотой</span></button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-cashmere" data-fin="fin-cashmere" data-name="Кашемир матовый" title="Кашемир матовый"><span class="fk-vh">Кашемир матовый</span></button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-gray" data-fin="fin-gray" data-name="Серый" title="Серый"><span class="fk-vh">Серый</span></button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-black" data-fin="fin-black" data-name="Чёрный матовый" title="Чёрный матовый"><span class="fk-vh">Чёрный матовый</span></button>
+                </div>
+              </li>
+              <li class="fk-step">
+                <p class="fk-step__label" id="cfg-mech-label"><span class="fk-step__n" aria-hidden="true">4</span>Цвет механизма<span class="fk-step__val" data-val="mech"></span></p>
+                <div class="fk-swatches" role="radiogroup" aria-labelledby="cfg-mech-label" data-part="mech">
+                  <button type="button" role="radio" aria-checked="true" class="fk-swatch fin-white" data-fin="fin-white" data-name="Белый глянцевый" title="Белый глянцевый"><span class="fk-vh">Белый глянцевый</span></button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-whitem" data-fin="fin-whitem" data-name="Белый матовый" title="Белый матовый"><span class="fk-vh">Белый матовый</span></button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-gold" data-fin="fin-gold" data-name="Золотой" title="Золотой"><span class="fk-vh">Золотой</span></button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-cashmere" data-fin="fin-cashmere" data-name="Кашемир матовый" title="Кашемир матовый"><span class="fk-vh">Кашемир матовый</span></button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-gray" data-fin="fin-gray" data-name="Серый" title="Серый"><span class="fk-vh">Серый</span></button>
+                  <button type="button" role="radio" aria-checked="false" class="fk-swatch fin-black" data-fin="fin-black" data-name="Чёрный матовый" title="Чёрный матовый"><span class="fk-vh">Чёрный матовый</span></button>
+                </div>
+              </li>
+            </ol>
+            <p class="fk-note">Демо-режим: правила совместимости рамок и механизмов неизвестны, поэтому доступны все сочетания. Цвета и порядок — по примеру фильтра, присланного заказчиком; изображения слоёв — из того же примера (права и пригодность для FORKEL не подтверждены).</p>
+            <div class="fk-result" role="group" aria-labelledby="cfg-result-title">
+              <h3 id="cfg-result-title">Комплект <span class="fk-tag">демо</span></h3>
+              <dl class="fk-spec">
+                <div><dt>Коллекция</dt><dd data-out="collection">Коллекция A</dd></div>
+                <div><dt>Рамка</dt><dd data-out="frame">Белый</dd></div>
+                <div><dt>Механизм</dt><dd data-out="mech">Выключатель, белый</dd></div>
+                <div><dt>Артикул комплекта</dt><dd data-out="kit-sku"></dd></div>
+                <div><dt>Цена комплекта</dt><dd data-out="kit-price"></dd></div>
+              </dl>
+              <p class="fk-vh" id="cfg-summary" role="status"></p>
+              <button class="fk-btn fk-btn--primary fk-result__btn" id="cfg-add" type="button">Добавить комплект в корзину</button>
+              <p class="fk-pdp__more"><a class="fk-link fk-link--tap" id="cfg-catalog-link" href="catalog.html">Подобрать отдельные изделия в каталоге</a></p>
+              <p class="fk-pdp__more" id="cfg-cart-link" hidden><a class="fk-link fk-link--tap" href="cart.html">Перейти в корзину</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- H-04 Категории -->
+    <section class="fk-section" id="categories" aria-labelledby="categories-title">
+      <div class="fk-container">
+        <div class="fk-section-head">
+          <h2 id="categories-title">Категории</h2>
+          <p class="fk-note">Розетки, выключатели и рамки названы в требованиях проекта. Остальные категории временные.</p>
+        </div>
+        <ul class="fk-grid fk-grid--categories">
+          <li>
+            <a class="fk-category-tile tone-graphite" href="catalog.html?category=sockets">
+              <span class="fk-category-tile__media"><svg class="fin-white" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-socket" x="45" y="45" width="150" height="150"/></svg></span>
+              <span class="fk-category-tile__cap"><span class="fk-idx" aria-hidden="true">01</span><span class="fk-category-tile__name">Розетки</span><span class="fk-arrow" aria-hidden="true">→</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="fk-category-tile tone-light" href="catalog.html?category=switches">
+              <span class="fk-category-tile__media"><svg class="fin-black" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-switch" x="45" y="45" width="150" height="150"/></svg></span>
+              <span class="fk-category-tile__cap"><span class="fk-idx" aria-hidden="true">02</span><span class="fk-category-tile__name">Выключатели</span><span class="fk-arrow" aria-hidden="true">→</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="fk-category-tile tone-sand" href="catalog.html?category=frames">
+              <span class="fk-category-tile__media"><svg class="fin-white" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-frame" x="45" y="45" width="150" height="150"/></svg></span>
+              <span class="fk-category-tile__cap"><span class="fk-idx" aria-hidden="true">03</span><span class="fk-category-tile__name">Рамки</span><span class="fk-arrow" aria-hidden="true">→</span></span>
+            </a>
+          </li>
+        </ul>
+        <ul class="fk-cat-rows">
+          <li><a class="fk-cat-row" href="#" data-stub="Страница категории не создана."><span class="fk-idx" aria-hidden="true">04</span><span class="fk-cat-row__name">Категория D</span><span class="fk-tag">временная</span><span class="fk-arrow" aria-hidden="true">→</span></a></li>
+          <li><a class="fk-cat-row" href="#" data-stub="Страница категории не создана."><span class="fk-idx" aria-hidden="true">05</span><span class="fk-cat-row__name">Категория E</span><span class="fk-tag">временная</span><span class="fk-arrow" aria-hidden="true">→</span></a></li>
+          <li><a class="fk-cat-row" href="#" data-stub="Страница категории не создана."><span class="fk-idx" aria-hidden="true">06</span><span class="fk-cat-row__name">Категория F</span><span class="fk-tag">временная</span><span class="fk-arrow" aria-hidden="true">→</span></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- H-06 Новинки и популярное. Очередь B, в прототипе показывается; все данные демонстрационные -->
+    <section class="fk-section" id="new" aria-labelledby="new-title" data-proto-status="demo">
+      <div class="fk-container">
+        <div class="fk-section-head">
+          <div class="fk-section-head__row">
+            <h2 id="new-title">Новинки</h2>
+            <a class="fk-link fk-link--tap" href="catalog.html">Все новинки</a>
+          </div>
+          <p class="fk-note fk-note--proto">Демонстрационные данные. Товаров, артикулов, цен и остатков нет; изображения — условные иллюстрации. Кнопка «В корзину» добавляет демонстрационную позицию в корзину этого прототипа; заказ не оформляется.</p>
+        </div>
+        <ul class="fk-grid fk-grid--products">
+          <li class="fk-product-card">
+            <span class="fk-product-card__media tone-light"><svg class="fin-white" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-switch" x="45" y="45" width="150" height="150"/></svg></span>
+            <h3 class="fk-product-card__name"><a href="product.html?id=1">Демонстрационный выключатель</a></h3>
+            <p class="fk-product-card__sku">Арт. <span class="fk-stub">ХХХ-001</span> <span class="fk-tag">заглушка</span></p>
+            <div class="fk-variants" data-variants="1"></div>
+            <p class="fk-product-card__price"><span class="fk-stub">200&nbsp;₽</span> <span class="fk-tag">демо</span></p>
+            <p class="fk-product-card__stock">Наличие уточняется</p>
+            <div class="fk-product-card__actions">
+              <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="1">В корзину<span class="fk-vh"> (демо) — Демонстрационный выключатель</span><span aria-hidden="true">&nbsp;(демо)</span></button>
+              <a class="fk-btn fk-btn--secondary fk-btn--card" href="product.html?id=1">Подробнее<span class="fk-vh"> — товар 1</span></a>
+            </div>
+          </li>
+          <li class="fk-product-card">
+            <span class="fk-product-card__media tone-sand"><svg class="fin-black" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-socket" x="45" y="45" width="150" height="150"/></svg></span>
+            <h3 class="fk-product-card__name"><a href="product.html?id=2">Демонстрационная розетка</a></h3>
+            <p class="fk-product-card__sku">Арт. <span class="fk-stub">ХХХ-002</span> <span class="fk-tag">заглушка</span></p>
+            <div class="fk-variants" data-variants="2"></div>
+            <p class="fk-product-card__price"><span class="fk-stub">100&nbsp;₽</span> <span class="fk-tag">демо</span></p>
+            <p class="fk-product-card__stock">Наличие уточняется</p>
+            <div class="fk-product-card__actions">
+              <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="2">В корзину<span class="fk-vh"> (демо) — Демонстрационная розетка</span><span aria-hidden="true">&nbsp;(демо)</span></button>
+              <a class="fk-btn fk-btn--secondary fk-btn--card" href="product.html?id=2">Подробнее<span class="fk-vh"> — товар 2</span></a>
+            </div>
+          </li>
+          <li class="fk-product-card">
+            <span class="fk-product-card__media tone-light"><svg class="fin-nickel" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-double" x="45" y="45" width="150" height="150"/></svg></span>
+            <h3 class="fk-product-card__name"><a href="product.html?id=3">Демонстрационный двойной выключатель</a></h3>
+            <p class="fk-product-card__sku">Арт. <span class="fk-stub">ХХХ-003</span> <span class="fk-tag">заглушка</span></p>
+            <div class="fk-variants" data-variants="3"></div>
+            <p class="fk-product-card__price"><span class="fk-stub">300&nbsp;₽</span> <span class="fk-tag">демо</span></p>
+            <p class="fk-product-card__stock">Наличие уточняется</p>
+            <div class="fk-product-card__actions">
+              <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="3">В корзину<span class="fk-vh"> (демо) — Демонстрационный двойной выключатель</span><span aria-hidden="true">&nbsp;(демо)</span></button>
+              <a class="fk-btn fk-btn--secondary fk-btn--card" href="product.html?id=3">Подробнее<span class="fk-vh"> — товар 3</span></a>
+            </div>
+          </li>
+          <li class="fk-product-card">
+            <span class="fk-product-card__media tone-stone"><svg class="fin-cashmere" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-frame" x="45" y="45" width="150" height="150"/></svg></span>
+            <h3 class="fk-product-card__name"><a href="product.html?id=4">Демонстрационная рамка</a></h3>
+            <p class="fk-product-card__sku">Арт. <span class="fk-stub">ХХХ-004</span> <span class="fk-tag">заглушка</span></p>
+            <div class="fk-variants" data-variants="4"></div>
+            <p class="fk-product-card__price"><span class="fk-stub">200&nbsp;₽</span> <span class="fk-tag">демо</span></p>
+            <p class="fk-product-card__stock">Наличие уточняется</p>
+            <div class="fk-product-card__actions">
+              <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="4">В корзину<span class="fk-vh"> (демо) — Демонстрационная рамка</span><span aria-hidden="true">&nbsp;(демо)</span></button>
+              <a class="fk-btn fk-btn--secondary fk-btn--card" href="product.html?id=4">Подробнее<span class="fk-vh"> — товар 4</span></a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- H-10 Проекты. Очередь B, в прототипе показывается; контент предоставит владелец -->
+    <section class="fk-section" id="projects" aria-labelledby="projects-title" data-proto-status="demo">
+      <div class="fk-container">
+        <div class="fk-section-head">
+          <div class="fk-section-head__row">
+            <h2 id="projects-title">Проекты</h2>
+            <a class="fk-link fk-link--tap" href="#" data-stub="Страница проектов не создана.">Все проекты</a>
+          </div>
+          <p class="fk-note fk-note--proto">Демонстрационные данные. Проектов, фотографий и использованных коллекций нет; на карточках — схематичные иллюстрации. Контент предоставит владелец.</p>
+        </div>
+        <ul class="fk-grid fk-grid--projects">
+          <li class="is-p1">
+            <a class="fk-project-card tone-graphite" href="#" data-stub="Страница проекта не создана.">
+              <span class="fk-project-card__media">
+                <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use href="#room"/><use href="#shade150" transform="translate(250 120) scale(0.6667)"/><use class="fin-white" href="#p-switch" x="250" y="120" width="100" height="100"/><use href="#shade150" transform="translate(150 210) scale(0.4000)"/><use class="fin-white" href="#p-socket" x="150" y="210" width="60" height="60"/></svg>
+                <span class="fk-tag fk-tag--float">Заглушка: фото проекта</span>
+              </span>
+              <span class="fk-project-card__cap">
+                <h3 class="fk-project-card__name">Демонстрационный проект 1</h3>
+                <span class="fk-project-card__meta">Помещение — заглушка · Коллекция — заглушка</span>
+              </span>
+            </a>
+          </li>
+          <li class="">
+            <a class="fk-project-card tone-light" href="#" data-stub="Страница проекта не создана.">
+              <span class="fk-project-card__media">
+                <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use href="#room"/><use href="#shade150" transform="translate(165 100) scale(0.4667)"/><use class="fin-black" href="#p-socket" x="165" y="100" width="70" height="70"/></svg>
+                <span class="fk-tag fk-tag--float">Заглушка: фото проекта</span>
+              </span>
+              <span class="fk-project-card__cap">
+                <h3 class="fk-project-card__name">Демонстрационный проект 2</h3>
+                <span class="fk-project-card__meta">Помещение — заглушка · Коллекция — заглушка</span>
+              </span>
+            </a>
+          </li>
+          <li class="">
+            <a class="fk-project-card tone-sand" href="#" data-stub="Страница проекта не создана.">
+              <span class="fk-project-card__media">
+                <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use href="#room"/><use href="#shade150" transform="translate(140 92) scale(0.4267)"/><use class="fin-white" href="#p-double" x="140" y="92" width="64" height="64"/></svg>
+                <span class="fk-tag fk-tag--float">Заглушка: фото проекта</span>
+              </span>
+              <span class="fk-project-card__cap">
+                <h3 class="fk-project-card__name">Демонстрационный проект 3</h3>
+                <span class="fk-project-card__meta">Помещение — заглушка · Коллекция — заглушка</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- H-07 Профессионалам -->
+    <section class="fk-pro" id="pro" aria-labelledby="pro-title">
+      <div class="fk-container">
+        <div class="fk-pro__grid">
+          <div class="fk-pro__intro fk-section-head">
+            <h2 id="pro-title">Профессионалам</h2>
+            <p class="fk-note fk-note--proto">Временные тексты. Формулировки и страницы сотрудничества предоставит владелец; до подтверждения не использовать как коммерческое предложение.</p>
+            <a class="fk-btn fk-btn--inverse" href="#contacts">Связаться с нами</a>
+          </div>
+          <ul class="fk-pro__list">
+            <li class="fk-pro__item"><span class="fk-idx" aria-hidden="true">01</span><div><h3>Дизайнерам</h3><p>Временный текст для дизайнеров: формулировку предоставит владелец.</p></div></li>
+            <li class="fk-pro__item"><span class="fk-idx" aria-hidden="true">02</span><div><h3>Монтажным организациям</h3><p>Временный текст для монтажных организаций: формулировку предоставит владелец.</p></div></li>
+            <li class="fk-pro__item"><span class="fk-idx" aria-hidden="true">03</span><div><h3>Дилерам</h3><p>Временный текст для дилеров: формулировку предоставит владелец.</p></div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- H-08 Доставка и оплата -->
+    <section class="fk-delivery" id="delivery" aria-labelledby="delivery-title" data-proto-status="conditional">
+      <div class="fk-container">
+        <div class="fk-delivery__grid">
+          <div class="fk-delivery__intro fk-section-head">
+            <h2 class="fk-section-title" id="delivery-title">Доставка и оплата</h2>
+            <p class="fk-note fk-note--proto">Условный блок: показан только для оценки композиции. Способы названы в техническом задании, но не утверждены, условий нет. На сайте блок скрыт, пока владелец не утвердит способы доставки и оплаты.</p>
+          </div>
+          <ul class="fk-delivery__list">
+            <li><span class="fk-idx" aria-hidden="true">01</span><h3>Курьер</h3><p>Условия будут опубликованы после утверждения.</p><span class="fk-tag">не утверждено</span></li>
+            <li><span class="fk-idx" aria-hidden="true">02</span><h3>Самовывоз</h3><p>Условия будут опубликованы после утверждения.</p><span class="fk-tag">не утверждено</span></li>
+            <li><span class="fk-idx" aria-hidden="true">03</span><h3>СДЭК</h3><p>Условия будут опубликованы после утверждения.</p><span class="fk-tag">не утверждено</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- H-09 Подвал -->
+  <footer class="fk-footer" id="contacts">
+    <div class="fk-container">
+      <div class="fk-footer__grid">
+        <div class="fk-footer__brand">
+          <p class="fk-footer__logo">FORKEL</p>
+        </div>
+        <nav class="fk-footer__nav" aria-label="Разделы">
+          <h2>Разделы</h2>
+          <ul>
+            <li><a href="catalog.html">Каталог</a></li>
+            <li><a href="#collections">Коллекции</a></li>
+            <li><a href="#categories">Категории</a></li>
+            <li><a href="#new">Новинки</a></li>
+            <li><a href="#configurator">Подбор</a></li>
+            <li><a href="#projects">Проекты</a></li>
+            <li><a href="#pro">Сотрудничество</a></li>
+            <li><a href="#delivery">Доставка и оплата</a></li>
+          </ul>
+        </nav>
+        <div class="fk-footer__contacts">
+          <h2>Контакты</h2>
+          <p>Телефон, email и адрес добавит владелец.</p>
+        </div>
+      </div>
+      <div class="fk-footer__legal">
+        <a href="#" data-stub="Страница политики не создана. Текст предоставит владелец.">Политика обработки персональных данных</a>
+        <p>Юридические данные добавит владелец.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="fk-toast" id="proto-note" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+  <script src="data.js"></script>
+  <script src="cart.js"></script>
+  <script src="configurator.js"></script>
+</body>
+</html>

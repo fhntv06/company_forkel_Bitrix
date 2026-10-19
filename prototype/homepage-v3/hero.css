@@ -1,0 +1,161 @@
+/* FORKEL V3 — блок «Hero» (из prototype/hero/, интегрирован без изменения вида).
+   Глобальные правила исходного файла (reset, body, h1, .fk-vh) убраны: они есть в styles.css.
+   Класс образцов переименован в .fk-hero__swatches (в styles.css есть .fk-swatches подбора). */
+/* FORKEL — Hero главной (изолированный компонент).
+   Всё содержимое ограничено классом .fk-hero и переменными --hero-*.
+   Значения цвета, радиуса и шрифта — исследовательский вариант, не утверждённый стиль (D10, D13). */
+
+@property --wall-hi { syntax: '<color>'; inherits: true; initial-value: #3b3330; }
+@property --wall-lo { syntax: '<color>'; inherits: true; initial-value: #1d1917; }
+
+:root {
+  --hero-font: "Golos Text", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --hero-accent: #FB4B00;          /* оттенок кнопок на forkel.by (замер по скриншоту заказчика); бренд-цвет не утверждён */
+  --hero-on-accent: #1E2022;       /* белый на этом оранжевом даёт 3.44:1, тёмный — 4.75:1 */
+  --hero-ink: #1E2022;
+  --hero-margin: 16px;
+  --hero-radius: 24px;
+}
+@media (min-width: 768px)  { :root { --hero-margin: 24px; --hero-radius: 28px; } }
+@media (min-width: 1024px) { :root { --hero-margin: 40px; --hero-radius: 32px; } }
+
+
+/* ---------- Отделки: цвет изделий и тон стены ---------- */
+.fk-hero {
+  --frame-a: #DCCFC4; --frame-m: #CBBCAE; --frame-b: #B9A99B;
+  --plate-a: #E6DBD1; --plate-b: #CBBDB0;
+  --key-a:   #EFE5DC; --key-b:   #D6C9BD;
+  --wall-hi: #3b3330; --wall-lo: #1d1917;
+  --fg: #FFFFFF; --fg-muted: #D3CCC7; --fg-line: rgba(255,255,255,.55);
+  --fg-hover: rgba(255,255,255,.14); --scrim: rgba(0,0,0,.35);
+}
+.fk-hero[data-finish="white"]    { --frame-a:#F7F7F5; --frame-m:#E8E8E4; --frame-b:#D5D5D0; --plate-a:#FCFCFA; --plate-b:#E7E7E3; --key-a:#FFFFFF; --key-b:#EDEDE9; --wall-hi:#3a3f46; --wall-lo:#1b1d21; --fg-muted:#CDD1D6; }
+.fk-hero[data-finish="nickel"]   { --frame-a:#E4E6E9; --frame-m:#BFC3C8; --frame-b:#8F949B; --plate-a:#D3D6DA; --plate-b:#A6AAB0; --key-a:#E2E4E7; --key-b:#B4B8BD; --wall-hi:#343c47; --wall-lo:#171a1f; --fg-muted:#CBD0D6; }
+.fk-hero[data-finish="cashmere"] { /* по умолчанию */ }
+.fk-hero[data-finish="gold"]     { --frame-a:#E8D199; --frame-m:#D2B473; --frame-b:#A98849; --plate-a:#EAD7A8; --plate-b:#C2A062; --key-a:#F1E1B8; --key-b:#CDAC6D; --wall-hi:#363a40; --wall-lo:#181a1d; --fg-muted:#CDD1D6; }
+.fk-hero[data-finish="black"]    { --frame-a:#3a3b40; --frame-m:#202124; --frame-b:#0f0f11; --plate-a:#2a2b2f; --plate-b:#151517; --key-a:#3c3d42; --key-b:#1c1c1f;
+                                   --wall-hi:#ECE8E1; --wall-lo:#CDC8BF; --fg:#1E2022; --fg-muted:#43484D; --fg-line:rgba(30,32,34,.65); --fg-hover:rgba(30,32,34,.08); --scrim: rgba(255,255,255,.2); }
+.fk-hero[data-finish="grey"]     { --frame-a:#9a9da3; --frame-m:#777a80; --frame-b:#585b60; --plate-a:#85888e; --plate-b:#5b5e63; --key-a:#9d9fa5; --key-b:#6e7176;
+                                   --wall-hi:#E9E5DE; --wall-lo:#C9C4BB; --fg:#1E2022; --fg-muted:#43484D; --fg-line:rgba(30,32,34,.65); --fg-hover:rgba(30,32,34,.08); --scrim: rgba(255,255,255,.2); }
+
+/* ---------- Сцена-контейнер ---------- */
+.fk-hero { position: relative; max-width: 1440px; margin-inline: auto; padding: 0 var(--hero-margin) var(--fk-section-gap); font-family: var(--hero-font); }
+.fk-hero__stage {
+  position: relative; overflow: hidden; isolation: isolate;
+  border-radius: var(--hero-radius);
+  color: var(--fg);
+  background:
+    radial-gradient(110% 85% at 38% -5%, var(--wall-hi) 0%, transparent 64%),
+    linear-gradient(180deg, var(--wall-hi) -20%, var(--wall-lo) 100%);
+  transition: --wall-hi .5s ease, --wall-lo .5s ease, color .4s ease;
+}
+/* фактура стены (процедурный шум) и скользящий свет сверху */
+.fk-hero__stage::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .09; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.fk-hero__stage::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(115deg, rgba(255,255,255,.07) 0%, transparent 38%, rgba(0,0,0,.14) 100%);
+}
+
+.fk-hero__grid { display: grid; grid-template-columns: 1fr; }
+.fk-hero__scene { order: -1; position: relative; padding: 28px 16px 0; }
+.fk-hero__svg { width: 100%; height: auto; display: block; overflow: visible; }
+.fk-hero__svg--wide { display: none; }
+
+.fk-hero__content { position: relative; padding: 24px 24px 32px; display: flex; flex-direction: column; gap: 20px; }
+.fk-hero h1 {
+  font-size: clamp(2.25rem, 1.5rem + 3vw, 4.25rem);
+  line-height: 1.02; letter-spacing: -0.028em; font-weight: 700; text-wrap: balance;
+}
+.fk-hero__lead { font-size: 1.0625rem; line-height: 1.5; color: var(--fg-muted); max-width: 34ch; }
+.fk-hero__actions { display: grid; gap: 12px; margin-top: 4px; }
+
+/* ---------- Кнопки ---------- */
+.fk-hbtn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 52px; padding: 0 28px; border-radius: 14px; border: 1.5px solid transparent;
+  font: 600 1rem/1 var(--hero-font); text-decoration: none; cursor: pointer;
+  transition: background-color .15s ease-out, border-color .15s ease-out, transform .15s ease-out;
+}
+.fk-hbtn--primary { background: var(--hero-accent); color: var(--hero-on-accent); }
+.fk-hbtn--primary:hover { background: #FF6A2B; }
+.fk-hbtn--primary:active { transform: translateY(1px); }
+.fk-hbtn--secondary { background: transparent; color: var(--fg); border-color: var(--fg-line); }
+.fk-hbtn--secondary:hover { background: var(--fg-hover); border-color: var(--fg); }
+.fk-hero :focus-visible { outline: 3px solid var(--fg); outline-offset: 3px; border-radius: 14px; }
+.fk-hbtn--primary:focus-visible { outline-color: var(--fg); box-shadow: 0 0 0 3px var(--hero-accent); }
+
+/* ---------- Образцы отделки (демо) ---------- */
+.fk-hero__finishes { display: none; }
+.js .fk-hero__finishes { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+.fk-hero__finishes-label { font-size: .875rem; color: var(--fg-muted); }
+.fk-hero__finishes-label strong { color: var(--fg); font-weight: 600; }
+.fk-hero__swatches { display: flex; flex-wrap: wrap; gap: 2px; }
+.fk-sw {
+  position: relative; width: 44px; height: 44px; padding: 0; border: 0; background: none; cursor: pointer; border-radius: 12px;
+}
+.fk-sw::before {
+  content: ""; position: absolute; inset: 7px; border-radius: 9px; background: var(--c);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.35);
+  transition: transform .15s ease-out;
+}
+.fk-sw:hover::before { transform: scale(1.06); }
+.fk-sw[aria-checked="true"]::after {
+  content: ""; position: absolute; inset: 1px; border-radius: 12px; border: 2px solid var(--fg);
+}
+
+/* ---------- Пометка временной визуализации ---------- */
+.fk-hero__note {
+  position: absolute; right: 16px; bottom: 12px; z-index: 2;
+  font-size: .875rem; line-height: 1.3; color: var(--fg-muted); text-align: right; max-width: 24ch;
+}
+
+/* ---------- Слот под реальную фотографию ---------- */
+.fk-hero__photo { display: none; }
+.fk-hero.has-photo .fk-hero__photo { display: block; position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; }
+.fk-hero.has-photo .fk-hero__scene, .fk-hero.has-photo .fk-hero__note, .fk-hero.has-photo .fk-hero__finishes { display: none; }
+.fk-hero.has-photo .fk-hero__stage::after { background: linear-gradient(90deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.28) 55%, rgba(0,0,0,0) 100%); }
+.fk-hero.has-photo { --fg: #fff; --fg-muted: #E4E6E9; --fg-line: rgba(255,255,255,.6); --fg-hover: rgba(255,255,255,.14); }
+
+/* ---------- Появление (один выразительный момент) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .fk-hero__svg .fk-set { opacity: 0; transform: translateY(18px); animation: fk-hero-rise .7s cubic-bezier(.2,.7,.2,1) forwards; }
+  .fk-hero__svg .fk-set:nth-of-type(1) { animation-delay: .05s; }
+  .fk-hero__svg .fk-set:nth-of-type(2) { animation-delay: .17s; }
+  .fk-hero__svg .fk-set:nth-of-type(3) { animation-delay: .29s; }
+  @keyframes fk-hero-rise { to { opacity: 1; transform: none; } }
+  .fk-hero__content > * { animation: fk-hero-fade .6s ease-out both; }
+  .fk-hero__content > :nth-child(2) { animation-delay: .08s; }
+  .fk-hero__content > :nth-child(3) { animation-delay: .16s; }
+  .fk-hero__content > :nth-child(4) { animation-delay: .24s; }
+  @keyframes fk-hero-fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .fk-sprite stop { transition: stop-color .45s ease; }
+}
+
+/* ---------- Спрайт и градиенты изделий ---------- */
+.fk-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.s-fa { stop-color: var(--frame-a); } .s-fm { stop-color: var(--frame-m); } .s-fb { stop-color: var(--frame-b); }
+.s-pa { stop-color: var(--plate-a); } .s-pb { stop-color: var(--plate-b); }
+.s-ka { stop-color: var(--key-a); }   .s-kb { stop-color: var(--key-b); }
+
+/* ---------- Планшет и больше: две колонки ---------- */
+@media (min-width: 960px) {
+  .fk-hero__stage { min-height: clamp(560px, calc(100svh - 150px), 760px); }
+  .fk-hero__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); min-height: inherit; }
+  .fk-hero__scene { order: 0; padding: 0; display: flex; align-items: center; justify-content: flex-end; }
+  .fk-hero__svg--narrow { display: none; }
+  .fk-hero__svg--wide { display: block; width: 100%; max-width: 920px; height: auto; }
+  .fk-hero__content { padding: 56px 0 56px 56px; justify-content: center; gap: 24px; z-index: 1; }
+  .fk-hero__lead { font-size: 1.25rem; }
+  .fk-hero__actions { grid-auto-flow: column; justify-content: start; gap: 12px; }
+  .fk-hero__note { right: 28px; bottom: 20px; }
+}
+@media (min-width: 960px) and (max-width: 1199px) {
+  .fk-hero__actions { grid-auto-flow: row; justify-items: start; }
+  .fk-hero__actions .fk-hbtn { width: 100%; max-width: 280px; }
+}
+@media (max-width: 959px) {
+  .fk-hero__note { position: static; max-width: none; text-align: left; padding: 0 24px 20px; }
+}
