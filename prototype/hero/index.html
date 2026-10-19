@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FORKEL — Hero главной (концепт)</title>
+  <meta name="description" content="Визуальный концепт первого экрана FORKEL. Не является рабочим сайтом.">
+  <meta name="robots" content="noindex, nofollow">
+  <script>document.documentElement.className = 'js';</script>
+  <link rel="stylesheet" href="hero.css">
+  <style>
+    /* Заглушка шапки — только для контекста при просмотре Hero. Не часть компонента. */
+    .stub-header { display: flex; align-items: center; gap: 24px; height: 72px; padding: 0 var(--hero-margin); font-size: .9375rem; }
+    .stub-logo { font-weight: 800; letter-spacing: .12em; font-size: 1.25rem; text-decoration: none; color: var(--hero-ink); }
+    .stub-nav { display: none; gap: 24px; margin-left: 16px; }
+    .stub-nav a { color: var(--hero-ink); text-decoration: none; }
+    .stub-nav a:hover { text-decoration: underline; }
+    .stub-right { margin-left: auto; display: flex; align-items: center; gap: 16px; }
+    .stub-right span { display: none; color: #5A5F64; }
+    .stub-btn { width: 44px; height: 44px; border: 0; background: none; display: grid; place-items: center; border-radius: 12px; cursor: default; color: var(--hero-ink); }
+    @media (min-width: 1100px) { .stub-nav { display: flex; } .stub-right span { display: block; } }
+    .stub-bottom { height: 48px; }
+  </style>
+</head>
+<body>
+
+<header class="stub-header">
+  <a class="stub-logo" href="#" aria-label="FORKEL — заглушка логотипа">FORKEL</a>
+  <nav class="stub-nav" aria-label="Заглушка меню">
+    <a href="#">Каталог</a><a href="#">Коллекции</a><a href="#">Подбор</a><a href="#">Проекты</a><a href="#">Сотрудничество</a><a href="#">О бренде</a>
+  </nav>
+  <div class="stub-right">
+    <span>Телефон (заглушка)</span>
+    <button class="stub-btn" type="button" aria-label="Поиск (заглушка)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l5 5"/></svg></button>
+    <button class="stub-btn" type="button" aria-label="Личный кабинет (заглушка)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg></button>
+    <button class="stub-btn" type="button" aria-label="Корзина (заглушка)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.2 11h10.6L20 7H6.3"/><circle cx="9" cy="19.5" r="1.3"/><circle cx="17" cy="19.5" r="1.3"/></svg></button>
+  </div>
+</header>
+
+<main>
+<!-- =================== HERO (компонент) =================== -->
+<section class="fk-hero" id="hero" aria-labelledby="hero-title" data-finish="cashmere" data-photo="" data-photo-alt="">
+
+  <!-- Градиенты, фильтры и символы изделий. Лежат внутри секции, чтобы наследовать переменные отделки. -->
+  <svg class="fk-sprite" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="fk-g-frame" x1="0" y1="0" x2="1" y2="1"><stop offset="0" class="s-fa"/><stop offset=".5" class="s-fm"/><stop offset="1" class="s-fb"/></linearGradient>
+      <linearGradient id="fk-g-plate" x1="0" y1="0" x2="1" y2="1"><stop offset="0" class="s-pa"/><stop offset="1" class="s-pb"/></linearGradient>
+      <linearGradient id="fk-g-key" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="s-ka"/><stop offset="1" class="s-kb"/></linearGradient>
+      <linearGradient id="fk-g-sheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".30"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/></linearGradient>
+      <radialGradient id="fk-g-recess" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#000" stop-opacity=".06"/><stop offset=".8" stop-color="#000" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".34"/></radialGradient>
+      <linearGradient id="fk-g-metal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EEF0F2"/><stop offset="1" stop-color="#8E9298"/></linearGradient>
+      <filter id="fk-shadow" x="-15%" y="-20%" width="140%" height="170%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="16" result="b1"/><feOffset in="b1" dx="18" dy="28" result="o1"/>
+        <feComponentTransfer in="o1" result="s1"><feFuncA type="linear" slope=".5"/></feComponentTransfer>
+        <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="b2"/><feOffset in="b2" dx="2" dy="5" result="o2"/>
+        <feComponentTransfer in="o2" result="s2"><feFuncA type="linear" slope=".55"/></feComponentTransfer>
+        <feMerge><feMergeNode in="s1"/><feMergeNode in="s2"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+
+    <!-- Механизмы (условная графика, не фотография и не данные изделий) -->
+    <symbol id="fk-p-switch2" viewBox="0 0 160 160">
+      <rect width="160" height="160" rx="5" fill="url(#fk-g-plate)"/>
+      <rect x=".75" y=".75" width="158.5" height="158.5" rx="4.5" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="1.5"/>
+      <rect x="9" y="9" width="66" height="142" rx="4" fill="url(#fk-g-key)" stroke="#000" stroke-opacity=".16"/>
+      <rect x="9" y="9" width="66" height="142" rx="4" fill="url(#fk-g-sheen)"/>
+      <rect x="85" y="9" width="66" height="142" rx="4" fill="url(#fk-g-key)" stroke="#000" stroke-opacity=".16"/>
+      <rect x="85" y="9" width="66" height="142" rx="4" fill="url(#fk-g-sheen)"/>
+      <rect x="85" y="9" width="66" height="142" rx="4" fill="#000" fill-opacity=".05"/>
+    </symbol>
+    <symbol id="fk-p-switch1" viewBox="0 0 160 160">
+      <rect width="160" height="160" rx="5" fill="url(#fk-g-plate)"/>
+      <rect x=".75" y=".75" width="158.5" height="158.5" rx="4.5" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="1.5"/>
+      <rect x="9" y="9" width="142" height="142" rx="4" fill="url(#fk-g-key)" stroke="#000" stroke-opacity=".16"/>
+      <rect x="9" y="9" width="142" height="142" rx="4" fill="url(#fk-g-sheen)"/>
+    </symbol>
+    <symbol id="fk-p-socket" viewBox="0 0 160 160">
+      <rect width="160" height="160" rx="5" fill="url(#fk-g-plate)"/>
+      <rect x=".75" y=".75" width="158.5" height="158.5" rx="4.5" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="1.5"/>
+      <circle cx="80" cy="80" r="58" fill="#000" fill-opacity=".14"/>
+      <circle cx="80" cy="80" r="54" fill="url(#fk-g-recess)"/>
+      <circle cx="80" cy="80" r="54" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="1.5"/>
+      <circle cx="60" cy="80" r="8" fill="#0e0f11"/><circle cx="100" cy="80" r="8" fill="#0e0f11"/>
+      <rect x="72" y="29" width="16" height="11" rx="2" fill="url(#fk-g-metal)"/><rect x="72" y="120" width="16" height="11" rx="2" fill="url(#fk-g-metal)"/>
+    </symbol>
+    <symbol id="fk-p-dimmer" viewBox="0 0 160 160">
+      <rect width="160" height="160" rx="5" fill="url(#fk-g-plate)"/>
+      <rect x=".75" y=".75" width="158.5" height="158.5" rx="4.5" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="1.5"/>
+      <circle cx="80" cy="84" r="50" fill="#000" fill-opacity=".14"/>
+      <circle cx="80" cy="80" r="46" fill="url(#fk-g-key)" stroke="#000" stroke-opacity=".2"/>
+      <circle cx="80" cy="80" r="46" fill="url(#fk-g-sheen)"/>
+      <circle cx="80" cy="80" r="35" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="1.5"/>
+      <rect x="77" y="42" width="6" height="18" rx="3" fill="#000" fill-opacity=".5"/>
+    </symbol>
+
+    <!-- Рамки с механизмами -->
+    <symbol id="fk-set-a" viewBox="0 0 548 204">
+      <rect width="548" height="204" rx="12" fill="url(#fk-g-frame)"/>
+      <rect x="1" y="1" width="546" height="202" rx="11" fill="none" stroke="#fff" stroke-opacity=".38" stroke-width="1.5"/>
+      <rect x="22" y="22" width="160" height="160" rx="5" fill="#000" fill-opacity=".32"/><rect x="194" y="22" width="160" height="160" rx="5" fill="#000" fill-opacity=".32"/><rect x="366" y="22" width="160" height="160" rx="5" fill="#000" fill-opacity=".32"/>
+      <use href="#fk-p-switch2" x="22" y="22" width="160" height="160"/><use href="#fk-p-socket" x="194" y="22" width="160" height="160"/><use href="#fk-p-dimmer" x="366" y="22" width="160" height="160"/>
+    </symbol>
+    <symbol id="fk-set-b" viewBox="0 0 204 204">
+      <rect width="204" height="204" rx="12" fill="url(#fk-g-frame)"/>
+      <rect x="1" y="1" width="202" height="202" rx="11" fill="none" stroke="#fff" stroke-opacity=".38" stroke-width="1.5"/>
+      <rect x="22" y="22" width="160" height="160" rx="5" fill="#000" fill-opacity=".32"/>
+      <use href="#fk-p-socket" x="22" y="22" width="160" height="160"/>
+    </symbol>
+    <symbol id="fk-set-c" viewBox="0 0 376 204">
+      <rect width="376" height="204" rx="12" fill="url(#fk-g-frame)"/>
+      <rect x="1" y="1" width="374" height="202" rx="11" fill="none" stroke="#fff" stroke-opacity=".38" stroke-width="1.5"/>
+      <rect x="22" y="22" width="160" height="160" rx="5" fill="#000" fill-opacity=".32"/><rect x="194" y="22" width="160" height="160" rx="5" fill="#000" fill-opacity=".32"/>
+      <use href="#fk-p-switch1" x="22" y="22" width="160" height="160"/><use href="#fk-p-socket" x="194" y="22" width="160" height="160"/>
+    </symbol>
+  </svg>
+
+  <div class="fk-hero__stage">
+    <img class="fk-hero__photo" alt="" width="1600" height="900">
+
+    <div class="fk-hero__grid">
+      <div class="fk-hero__content">
+        <h1 id="hero-title">Розетки и выключатели для интерьера</h1>
+        <p class="fk-hero__lead">Рамки и механизмы в одной серии: выбирайте коллекцию и смотрите изделия.</p>
+        <div class="fk-hero__actions">
+          <a class="fk-hbtn fk-hbtn--primary" href="#collections">Смотреть коллекции</a>
+          <a class="fk-hbtn fk-hbtn--secondary" href="#configurator">Собрать в подборе</a>
+        </div>
+
+        <!-- Демо отделки: только перекрашивает картинку Hero. Это не конфигуратор и не данные ассортимента. -->
+        <div class="fk-hero__finishes" role="radiogroup" aria-labelledby="finish-label">
+          <p class="fk-hero__finishes-label" id="finish-label">Отделка (демо): <strong id="finish-name" aria-live="polite">Кашемир</strong></p>
+          <div class="fk-swatches">
+            <button class="fk-sw" type="button" role="radio" aria-checked="false" tabindex="-1" data-finish="white"    data-name="Белый"    style="--c:#F4F4F1"><span class="fk-vh">Белый</span></button>
+            <button class="fk-sw" type="button" role="radio" aria-checked="false" tabindex="-1" data-finish="black"    data-name="Чёрный"   style="--c:#202124"><span class="fk-vh">Чёрный</span></button>
+            <button class="fk-sw" type="button" role="radio" aria-checked="false" tabindex="-1" data-finish="grey"     data-name="Серый"    style="--c:#7A7D83"><span class="fk-vh">Серый</span></button>
+            <button class="fk-sw" type="button" role="radio" aria-checked="false" tabindex="-1" data-finish="nickel"   data-name="Никель"   style="--c:linear-gradient(135deg,#E4E6E9,#8F949B)"><span class="fk-vh">Никель</span></button>
+            <button class="fk-sw" type="button" role="radio" aria-checked="true"  tabindex="0"  data-finish="cashmere" data-name="Кашемир"  style="--c:#CDBFB2"><span class="fk-vh">Кашемир</span></button>
+            <button class="fk-sw" type="button" role="radio" aria-checked="false" tabindex="-1" data-finish="gold"     data-name="Золотой"  style="--c:#D2B473"><span class="fk-vh">Золотой</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="fk-hero__scene">
+        <!-- Широкая композиция (от 960 px) -->
+        <svg class="fk-hero__svg fk-hero__svg--wide" viewBox="0 0 960 840" role="img"
+             aria-label="Временная визуализация: три рамки с выключателями, розетками и светорегулятором на стене. Это не фотография изделий.">
+          <g class="fk-set" filter="url(#fk-shadow)"><use href="#fk-set-a" x="190" y="90"  width="712" height="265"/></g>
+          <g class="fk-set" filter="url(#fk-shadow)"><use href="#fk-set-c" x="372" y="470" width="489" height="265"/></g>
+          <g class="fk-set" filter="url(#fk-shadow)"><use href="#fk-set-b" x="70"  y="400" width="265" height="265"/></g>
+        </svg>
+        <!-- Узкая композиция (мобильные и планшеты) -->
+        <svg class="fk-hero__svg fk-hero__svg--narrow" viewBox="0 0 720 540" role="img"
+             aria-label="Временная визуализация: три рамки с выключателями, розетками и светорегулятором на стене. Это не фотография изделий.">
+          <g class="fk-set" filter="url(#fk-shadow)"><use href="#fk-set-a" x="150" y="30"  width="548" height="204"/></g>
+          <g class="fk-set" filter="url(#fk-shadow)"><use href="#fk-set-c" x="300" y="300" width="376" height="204"/></g>
+          <g class="fk-set" filter="url(#fk-shadow)"><use href="#fk-set-b" x="40"  y="270" width="204" height="204"/></g>
+        </svg>
+      </div>
+    </div>
+
+    <p class="fk-hero__note">Временная визуализация, не фотография изделия</p>
+  </div>
+</section>
+</main>
+<div class="stub-bottom"></div>
+
+<script src="hero.js"></script>
+</body>
+</html>
