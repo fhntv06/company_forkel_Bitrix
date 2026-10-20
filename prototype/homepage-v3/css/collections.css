@@ -1,0 +1,44 @@
+/* FORKEL V3 — компонент «Коллекции» (H-03): сетка крупных скруглённых карточек.
+   Подключается из styles.css (@import). Токены --fk-* и тона .tone-* берутся из styles.css.
+   Разметка: <section id="collections"> ... <ul class="fk-grid fk-grid--collections"> <li> <a class="fk-collection-card tone-*">. */
+
+.fk-grid--collections { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: clamp(280px, 72vw, 360px); gap: 16px; }
+.fk-grid--collections > li { min-height: 0; }
+.fk-grid--collections .is-a, .fk-grid--collections .is-f { grid-column: span 2; }
+@media (min-width: 768px) {
+  .fk-grid--collections { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: clamp(300px, 34vw, 400px); gap: 24px; }
+  .fk-grid--collections .is-a { grid-row: span 2; }
+  .fk-grid--collections .is-f { grid-column: auto; }
+  .fk-grid--collections .is-h { grid-column: span 2; }
+}
+@media (min-width: 1024px) {
+  .fk-grid--collections { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: clamp(340px, 30vw, 440px); gap: 32px; }
+  .fk-grid--collections .is-f { grid-column: span 2; }
+  .fk-grid--collections .is-h { grid-column: auto; }
+}
+@media (min-width: 1536px) { .fk-grid--collections { grid-auto-rows: 440px; } }
+
+.fk-collection-card {
+  position: relative; display: flex; flex-direction: column; height: 100%;
+  background: var(--tone); color: var(--tone-ink); text-decoration: none;
+  border-radius: var(--fk-r-lg); overflow: hidden;
+  border: 1px solid transparent;
+  transition: transform var(--fk-dur) ease-out, box-shadow var(--fk-dur) ease-out, border-color var(--fk-dur) ease-out;
+}
+.fk-collection-card:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(30, 32, 34, 0.14); border-color: var(--fk-bright); }
+.fk-collection-card__media { position: relative; flex: 1; min-height: 0; }
+.fk-collection-card__media svg { position: absolute; inset: 24px; width: calc(100% - 48px); height: calc(100% - 48px); }
+.fk-collection-card__cap { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; padding: 0 20px 20px; }
+.fk-collection-card__name { flex: 1 0 100%; order: -1; font-size: 1.25rem; line-height: 1.2; font-weight: 600; overflow-wrap: break-word; }
+.fk-collection-card .fk-idx {
+  padding: 4px 12px; border-radius: 999px; background: var(--fk-canvas); color: var(--fk-ink); font-weight: 600;
+}
+.tone-graphite.fk-collection-card .fk-idx { background: var(--fk-bright); color: var(--fk-on-bright); }
+.fk-collection-card .fk-arrow {
+  margin-left: auto; display: inline-grid; place-items: center; width: 48px; height: 48px; border-radius: 50%;
+  background: var(--fk-bright); color: var(--fk-on-bright); font-size: 1.375rem;
+}
+.fk-collection-card:hover .fk-collection-card__name { text-decoration: none; }
+@media (min-width: 768px) { .fk-collection-card__cap { padding: 0 24px 24px; } }
+@media (min-width: 1024px) { .fk-collection-card__name { font-size: 1.5rem; } }
+@media (prefers-reduced-motion: reduce) { .fk-collection-card { transition: none; } .fk-collection-card:hover { transform: none; } }

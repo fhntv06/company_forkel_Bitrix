@@ -4,6 +4,7 @@
 /* Компоненты (по одному файлу на блок). Порядок: сначала компоненты, затем общие правила ниже. */
 @import url("css/header.css");
 @import url("css/hero.css");
+@import url("css/collections.css");
 
 :root {
   --fk-canvas: #FFFFFF;
@@ -132,6 +133,7 @@ a:hover > * > .fk-arrow, a:hover > .fk-arrow { transform: translateX(4px); }
 .tone-light    { --tone: #F3F4F5; --tone-ink: var(--fk-ink); --tone-muted: var(--fk-ink-muted); --wall: #F3F4F5; --shade: rgba(30, 32, 34, 0.08); }
 .tone-sand     { --tone: #ECE6DC; --tone-ink: var(--fk-ink); --tone-muted: #5A5F64; --wall: #ECE6DC; --shade: rgba(60, 45, 20, 0.12); }
 .tone-stone    { --tone: #DFE2E5; --tone-ink: var(--fk-ink); --tone-muted: #4F545A; --wall: #DFE2E5; --shade: rgba(30, 32, 34, 0.12); }
+.tone-gold     { --tone: #F3E8CC; --tone-ink: var(--fk-ink); --tone-muted: #5A5F64; --wall: #F3E8CC; --shade: rgba(90, 65, 10, 0.14); }
 .tone-graphite { --tone: #2A2C2F; --tone-ink: #FFFFFF; --tone-muted: #B8BCC0; --wall: #2A2C2F; --shade: rgba(0, 0, 0, 0.34); }
 
 /* ---------- H-02 Первый экран ---------- */
@@ -149,42 +151,10 @@ a:hover > * > .fk-arrow, a:hover > .fk-arrow { transform: translateX(4px); }
 .fk-section-head__row { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; }
 .fk-link--tap { display: inline-flex; align-items: center; min-height: 44px; }
 
-/* ---------- H-03 Коллекции (сетка с разными по размеру плитками) ---------- */
+/* H-03 Коллекции — см. css/collections.css */
 .fk-grid { display: grid; gap: var(--fk-col-gap); }
-.fk-grid--collections { grid-template-columns: repeat(2, 1fr); grid-auto-rows: clamp(220px, 62vw, 300px); }
-.fk-grid--collections > li { min-height: 0; }
-.fk-grid--collections .is-a, .fk-grid--collections .is-f { grid-column: span 2; }
-@media (min-width: 768px) {
-  .fk-grid--collections { grid-template-columns: repeat(3, 1fr); grid-auto-rows: clamp(240px, 26vw, 320px); }
-  .fk-grid--collections .is-a { grid-row: span 2; }
-  .fk-grid--collections .is-f { grid-column: auto; }
-  .fk-grid--collections .is-h { grid-column: span 2; }
-}
-@media (min-width: 1024px) {
-  .fk-grid--collections { grid-template-columns: repeat(4, 1fr); }
-  .fk-grid--collections .is-f { grid-column: span 2; }
-  .fk-grid--collections .is-h { grid-column: auto; }
-}
-.fk-collection-card {
-  display: flex; flex-direction: column; height: 100%;
-  background: var(--tone); color: var(--tone-ink); text-decoration: none;
-  border-radius: var(--fk-radius); overflow: hidden;
-}
-.fk-collection-card__media { position: relative; flex: 1; min-height: 0; }
-.fk-collection-card__media svg { position: absolute; inset: 12px; width: calc(100% - 24px); height: calc(100% - 24px); }
-.fk-collection-card__cap { display: flex; align-items: baseline; gap: 12px; padding: 0 16px 16px; }
-.fk-collection-card__cap { flex-wrap: wrap; gap: 4px 12px; }
-.fk-collection-card__cap .fk-arrow { margin-left: auto; }
-.fk-collection-card__name { flex: 1 0 100%; order: 2; font-size: 1.125rem; line-height: 1.25; font-weight: 600; overflow-wrap: anywhere; }
-.fk-collection-card:hover .fk-collection-card__name,
 .fk-category-tile:hover .fk-category-tile__name,
 .fk-project-card:hover .fk-project-card__name { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 2px; }
-@media (min-width: 768px) {
-  .fk-collection-card__cap { flex-wrap: nowrap; }
-  .fk-collection-card__cap .fk-arrow { margin-left: 0; }
-  .fk-collection-card__name { flex: 1; order: 0; }
-}
-@media (min-width: 1024px) { .fk-collection-card__name { font-size: var(--fk-fs-h3); } .fk-collection-card__cap { padding: 0 20px 20px; } }
 
 /* ---------- H-05 Подбор ---------- */
 .fk-cfg { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px var(--fk-col-gap); }
