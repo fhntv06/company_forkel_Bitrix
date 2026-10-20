@@ -6,6 +6,7 @@
 @import url("css/hero.css");
 @import url("css/collections.css");
 @import url("css/categories.css");
+@import url("css/configurator.css");
 
 :root {
   --fk-canvas: #FFFFFF;
@@ -157,54 +158,8 @@ a:hover > * > .fk-arrow, a:hover > .fk-arrow { transform: translateX(4px); }
 .fk-category-tile:hover .fk-category-tile__name,
 .fk-project-card:hover .fk-project-card__name { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 2px; }
 
-/* ---------- H-05 Подбор ---------- */
-.fk-cfg { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px var(--fk-col-gap); }
-.fk-cfg > * { min-width: 0; }
-.fk-cfg__preview { --wall: #E2DED6; --shade: rgba(60, 45, 20, 0.15); position: relative; aspect-ratio: 4 / 3; background: var(--wall); overflow: hidden; border-radius: var(--fk-radius); }
-.fk-cfg__preview svg { width: 100%; height: 100%; }
-.fk-cfg__tag { position: absolute; left: 12px; bottom: 12px; padding: 2px 8px; font-size: var(--fk-fs-small); line-height: 1.4; background: var(--fk-canvas); border: 1px dashed var(--fk-edge); border-radius: var(--fk-radius); }
-.fk-steps { display: grid; gap: 24px; list-style: none; margin: 0; padding: 0; }
-.fk-step__label { display: flex; align-items: center; gap: 12px; font-weight: 600; line-height: 1.3; margin-bottom: 12px; }
-.fk-step__n { display: inline-grid; place-items: center; flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--fk-ink); color: var(--fk-ink-inverse); font-size: var(--fk-fs-small); font-variant-numeric: tabular-nums; }
-.fk-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.fk-chip {
-  min-height: 44px; padding: 0 16px; font: inherit; font-size: 1rem; font-weight: 600; cursor: pointer;
-  background: transparent; color: var(--fk-ink); border: 1px solid var(--fk-edge); border-radius: var(--fk-radius);
-  transition: background-color var(--fk-dur) ease-out, color var(--fk-dur) ease-out;
-}
-.fk-chip:hover { background: var(--fk-surface); }
-.fk-chip[aria-checked="true"] { background: var(--fk-ink); color: var(--fk-ink-inverse); border-color: var(--fk-ink); }
-.fk-types { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.fk-type {
-  display: flex; flex-direction: column; align-items: center; gap: 8px; min-height: 44px; padding: 12px 2px;
-  font: inherit; font-size: var(--fk-fs-small); font-weight: 600; line-height: 1.25; text-align: center; cursor: pointer;
-  background: transparent; color: var(--fk-ink); border: 1px solid var(--fk-edge); border-radius: var(--fk-radius);
-}
-.fk-type svg { width: 48px; height: 48px; }
-.fk-type span { overflow-wrap: break-word; }
-.fk-type:hover { background: var(--fk-surface); }
-.fk-type[aria-checked="true"] { background: var(--fk-surface); border-color: var(--fk-ink); box-shadow: inset 0 0 0 1px var(--fk-ink); }
-.fk-swatches { display: flex; flex-wrap: wrap; gap: 4px; }
-/* Образец: квадрат 32 px внутри зоны касания 44 px; контур --fk-edge, выбранный — кольцо 2 px (design-system 6.8) */
-.fk-swatch { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; background: transparent; border: 0; border-radius: var(--fk-radius); cursor: pointer; }
-.fk-swatch::before { content: ""; width: 32px; height: 32px; background: var(--finish); border: 1px solid var(--fk-edge); border-radius: var(--fk-radius); }
-.fk-swatch[aria-checked="true"]::before { box-shadow: 0 0 0 2px var(--fk-canvas), 0 0 0 4px var(--fk-ink); }
-.fk-result { display: grid; gap: 12px; margin-top: 32px; padding: 20px; border: 1px solid var(--fk-ink); border-radius: var(--fk-radius); }
-.fk-result h3 { display: flex; align-items: center; gap: 8px; font-size: var(--fk-fs-h3); line-height: 1.25; font-weight: 600; }
-.fk-spec { margin: 0; }
-.fk-spec > div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 8px 0; border-top: 1px solid var(--fk-line); }
-.fk-spec dt { color: var(--fk-ink-muted); font-size: var(--fk-fs-small); }
-.fk-spec dd { margin: 0; font-weight: 600; text-align: right; }
-.fk-result__btn { width: 100%; margin-top: 4px; }
-.no-js .fk-cfg__side { display: none; }
-@media (min-width: 768px) and (max-width: 1023px) { .fk-cfg__preview { aspect-ratio: 16 / 9; } }
-@media (min-width: 1024px) {
-  .fk-cfg { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: start; }
-  .fk-cfg__stage { grid-column: 1 / span 7; position: sticky; top: calc(var(--fk-header-h) + 16px); }
-  .fk-cfg__preview { aspect-ratio: 5 / 4; }
-  .fk-cfg__side { grid-column: 8 / span 5; }
-  .fk-result { margin-top: 32px; }
-}
+/* H-05 Подбор — см. css/configurator.css */
+.fk-swatch[data-fin]::before { background: var(--img) center / cover no-repeat, #E9EAEB; } /* --img: url('../assets/…') считается от этого файла */
 
 /* H-04 Категории — см. css/categories.css */
 
@@ -398,9 +353,6 @@ a:hover > * > .fk-arrow, a:hover > .fk-arrow { transform: translateX(4px); }
 }
 
 /* ---------- Корзина (демо), счётчик, недоступные варианты подбора ---------- */
-.fk-chip:disabled, .fk-type:disabled, .fk-swatch:disabled { opacity: 0.35; cursor: not-allowed; }
-.fk-chip:disabled:hover, .fk-type:disabled:hover { background: transparent; }
-.fk-swatch:disabled::before { background-image: linear-gradient(135deg, transparent 46%, var(--fk-edge) 46%, var(--fk-edge) 54%, transparent 54%); background-color: var(--finish); }
 .fk-pdp__more[hidden] { display: none; }
 .fk-cart { display: grid; gap: 32px var(--fk-col-gap); grid-template-columns: minmax(0, 1fr); align-items: start; }
 .fk-cart__list { display: grid; gap: 0; border-top: 1px solid var(--fk-ink); }
@@ -447,7 +399,6 @@ a:hover > * > .fk-arrow, a:hover > .fk-arrow { transform: translateX(4px); }
 .fk-dots li { width: 18px; height: 18px; background: var(--finish); border: 1px solid var(--fk-edge); border-radius: 50%; }
 .fk-product-card__actions { display: grid; gap: 8px; margin-top: auto; }
 .fk-product-card__actions .fk-btn--card { margin-top: 0; }
-.fk-step__val { margin-left: auto; font-weight: 400; color: var(--fk-ink-muted); text-align: right; }
 
 /* ---------- Характеристики товара ---------- */
 .fk-pdp__specs { grid-column: 1 / -1; min-width: 0; display: grid; gap: 24px; margin-top: 8px; }
@@ -465,11 +416,3 @@ a:hover > * > .fk-arrow, a:hover > .fk-arrow { transform: translateX(4px); }
 /* Блок характеристик занимает всю ширину под фото, поэтому фото не закрепляется при прокрутке */
 @media (min-width: 1024px) { .fk-pdp__media { position: relative; top: auto; } }
 
-/* ---------- Превью подбора и комплект на образцах цвета (prototype/assets/images) ---------- */
-.fk-cfg__photo { position: absolute; top: 0; bottom: 0; left: 50%; aspect-ratio: 1; transform: translateX(-50%); max-width: 100%; }
-.fk-cfg__photo img, .fk-kitimg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
-.fk-cfg__photo img { filter: drop-shadow(0 6px 10px rgba(60, 45, 20, 0.18)); }
-.fk-cfg__preview .fk-cfg__tag { max-width: calc(100% - 24px); }
-.fk-kitimg { position: relative; display: block; width: 100%; aspect-ratio: 1; }
-.fk-swatch[data-fin]::before { background: var(--img) center / cover no-repeat, #E9EAEB; }
-@media (max-width: 767px) { .fk-cfg__preview { aspect-ratio: 1; } }
