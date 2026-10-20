@@ -1,0 +1,154 @@
+/* FORKEL V3 — компонент «Шапка сайта» (H-01): баннер прототипа, ссылка пропуска, шапка, навигация, панель каталога,
+   мобильное меню, телефон-заглушка, иконки поиска/кабинета/корзины, счётчик корзины. Подключается из styles.css (@import).
+   Токены (--fk-*) берутся из :root в styles.css. Разметка — <header class="fk-header" data-component="header"> на всех страницах. */
+
+/* ---------- Служебное: баннер прототипа, ссылка пропуска, уведомление ---------- */
+.fk-proto-bar {
+  background: var(--fk-surface);
+  border-bottom: 1px solid var(--fk-line);
+  font-size: var(--fk-fs-small);
+  line-height: 1.45;
+  color: var(--fk-ink-muted);
+}
+.fk-proto-bar .fk-container { padding-block: 8px; }
+/* До 767 px баннер прототипа показывается внизу страницы: он не часть макета и не должен занимать
+   первый экран (мобильное фото 4:3, заголовок и кнопка должны помещаться на 360×640). */
+@media (max-width: 767px) {
+  body { display: flex; flex-direction: column; }
+  .fk-proto-bar { order: 10; border-bottom: 0; border-top: 1px solid var(--fk-line); }
+}
+
+.fk-skip {
+  position: absolute; left: var(--fk-margin); top: 8px; z-index: 100;
+  padding: 12px 16px; background: var(--fk-ink); color: var(--fk-ink-inverse);
+  border-radius: var(--fk-radius); text-decoration: none; font-weight: 600;
+  transform: translateY(-200%);
+}
+.fk-skip:focus { transform: none; box-shadow: 0 0 0 2px var(--fk-ink), 0 0 0 4px var(--fk-canvas); }
+
+/* ---------- H-01 Шапка ---------- */
+.fk-header {
+  position: sticky; top: 0; z-index: 40;
+  background: var(--fk-canvas);
+  border-bottom: 1px solid var(--fk-line);
+}
+.fk-header__row {
+  /* Нижняя граница шапки (1 px) входит в --fk-header-h: полная высота не больше 72 px (H-01, критерий 5) */
+  height: calc(var(--fk-header-h) - 1px);
+  display: flex; align-items: center; gap: 8px;
+}
+.fk-logo {
+  font-size: 1.375rem; font-weight: 600; letter-spacing: 0.04em; text-decoration: none;
+  display: inline-flex; align-items: center; min-height: 44px; margin-right: auto;
+}
+.fk-actions { display: flex; align-items: center; gap: 4px; }
+.fk-icon-btn, .fk-menu-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 44px; min-height: 44px; padding: 0;
+  background: transparent; border: 0; color: var(--fk-ink); font: inherit; cursor: pointer;
+  border-radius: var(--fk-radius);
+}
+.fk-icon-btn:hover, .fk-menu-btn:hover { background: var(--fk-surface); }
+.fk-icon-btn svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.fk-icon-btn--account { display: none; }
+.fk-menu-btn { padding: 0 12px; font-weight: 600; }
+
+/* Навигация: мобильная — полноэкранная панель */
+.fk-nav {
+  display: none;
+  position: fixed; inset: var(--fk-header-h) 0 0 0; z-index: 39;
+  background: var(--fk-canvas); overflow-y: auto; overscroll-behavior: contain;
+  padding: 16px var(--fk-margin) 48px;
+}
+.fk-nav[data-open] { display: block; }
+.fk-nav__list { display: flex; flex-direction: column; }
+.fk-nav__link, .fk-catalog-btn {
+  display: flex; align-items: center; width: 100%; min-height: 52px;
+  font: inherit; font-size: 1.125rem; font-weight: 600; text-decoration: none; text-align: left;
+  color: var(--fk-ink); background: transparent; border: 0; border-bottom: 1px solid var(--fk-line);
+  padding: 0; cursor: pointer; border-radius: 0;
+}
+.fk-nav__link[aria-current="true"], .fk-nav__link:hover { text-decoration: underline; text-underline-offset: 6px; }
+.fk-catalog-btn { display: none; }
+.fk-catalog-panel { display: block; padding: 16px 0 8px; }
+/* В мобильной панели боковой отступ уже задан у .fk-nav; на десктопе контейнер возвращается ниже */
+.fk-catalog-panel .fk-container { padding-inline: 0; }
+.fk-catalog-cols { display: grid; gap: 24px; }
+.fk-catalog-title { font-size: var(--fk-fs-small); font-weight: 600; color: var(--fk-ink-muted); margin-bottom: 4px; }
+.fk-catalog-list a {
+  display: flex; align-items: center; min-height: 44px; text-decoration: none; color: var(--fk-ink);
+}
+.fk-catalog-list a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.fk-nav-fallback { display: none; }
+
+/* Телефон: номера нет, показана явная заглушка (контакты предоставит владелец) */
+.fk-phone {
+  display: inline-block; padding: 4px 8px; white-space: nowrap;
+  font-size: var(--fk-fs-small); line-height: 1.3; color: var(--fk-ink);
+  border: 1px dashed var(--fk-edge); border-radius: var(--fk-radius);
+}
+.fk-phone--header { display: none; }
+@media (min-width: 1280px) { .fk-phone--header { display: inline-block; margin-right: 8px; } }
+.fk-nav__phone { margin-top: 16px; }
+
+/* Без JavaScript: навигация обычным списком, без панелей и без неработающих кнопок */
+.no-js .fk-nav__list > li:first-child,
+.no-js .fk-actions { display: none; }
+.no-js .fk-menu-btn { display: none; }
+.no-js .fk-nav { display: block; position: static; padding: 0 0 8px; overflow: visible; }
+.no-js .fk-nav__list { flex-direction: row; flex-wrap: wrap; gap: 0 24px; }
+.no-js .fk-nav__link { width: auto; min-height: 44px; border-bottom: 0; font-size: 1rem; }
+.no-js .fk-catalog-panel { display: none; }
+.no-js .fk-nav-fallback { display: contents; }
+.no-js .fk-header__row { flex-wrap: wrap; height: auto; min-height: calc(var(--fk-header-h) - 1px); }
+
+@media (min-width: 1024px) {
+  .fk-menu-btn { display: none; }
+  .fk-nav__mobile-only, .fk-nav__phone { display: none; }
+  .fk-icon-btn--account { display: inline-flex; }
+  .fk-header__row { gap: 32px; }
+  .fk-logo { margin-right: 0; }
+  .fk-nav {
+    display: block; position: static; inset: auto; padding: 0; overflow: visible; background: transparent; flex: 1;
+  }
+  .fk-nav__list { flex-direction: row; align-items: center; gap: 8px; }
+  .fk-nav__link, .fk-catalog-btn {
+    width: auto; min-height: 44px; padding: 0 12px; font-size: 1rem; border-bottom: 0; border-radius: var(--fk-radius);
+  }
+  .fk-catalog-btn { display: inline-flex; gap: 8px; align-items: center; }
+  .fk-catalog-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.75; transition: transform var(--fk-dur) ease-out; }
+  .fk-catalog-btn[aria-expanded="true"] svg { transform: rotate(180deg); }
+  .fk-catalog-btn[aria-expanded="true"] { background: var(--fk-surface); }
+  .fk-nav__link:hover { background: var(--fk-surface); text-decoration: none; }
+  .fk-catalog-panel {
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--fk-canvas); border-bottom: 1px solid var(--fk-line);
+    box-shadow: 0 8px 24px rgba(30, 32, 34, 0.12); padding: 32px 0 40px;
+  }
+  .fk-catalog-btn[aria-expanded="true"] ~ .fk-catalog-panel { display: block; }
+  .fk-catalog-panel .fk-container { padding-inline: var(--fk-margin); }
+  .fk-catalog-cols { grid-template-columns: repeat(12, 1fr); gap: var(--fk-col-gap); }
+  .fk-catalog-cols > div:nth-child(1) { grid-column: 1 / span 4; }
+  .fk-catalog-cols > div:nth-child(2) { grid-column: 5 / span 4; }
+}
+
+/* ---------- Поиск: кнопка-поле (текст — от 1440 px), текущая страница ---------- */
+.fk-search-btn__text { display: none; }
+@media (min-width: 1440px) {
+  .fk-search-btn { width: 240px; justify-content: flex-start; gap: 10px; padding: 0 14px; margin-right: 4px; border: 1px solid var(--fk-line); color: var(--fk-ink-muted); }
+  .fk-search-btn__text { display: inline; font-size: var(--fk-fs-small); }
+  .fk-search-btn:hover { background: var(--fk-surface); border-color: var(--fk-edge); }
+}
+.fk-icon-btn[aria-current="page"] { background: var(--fk-surface); }
+@media (min-width: 1024px) {
+  .fk-catalog-btn[data-current] { box-shadow: inset 0 -2px 0 var(--fk-ink); }
+}
+
+/* ---------- Корзина в шапке: ссылка и счётчик ---------- */
+.fk-cart-link { position: relative; text-decoration: none; }
+.fk-badge {
+  position: absolute; top: 2px; right: 0; min-width: 22px; height: 22px; padding: 0 5px;
+  display: inline-grid; place-items: center; font-size: 0.875rem; line-height: 1; font-weight: 600; font-variant-numeric: tabular-nums;
+  color: var(--fk-ink-inverse); background: var(--fk-ink); border: 2px solid var(--fk-canvas); border-radius: 999px;
+}
+.fk-badge[hidden] { display: none; }
