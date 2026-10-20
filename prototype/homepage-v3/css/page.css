@@ -1,0 +1,32 @@
+/* FORKEL V3 — общие элементы внутренних страниц: хлебные крошки, шапка страницы (заголовок + пометка), поля форм,
+   пустое состояние. Используются каталогом, товаром, корзиной и следующими страницами. Подключается из styles.css (@import). */
+
+.fk-page { padding-bottom: var(--fk-section-gap); }
+.fk-crumbs { padding-top: 8px; }
+.fk-crumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: 0 8px; padding: 0; margin: 0; list-style: none; font-size: var(--fk-fs-small); color: var(--fk-ink-muted); }
+.fk-crumbs li + li::before { content: "/"; margin-right: 8px; color: var(--fk-bright); font-weight: 700; }
+.fk-crumbs a { display: inline-flex; align-items: center; min-height: 44px; color: var(--fk-ink); text-decoration-color: var(--fk-bright); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.fk-crumbs [aria-current="page"] { color: var(--fk-ink-muted); overflow-wrap: anywhere; }
+
+/* Шапка страницы: заголовок и пометка прототипа на фоне-карточке */
+.fk-page > .fk-section-head {
+  margin: 8px 0 24px; padding: 24px; gap: 16px; border-top: 0;
+  background: var(--fk-tint); border-radius: var(--fk-r-lg);
+}
+.fk-page-title { font-size: clamp(2rem, 1.2rem + 2.4vw, 3.5rem); line-height: 1.05; font-weight: 700; letter-spacing: -0.02em; }
+@media (min-width: 1024px) { .fk-page > .fk-section-head { padding: 40px 48px; margin-bottom: 32px; } }
+
+/* Поля форм */
+.fk-field__label { display: block; margin-bottom: 8px; font-size: var(--fk-fs-small); font-weight: 600; }
+.fk-field {
+  width: 100%; min-height: 52px; padding: 0 16px; font: inherit; color: var(--fk-ink);
+  background: var(--fk-surface); border: 2px solid transparent; border-radius: var(--fk-r-md);
+}
+.fk-field:hover { border-color: var(--fk-line); }
+.fk-field:focus { border-color: var(--fk-ink); background: var(--fk-canvas); }
+.fk-field::placeholder { color: var(--fk-ink-muted); opacity: 1; }
+
+/* Пустое состояние */
+.fk-empty { display: grid; gap: 12px; justify-items: start; padding: 32px; background: var(--fk-surface); border-radius: var(--fk-r-lg); }
+.fk-empty[hidden] { display: none; }
+.fk-empty h2 { font-size: var(--fk-fs-h3); }
