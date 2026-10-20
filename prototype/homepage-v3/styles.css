@@ -10,6 +10,7 @@
 @import url("css/products.css");
 @import url("css/pro.css");
 @import url("css/delivery.css");
+@import url("css/footer.css");
 
 :root {
   --fk-canvas: #FFFFFF;
@@ -191,28 +192,7 @@ a:hover > * > .fk-arrow, a:hover > .fk-arrow { transform: translateX(4px); }
 
 /* H-08 Доставка и оплата — см. css/delivery.css */
 
-/* ---------- H-09 Подвал ---------- */
-.fk-footer {
-  background: var(--fk-ink); color: var(--fk-ink-inverse);
-  --fk-focus: 0 0 0 2px var(--fk-ink), 0 0 0 4px var(--fk-ink-inverse);
-  padding-block: 48px;
-}
-.fk-footer__grid { display: grid; gap: 32px var(--fk-col-gap); }
-.fk-footer__logo { font-size: 1.375rem; font-weight: 600; letter-spacing: 0.04em; }
-.fk-footer h2 { font-size: var(--fk-fs-small); font-weight: 600; color: var(--fk-inverse-muted); margin-bottom: 8px; }
-.fk-footer p, .fk-footer li { color: var(--fk-inverse-muted); }
-.fk-footer a { display: inline-flex; align-items: center; min-height: 44px; color: var(--fk-ink-inverse); }
-.fk-footer a:hover { text-decoration-thickness: 2px; }
-.fk-footer__legal { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--fk-ink-muted); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0 var(--fk-col-gap); font-size: var(--fk-fs-small); }
-@media (min-width: 768px) {
-  .fk-footer__grid { grid-template-columns: repeat(3, 1fr); }
-}
-@media (min-width: 1024px) {
-  .fk-footer__grid { grid-template-columns: repeat(12, 1fr); }
-  .fk-footer__brand { grid-column: 1 / span 5; }
-  .fk-footer__nav { grid-column: 7 / span 3; }
-  .fk-footer__contacts { grid-column: 10 / span 3; }
-}
+/* H-09 Подвал — см. css/footer.css */
 
 /* ---------- Изделия (SVG-спрайт): цвета образцов — демонстрационные ---------- */
 .pl-face  { fill: var(--finish); stroke: var(--edge); stroke-width: 1; vector-effect: non-scaling-stroke; }
