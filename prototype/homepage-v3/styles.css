@@ -26,7 +26,7 @@
   /* V3, новое направление (на согласование): крупные скругления, яркий акцент, фон элементов */
   --fk-r-md: 14px;
   --fk-r-lg: 24px;
-  --fk-bright: #FB4B00;
+  --fk-bright: #D2B473; /* золотой акцент, выбран владельцем */
   --fk-on-bright: #1E2022;
   --fk-tint: #EEF1F5;
   --fk-focus: 0 0 0 2px var(--fk-canvas), 0 0 0 4px var(--fk-ink);
@@ -41,7 +41,7 @@
   --fk-margin: 16px;
   --fk-col-gap: 16px;
   --fk-section-gap: 64px;
-  --fk-header-h: 72px;
+  --fk-header-h: 96px; /* строка 72 px + 8 сверху + 16 зазор до контента */
 
   /* Образцы изделий в прототипе — демонстрационные цвета, не данные продукции */
   --wall: var(--fk-surface);
@@ -52,7 +52,7 @@
   :root { --fk-margin: 24px; --fk-col-gap: 24px; --fk-section-gap: 96px; }
 }
 @media (min-width: 1024px) {
-  :root { --fk-margin: 40px; --fk-col-gap: 32px; --fk-header-h: 96px; --fk-fs-body: 1.0625rem; }
+  :root { --fk-margin: 40px; --fk-col-gap: 32px; --fk-header-h: 120px; --fk-fs-body: 1.0625rem; }
 }
 @media (min-width: 1280px) {
   :root { --fk-section-gap: 128px; }
@@ -87,7 +87,7 @@ svg { display: block; }
 }
 .fk-container {
   width: 100%;
-  max-width: 1440px;
+  max-width: 1920px;
   margin-inline: auto;
   padding-inline: var(--fk-margin);
 }
@@ -110,12 +110,12 @@ svg { display: block; }
   cursor: pointer; transition: background-color var(--fk-dur) ease-out, color var(--fk-dur) ease-out;
 }
 @media (min-width: 1024px) { .fk-btn { min-height: 44px; } }
-.fk-btn--primary { background: var(--fk-accent); color: var(--fk-on-accent); }
-.fk-btn--primary:hover { background: var(--fk-ink-muted); }
+.fk-btn--primary { background: var(--fk-bright); color: var(--fk-on-bright); }
+.fk-btn--primary:hover { background: var(--fk-ink); color: var(--fk-ink-inverse); }
 .fk-btn--secondary { background: transparent; color: var(--fk-ink); border-color: var(--fk-ink); }
 .fk-btn--secondary:hover { background: var(--fk-surface); }
 
-.fk-link { text-decoration: underline; text-underline-offset: 3px; font-weight: 600; }
+.fk-link { text-decoration: underline; text-decoration-color: var(--fk-bright); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600; }
 .fk-link:hover { text-decoration-thickness: 2px; }
 
 /* ---------- Общие приёмы подачи (v2) ---------- */

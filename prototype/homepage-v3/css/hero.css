@@ -10,7 +10,7 @@
 
 :root {
   --hero-font: "Golos Text", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --hero-accent: #FB4B00;          /* оттенок кнопок на forkel.by (замер по скриншоту заказчика); бренд-цвет не утверждён */
+  --hero-accent: #D2B473;          /* оттенок кнопок на forkel.by (замер по скриншоту заказчика); бренд-цвет не утверждён */
   --hero-on-accent: #1E2022;       /* белый на этом оранжевом даёт 3.44:1, тёмный — 4.75:1 */
   --hero-ink: #1E2022;
   --hero-margin: 16px;
@@ -39,7 +39,7 @@
                                    --wall-hi:#E9E5DE; --wall-lo:#C9C4BB; --fg:#1E2022; --fg-muted:#43484D; --fg-line:rgba(30,32,34,.65); --fg-hover:rgba(30,32,34,.08); --scrim: rgba(255,255,255,.2); }
 
 /* ---------- Сцена-контейнер ---------- */
-.fk-hero { position: relative; max-width: 1440px; margin-inline: auto; padding: 0 var(--hero-margin) var(--fk-section-gap); font-family: var(--hero-font); }
+.fk-hero { position: relative; max-width: 1920px; margin-inline: auto; padding: 0 var(--hero-margin) var(--fk-section-gap); font-family: var(--hero-font); }
 .fk-hero__stage {
   position: relative; overflow: hidden; isolation: isolate;
   border-radius: var(--hero-radius);
