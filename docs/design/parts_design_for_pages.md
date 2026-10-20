@@ -8,7 +8,7 @@
 
 | № | Блок | Статус | Коммит / файлы |
 |---|---|---|---|
-| H-01 | Шапка сайта | **на подтверждении** | `css/header.css`, `index.html`, `catalog.html`, `product.html`, `cart.html` |
+| H-01 | Шапка сайта | **на подтверждении (v2: новое направление)** | `css/header.css`, `index.html`, `catalog.html`, `product.html`, `cart.html` |
 | H-02 | Главный экран (Hero) | принято (2026-10-20) | `css/hero.css`, `hero.js`, `index.html` |
 | H-03…H-10 | остальные блоки главной | в очереди | — |
 

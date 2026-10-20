@@ -23,6 +23,12 @@
   /* Golos Text в прототипе не подключён (нет доступа к файлам шрифта); работает системный стек. */
   --fk-font: "Golos Text", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --fk-radius: 4px;
+  /* V3, новое направление (на согласование): крупные скругления, яркий акцент, фон элементов */
+  --fk-r-md: 14px;
+  --fk-r-lg: 24px;
+  --fk-bright: #FB4B00;
+  --fk-on-bright: #1E2022;
+  --fk-tint: #EEF1F5;
   --fk-focus: 0 0 0 2px var(--fk-canvas), 0 0 0 4px var(--fk-ink);
   --fk-dur: 150ms;
 
@@ -35,7 +41,7 @@
   --fk-margin: 16px;
   --fk-col-gap: 16px;
   --fk-section-gap: 64px;
-  --fk-header-h: 64px;
+  --fk-header-h: 72px;
 
   /* Образцы изделий в прототипе — демонстрационные цвета, не данные продукции */
   --wall: var(--fk-surface);
@@ -46,7 +52,7 @@
   :root { --fk-margin: 24px; --fk-col-gap: 24px; --fk-section-gap: 96px; }
 }
 @media (min-width: 1024px) {
-  :root { --fk-margin: 40px; --fk-col-gap: 32px; --fk-header-h: 72px; --fk-fs-body: 1.0625rem; }
+  :root { --fk-margin: 40px; --fk-col-gap: 32px; --fk-header-h: 96px; --fk-fs-body: 1.0625rem; }
 }
 @media (min-width: 1280px) {
   :root { --fk-section-gap: 128px; }

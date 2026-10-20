@@ -29,29 +29,34 @@
 /* ---------- H-01 Шапка ---------- */
 .fk-header {
   position: sticky; top: 0; z-index: 40;
-  background: var(--fk-canvas);
+  background: var(--fk-tint);
   border-bottom: 1px solid var(--fk-line);
+  border-radius: 0 0 var(--fk-r-lg) var(--fk-r-lg);
+  box-shadow: 0 6px 20px rgba(30, 32, 34, 0.06);
 }
 .fk-header__row {
-  /* Нижняя граница шапки (1 px) входит в --fk-header-h: полная высота не больше 72 px (H-01, критерий 5) */
+  /* Нижняя граница шапки (1 px) входит в --fk-header-h (72 px, от 1024 px — 96 px, по новому направлению: крупная шапка) */
   height: calc(var(--fk-header-h) - 1px);
   display: flex; align-items: center; gap: 8px;
 }
+@media (min-width: 1024px) { .fk-header__row { gap: 12px; } }
+@media (min-width: 1280px) { .fk-header__row { gap: 20px; } }
 .fk-logo {
-  font-size: 1.375rem; font-weight: 600; letter-spacing: 0.04em; text-decoration: none;
+  font-size: 1.5rem; font-weight: 700; letter-spacing: 0.04em; text-decoration: none;
   display: inline-flex; align-items: center; min-height: 44px; margin-right: auto;
 }
-.fk-actions { display: flex; align-items: center; gap: 4px; }
+.fk-actions { display: flex; align-items: center; gap: 8px; }
 .fk-icon-btn, .fk-menu-btn {
   display: inline-flex; align-items: center; justify-content: center;
-  min-width: 44px; min-height: 44px; padding: 0;
-  background: transparent; border: 0; color: var(--fk-ink); font: inherit; cursor: pointer;
-  border-radius: var(--fk-radius);
+  min-width: 48px; min-height: 48px; padding: 0;
+  background: var(--fk-canvas); border: 0; color: var(--fk-ink); font: inherit; cursor: pointer;
+  border-radius: var(--fk-r-md);
 }
-.fk-icon-btn:hover, .fk-menu-btn:hover { background: var(--fk-surface); }
-.fk-icon-btn svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.fk-icon-btn:hover, .fk-menu-btn:hover { background: var(--fk-ink); color: var(--fk-ink-inverse); }
+.fk-icon-btn svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .fk-icon-btn--account { display: none; }
-.fk-menu-btn { padding: 0 12px; font-weight: 600; }
+.fk-menu-btn { padding: 0 16px; font-weight: 600; background: var(--fk-bright); color: var(--fk-on-bright); }
+.fk-menu-btn:hover { background: var(--fk-ink); }
 
 /* Навигация: мобильная — полноэкранная панель */
 .fk-nav {
@@ -83,12 +88,12 @@
 
 /* Телефон: номера нет, показана явная заглушка (контакты предоставит владелец) */
 .fk-phone {
-  display: inline-block; padding: 4px 8px; white-space: nowrap;
+  display: inline-block; padding: 8px 14px; white-space: nowrap;
   font-size: var(--fk-fs-small); line-height: 1.3; color: var(--fk-ink);
-  border: 1px dashed var(--fk-edge); border-radius: var(--fk-radius);
+  border: 1px dashed var(--fk-edge); border-radius: var(--fk-r-md); background: var(--fk-canvas);
 }
 .fk-phone--header { display: none; }
-@media (min-width: 1280px) { .fk-phone--header { display: inline-block; margin-right: 8px; } }
+@media (min-width: 1536px) { .fk-phone--header { display: inline-block; margin-right: 8px; } }
 .fk-nav__phone { margin-top: 16px; }
 
 /* Без JavaScript: навигация обычным списком, без панелей и без неработающих кнопок */
@@ -106,24 +111,24 @@
   .fk-menu-btn { display: none; }
   .fk-nav__mobile-only, .fk-nav__phone { display: none; }
   .fk-icon-btn--account { display: inline-flex; }
-  .fk-header__row { gap: 32px; }
   .fk-logo { margin-right: 0; }
   .fk-nav {
     display: block; position: static; inset: auto; padding: 0; overflow: visible; background: transparent; flex: 1;
   }
-  .fk-nav__list { flex-direction: row; align-items: center; gap: 8px; }
+  .fk-nav__list { flex-direction: row; align-items: center; gap: 4px; }
   .fk-nav__link, .fk-catalog-btn {
-    width: auto; min-height: 44px; padding: 0 12px; font-size: 1rem; border-bottom: 0; border-radius: var(--fk-radius);
+    width: auto; min-height: 52px; padding: 0 12px; font-size: 1rem; border-bottom: 0; border-radius: var(--fk-r-md);
   }
-  .fk-catalog-btn { display: inline-flex; gap: 8px; align-items: center; }
+  .fk-catalog-btn { display: inline-flex; gap: 10px; align-items: center; background: var(--fk-bright); color: var(--fk-on-bright); }
+  .fk-catalog-btn:hover { background: var(--fk-ink); color: var(--fk-ink-inverse); }
   .fk-catalog-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.75; transition: transform var(--fk-dur) ease-out; }
   .fk-catalog-btn[aria-expanded="true"] svg { transform: rotate(180deg); }
-  .fk-catalog-btn[aria-expanded="true"] { background: var(--fk-surface); }
-  .fk-nav__link:hover { background: var(--fk-surface); text-decoration: none; }
+  .fk-catalog-btn[aria-expanded="true"] { background: var(--fk-ink); color: var(--fk-ink-inverse); }
+  .fk-nav__link:hover { background: var(--fk-canvas); text-decoration: none; }
   .fk-catalog-panel {
     display: none; position: absolute; top: 100%; left: 0; right: 0;
     background: var(--fk-canvas); border-bottom: 1px solid var(--fk-line);
-    box-shadow: 0 8px 24px rgba(30, 32, 34, 0.12); padding: 32px 0 40px;
+    box-shadow: 0 8px 24px rgba(30, 32, 34, 0.12); padding: 40px 0 48px; border-radius: 0 0 var(--fk-r-lg) var(--fk-r-lg);
   }
   .fk-catalog-btn[aria-expanded="true"] ~ .fk-catalog-panel { display: block; }
   .fk-catalog-panel .fk-container { padding-inline: var(--fk-margin); }
@@ -135,20 +140,22 @@
 /* ---------- Поиск: кнопка-поле (текст — от 1440 px), текущая страница ---------- */
 .fk-search-btn__text { display: none; }
 @media (min-width: 1440px) {
-  .fk-search-btn { width: 240px; justify-content: flex-start; gap: 10px; padding: 0 14px; margin-right: 4px; border: 1px solid var(--fk-line); color: var(--fk-ink-muted); }
+  .fk-search-btn { width: 200px; justify-content: flex-start; gap: 10px; padding: 0 16px; margin-right: 4px; border: 0; color: var(--fk-ink-muted); }
   .fk-search-btn__text { display: inline; font-size: var(--fk-fs-small); }
-  .fk-search-btn:hover { background: var(--fk-surface); border-color: var(--fk-edge); }
+  .fk-search-btn:hover { background: var(--fk-ink); color: var(--fk-ink-inverse); }
 }
-.fk-icon-btn[aria-current="page"] { background: var(--fk-surface); }
+.fk-icon-btn[aria-current="page"] { box-shadow: inset 0 0 0 2px var(--fk-ink); }
 @media (min-width: 1024px) {
-  .fk-catalog-btn[data-current] { box-shadow: inset 0 -2px 0 var(--fk-ink); }
+  .fk-catalog-btn[data-current] { box-shadow: inset 0 0 0 2px var(--fk-ink); }
 }
 
 /* ---------- Корзина в шапке: ссылка и счётчик ---------- */
 .fk-cart-link { position: relative; text-decoration: none; }
 .fk-badge {
-  position: absolute; top: 2px; right: 0; min-width: 22px; height: 22px; padding: 0 5px;
+  position: absolute; top: 2px; right: 0; min-width: 24px; height: 24px; padding: 0 5px;
   display: inline-grid; place-items: center; font-size: 0.875rem; line-height: 1; font-weight: 600; font-variant-numeric: tabular-nums;
-  color: var(--fk-ink-inverse); background: var(--fk-ink); border: 2px solid var(--fk-canvas); border-radius: 999px;
+  color: var(--fk-on-bright); background: var(--fk-bright); border: 2px solid var(--fk-tint); border-radius: 999px;
 }
 .fk-badge[hidden] { display: none; }
+
+@media (min-width: 1280px) { .fk-nav__link, .fk-catalog-btn { padding-inline: 18px; } }
