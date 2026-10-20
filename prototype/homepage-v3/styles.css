@@ -8,6 +8,7 @@
 @import url("css/categories.css");
 @import url("css/configurator.css");
 @import url("css/products.css");
+@import url("css/pro.css");
 
 :root {
   --fk-canvas: #FFFFFF;
@@ -183,27 +184,9 @@ a:hover > * > .fk-arrow, a:hover > .fk-arrow { transform: translateX(4px); }
   .fk-project-card__media { aspect-ratio: auto; flex: 1; }
 }
 
-/* ---------- H-07 Профессионалам ---------- */
-.fk-pro {
-  background: var(--fk-ink); color: var(--fk-ink-inverse); padding-block: var(--fk-section-gap);
-  --fk-focus: 0 0 0 2px var(--fk-ink), 0 0 0 4px var(--fk-ink-inverse);
-  --tone-muted: var(--fk-inverse-muted);
-}
-.fk-pro__grid { display: grid; gap: 24px var(--fk-col-gap); }
-.fk-pro .fk-section-head { border-top-color: rgba(255, 255, 255, 0.4); margin-bottom: 0; align-items: flex-start; gap: 16px; }
-.fk-pro .fk-note { color: var(--fk-inverse-muted); }
-.fk-pro .fk-note--proto { color: var(--fk-ink-inverse); border-color: #8A8F94; }
+/* H-07 Профессионалам — см. css/pro.css */
 .fk-btn--inverse { background: var(--fk-ink-inverse); color: var(--fk-ink); }
 .fk-btn--inverse:hover { background: #DADCDE; }
-.fk-pro__item { display: grid; grid-template-columns: 40px 1fr; gap: 8px 16px; padding: 24px 0; border-top: 1px solid rgba(255, 255, 255, 0.4); }
-.fk-pro__item h3 { font-size: var(--fk-fs-h3); line-height: 1.25; font-weight: 600; margin-bottom: 8px; }
-.fk-pro__item p { color: var(--fk-inverse-muted); max-width: 44ch; }
-@media (min-width: 1024px) {
-  .fk-pro__grid { grid-template-columns: repeat(12, 1fr); }
-  .fk-pro__intro { grid-column: 1 / span 5; align-self: start; }
-  .fk-pro__list { grid-column: 7 / span 6; }
-  .fk-pro__item:first-child { padding-top: 0; border-top: 0; }
-}
 
 /* ---------- H-08 Доставка и оплата ---------- */
 .fk-delivery { padding-block: var(--fk-section-gap); }
