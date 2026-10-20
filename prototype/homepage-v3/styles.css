@@ -11,6 +11,7 @@
 @import url("css/pro.css");
 @import url("css/delivery.css");
 @import url("css/footer.css");
+@import url("css/projects.css");
 
 :root {
   --fk-canvas: #FFFFFF;
@@ -159,8 +160,6 @@ a:hover > * > .fk-arrow, a:hover > .fk-arrow { transform: translateX(4px); }
 
 /* H-03 Коллекции — см. css/collections.css */
 .fk-grid { display: grid; gap: var(--fk-col-gap); }
-.fk-category-tile:hover .fk-category-tile__name,
-.fk-project-card:hover .fk-project-card__name { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 2px; }
 
 /* H-05 Подбор — см. css/configurator.css */
 .fk-swatch[data-fin]::before { background: var(--img) center / cover no-repeat, #E9EAEB; } /* --img: url('../assets/…') считается от этого файла */
@@ -169,22 +168,7 @@ a:hover > * > .fk-arrow, a:hover > .fk-arrow { transform: translateX(4px); }
 
 /* H-06 Новинки / карточка товара — см. css/products.css */
 
-/* ---------- H-10 Проекты ---------- */
-.fk-grid--projects { grid-template-columns: minmax(0, 1fr); }
-.fk-project-card { display: flex; flex-direction: column; height: 100%; background: var(--tone); color: var(--tone-ink); text-decoration: none; border-radius: var(--fk-radius); overflow: hidden; }
-.fk-project-card__media { position: relative; display: block; flex: none; min-height: 200px; aspect-ratio: 4 / 3; color: var(--tone-ink); }
-.fk-project-card__media svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.fk-tag--float { position: absolute; left: 12px; top: 12px; }
-.fk-project-card__cap { display: grid; gap: 4px; padding: 16px 20px 20px; }
-.fk-project-card__name { font-size: var(--fk-fs-h3); line-height: 1.25; font-weight: 600; }
-.fk-project-card__meta { font-size: var(--fk-fs-small); line-height: 1.45; color: var(--tone-muted); }
-.pl-room { fill: none; stroke: currentColor; stroke-opacity: 0.4; stroke-width: 1; vector-effect: non-scaling-stroke; }
-@media (min-width: 768px) {
-  .fk-grid--projects { grid-template-columns: repeat(12, 1fr); }
-  .fk-grid--projects > li { grid-column: 8 / span 5; }
-  .fk-grid--projects > .is-p1 { grid-column: 1 / span 7; grid-row: 1 / span 2; }
-  .fk-project-card__media { aspect-ratio: auto; flex: 1; }
-}
+/* H-10 Проекты — см. css/projects.css */
 
 /* H-07 Профессионалам — см. css/pro.css */
 .fk-btn--inverse { background: var(--fk-ink-inverse); color: var(--fk-ink); }
