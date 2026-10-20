@@ -9,6 +9,7 @@
 @import url("css/configurator.css");
 @import url("css/products.css");
 @import url("css/pro.css");
+@import url("css/delivery.css");
 
 :root {
   --fk-canvas: #FFFFFF;
@@ -188,24 +189,7 @@ a:hover > * > .fk-arrow, a:hover > .fk-arrow { transform: translateX(4px); }
 .fk-btn--inverse { background: var(--fk-ink-inverse); color: var(--fk-ink); }
 .fk-btn--inverse:hover { background: #DADCDE; }
 
-/* ---------- H-08 Доставка и оплата ---------- */
-.fk-delivery { padding-block: var(--fk-section-gap); }
-.fk-delivery__grid { display: grid; gap: 24px var(--fk-col-gap); }
-.fk-delivery__list > li { display: grid; grid-template-columns: 32px 1fr; gap: 4px 12px; align-items: baseline; padding-block: 20px; border-top: 1px solid var(--fk-line); }
-.fk-delivery__list > li:last-child { border-bottom: 1px solid var(--fk-line); }
-.fk-delivery__list h3 { font-size: var(--fk-fs-h3); line-height: 1.25; font-weight: 600; }
-.fk-delivery__list p, .fk-delivery__list .fk-tag { grid-column: 2; }
-.fk-delivery__list p { color: var(--fk-ink-muted); }
-.fk-delivery__list .fk-tag { justify-self: start; margin-top: 4px; }
-@media (min-width: 1024px) {
-  .fk-delivery__grid { grid-template-columns: repeat(12, 1fr); }
-  .fk-delivery__intro { grid-column: 1 / span 5; align-self: start; }
-  .fk-delivery__list { grid-column: 7 / span 6; }
-}
-@media (min-width: 1280px) {
-  .fk-delivery__list > li { grid-template-columns: 40px minmax(0, 1fr) minmax(0, 2fr) auto; gap: var(--fk-col-gap); }
-  .fk-delivery__list p, .fk-delivery__list .fk-tag { grid-column: auto; margin-top: 0; }
-}
+/* H-08 Доставка и оплата — см. css/delivery.css */
 
 /* ---------- H-09 Подвал ---------- */
 .fk-footer {

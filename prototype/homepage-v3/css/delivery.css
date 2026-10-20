@@ -1,0 +1,20 @@
+/* FORKEL V3 — компонент «Доставка и оплата» (H-08): заголовок и три карточки способов (курьер, самовывоз, СДЭК).
+   Условия не утверждены — везде пометка «не утверждено». Подключается из styles.css (@import). */
+
+.fk-delivery { padding-block: 0 var(--fk-section-gap); }
+.fk-delivery__grid { display: grid; gap: 32px; }
+.fk-delivery__intro { margin-bottom: 0; }
+.fk-delivery__list { display: grid; gap: 16px; }
+.fk-delivery__list > li {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 24px;
+  background: var(--fk-surface); border: 1px solid transparent; border-radius: var(--fk-r-lg);
+}
+.fk-delivery__list .fk-idx { padding: 4px 12px; border-radius: 999px; background: var(--fk-bright); color: var(--fk-on-bright); font-weight: 600; }
+.fk-delivery__list h3 { font-size: 1.5rem; line-height: 1.2; font-weight: 600; }
+.fk-delivery__list p { color: var(--fk-ink-muted); max-width: 40ch; }
+.fk-delivery__list .fk-tag { margin-top: auto; padding: 4px 12px; border-radius: 999px; background: var(--fk-canvas); }
+@media (min-width: 768px) {
+  .fk-delivery__list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .fk-delivery__list > li { padding: 32px; min-height: 260px; }
+}
+@media (min-width: 1024px) { .fk-delivery__list { gap: 32px; } }
