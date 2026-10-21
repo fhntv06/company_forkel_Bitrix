@@ -4,12 +4,14 @@
   'use strict';
   var D = window.FKData;
   var buttons = document.querySelectorAll('.fk-search-btn');
-  if (!D || !buttons.length || typeof HTMLDialogElement === 'undefined') return;
+  if (!D) return;
 
   var PROJECTS = [1, 2, 3, 4, 5, 6];
   var MAX_P = 6, MAX_PRJ = 3;
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function norm(s) { return String(s).toLowerCase().replace(/ё/g, 'е').trim(); }
+
+  window.FKSearch = { find: find, norm: norm, esc: esc };
 
   var dlg = document.createElement('dialog');
   dlg.className = 'fk-search';
@@ -79,8 +81,8 @@
       html += '<h3 class="fk-search__group">Проекты</h3><ul class="fk-search__list">' + r.prj.slice(0, MAX_PRJ).map(projectRow).join('') + '</ul>';
     }
     var more = r.prod.length > MAX_P || r.prj.length > MAX_PRJ;
-    html += '<p class="fk-search__all"><button class="fk-link fk-search__allbtn" type="button" data-stub="Страница всех результатов поиска — следующий шаг V3 (7.2), пока не подключена.">Все результаты' +
-      (more ? ' (' + (r.prod.length + r.prj.length) + ')' : '') + '</button></p>';
+    html += '<p class="fk-search__all"><a class="fk-link fk-search__allbtn" href="search.html?q=' + encodeURIComponent(q.trim()) + '">Все результаты' +
+      (more ? ' (' + (r.prod.length + r.prj.length) + ')' : '') + '</a></p>';
     body.innerHTML = html;
   }
 
@@ -101,7 +103,10 @@
   dlg.querySelector('.fk-search__close').addEventListener('click', close);
   clear.addEventListener('click', function () { input.value = ''; render(); input.focus(); });
   input.addEventListener('input', render);
-  dlg.querySelector('.fk-search__form').addEventListener('submit', function (e) { e.preventDefault(); });
+  dlg.querySelector('.fk-search__form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (norm(input.value)) location.href = 'search.html?q=' + encodeURIComponent(input.value.trim());
+  });
   body.addEventListener('click', function (e) {
     var a = e.target.closest('a');
     if (a) close();

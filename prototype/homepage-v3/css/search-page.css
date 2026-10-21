@@ -1,0 +1,17 @@
+/* FORKEL V3 — страница результатов поиска (7.2). Сетки и карточки — из catalog.css, products.css, projects.css. */
+.fk-sr-form { margin-bottom: 24px; }
+.fk-sr-form__row { display: grid; gap: 12px; }
+.fk-sr-form .fk-btn { justify-self: stretch; }
+.fk-sr-bar { display: grid; gap: 12px; margin-bottom: 24px; }
+.fk-sr-count { color: var(--fk-ink-muted); }
+.fk-sr-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+.fk-sr-tabs .fk-chip[disabled] { opacity: 0.5; cursor: not-allowed; }
+.fk-sr-n { margin-left: 6px; font-variant-numeric: tabular-nums; color: var(--fk-ink-muted); }
+.fk-sr-tabs .fk-chip[aria-pressed="true"] .fk-sr-n { color: inherit; }
+.fk-sr-h { margin: 0 0 16px; font-size: 1.5rem; line-height: 1.1; font-weight: 700; }
+#sr-products, #sr-projects { margin-bottom: var(--fk-section-gap); }
+@media (min-width: 640px) { .fk-sr-form__row { grid-template-columns: minmax(0, 1fr) auto; } .fk-sr-form .fk-btn { justify-self: auto; } }
+@media (min-width: 768px) { .fk-grid--projects-page { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1280px) { #sr-projects .fk-grid--projects-page { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.fk-sr-tabs .fk-chip[aria-pressed="true"] { background: var(--fk-bright); color: var(--fk-on-bright); border-color: var(--fk-bright); }
+.fk-sr-form input[type="search"]::-webkit-search-cancel-button { display: none; }

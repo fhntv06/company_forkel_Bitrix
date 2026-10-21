@@ -244,6 +244,7 @@
     });
   }
 
+  window.FKShopCard = card;
   if (document.getElementById('cat-list')) initCatalog();
   if (document.getElementById('pdp')) initProduct();
 })();
