@@ -40,3 +40,26 @@
 }
 @media (min-width: 1280px) { .fk-grid--catalog { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (min-width: 1680px) { .fk-grid--catalog { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* ---------- Страница коллекции (2.2): баннер ---------- */
+.fk-colhero {
+  display: grid; gap: 24px; margin: 8px 0 24px; padding: 24px; overflow: hidden;
+  background: var(--tone); color: var(--tone-ink); border-radius: 32px;
+  --fk-focus: 0 0 0 2px var(--fk-ink), 0 0 0 4px var(--fk-bright);
+}
+.fk-colhero__label { font-size: var(--fk-fs-small); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fk-bright); margin-bottom: 8px; }
+.fk-colhero__text { display: grid; gap: 16px; align-content: start; min-width: 0; }
+.fk-colhero .fk-note--proto { color: var(--fk-ink-inverse); border-color: #8A8F94; border-radius: var(--fk-r-md); padding: 10px 14px; }
+.fk-colhero__actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.fk-colhero__switch { display: flex; flex-wrap: wrap; gap: 8px; }
+.fk-colhero__switch .fk-chip { min-width: 52px; justify-content: center; text-decoration: none; display: inline-flex; align-items: center; background: rgba(255, 255, 255, 0.1); color: var(--fk-ink-inverse); }
+.fk-colhero__switch .fk-chip:hover { border-color: var(--fk-bright); }
+.fk-colhero__switch .fk-chip[aria-current="page"] { background: var(--fk-bright); color: var(--fk-on-bright); }
+.fk-colhero__media { position: relative; min-height: 220px; }
+.fk-colhero__media svg { width: 100%; height: 100%; max-height: 360px; }
+.fk-colhero__media .fk-tag { position: absolute; left: 0; bottom: 0; border-radius: 999px; padding: 4px 12px; }
+@media (min-width: 1024px) {
+  .fk-colhero { grid-template-columns: repeat(12, minmax(0, 1fr)); padding: 56px; margin-bottom: 32px; align-items: center; }
+  .fk-colhero__text { grid-column: 1 / span 6; }
+  .fk-colhero__media { grid-column: 7 / span 6; min-height: 320px; }
+}

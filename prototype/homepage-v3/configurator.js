@@ -101,6 +101,10 @@
     });
   });
 
+  // Переход со страницы коллекции: index.html?collection=A…D#configurator
+  var pm = /[?&]collection=([A-D])(&|$)/.exec(location.search);
+  if (pm) state.collection = pm[1];
+
   document.getElementById('cfg-add').addEventListener('click', function () {
     var r = C.add({ kind: 'kit', col: state.collection, mech: state.type, mc: state.mech, fc: state.frame }, 1);
     C.announceAdd(r, 'Комплект добавлен в корзину (демо)');

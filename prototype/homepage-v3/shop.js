@@ -39,14 +39,29 @@
     var toggle = document.getElementById('cat-filters-toggle');
     var category = param('category');
     if (!CATEGORIES.some(function (c) { return c.key === category; })) category = '';
+    /* Страница коллекции (collection.html?collection=A…D): тот же список; правил совместимости нет, поэтому показаны все демо-товары */
+    var collection = '';
+    if (document.querySelector('[data-collection-page]')) {
+      collection = param('collection');
+      if (!/^[A-D]$/.test(collection)) collection = 'A';
+    }
 
     /* Категории: ссылки, текущая отмечена */
     [].forEach.call(document.querySelectorAll('.fk-cat-nav a'), function (a) {
       var on = (a.getAttribute('data-cat') || '') === category;
       if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+      if (collection) a.setAttribute('href', 'collection.html?collection=' + collection + (a.getAttribute('data-cat') ? '&category=' + a.getAttribute('data-cat') : ''));
     });
+    if (collection) {
+      [].forEach.call(document.querySelectorAll('[data-col]'), function (a) {
+        if (a.getAttribute('data-col') === collection) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+      });
+      [].forEach.call(document.querySelectorAll('[data-col-name]'), function (n) { n.textContent = 'Коллекция ' + collection; });
+      var cl = document.getElementById('col-cfg-link');
+      if (cl) cl.setAttribute('href', 'index.html?collection=' + collection + '#configurator');
+    }
     var h1 = document.getElementById('cat-title');
-    h1.textContent = category ? catName(category) : 'Каталог';
+    h1.textContent = collection ? 'Коллекция ' + collection + (category ? ': ' + catName(category).toLowerCase() : '') : (category ? catName(category) : 'Каталог');
     document.title = 'FORKEL — ' + h1.textContent + ' (прототип)';
     var crumb = document.getElementById('cat-crumb');
     if (crumb) crumb.textContent = h1.textContent;
@@ -64,6 +79,7 @@
     /* Поиск, фильтры и сортировка хранятся в адресе: после перехода в товар и возврата они сохраняются */
     function persist(q, colors, stocks, groups) {
       var parts = [];
+      if (collection) parts.push('collection=' + collection);
       if (category) parts.push('category=' + category);
       if (q) parts.push('q=' + encodeURIComponent(q));
       if (sort.value !== 'default') parts.push('sort=' + sort.value);
