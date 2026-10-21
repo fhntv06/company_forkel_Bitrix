@@ -77,7 +77,7 @@
   }
   /* Образцы цвета из присланных заказчиком файлов (prototype/assets/images, список — about_photo.md).
      Это слои из примера Kollinger Eclipse, а не продукция FORKEL. Механизм — нижний слой, рамка — верхний. */
-  var IMG_BASE = '../assets/images/';
+  var IMG_BASE = 'assets/images/';
   var IMG = {
     frame: { white: 'tcvet_ramki_belyy_glyantsevyy', whitem: 'tcvet_ramki_belyy_matovyy', gold: 'tcvet_ramki_zolotoy', cashmere: 'tcvet_ramki_kashemir-matovyy', gray: 'tcvet_ramki_seryy', black: 'tcvet_ramki_chernyy_matovyy' },
     mech: { white: 'tcvet_mehanizma_belyy_glyantsevyy', whitem: 'tcvet_mehanizma_belyy_matovyy', gold: 'tcvet_mehanizma_zolotoy', cashmere: 'tcvet_mehanizma_kashemir-matovyy', gray: 'tcvet_mehanizma_seryy', black: 'tcvet_mehanizma_chyernyy_matovyy' }

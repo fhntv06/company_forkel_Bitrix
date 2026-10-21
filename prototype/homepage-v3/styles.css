@@ -170,7 +170,7 @@ a:hover > * > .fk-arrow, a:hover > .fk-arrow { transform: translateX(4px); }
 .fk-grid { display: grid; gap: var(--fk-col-gap); }
 
 /* H-05 Подбор — см. css/configurator.css */
-.fk-swatch[data-fin]::before { background: var(--img) center / cover no-repeat, #E9EAEB; } /* --img: url('../assets/…') считается от этого файла */
+.fk-swatch[data-fin]::before { background: var(--img) center / cover no-repeat, #E9EAEB; } /* --img: url('assets/…') считается от этого файла */
 
 /* H-04 Категории — см. css/categories.css */
 
