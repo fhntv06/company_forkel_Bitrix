@@ -140,7 +140,7 @@
           '<dl class="fk-spec"><div><dt>Позиций</dt><dd data-sum="positions">' + list.length + '</dd></div><div><dt>Товаров</dt><dd data-sum="units">' + units + '</dd></div>' +
           '<div><dt>Доставка</dt><dd>не рассчитана</dd></div>' +
           '<div class="fk-cart__total"><dt>Сумма</dt><dd data-sum="total">' + fmt(total()) + '</dd></div></dl>' +
-          '<button class="fk-btn fk-btn--primary" type="button" data-stub="Демонстрационное действие: оформление заказа не реализовано.">Оформить заказ (демо)</button>' +
+          '<a class="fk-btn fk-btn--primary" href="checkout.html">Оформить заказ (демо)</a>' +
           '<a class="fk-btn fk-btn--secondary" href="catalog.html">Продолжить покупки</a>' +
           '<p class="fk-note">Цены и артикулы демонстрационные. Корзина хранится только в этом браузере.</p>' +
         '</aside></div>';

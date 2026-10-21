@@ -16,6 +16,7 @@
 @import url("css/catalog.css");
 @import url("css/product-page.css");
 @import url("css/cart.css");
+@import url("css/checkout.css");
 
 :root {
   --fk-canvas: #FFFFFF;
