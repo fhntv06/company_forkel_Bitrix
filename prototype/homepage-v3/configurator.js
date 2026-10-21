@@ -105,6 +105,14 @@
   var pm = /[?&]collection=([A-D])(&|$)/.exec(location.search);
   if (pm) state.collection = pm[1];
 
+  // Сброс параметров (страница подбора)
+  var resetBtn = document.getElementById('cfg-reset');
+  if (resetBtn) resetBtn.addEventListener('click', function () {
+    state.collection = 'A'; state.type = 'switch'; state.mech = 'white'; state.frame = 'white';
+    sync();
+    if (window.fkNote) window.fkNote('Параметры подбора сброшены.');
+  });
+
   document.getElementById('cfg-add').addEventListener('click', function () {
     var r = C.add({ kind: 'kit', col: state.collection, mech: state.type, mc: state.mech, fc: state.frame }, 1);
     C.announceAdd(r, 'Комплект добавлен в корзину (демо)');

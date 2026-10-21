@@ -58,7 +58,7 @@
       });
       [].forEach.call(document.querySelectorAll('[data-col-name]'), function (n) { n.textContent = 'Коллекция ' + collection; });
       var cl = document.getElementById('col-cfg-link');
-      if (cl) cl.setAttribute('href', 'index.html?collection=' + collection + '#configurator');
+      if (cl) cl.setAttribute('href', 'configurator.html?collection=' + collection);
     }
     var h1 = document.getElementById('cat-title');
     h1.textContent = collection ? 'Коллекция ' + collection + (category ? ': ' + catName(category).toLowerCase() : '') : (category ? catName(category) : 'Каталог');
@@ -212,7 +212,7 @@
         '</div>' +
         '<button class="fk-btn fk-btn--secondary fk-pdp__oneclick" type="button" data-stub="Демонстрационное действие: покупка в один клик не реализована.">Купить в один клик (демо)</button>' +
         '<p class="fk-pdp__more fk-pdp__cartlink" id="pdp-cartlink" hidden><a class="fk-link fk-link--tap" href="cart.html">Перейти в корзину</a></p>' +
-        '<p class="fk-pdp__more"><a class="fk-link fk-link--tap" href="index.html#configurator">Собрать в подборе</a></p>' +
+        '<p class="fk-pdp__more"><a class="fk-link fk-link--tap" href="configurator.html">Собрать в подборе</a></p>' +
         '<div class="fk-variants">Цвета: ' + D.dots(p) + '</div>' +
       '</div>' +
       chars(p);

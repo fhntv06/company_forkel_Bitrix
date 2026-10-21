@@ -76,7 +76,7 @@
   color: var(--fk-ink); background: transparent; border: 0; border-bottom: 1px solid var(--fk-line);
   padding: 0; cursor: pointer; border-radius: 0;
 }
-.fk-nav__link[aria-current="true"], .fk-nav__link:hover { text-decoration: underline; text-underline-offset: 6px; }
+.fk-nav__link[aria-current="true"], .fk-nav__link[aria-current="page"], .fk-nav__link:hover { text-decoration: underline; text-underline-offset: 6px; }
 .fk-catalog-btn { display: none; }
 .fk-catalog-panel { display: block; padding: 16px 0 8px; }
 /* В мобильной панели боковой отступ уже задан у .fk-nav; на десктопе контейнер возвращается ниже */
@@ -128,6 +128,7 @@
   .fk-catalog-btn[aria-expanded="true"] svg { transform: rotate(180deg); }
   .fk-catalog-btn[aria-expanded="true"] { background: var(--fk-ink); color: var(--fk-ink-inverse); }
   .fk-nav__link:hover { background: var(--fk-canvas); text-decoration: none; }
+  .fk-nav__link[aria-current="page"] { background: var(--fk-canvas); text-decoration: none; box-shadow: inset 0 0 0 2px var(--fk-ink); }
   .fk-catalog-panel {
     display: none; position: absolute; top: calc(100% + 8px); left: var(--fk-margin); right: var(--fk-margin);
     background: var(--fk-canvas); border: 1px solid var(--fk-line);
