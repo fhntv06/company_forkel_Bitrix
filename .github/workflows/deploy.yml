@@ -1,8 +1,9 @@
-name: Deploy UI to Pages
+name: Deploy UI prototype
 
 on:
   push:
-    branches: [main]
+    branches:
+      - role/implementation/ui-001-homepage
   workflow_dispatch:
 
 permissions:
@@ -25,6 +26,6 @@ jobs:
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: prototype/homepage-v3   # ← ваша папка
+          path: prototype/homepage-v3
       - id: deployment
         uses: actions/deploy-pages@v4
