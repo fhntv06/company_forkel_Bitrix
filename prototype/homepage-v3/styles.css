@@ -19,6 +19,7 @@
 @import url("css/checkout.css");
 @import url("css/contacts.css");
 @import url("css/search.css");
+@import url("css/search-page.css");
 
 :root {
   --fk-canvas: #FFFFFF;
