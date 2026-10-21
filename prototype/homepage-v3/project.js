@@ -50,7 +50,7 @@
     '</div>' +
     '<section class="fk-prj-gallery" aria-labelledby="prj-gal"><h2 id="prj-gal">Галерея</h2><ul class="fk-prj-tiles">' + tiles + '</ul></section>' +
     '<section class="fk-prj-cta" aria-labelledby="prj-cta"><div><h2 id="prj-cta">Нужна консультация?</h2><p>Текст предложения — заглушка. Контакты предоставит владелец.</p></div>' +
-      '<a class="fk-btn fk-btn--primary" href="contacts.html">Связаться с нами</a></section>' +
+      '<button class="fk-btn fk-btn--primary" type="button" data-feedback aria-haspopup="dialog">Связаться с нами</button></section>' +
     '<section class="fk-prj-more" aria-labelledby="prj-more"><div class="fk-section-head fk-section-head__row"><h2 id="prj-more">Другие проекты</h2>' +
       '<a class="fk-link fk-link--tap" href="projects.html">Все проекты</a></div><ul class="fk-grid fk-grid--projects-page fk-grid--projects-more">' + others.map(card).join('') + '</ul></section>';
 })();

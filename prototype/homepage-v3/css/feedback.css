@@ -1,0 +1,26 @@
+/* FORKEL V3 — окно обратной связи (8.1). Поля и ошибки — общие (.fk-field, .fk-co-error из checkout.css). */
+html.fk-fb-open { overflow: hidden; }
+.fk-fb { width: min(560px, calc(100% - 32px)); max-width: none; max-height: calc(100dvh - 32px); margin: auto; padding: 0; border: 0; border-radius: var(--fk-r-lg); background: var(--fk-canvas); color: var(--fk-ink); box-shadow: 0 24px 64px rgba(30, 32, 34, 0.28); overflow: hidden; }
+.fk-fb::backdrop { background: rgba(30, 32, 34, 0.55); }
+.fk-fb[open] { display: flex; }
+.fk-fb__panel { display: flex; flex-direction: column; gap: 16px; width: 100%; max-height: inherit; padding: 20px; border-top: 4px solid var(--fk-bright); overflow: hidden; }
+.fk-fb__head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.fk-fb__title { font-size: 1.5rem; line-height: 1.1; font-weight: 700; letter-spacing: -0.01em; }
+.fk-fb__title:focus, .fk-fb__done-title:focus { outline: none; }
+.fk-fb__close { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; padding: 0; color: var(--fk-ink); background: var(--fk-surface); border: 0; border-radius: var(--fk-r-md); cursor: pointer; }
+.fk-fb__close:hover { background: var(--fk-ink); color: var(--fk-ink-inverse); }
+.fk-fb__close:focus-visible { outline: 3px solid var(--fk-bright); outline-offset: 2px; }
+.fk-fb__close svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+.fk-fb__body { min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+.fk-fb__form { display: grid; gap: 16px; }
+.fk-fb__lead { color: var(--fk-ink-muted); }
+.fk-fb .fk-field[aria-invalid="true"] { border-color: var(--fk-error); }
+.fk-fb .fk-co-textarea { min-height: 120px; padding-block: 12px; resize: vertical; }
+.fk-fb__consent .fk-check { align-items: flex-start; padding-block: 8px; }
+.fk-fb__consent a { display: inline-block; padding-block: 12px; margin-block: -12px; text-decoration-color: var(--fk-bright); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.fk-fb__submit { width: 100%; }
+.fk-fb__submit:disabled { opacity: 0.7; cursor: progress; }
+.fk-fb__done { display: grid; gap: 16px; justify-items: start; padding: 24px; background: var(--fk-surface); border-radius: var(--fk-r-lg); }
+.fk-fb__done[hidden], .fk-fb__form[hidden], .fk-fb__policy-note[hidden] { display: none; }
+.fk-fb__done-title { font-size: 1.375rem; font-weight: 700; }
+@media (min-width: 768px) { .fk-fb__panel { padding: 28px; gap: 20px; } .fk-fb__submit { width: auto; justify-self: start; } }
