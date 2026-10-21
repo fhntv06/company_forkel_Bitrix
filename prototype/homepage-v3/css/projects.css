@@ -29,3 +29,12 @@
 }
 @media (min-width: 1024px) { .fk-grid--projects { gap: 32px; } }
 @media (prefers-reduced-motion: reduce) { .fk-project-card { transition: none; } .fk-project-card:hover { transform: none; } }
+
+/* ---------- Страница «Проекты» (5.1): сетка карточек ---------- */
+.fk-prj-intro { max-width: 62ch; margin-bottom: 24px; font-size: 1.125rem; }
+.fk-grid--projects-page { grid-template-columns: minmax(0, 1fr); gap: 16px; margin-bottom: var(--fk-section-gap); }
+.fk-grid--projects-page .fk-project-card__media { flex: none; aspect-ratio: 4 / 3; }
+.fk-grid--projects-page .fk-project-card__name { font-size: 1.375rem; }
+@media (min-width: 768px) { .fk-grid--projects-page { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; } }
+@media (min-width: 1280px) { .fk-grid--projects-page { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; } }
+@media (min-width: 1680px) { .fk-grid--projects-page { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
