@@ -1,0 +1,21 @@
+/* FORKEL V3 — страница «Сотрудничество» (9). Все тексты, условия и преимущества — заглушки до данных владельца. */
+.fk-coop-intro { max-width: 70ch; margin: 0 0 32px; font-size: 1.125rem; }
+.fk-coop-sec { margin-bottom: var(--fk-section-gap); }
+.fk-coop-sec > h2 { margin-bottom: 20px; font-size: var(--fk-fs-h2); line-height: 1.15; font-weight: 700; padding-bottom: 12px; border-bottom: 2px solid var(--fk-bright); }
+.fk-coop-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 0; margin: 0; list-style: none; }
+.fk-coop-grid > li { display: grid; gap: 8px; justify-items: start; align-content: start; min-width: 0; padding: 24px; background: var(--fk-surface); border-radius: var(--fk-r-lg); }
+.fk-coop-grid h3 { font-size: var(--fk-fs-h3); line-height: 1.25; font-weight: 700; overflow-wrap: break-word; }
+.fk-coop-grid p { color: var(--fk-ink-muted); }
+.fk-co-aud .fk-idx { padding: 4px 12px; border-radius: 999px; background: var(--fk-bright); color: var(--fk-on-bright); font-weight: 600; }
+.fk-coop-card { display: grid; gap: 16px; padding: 24px; background: var(--fk-surface); border-radius: var(--fk-r-lg); }
+.fk-coop-cta { display: grid; gap: 24px; align-items: center; margin-bottom: var(--fk-section-gap); padding: 32px 24px; background: var(--fk-ink); color: var(--fk-ink-inverse); border-radius: 32px; --fk-focus: 0 0 0 2px var(--fk-ink), 0 0 0 4px var(--fk-bright); }
+.fk-coop-cta h2 { margin-bottom: 8px; font-size: var(--fk-fs-h2); line-height: 1.15; font-weight: 600; }
+.fk-coop-cta p { color: var(--fk-inverse-muted); }
+.fk-coop-cta .fk-tag { color: var(--fk-ink); }
+.fk-coop-cta__actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.fk-coop-cta .fk-btn--inverse { background: var(--fk-bright); color: var(--fk-on-bright); }
+.fk-coop-cta .fk-btn--inverse:hover { background: var(--fk-ink-inverse); }
+.fk-coop-cta .fk-btn--ghost { background: transparent; color: var(--fk-ink-inverse); border-color: var(--fk-ink-inverse); }
+.fk-coop-cta .fk-btn--ghost:hover { background: var(--fk-ink-inverse); color: var(--fk-ink); }
+@media (min-width: 768px) { .fk-coop-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .fk-coop-cta { padding: 48px; } }
+@media (min-width: 1024px) { .fk-coop-cta { grid-template-columns: minmax(0, 1fr) auto; padding: 56px 64px; } }
