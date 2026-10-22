@@ -1,4 +1,3 @@
-
 # ==========================================
 # FORKEL — secrets and local environment
 # ==========================================
@@ -68,28 +67,24 @@ temp/
 # 1C-Bitrix generated files and core
 # ==========================================
 
-# Bitrix core
+# Bitrix core (включает bitrix/php_interface, bitrix/templates, bitrix/cache и т. д.)
+# Собственный код хранится только в /backend/www/local/ (DEC-DEV-10)
 /backend/www/bitrix/
 
 # Uploaded files and generated content
 /backend/www/upload/
-/backend/www/bitrixphp_interface/dbconn.php
 
-# Cache and managed cache
-/backend/www/bitrix/cache/
-/backend/www/bitrix/managed_cache/
-/backend/www/bitrix/stack_cache/
-/backend/www/bitrix/html_pages/
+# Файлы с доступами к БД (внутри /bitrix/ уже игнорируются, пути указаны явно как страховка)
+/backend/www/bitrix/php_interface/dbconn.php
+/backend/www/bitrix/.settings.php
+/backend/www/bitrix/.settings_extra.php
 
-# Local runtime and backup files
-/backend/www/.settings.php
+# Установщик и восстановление
+/backend/www/bitrixsetup.php
+/backend/www/restore.php
 /backend/www/backup/
 /backend/www/restore/
-/backend/www/bitrix/backup/
 
-# ==========================================
-# Keep custom project code
-# ==========================================
-
-!/backend/www/local/
-!/backend/www/local/**
+# Кеш собственного кода в local/
+/backend/www/local/cache/
+/backend/www/local/managed_cache/
