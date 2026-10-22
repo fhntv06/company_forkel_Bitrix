@@ -6,6 +6,10 @@
   var D = window.FKData, C = window.FKCart;
   var CATEGORIES = D.CATEGORIES, COLORS = D.COLORS, STOCKS = D.STOCKS, PRODUCTS = D.PRODUCTS;
   var catName = D.catName, tag = D.tag, illu = D.illu;
+  /* «Новинки» (new.html): признака новинки в исходных данных нет — условно показаны первые 8 демо-товаров, на главной — первые 4 */
+  var NEW_IDS = [1, 2, 3, 4, 5, 6, 7, 8];
+  var newPage = !!document.querySelector('[data-new-page]');
+  var POOL = newPage ? PRODUCTS.filter(function (p) { return NEW_IDS.indexOf(p.id) >= 0; }) : PRODUCTS;
 
   function card(p) {
     var url = 'product.html?id=' + p.id;
@@ -61,7 +65,7 @@
       if (cl) cl.setAttribute('href', 'configurator.html?collection=' + collection);
     }
     var h1 = document.getElementById('cat-title');
-    h1.textContent = collection ? 'Коллекция ' + collection + (category ? ': ' + catName(category).toLowerCase() : '') : (category ? catName(category) : 'Каталог');
+    h1.textContent = newPage ? 'Новинки' : collection ? 'Коллекция ' + collection + (category ? ': ' + catName(category).toLowerCase() : '') : (category ? catName(category) : 'Каталог');
     document.title = 'FORKEL — ' + h1.textContent + ' (прототип)';
     var crumb = document.getElementById('cat-crumb');
     if (crumb) crumb.textContent = h1.textContent;
@@ -100,7 +104,7 @@
     function render() {
       var q = search.value.trim().toLowerCase();
       var colors = checked('color'), stocks = checked('stock'), groups = checked('group');
-      var items = PRODUCTS.filter(function (p) {
+      var items = POOL.filter(function (p) {
         if (category && p.cat !== category) return false;
         if (q && (p.name + ' ' + p.sku + ' ' + COLORS[p.color]).toLowerCase().indexOf(q) < 0) return false;
         if (colors.length && colors.indexOf(p.color) < 0) return false;
@@ -111,7 +115,7 @@
       list.innerHTML = items.map(card).join('');
       empty.hidden = items.length > 0;
       persist(q ? search.value.trim() : '', colors, stocks, groups);
-      count.textContent = 'Показано демонстрационных товаров: ' + items.length + ' из ' + PRODUCTS.filter(function (p) { return !category || p.cat === category; }).length;
+      count.textContent = 'Показано демонстрационных товаров: ' + items.length + ' из ' + POOL.filter(function (p) { return !category || p.cat === category; }).length;
     }
     panel.addEventListener('change', render);
     sort.addEventListener('change', render);

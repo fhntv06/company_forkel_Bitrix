@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="ru" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FORKEL — новинки (прототип)</title>
+  <meta name="description" content="Прототип раздела «Новинки» FORKEL. Данные демонстрационные.">
+  <meta name="robots" content="noindex, nofollow">
+  <script>document.documentElement.className = 'js';</script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-new-page>
+
+  <!-- Спрайт изделий. Цвета берутся из CSS-переменных (--finish, --finish-2, --edge) — см. styles.css, .fin-* -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <!-- Плоская длинная тень накладки 150×150 (косой свет слева сверху) -->
+      <polygon id="shade150" class="pl-shade" points="150,0 270,120 270,270 120,270 0,150 150,150"/>
+    </defs>
+    <symbol id="p-switch" viewBox="0 0 150 150">
+      <rect class="pl-face" x="0.5" y="0.5" width="149" height="149" rx="3"/>
+      <rect class="pl-inner" x="14" y="14" width="122" height="122" rx="2"/>
+      <rect class="pl-key" x="28" y="28" width="94" height="94" rx="2"/>
+      <path class="pl-line" d="M28 52H122"/>
+    </symbol>
+    <symbol id="p-double" viewBox="0 0 150 150">
+      <rect class="pl-face" x="0.5" y="0.5" width="149" height="149" rx="3"/>
+      <rect class="pl-inner" x="14" y="14" width="122" height="122" rx="2"/>
+      <rect class="pl-key" x="24" y="28" width="47" height="94" rx="2"/>
+      <rect class="pl-key" x="79" y="28" width="47" height="94" rx="2"/>
+      <path class="pl-line" d="M24 52H71M79 52H126"/>
+    </symbol>
+    <symbol id="p-socket" viewBox="0 0 150 150">
+      <rect class="pl-face" x="0.5" y="0.5" width="149" height="149" rx="3"/>
+      <circle class="pl-inner" cx="75" cy="75" r="50"/>
+      <circle class="pl-key" cx="75" cy="75" r="38"/>
+      <circle class="pl-hole" cx="62" cy="75" r="4.5"/>
+      <circle class="pl-hole" cx="88" cy="75" r="4.5"/>
+      <rect class="pl-hole" x="71" y="40" width="8" height="7" rx="1"/>
+      <rect class="pl-hole" x="71" y="103" width="8" height="7" rx="1"/>
+    </symbol>
+    <symbol id="p-frame" viewBox="0 0 150 150">
+      <rect class="pl-face" x="0.5" y="0.5" width="149" height="149" rx="3"/>
+      <rect class="pl-open" x="22" y="22" width="106" height="106" rx="1"/>
+    </symbol>
+    <symbol id="room" viewBox="0 0 400 300">
+      <path class="pl-room" d="M0 250H400M0 236H400"/>
+      <rect class="pl-room" x="36" y="58" width="92" height="178"/>
+      <path class="pl-room" d="M36 58h92M112 150v8"/>
+      <rect class="pl-room" x="236" y="64" width="120" height="104"/>
+      <path class="pl-room" d="M296 64v104M236 116h120"/>
+    </symbol>
+    <clipPath id="wall-clip"><rect x="0" y="0" width="840" height="540"/></clipPath>
+  </svg>
+
+  <a class="fk-skip" href="#main">К содержимому</a>
+
+  <div class="fk-proto-bar">
+    <div class="fk-container">
+      Прототип: тексты и изображения временные, поиск и корзина демонстрационные.
+    </div>
+  </div>
+
+  <!-- H-01 Шапка -->
+  <header class="fk-header" id="top">
+    <div class="fk-container fk-header__row">
+      <a class="fk-logo" href="index.html#top" aria-label="FORKEL, на главную">FORKEL</a>
+
+      <nav class="fk-nav" id="site-nav" aria-label="Основная навигация">
+        <ul class="fk-nav__list">
+          <li>
+            <button class="fk-catalog-btn" type="button" aria-expanded="false" aria-controls="catalog-panel">
+              Каталог
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5"/></svg>
+            </button>
+            <div class="fk-catalog-panel" id="catalog-panel">
+              <div class="fk-container">
+                <div class="fk-catalog-cols">
+                  <div>
+                    <p class="fk-catalog-title">Коллекции</p>
+                    <ul class="fk-catalog-list">
+                      <li><a href="index.html#collections">Коллекция A</a></li>
+                      <li><a href="index.html#collections">Коллекция B</a></li>
+                      <li><a href="index.html#collections">Коллекция C</a></li>
+                      <li><a href="index.html#collections">Коллекция D</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="fk-catalog-title">Категории</p>
+                    <ul class="fk-catalog-list">
+                      <li><a href="catalog.html?category=sockets">Розетки</a></li>
+                      <li><a href="catalog.html?category=switches">Выключатели</a></li>
+                      <li><a href="catalog.html?category=frames">Рамки</a></li>
+                    </ul>
+                    <p class="fk-catalog-all"><a class="fk-link" href="catalog.html">Весь каталог</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <!-- Запасные ссылки, если JavaScript недоступен -->
+          <li class="fk-nav-fallback"><a class="fk-nav__link" href="index.html#collections">Коллекции</a></li>
+          <li class="fk-nav-fallback"><a class="fk-nav__link" href="index.html#categories">Категории</a></li>
+          <li><a class="fk-nav__link" href="new.html" aria-current="page">Новинки</a></li>
+          <li><a class="fk-nav__link" href="configurator.html">Подбор</a></li>
+          <li><a class="fk-nav__link" href="projects.html">Проекты</a></li>
+          <li><a class="fk-nav__link" href="cooperation.html">Сотрудничество</a></li>
+          <!-- В спецификации (H-01) этого пункта в шапке нет: оставлен только в мобильной панели -->
+          <li class="fk-nav__mobile-only"><a class="fk-nav__link" href="index.html#delivery">Доставка и оплата</a></li>
+          <li><a class="fk-nav__link" href="contacts.html">Контакты</a></li>
+          <li class="fk-nav__phone"><span class="fk-phone">Телефон (заглушка)</span></li>
+        </ul>
+      </nav>
+
+      <div class="fk-actions">
+        <button class="fk-icon-btn fk-search-btn" type="button" aria-haspopup="dialog" aria-label="Поиск по товарам" data-stub="Окно поиска — следующий блок V3, пока не подключено.">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+          <span class="fk-search-btn__text" aria-hidden="true">Поиск по товарам</span>
+        </button>
+        <button class="fk-icon-btn fk-icon-btn--account" type="button" data-stub="Личный кабинет не реализован в прототипе.">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.75"/><path d="M4.5 20c.9-3.6 3.8-5.5 7.5-5.5s6.6 1.9 7.5 5.5"/></svg>
+          <span class="fk-vh">Личный кабинет</span>
+        </button>
+        <a class="fk-icon-btn fk-cart-link" href="cart.html">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6.5a3 3 0 016 0V8"/></svg>
+          <span class="fk-vh">Корзина<span data-cart-sr></span></span>
+          <span class="fk-badge" data-cart-count hidden aria-hidden="true">0</span>
+        </a>
+        <span class="fk-phone fk-phone--header">Телефон (заглушка)</span>
+        <button class="fk-menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Меню</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <div class="fk-container fk-page">
+      <nav class="fk-crumbs" aria-label="Хлебные крошки">
+        <ol><li><a href="index.html">Главная</a></li><li aria-current="page" id="cat-crumb">Новинки</li></ol>
+      </nav>
+      <div class="fk-section-head">
+        <h1 class="fk-page-title" id="cat-title">Новинки</h1>
+        <p class="fk-note fk-note--proto">Демонстрационные данные. Признака «новинка» в данных нет: показаны первые 8 демонстрационных товаров, реальных новинок, артикулов, цен и остатков нет. Какие товары считать новинками, определит владелец.</p>
+      </div>
+      <noscript><p class="fk-note fk-note--proto">Для списка товаров в прототипе нужен JavaScript.</p></noscript>
+
+      <div class="fk-toolbar">
+        <form class="fk-search" id="cat-search-form" role="search">
+          <label class="fk-field__label" for="cat-search">Поиск по названию и артикулу</label>
+          <input class="fk-field" id="cat-search" type="search" placeholder="Например, ХХХ-005" autocomplete="off">
+        </form>
+        <div class="fk-sort">
+          <label class="fk-field__label" for="cat-sort">Сортировка</label>
+          <select class="fk-field" id="cat-sort">
+            <option value="default">По умолчанию</option>
+            <option value="name">По названию</option>
+            <option value="sku">По артикулу</option>
+            <option value="price-asc">Цена: по возрастанию (демо)</option>
+            <option value="price-desc">Цена: по убыванию (демо)</option>
+          </select>
+        </div>
+        <button class="fk-btn fk-btn--secondary fk-filters-toggle" id="cat-filters-toggle" type="button" aria-expanded="false" aria-controls="cat-filters">Фильтры</button>
+      </div>
+
+      <div class="fk-catalog">
+        <form class="fk-filters" id="cat-filters" aria-label="Фильтры" onsubmit="return false">
+          <fieldset class="fk-filter">
+            <legend>Цвет</legend>
+            <label class="fk-check"><input type="checkbox" name="color" value="white"><span class="fk-check__chip fin-white"></span>Белый глянцевый</label>
+            <label class="fk-check"><input type="checkbox" name="color" value="whitem"><span class="fk-check__chip fin-whitem"></span>Белый матовый</label>
+            <label class="fk-check"><input type="checkbox" name="color" value="gold"><span class="fk-check__chip fin-gold"></span>Золотой</label>
+            <label class="fk-check"><input type="checkbox" name="color" value="cashmere"><span class="fk-check__chip fin-cashmere"></span>Кашемир матовый</label>
+            <label class="fk-check"><input type="checkbox" name="color" value="gray"><span class="fk-check__chip fin-gray"></span>Серый</label>
+            <label class="fk-check"><input type="checkbox" name="color" value="black"><span class="fk-check__chip fin-black"></span>Чёрный матовый</label>
+          </fieldset>
+          <fieldset class="fk-filter">
+            <legend>Наличие <span class="fk-tag">демо</span></legend>
+            <label class="fk-check"><input type="checkbox" name="stock" value="in">В наличии</label>
+            <label class="fk-check"><input type="checkbox" name="stock" value="order">Под заказ</label>
+          </fieldset>
+          <fieldset class="fk-filter">
+            <legend>Цена <span class="fk-tag">демо</span></legend>
+            <label class="fk-check"><input type="checkbox" name="group" value="1">100&nbsp;₽</label>
+            <label class="fk-check"><input type="checkbox" name="group" value="2">200&nbsp;₽</label>
+            <label class="fk-check"><input type="checkbox" name="group" value="3">300&nbsp;₽</label>
+            <p class="fk-note">Реальных цен нет: суммы демонстрационные.</p>
+          </fieldset>
+          <button class="fk-btn fk-btn--secondary" type="button" data-reset>Сбросить фильтры</button>
+        </form>
+
+        <div class="fk-results">
+          <p class="fk-results__count" id="cat-count" role="status" aria-live="polite"></p>
+          <ul class="fk-grid fk-grid--products fk-grid--catalog" id="cat-list"></ul>
+          <div class="fk-empty" id="cat-empty" hidden>
+            <h2>Ничего не найдено</h2>
+            <p>Измените запрос или сбросьте фильтры.</p>
+            <button class="fk-btn fk-btn--primary" type="button" data-reset>Сбросить фильтры</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- H-09 Подвал -->
+  <footer class="fk-footer" id="contacts">
+    <div class="fk-container">
+      <div class="fk-footer__grid">
+        <div class="fk-footer__brand">
+          <p class="fk-footer__logo">FORKEL</p>
+        </div>
+        <nav class="fk-footer__nav" aria-label="Разделы">
+          <h2>Разделы</h2>
+          <ul>
+            <li><a href="catalog.html">Каталог</a></li>
+            <li><a href="index.html#collections">Коллекции</a></li>
+            <li><a href="index.html#categories">Категории</a></li>
+            <li><a href="index.html#new">Новинки</a></li>
+            <li><a href="configurator.html">Подбор</a></li>
+            <li><a href="projects.html">Проекты</a></li>
+            <li><a href="cooperation.html">Сотрудничество</a></li>
+            <li><a href="index.html#delivery">Доставка и оплата</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+          </ul>
+        </nav>
+        <div class="fk-footer__contacts">
+          <h2>Контакты</h2>
+          <p>Телефон, email и адрес добавит владелец.</p>
+        </div>
+      </div>
+      <div class="fk-footer__legal">
+        <a href="#" data-stub="Страница политики не создана. Текст предоставит владелец.">Политика обработки персональных данных</a>
+        <p>Юридические данные добавит владелец.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="fk-toast" id="proto-note" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+  <script src="data.js"></script>
+  <script src="cart.js"></script>
+  <script src="search.js"></script>
+  <script src="feedback.js"></script>
+  <script src="callback.js"></script>
+  <script src="shop.js"></script>
+</body>
+</html>
