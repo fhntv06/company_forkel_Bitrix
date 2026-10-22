@@ -1,0 +1,35 @@
+/* FORKEL V3 — личный кабинет (11): демонстрационные формы, вкладки, заказы и адреса. Поля и ошибки — общие (page.css, checkout.css). */
+.fk-icon-btn--account.is-in { position: relative; }
+.fk-icon-btn--account.is-in::after { content: ""; position: absolute; top: 8px; right: 8px; width: 10px; height: 10px; border-radius: 50%; background: var(--fk-bright); border: 2px solid var(--fk-canvas); }
+.fk-acc-card { display: grid; gap: 20px; max-width: 760px; padding: 24px; margin-bottom: var(--fk-section-gap); background: var(--fk-surface); border-radius: var(--fk-r-lg); }
+.fk-acc-card > h2 { font-size: var(--fk-fs-h2); line-height: 1.15; font-weight: 700; padding-bottom: 12px; border-bottom: 2px solid var(--fk-bright); }
+.fk-acc-card > h2:focus { outline: none; }
+.fk-acc-card form { display: grid; gap: 16px; }
+.fk-acc-card form[hidden], .fk-acc-done[hidden], .fk-acc-repeat[hidden] { display: none; }
+.fk-acc-card .fk-field[aria-invalid="true"] { border-color: var(--fk-error); }
+.fk-acc-card .fk-field { background: var(--fk-canvas); }
+.fk-acc-card .fk-check { align-items: flex-start; padding-block: 8px; }
+.fk-acc-card .fk-check a { display: inline-block; padding-block: 12px; margin-block: -12px; text-decoration-color: var(--fk-bright); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.fk-acc-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+.fk-acc-tabs .fk-chip { display: inline-flex; align-items: center; background: var(--fk-canvas); text-decoration: none; }
+.fk-acc-tabs .fk-chip[aria-current="page"] { background: var(--fk-bright); color: var(--fk-on-bright); border-color: var(--fk-bright); }
+.fk-acc-logout { margin-left: auto; }
+.fk-acc-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.fk-acc-actions .fk-btn { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
+.fk-acc-done, .fk-acc-repeat { padding: 16px 20px; background: var(--fk-canvas); border-left: 4px solid var(--fk-bright); border-radius: var(--fk-r-md); }
+.fk-acc-sub { font-size: var(--fk-fs-h3); font-weight: 700; }
+.fk-acc-orders, .fk-acc-addr, .fk-acc-lines { display: grid; gap: 12px; padding: 0; margin: 0; list-style: none; }
+.fk-acc-order { background: var(--fk-canvas); border-radius: var(--fk-r-md); }
+.fk-acc-order summary { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; align-items: center; min-height: 64px; padding: 14px 16px; cursor: pointer; }
+.fk-acc-order summary:focus-visible { outline: 3px solid var(--fk-bright); outline-offset: 2px; border-radius: var(--fk-r-md); }
+.fk-acc-order__no { font-weight: 700; }
+.fk-acc-order__sum { grid-column: 2; grid-row: 1; font-weight: 700; }
+.fk-acc-status { grid-column: 1 / -1; justify-self: start; padding: 2px 12px; font-size: var(--fk-fs-small); font-weight: 600; border-radius: 999px; background: var(--fk-tint); }
+.fk-acc-status--done { background: var(--fk-bright); color: var(--fk-on-bright); }
+.fk-acc-status--shipping { background: var(--fk-ink); color: var(--fk-ink-inverse); }
+.fk-acc-order__body { display: grid; gap: 12px; padding: 0 16px 16px; justify-items: start; }
+.fk-acc-lines { width: 100%; }
+.fk-acc-lines li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; padding-top: 12px; border-top: 1px solid var(--fk-line); }
+.fk-acc-line__meta { color: var(--fk-ink-muted); font-size: var(--fk-fs-small); }
+.fk-acc-addr li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 16px; background: var(--fk-canvas); border-radius: var(--fk-r-md); }
+@media (min-width: 768px) { .fk-acc-card { padding: 40px; } .fk-acc-order summary { grid-template-columns: auto auto 1fr; } .fk-acc-status { grid-column: auto; } .fk-acc-order__sum { grid-column: auto; grid-row: auto; justify-self: end; } }
