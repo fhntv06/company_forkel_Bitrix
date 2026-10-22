@@ -24,3 +24,4 @@
   .fk-ct > :nth-child(2) { grid-column: 6 / span 7; grid-row: span 2; }
   .fk-ct > :nth-child(3) { grid-column: 1 / span 5; padding: 40px; }
 }
+.fk-ct-actions { display: flex; flex-wrap: wrap; gap: 12px; }
