@@ -79,8 +79,8 @@
   font: 600 1rem/1 var(--hero-font); text-decoration: none; cursor: pointer;
   transition: background-color .15s ease-out, border-color .15s ease-out, transform .15s ease-out;
 }
-.fk-hbtn--primary { background: var(--hero-accent); color: var(--hero-on-accent); }
-.fk-hbtn--primary:hover { background: #FF6A2B; }
+.fk-hbtn--primary { background: #FFFFFF; color: var(--hero-ink); }
+.fk-hbtn--primary:hover { background: #DADCDE; }
 .fk-hbtn--primary:active { transform: translateY(1px); }
 .fk-hbtn--secondary { background: transparent; color: var(--fg); border-color: var(--fg-line); }
 .fk-hbtn--secondary:hover { background: var(--fg-hover); border-color: var(--fg); }

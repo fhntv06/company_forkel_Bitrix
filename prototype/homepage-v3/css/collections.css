@@ -33,10 +33,10 @@
 .fk-collection-card .fk-idx {
   padding: 4px 12px; border-radius: 999px; background: var(--fk-canvas); color: var(--fk-ink); font-weight: 600;
 }
-.tone-graphite.fk-collection-card .fk-idx { background: var(--fk-bright); color: var(--fk-on-bright); }
+.tone-graphite.fk-collection-card .fk-idx, .tone-graphite.fk-collection-card .fk-arrow { background: var(--fk-ink-inverse); color: var(--fk-ink); }
 .fk-collection-card .fk-arrow {
   margin-left: auto; display: inline-grid; place-items: center; width: 48px; height: 48px; border-radius: 50%;
-  background: var(--fk-bright); color: var(--fk-on-bright); font-size: 1.375rem;
+  background: var(--fk-action); color: var(--fk-on-action); font-size: 1.375rem;
 }
 .fk-collection-card:hover .fk-collection-card__name { text-decoration: none; }
 @media (min-width: 768px) { .fk-collection-card__cap { padding: 0 24px 24px; } }

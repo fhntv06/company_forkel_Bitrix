@@ -23,7 +23,7 @@
 /* Количество */
 .fk-qty { display: inline-flex; align-items: center; background: var(--fk-canvas); border-radius: var(--fk-r-md); padding: 4px; }
 .fk-qty__btn { width: 48px; min-height: 48px; padding: 0; font: inherit; font-size: 1.375rem; background: transparent; color: var(--fk-ink); border: 0; border-radius: 10px; cursor: pointer; }
-.fk-qty__btn:hover { background: var(--fk-bright); color: var(--fk-on-bright); }
+.fk-qty__btn:hover { background: var(--fk-action); color: var(--fk-on-action); }
 .fk-qty__input { width: 56px; min-height: 48px; padding: 0; font: inherit; font-weight: 600; text-align: center; color: var(--fk-ink); background: transparent; border: 0; -moz-appearance: textfield; appearance: textfield; }
 .fk-qty__input::-webkit-outer-spin-button, .fk-qty__input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
@@ -42,7 +42,7 @@
   min-height: 44px; min-width: 44px; padding: 0 14px; margin: -8px 0 -8px 4px; font: inherit; font-size: var(--fk-fs-small); font-weight: 600;
   color: var(--fk-ink); background: var(--fk-canvas); border: 0; border-radius: var(--fk-r-md); cursor: pointer;
 }
-.fk-copy:hover { background: var(--fk-bright); color: var(--fk-on-bright); }
+.fk-copy:hover { background: var(--fk-action); color: var(--fk-on-action); }
 
 /* Связанные товары */
 .fk-pdp__related .fk-section-head { border-top: 0; padding-top: 0; }

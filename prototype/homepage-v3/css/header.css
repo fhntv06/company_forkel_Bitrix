@@ -58,7 +58,7 @@
 .fk-icon-btn:hover, .fk-menu-btn:hover { background: var(--fk-ink); color: var(--fk-ink-inverse); }
 .fk-icon-btn svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .fk-icon-btn--account { display: none; }
-.fk-menu-btn { padding: 0 16px; font-weight: 600; background: var(--fk-bright); color: var(--fk-on-bright); }
+.fk-menu-btn { padding: 0 16px; font-weight: 600; background: var(--fk-action); color: var(--fk-on-action); }
 .fk-menu-btn:hover { background: var(--fk-ink); }
 
 /* Навигация: мобильная — полноэкранная панель */
@@ -122,8 +122,8 @@
   .fk-nav__link, .fk-catalog-btn {
     width: auto; min-height: 52px; padding: 0 12px; font-size: 1rem; border-bottom: 0; border-radius: var(--fk-r-md);
   }
-  .fk-catalog-btn { display: inline-flex; gap: 10px; align-items: center; background: var(--fk-bright); color: var(--fk-on-bright); }
-  .fk-catalog-btn:hover { background: var(--fk-ink); color: var(--fk-ink-inverse); }
+  .fk-catalog-btn { display: inline-flex; gap: 10px; align-items: center; background: var(--fk-action); color: var(--fk-on-action); }
+  .fk-catalog-btn:hover { background: var(--fk-action-hover); color: var(--fk-on-action); }
   .fk-catalog-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.75; transition: transform var(--fk-dur) ease-out; }
   .fk-catalog-btn[aria-expanded="true"] svg { transform: rotate(180deg); }
   .fk-catalog-btn[aria-expanded="true"] { background: var(--fk-ink); color: var(--fk-ink-inverse); }

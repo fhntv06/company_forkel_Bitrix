@@ -13,5 +13,5 @@
 @media (min-width: 640px) { .fk-sr-form__row { grid-template-columns: minmax(0, 1fr) auto; } .fk-sr-form .fk-btn { justify-self: auto; } }
 @media (min-width: 768px) { .fk-grid--projects-page { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 1280px) { #sr-projects .fk-grid--projects-page { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.fk-sr-tabs .fk-chip[aria-pressed="true"] { background: var(--fk-bright); color: var(--fk-on-bright); border-color: var(--fk-bright); }
+.fk-sr-tabs .fk-chip[aria-pressed="true"] { background: var(--fk-action); color: var(--fk-on-action); border-color: var(--fk-action); }
 .fk-sr-form input[type="search"]::-webkit-search-cancel-button { display: none; }

@@ -9,7 +9,7 @@
   display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 24px;
   background: var(--fk-surface); border: 1px solid transparent; border-radius: var(--fk-r-lg);
 }
-.fk-delivery__list .fk-idx { padding: 4px 12px; border-radius: 999px; background: var(--fk-bright); color: var(--fk-on-bright); font-weight: 600; }
+.fk-delivery__list .fk-idx { padding: 4px 12px; border-radius: 999px; background: var(--fk-action); color: var(--fk-on-action); font-weight: 600; }
 .fk-delivery__list h3 { font-size: 1.5rem; line-height: 1.2; font-weight: 600; }
 .fk-delivery__list p { color: var(--fk-ink-muted); max-width: 40ch; }
 .fk-delivery__list .fk-tag { margin-top: auto; padding: 4px 12px; border-radius: 999px; background: var(--fk-canvas); }

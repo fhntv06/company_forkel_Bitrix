@@ -32,6 +32,9 @@
   --fk-ink: #1E2022;
   --fk-ink-muted: #5A5F64;
   --fk-ink-inverse: #FFFFFF;
+  --fk-action: #1E2022;             /* кнопки и выбранные элементы — графит (замечание клиента: золотые кнопки заменить); золото — только акцент */
+  --fk-on-action: #FFFFFF;
+  --fk-action-hover: #3A3E42;
   --fk-inverse-muted: #B8BCC0;
   --fk-accent: var(--fk-ink);
   --fk-on-accent: var(--fk-ink-inverse);
@@ -128,8 +131,8 @@ svg { display: block; }
   border: 2px solid transparent; border-radius: var(--fk-r-md);
   cursor: pointer; transition: background-color var(--fk-dur) ease-out, color var(--fk-dur) ease-out;
 }
-.fk-btn--primary { background: var(--fk-bright); color: var(--fk-on-bright); }
-.fk-btn--primary:hover { background: var(--fk-ink); color: var(--fk-ink-inverse); }
+.fk-btn--primary { background: var(--fk-action); color: var(--fk-on-action); }
+.fk-btn--primary:hover { background: var(--fk-action-hover); color: var(--fk-on-action); }
 .fk-btn--secondary { background: transparent; color: var(--fk-ink); border-color: var(--fk-ink); }
 .fk-btn--secondary:hover { background: var(--fk-surface); }
 

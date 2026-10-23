@@ -21,7 +21,7 @@
 .fk-co-choice { display: flex; align-items: center; gap: 14px; min-height: 64px; padding: 12px 16px; background: var(--fk-canvas); border: 2px solid transparent; border-radius: var(--fk-r-md); cursor: pointer; }
 .fk-co-choice input { width: 22px; height: 22px; margin: 0; accent-color: var(--fk-ink); flex: none; }
 .fk-co-choice:hover { border-color: var(--fk-bright); }
-.fk-co-choice:has(input:checked) { border-color: var(--fk-ink); box-shadow: 0 0 0 3px var(--fk-bright); }
+.fk-co-choice:has(input:checked) { border-color: var(--fk-ink); box-shadow: 0 0 0 3px var(--fk-action); }
 .fk-co-choice:has(input:focus-visible) { outline: 2px solid var(--fk-ink); outline-offset: 3px; }
 .fk-co-choice__body { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; }
 .fk-co-choice__name { font-weight: 600; font-size: 1.0625rem; }
