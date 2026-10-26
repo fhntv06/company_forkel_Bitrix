@@ -1,0 +1,90 @@
+# ==========================================
+# FORKEL — secrets and local environment
+# ==========================================
+
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Private keys and certificates
+*.pem
+*.key
+*.p12
+*.pfx
+
+# ==========================================
+# Operating system and editors
+# ==========================================
+
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ==========================================
+# Logs and temporary files
+# ==========================================
+
+*.log
+logs/
+tmp/
+temp/
+
+# ==========================================
+# Docker local data and database dumps
+# ==========================================
+
+**/mysql_data/
+**/mariadb_data/
+**/database_data/
+*.sql
+*.sql.gz
+*.dump
+*.bak
+
+# ==========================================
+# Node.js / frontend
+# ==========================================
+
+**/node_modules/
+**/npm-debug.log*
+**/yarn-debug.log*
+**/pnpm-debug.log*
+**/dist/
+**/build/
+**/.parcel-cache/
+**/.vite/
+**/coverage/
+
+# ==========================================
+# 1C-Bitrix generated files and core
+# ==========================================
+
+# Bitrix core (включает bitrix/php_interface, bitrix/templates, bitrix/cache и т. д.)
+# Собственный код хранится только в /backend/www/local/ (DEC-DEV-10)
+/backend/www/bitrix/
+
+# Uploaded files and generated content
+/backend/www/upload/
+
+# Файлы с доступами к БД (внутри /bitrix/ уже игнорируются, пути указаны явно как страховка)
+/backend/www/bitrix/php_interface/dbconn.php
+/backend/www/bitrix/.settings.php
+/backend/www/bitrix/.settings_extra.php
+
+# Установщик и восстановление
+/backend/www/bitrixsetup.php
+/backend/www/restore.php
+/backend/www/backup/
+/backend/www/restore/
+
+# Кеш собственного кода в local/
+/backend/www/local/cache/
+/backend/www/local/managed_cache/

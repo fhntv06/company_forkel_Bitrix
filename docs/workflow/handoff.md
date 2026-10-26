@@ -92,17 +92,17 @@
 
 ### Handoff — 2026-10-19 (подготовка документации к V3)
 
-**Передающая роль:** Implementation (документы подготовлены по заданию владельца; код V3 не писался). **Изменено:** `docs/project/decisions.md` (DEC-004…DEC-008), `docs/workflow/current-state.md` (4.3, 4.4, 7), `docs/workflow/task-queue.md` (UI-011, QA-002), `docs/qa/acceptance-checklist.md` (раздел V3), `docs/qa/ui-review.md` (4.2, 5, 6), `docs/design/design-system.md` (4.3, 6.7), `docs/design/homepage-spec.md` (разделы 8 и 13, примечания), `docs/design/homepage-requirements-map.md` (8.1, 9.6), `docs/workflow/work-log.md`, этот файл. Правки подготовлены для заливки владельцем; в Git не отправлялись.
+**Передающая роль:** Research & Design System / QA. **Изменено:** `docs/design/homepage-requirements-map.md` (раздел 11), `docs/design/homepage-spec.md`, `docs/design/design-system.md` (4.3, 4.6, 6.13–6.19), `docs/qa/ui-review.md` (4.2, вопросы), `docs/qa/acceptance-checklist.md` (V3), `docs/project/decisions.md` (DEC-004…DEC-009), `docs/workflow/task-queue.md`, `current-state.md`, `work-log.md`, этот файл.
 
-**Состояние:** V1 и V2 готовы и заморожены; V2 включает главную, каталог, товар (с характеристиками), корзину, подбор с шестью цветами и слоями из `prototype/assets/images/`. Независимая приёмка V1 и V2 не проводилась. V3 (`prototype/homepage-v3/`) не начата: задача UI-011, статус READY.
+**Состояние:** V1 и V2 готовы и заморожены; V3 не начата (PRT-001, READY). Независимая приёмка V1 и V2 не проводилась.
 
-**Следующие действия:** 1) выполнить UI-011 по `task-queue.md`, `ui-review.md` 4.2 и `acceptance-checklist.md`; 2) QA-002; 3) после V3 обновить `current-state.md`, `work-log.md`, `design-system.md` (итоговые значения сетки и размеров).
+**Следующие действия:** 1) выполнить PRT-001 по `task-queue.md`, `ui-review.md` 4.2 и `acceptance-checklist.md`; 2) QA-002; 3) после V3 обновить `current-state.md`, `work-log.md` и итоговые значения сетки в `design-system.md`.
 
-**Открытые вопросы владельцу (не блокируют V3, решения не приняты самостоятельно):** кнопка личного кабинета в V3; поле «удобное время для звонка» в окне обратной связи (D8, ORD-009); список и названия коллекций (в V2 8 на главной и 4 в подборе); источник и лицензия стоковых фото; реальные фото изделий FORKEL; реквизиты, адрес и ключ карты; название «О бренде» / «О компании» (D16). Прежние вопросы ниже остаются в силе.
+**Открытые вопросы владельцу (не блокируют V3):** судьба кнопки личного кабинета; поле «удобное время» в окне обратной связи; число и названия коллекций; источник и лицензия стоковых фото; собственные слои подбора FORKEL; D10 и D13 (фирменный стиль, скругления, шрифты).
 
-**Замечания по документам:** ссылки на «D19» корректны (решение записано в `homepage-requirements-map.md`, 8.1; прежняя ошибка в обсуждении исправлена); `reference-analysis.md`, `comparison.md`, `implementation-guide.md` по-прежнему пусты; DEC-004…DEC-008 основаны на письменных заданиях владельца, отдельного подтверждения в репозитории нет.
+**Замечания по документам:** идентификаторы задач `UI-0xx` совпадают с идентификаторами требований `UI-0xx` (`task-queue.md`, раздел 5); в README V2 две взаимоисключающие строки про изображения слоёв (V2-07); `reference-analysis.md`, `comparison.md`, `implementation-guide.md` по-прежнему пусты.
 
-### Предыдущий handoff — 2026-10-17 (блоки очереди B: H-05, H-06, H-10, шапка, первый экран)
+### Handoff — 2026-10-17 (блоки очереди B: H-05, H-06, H-10, шапка, первый экран)
 
 **Передающая роль:** Implementation. **Изменено:** `prototype/homepage/index.html`, `styles.css`, `app.js`, `README.md`; `docs/design/homepage-requirements-map.md` (статус в шапке). Блоки добавлены по обновлённому `homepage-spec.md`; данные, цены, остатки, телефон и фото не придуманы, везде явные заглушки. Повторная приёмка QA не проводилась.
 
