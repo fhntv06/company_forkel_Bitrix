@@ -23,6 +23,7 @@
 @import url("css/feedback.css");
 @import url("css/cooperation.css");
 @import url("css/account.css");
+@import url("css/about.css");
 
 :root {
   --fk-canvas: #FFFFFF;
