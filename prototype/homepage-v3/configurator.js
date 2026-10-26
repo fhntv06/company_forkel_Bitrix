@@ -12,22 +12,22 @@
   var photo = document.getElementById('cfg-photo');
   var summary = document.getElementById('cfg-summary');
   var cartLink = document.getElementById('cfg-cart-link');
-  var state = { collection: 'A', type: 'switch', mech: 'white', frame: 'white' };
+  var state = { collection: 'F70', material: 'glass', type: 'switch', mech: 'white', frame: 'white' };
 
   function radios(g) { return [].slice.call(g.querySelectorAll('[role="radio"]')); }
   function keyOf(part, r) {
-    if (part === 'collection') return r.getAttribute('data-key');
+    if (part === 'collection' || part === 'material') return r.getAttribute('data-key');
     if (part === 'type') return r.getAttribute('data-symbol').slice(2);
     return r.getAttribute('data-fin').slice(4);
   }
   function allowed(part, key) {
     var c = D.COMPAT[state.collection];
-    return part === 'collection' || (part === 'type' ? c.types : c.colors).indexOf(key) >= 0;
+    return part === 'collection' || part === 'material' || (part === 'type' ? c.types : c.colors).indexOf(key) >= 0;
   }
   function out(name, html) {
     [].forEach.call(root.querySelectorAll('[data-out="' + name + '"]'), function (el) { el.innerHTML = html; });
   }
-  function spec() { return { col: state.collection, mech: state.type, mc: state.mech, fc: state.frame }; }
+  function spec() { return { col: state.collection, mat: state.material, mech: state.type, mc: state.mech, fc: state.frame }; }
 
   function sync() {
     var changed = false;
@@ -51,16 +51,19 @@
     });
     imgFrame.src = D.imgUrl('frame', state.frame);
     imgMech.src = D.imgUrl('mech', state.mech);
+    imgFrame.style.filter = D.imgFilter(state.frame);
+    imgMech.style.filter = D.imgFilter(state.mech);
     photo.setAttribute('aria-label', 'Превью (образцы цвета): рамка — ' + D.COLORS[state.frame].toLowerCase() + ', механизм — ' + D.COLORS[state.mech].toLowerCase());
     var k = D.kit(spec());
     out('collection', k.collection);
+    out('material', k.material);
     out('frame', D.COLORS[state.frame] + ' · ' + D.fmt(k.parts[0].price) + ' ' + D.tag('демо'));
     out('mech', D.TYPES[state.type].mech + ', ' + D.COLORS[state.mech].toLowerCase() + ' · ' + D.fmt(k.parts[1].price) + ' ' + D.tag('демо'));
     out('kit-sku', '<span class="fk-stub">' + k.sku + '</span> ' + D.tag('заглушка'));
     out('kit-price', D.fmt(k.price) + ' ' + D.tag('демо'));
     var cl = document.getElementById('cfg-catalog-link');
     if (cl) cl.setAttribute('href', 'catalog.html?category=' + (state.type === 'socket' ? 'sockets' : 'switches'));
-    summary.textContent = 'Выбрано (демо): ' + k.collection + ', ' + D.TYPES[state.type].mech.toLowerCase() + ', механизм — ' +
+    summary.textContent = 'Выбрано (демо): ' + k.collection + ', рамка — ' + k.material.toLowerCase() + ', ' + D.TYPES[state.type].mech.toLowerCase() + ', механизм — ' +
       D.COLORS[state.mech] + ', рамка — ' + D.COLORS[state.frame] + '. Цена комплекта: ' + D.fmt(k.price) + ' (демо).' +
       (changed ? ' Недоступные в этой коллекции варианты заменены.' : '');
   }
@@ -93,7 +96,7 @@
     });
   });
 
-  // Карточки коллекций A–D ведут в подбор с выбранной коллекцией (E–H — демонстрационные заглушки)
+  // Элементы с data-collection (F70, F55) выбирают коллекцию в подборе
   [].forEach.call(document.querySelectorAll('[data-collection]'), function (a) {
     a.addEventListener('click', function () {
       state.collection = a.getAttribute('data-collection');
@@ -101,20 +104,20 @@
     });
   });
 
-  // Переход со страницы коллекции: index.html?collection=A…D#configurator
-  var pm = /[?&]collection=([A-D])(&|$)/.exec(location.search);
+  // Переход со страницы коллекции: configurator.html?collection=F70|F55
+  var pm = /[?&]collection=(F70|F55)(&|$)/.exec(location.search);
   if (pm) state.collection = pm[1];
 
   // Сброс параметров (страница подбора)
   var resetBtn = document.getElementById('cfg-reset');
   if (resetBtn) resetBtn.addEventListener('click', function () {
-    state.collection = 'A'; state.type = 'switch'; state.mech = 'white'; state.frame = 'white';
+    state.collection = 'F70'; state.material = 'glass'; state.type = 'switch'; state.mech = 'white'; state.frame = 'white';
     sync();
     if (window.fkNote) window.fkNote('Параметры подбора сброшены.');
   });
 
   document.getElementById('cfg-add').addEventListener('click', function () {
-    var r = C.add({ kind: 'kit', col: state.collection, mech: state.type, mc: state.mech, fc: state.frame }, 1);
+    var r = C.add({ kind: 'kit', col: state.collection, mat: state.material, mech: state.type, mc: state.mech, fc: state.frame }, 1);
     C.announceAdd(r, 'Комплект добавлен в корзину (демо)');
     if (cartLink) cartLink.hidden = false;
   });

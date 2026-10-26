@@ -36,7 +36,7 @@
   var opener = null;
 
   function hint() {
-    var cols = ['A', 'B', 'C', 'D'].map(function (c) { return '<li><a class="fk-chip" href="collection.html?collection=' + c + '">Коллекция ' + c + '</a></li>'; }).join('');
+    var cols = ['F70', 'F55'].map(function (c) { return '<li><a class="fk-chip" href="collection.html?collection=' + c + '">Коллекция ' + c + '</a></li>'; }).join('');
     return '<p class="fk-search__lead">Введите запрос — например, «розетка», «чёрный» или «ХХХ-003».</p>' +
       '<p class="fk-search__sub">Или перейдите сразу:</p><ul class="fk-search__chips">' +
       '<li><a class="fk-chip" href="catalog.html">Весь каталог</a></li>' + cols + '<li><a class="fk-chip" href="projects.html">Проекты</a></li></ul>';
@@ -45,7 +45,7 @@
     var url = 'product.html?id=' + p.id;
     return '<li><a class="fk-search__item" href="' + url + '"><span class="fk-search__thumb tone-' + p.tone + '">' + D.illu(p) + '</span>' +
       '<span class="fk-search__text"><span class="fk-search__name">' + esc(p.name) + '</span>' +
-      '<span class="fk-search__meta">' + esc(D.COLORS[p.color]) + ' · ' + esc(p.collection) + ' · Арт. ' + esc(p.sku) + '</span></span>' +
+      '<span class="fk-search__meta">' + esc(D.COLORS[p.color]) + ' · ' + esc(p.col) + ', ' + esc(D.MATERIALS[p.mat].toLowerCase()) + ' · Арт. ' + esc(p.sku) + '</span></span>' +
       '<span class="fk-search__price">' + D.fmt(D.price(p)) + ' <span class="fk-tag">демо</span></span></a></li>';
   }
   function projectRow(i) {
@@ -55,7 +55,7 @@
   function find(q) {
     var words = norm(q).split(/\s+/).filter(Boolean);
     var prod = D.PRODUCTS.filter(function (p) {
-      var hay = norm([p.name, D.COLORS[p.color], p.collection, p.sku, D.catName(p.cat), D.TYPES[p.type].mech].join(' '));
+      var hay = norm([p.name, D.COLORS[p.color], p.collection, D.MATERIALS[p.mat], p.sku, D.catName(p.cat), D.TYPES[p.type].mech].join(' '));
       return words.every(function (w) { return hay.indexOf(w) >= 0; });
     });
     var prj = PROJECTS.filter(function (i) {

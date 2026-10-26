@@ -28,7 +28,7 @@
   function chips() {
     return '<ul class="fk-search__chips">' +
       '<li><a class="fk-chip" href="catalog.html">Весь каталог</a></li>' +
-      ['A', 'B', 'C', 'D'].map(function (c) { return '<li><a class="fk-chip" href="collection.html?collection=' + c + '">Коллекция ' + c + '</a></li>'; }).join('') +
+      ['F70', 'F55'].map(function (c) { return '<li><a class="fk-chip" href="collection.html?collection=' + c + '">Коллекция ' + c + '</a></li>'; }).join('') +
       '<li><a class="fk-chip" href="projects.html">Проекты</a></li></ul>';
   }
   function url() { return 'search.html' + (q ? '?q=' + encodeURIComponent(q) + (type !== 'all' ? '&type=' + type : '') : ''); }

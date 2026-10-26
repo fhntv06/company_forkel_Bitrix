@@ -175,7 +175,8 @@ a:hover > * > .fk-arrow, a:hover > .fk-arrow { transform: translateX(4px); }
 .fk-grid { display: grid; gap: var(--fk-col-gap); }
 
 /* H-05 Подбор — см. css/configurator.css */
-.fk-swatch[data-fin]::before { background: var(--img) center / cover no-repeat, #E9EAEB; } /* --img: url('assets/…') считается от этого файла */
+.fk-swatch[data-fin]::before { background: var(--img) center / cover no-repeat, #E9EAEB; }
+.fk-swatch.fin-lightgray::before { filter: brightness(1.32) saturate(0.8); } /* --img: url('assets/…') считается от этого файла */
 
 /* H-04 Категории — см. css/categories.css */
 
@@ -206,6 +207,7 @@ a:hover > * > .fk-arrow, a:hover > .fk-arrow { transform: translateX(4px); }
 .fin-black      { --finish: #2A2C2F; --finish-2: #1E2022; --edge: #53575C; --hole: #0F1011; }
 .fin-gray       { --finish: #9AA0A6; --finish-2: #8B9197; --edge: rgba(30, 32, 34, 0.38); }
 .fin-whitem     { --finish: #EDEDEA; --finish-2: #DEDEDA; --edge: rgba(30, 32, 34, 0.32); }
+.fin-lightgray  { --finish: #C9CDD1; --finish-2: #B9BEC3; --edge: rgba(30, 32, 34, 0.34); }
 .fin-nickel     { --finish: #CBCED1; --finish-2: #B8BCC0; --edge: rgba(30, 32, 34, 0.35); }
 .fin-cashmere   { --finish: #CDBFAA; --finish-2: #BCAE98; --edge: rgba(30, 32, 34, 0.35); }
 .fin-gold       { --finish: #C3A464; --finish-2: #B39455; --edge: rgba(30, 32, 34, 0.35); }

@@ -2,21 +2,12 @@
    Подключается из styles.css (@import). Токены --fk-* и тона .tone-* берутся из styles.css.
    Разметка: <section id="collections"> ... <ul class="fk-grid fk-grid--collections"> <li> <a class="fk-collection-card tone-*">. */
 
-.fk-grid--collections { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: clamp(280px, 72vw, 360px); gap: 16px; }
+/* Две коллекции (F70 и F55): одна колонка на узких экранах, две — от 768 px */
+.fk-grid--collections { grid-template-columns: minmax(0, 1fr); grid-auto-rows: clamp(320px, 84vw, 420px); gap: 16px; }
 .fk-grid--collections > li { min-height: 0; }
-.fk-grid--collections .is-a, .fk-grid--collections .is-f { grid-column: span 2; }
-@media (min-width: 768px) {
-  .fk-grid--collections { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: clamp(300px, 34vw, 400px); gap: 24px; }
-  .fk-grid--collections .is-a { grid-row: span 2; }
-  .fk-grid--collections .is-f { grid-column: auto; }
-  .fk-grid--collections .is-h { grid-column: span 2; }
-}
-@media (min-width: 1024px) {
-  .fk-grid--collections { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: clamp(340px, 30vw, 440px); gap: 32px; }
-  .fk-grid--collections .is-f { grid-column: span 2; }
-  .fk-grid--collections .is-h { grid-column: auto; }
-}
-@media (min-width: 1536px) { .fk-grid--collections { grid-auto-rows: 440px; } }
+@media (min-width: 768px) { .fk-grid--collections { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: clamp(380px, 44vw, 520px); gap: 24px; } }
+@media (min-width: 1024px) { .fk-grid--collections { gap: 32px; } }
+@media (min-width: 1536px) { .fk-grid--collections { grid-auto-rows: 560px; } }
 
 .fk-collection-card {
   position: relative; display: flex; flex-direction: column; height: 100%;
@@ -42,3 +33,5 @@
 @media (min-width: 768px) { .fk-collection-card__cap { padding: 0 24px 24px; } }
 @media (min-width: 1024px) { .fk-collection-card__name { font-size: 1.5rem; } }
 @media (prefers-reduced-motion: reduce) { .fk-collection-card { transition: none; } .fk-collection-card:hover { transform: none; } }
+
+.fk-collection-card__meta { flex: 1 0 100%; order: -1; font-size: var(--fk-fs-small); color: var(--tone-muted, var(--fk-ink-muted)); }

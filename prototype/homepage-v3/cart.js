@@ -55,7 +55,7 @@
       found.qty = Math.min(99, found.qty + qty);
     } else {
       var it = { kind: spec.kind, qty: qty };
-      if (spec.kind === 'product') it.id = spec.id; else { it.col = spec.col; it.mech = spec.mech; it.mc = spec.mc; it.fc = spec.fc; }
+      if (spec.kind === 'product') it.id = spec.id; else { it.col = spec.col; it.mat = spec.mat; it.mech = spec.mech; it.mc = spec.mc; it.fc = spec.fc; }
       list.push(it);
     }
     save(list); emit();

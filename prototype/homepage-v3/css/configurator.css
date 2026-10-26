@@ -8,16 +8,16 @@
 /* ---------- Превью ---------- */
 .fk-cfg__preview {
   --wall: #E9E4DA; --shade: rgba(60, 45, 20, 0.15);
-  position: relative; aspect-ratio: 1; background: var(--wall); overflow: hidden; border-radius: var(--fk-r-lg);
+  position: relative; aspect-ratio: 4 / 3; background: var(--wall); overflow: hidden; border-radius: var(--fk-r-lg);
 }
 .fk-cfg__preview svg { width: 100%; height: 100%; }
 .fk-cfg__tag { position: absolute; left: 16px; bottom: 16px; padding: 4px 12px; font-size: var(--fk-fs-small); line-height: 1.4; background: var(--fk-canvas); border: 1px dashed var(--fk-edge); border-radius: var(--fk-r-md); }
 .fk-cfg__preview .fk-cfg__tag { max-width: calc(100% - 32px); }
-.fk-cfg__photo { position: absolute; top: 8%; bottom: 8%; left: 50%; aspect-ratio: 1; transform: translateX(-50%); max-width: 84%; }
+.fk-cfg__photo { position: absolute; top: 25%; bottom: 25%; left: 50%; aspect-ratio: 1; transform: translateX(-50%); max-width: 50%; }
 .fk-cfg__photo img, .fk-kitimg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
 .fk-cfg__photo img { filter: drop-shadow(0 6px 10px rgba(60, 45, 20, 0.18)); }
 .fk-kitimg { position: relative; display: block; width: 100%; aspect-ratio: 1; }
-@media (min-width: 768px) and (max-width: 1023px) { .fk-cfg__preview { aspect-ratio: 16 / 9; } }
+@media (min-width: 768px) and (max-width: 1023px) { .fk-cfg__preview { aspect-ratio: 16 / 9; max-height: 320px; } }
 
 /* ---------- Шаги: каждая группа — карточка с фоном ---------- */
 .fk-steps { display: grid; gap: 16px; list-style: none; margin: 0; padding: 0; }
@@ -79,9 +79,9 @@
 
 @media (min-width: 1024px) {
   .fk-cfg { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: start; column-gap: 32px; }
-  .fk-cfg__stage { grid-column: 1 / span 6; position: sticky; top: calc(var(--fk-header-h) + 16px); }
-  .fk-cfg__preview { aspect-ratio: 4 / 3; max-height: 560px; }
-  .fk-cfg__side { grid-column: 7 / span 6; }
+  .fk-cfg__stage { grid-column: 1 / span 5; position: sticky; top: calc(var(--fk-header-h) + 16px); }
+  .fk-cfg__preview { aspect-ratio: 5 / 4; max-height: 380px; }
+  .fk-cfg__side { grid-column: 6 / span 7; }
   .fk-step { padding: 24px; }
 }
 @media (prefers-reduced-motion: reduce) { .fk-chip { transition: none; } }

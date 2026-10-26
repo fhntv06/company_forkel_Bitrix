@@ -79,10 +79,8 @@
                   <div>
                     <p class="fk-catalog-title">Коллекции</p>
                     <ul class="fk-catalog-list">
-                      <li><a href="index.html#collections">Коллекция A</a></li>
-                      <li><a href="index.html#collections">Коллекция B</a></li>
-                      <li><a href="index.html#collections">Коллекция C</a></li>
-                      <li><a href="index.html#collections">Коллекция D</a></li>
+                      <li><a href="collection.html?collection=F70">Коллекция F70</a></li>
+                      <li><a href="collection.html?collection=F55">Коллекция F55</a></li>
                     </ul>
                   </div>
                   <div>
@@ -166,13 +164,24 @@
       <div class="fk-catalog">
         <form class="fk-filters" id="cat-filters" aria-label="Фильтры" onsubmit="return false">
           <fieldset class="fk-filter">
+            <legend>Коллекция</legend>
+            <label class="fk-check"><input type="checkbox" name="col" value="F70">F70</label>
+            <label class="fk-check"><input type="checkbox" name="col" value="F55">F55</label>
+          </fieldset>
+          <fieldset class="fk-filter">
             <legend>Цвет</legend>
-            <label class="fk-check"><input type="checkbox" name="color" value="white"><span class="fk-check__chip fin-white"></span>Белый глянцевый</label>
-            <label class="fk-check"><input type="checkbox" name="color" value="whitem"><span class="fk-check__chip fin-whitem"></span>Белый матовый</label>
-            <label class="fk-check"><input type="checkbox" name="color" value="gold"><span class="fk-check__chip fin-gold"></span>Золотой</label>
-            <label class="fk-check"><input type="checkbox" name="color" value="cashmere"><span class="fk-check__chip fin-cashmere"></span>Кашемир матовый</label>
+            <label class="fk-check"><input type="checkbox" name="color" value="white"><span class="fk-check__chip fin-white"></span>Белый</label>
+            <label class="fk-check"><input type="checkbox" name="color" value="black"><span class="fk-check__chip fin-black"></span>Чёрный</label>
             <label class="fk-check"><input type="checkbox" name="color" value="gray"><span class="fk-check__chip fin-gray"></span>Серый</label>
-            <label class="fk-check"><input type="checkbox" name="color" value="black"><span class="fk-check__chip fin-black"></span>Чёрный матовый</label>
+            <label class="fk-check"><input type="checkbox" name="color" value="lightgray"><span class="fk-check__chip fin-lightgray"></span>Светло-серый</label>
+            <label class="fk-check"><input type="checkbox" name="color" value="cashmere"><span class="fk-check__chip fin-cashmere"></span>Кашемир</label>
+            <label class="fk-check"><input type="checkbox" name="color" value="gold"><span class="fk-check__chip fin-gold"></span>Золотой</label>
+          </fieldset>
+          <fieldset class="fk-filter">
+            <legend>Материал рамки <span class="fk-tag">демо</span></legend>
+            <label class="fk-check"><input type="checkbox" name="mat" value="glass">Стекло</label>
+            <label class="fk-check"><input type="checkbox" name="mat" value="aluminum">Алюминий</label>
+            <label class="fk-check"><input type="checkbox" name="mat" value="plastic">Термопласт</label>
           </fieldset>
           <fieldset class="fk-filter">
             <legend>Наличие <span class="fk-tag">демо</span></legend>
