@@ -14,7 +14,7 @@
   window.FKSearch = { find: find, norm: norm, esc: esc };
 
   var dlg = document.createElement('dialog');
-  dlg.className = 'fk-search';
+  dlg.className = 'fk-sdlg';
   dlg.setAttribute('aria-labelledby', 'fk-search-title');
   dlg.innerHTML =
     '<div class="fk-search__panel">' +
