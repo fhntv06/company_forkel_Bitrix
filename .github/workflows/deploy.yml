@@ -26,6 +26,6 @@ jobs:
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: prototype/homepage-v3
+          path: prototype
       - id: deployment
         uses: actions/deploy-pages@v4
