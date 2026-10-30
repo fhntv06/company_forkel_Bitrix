@@ -26,17 +26,17 @@
 @import url("css/about.css");
 
 :root {
-  --fk-canvas: #FFFFFF;
-  --fk-surface: #F3F4F5;
-  --fk-line: #D9DCDF;
-  --fk-edge: #767B80;
-  --fk-ink: #1E2022;
-  --fk-ink-muted: #5A5F64;
+  --fk-canvas: #F2F2F2;                /* фон сайта (заказчик, 2026-10-30) */
+  --fk-surface: #FFFFFF;               /* карточки и панели — белые на фоне #F2F2F2 */
+  --fk-line: #D3D7DB;
+  --fk-edge: #6B7782;
+  --fk-ink: #031627;                   /* цвет текста (заказчик, 2026-10-30) */
+  --fk-ink-muted: #46535F;
   --fk-ink-inverse: #FFFFFF;
-  --fk-action: #1E2022;             /* кнопки и выбранные элементы — графит (замечание клиента: золотые кнопки заменить); золото — только акцент */
-  --fk-on-action: #FFFFFF;
-  --fk-action-hover: #3A3E42;
-  --fk-inverse-muted: #B8BCC0;
+  --fk-action: #FBE88E;             /* основные кнопки и выбранные элементы — жёлтый (заказчик, 2026-10-30) */
+  --fk-on-action: #031627;
+  --fk-action-hover: #F3D966;
+  --fk-inverse-muted: #B9C3CC;
   --fk-accent: var(--fk-ink);
   --fk-on-accent: var(--fk-ink-inverse);
   --fk-ok: #1F7A3D;
@@ -49,9 +49,9 @@
   /* V3, новое направление (на согласование): крупные скругления, яркий акцент, фон элементов */
   --fk-r-md: 14px;
   --fk-r-lg: 24px;
-  --fk-bright: #D2B473; /* золотой акцент, выбран владельцем */
-  --fk-on-bright: #1E2022;
-  --fk-tint: #EEF1F5;
+  --fk-bright: #FBE88E; /* жёлтый акцент и основные кнопки (заказчик, 2026-10-30) */
+  --fk-on-bright: #031627;
+  --fk-tint: #FFFFFF;
   --fk-focus: 0 0 0 2px var(--fk-canvas), 0 0 0 4px var(--fk-ink);
   --fk-dur: 150ms;
 
