@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="ru" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FORKEL — прототип главной страницы V4</title>
+  <meta name="description" content="Визуальный прототип главной страницы FORKEL, версия 4. Не является рабочим сайтом.">
+  <meta name="robots" content="noindex, nofollow">
+  <script>document.documentElement.className = 'js';</script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <filter id="lift" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#2B2B2B" flood-opacity=".18"/></filter>
+  </defs>
+  <!-- Рамка на три поста: цвета рамки и механизма задаются переменными --frame и --mech (условная графика, не фото) -->
+  <symbol id="set" viewBox="0 0 520 200">
+    <rect width="520" height="200" rx="16" fill="var(--frame)"/>
+    <rect x=".5" y=".5" width="519" height="199" rx="15.5" fill="url(#sheen)" stroke="#2B2B2B" stroke-opacity=".14"/>
+    <g fill="var(--mech)" stroke="#2B2B2B" stroke-opacity=".16">
+      <rect x="22" y="25" width="150" height="150" rx="8"/><rect x="185" y="25" width="150" height="150" rx="8"/><rect x="348" y="25" width="150" height="150" rx="8"/>
+    </g>
+    <rect x="34" y="37" width="126" height="126" rx="6" fill="url(#sheen)" stroke="#2B2B2B" stroke-opacity=".12" fill-opacity=".9"/>
+    <circle cx="260" cy="100" r="50" fill="#2B2B2B" fill-opacity=".1"/>
+    <circle cx="260" cy="100" r="46" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="2"/>
+    <circle cx="241" cy="100" r="6" fill="#2B2B2B"/><circle cx="279" cy="100" r="6" fill="#2B2B2B"/>
+    <circle cx="423" cy="100" r="44" fill="url(#sheen)" stroke="#2B2B2B" stroke-opacity=".2"/>
+    <circle cx="423" cy="100" r="30" fill="none" stroke="#2B2B2B" stroke-opacity=".18"/>
+    <rect x="420" y="62" width="6" height="16" rx="3" fill="#2B2B2B" fill-opacity=".5"/>
+  </symbol>
+  <symbol id="arrow" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<a class="skip" href="#main">К содержимому</a>
+
+<header class="head" id="top">
+  <div class="wrap head__row">
+    <a class="logo" href="#top" aria-label="FORKEL, на главную">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 24A16 16 0 0 1 20 4" fill="none" stroke="var(--yellow)" stroke-width="2.4" stroke-linecap="round"/></svg>FORKEL
+    </a>
+    <nav class="nav" id="nav" aria-label="Основная навигация">
+      <ul>
+        <li><a href="#collections">Коллекции</a></li>
+        <li><a href="#configurator">Подбор</a></li>
+        <li><a href="#new">Новинки</a></li>
+        <li><a href="#showroom">Шоурум</a></li>
+        <li><a href="#pro">Сотрудничество</a></li>
+        <li><a href="#delivery">Доставка</a></li>
+        <li><a href="#contacts">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="head__tools">
+      <button class="icon" type="button" data-stub="Поиск не реализован в прототипе."><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><span class="vh">Поиск</span></button>
+      <button class="icon" type="button" data-stub="Корзина не подключена в прототипе главной."><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6.5a3 3 0 016 0V8"/></svg><span class="vh">Корзина</span></button>
+      <a class="btn btn--dark btn--sm head__cta" href="#collections">Смотреть коллекции</a>
+      <button class="icon menu" type="button" aria-expanded="false" aria-controls="nav"><span class="vh">Меню</span><i></i></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- 1. Первый экран -->
+  <section class="hero wrap" aria-labelledby="h1">
+    <div class="hero__text">
+      <h1 id="h1">Розетки и выключатели <span>для спокойного интерьера</span></h1>
+      <p class="lead">Рамки и механизмы одной серии. Выберите коллекцию, цвет и купите комплект онлайн.</p>
+      <div class="actions">
+        <a class="btn btn--dark" href="#collections">Смотреть коллекции <svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></a>
+        <a class="btn btn--ghost" href="#configurator">Собрать в подборе</a>
+      </div>
+    </div>
+    <div class="hero__stage">
+      <svg class="hero__svg" viewBox="0 0 520 200" role="img" aria-label="Временная визуализация: рамка на три поста с выключателем, розеткой и светорегулятором. Это не фотография изделия." style="--frame:#D8CBB8;--mech:#E9E1D3"><use href="#set" filter="url(#lift)"/></svg>
+      <a class="float float--a" href="#features"><b>Покрытие Soft Touch</b><span>Бархатистая поверхность, приятная на ощупь</span><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></a>
+      <a class="float float--b" href="#features"><b>Автозажимной механизм</b><span>Для розеток, быстрее монтаж</span><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></a>
+      <p class="stage__note">Временная визуализация, не фото изделия</p>
+    </div>
+  </section>
+
+  <!-- 2. Направления -->
+  <section class="sec wrap" aria-labelledby="dir-t">
+    <div class="split">
+      <div><h2 id="dir-t">Всё для подключения и управления светом</h2><p class="muted">Три категории из каталога. Остальные появятся после утверждения ассортимента.</p></div>
+      <ul class="dirs">
+        <li><a class="dir" href="#" data-stub="Страница категории в этом прототипе не создана."><span class="dir__img" style="--frame:#E4E4E2;--mech:#F6F6F4"><svg viewBox="0 0 120 120" aria-hidden="true"><rect x="10" y="10" width="100" height="100" rx="10" fill="var(--frame)"/><circle cx="60" cy="60" r="30" fill="var(--mech)" stroke="#2B2B2B" stroke-opacity=".2"/><circle cx="50" cy="60" r="4" fill="#2B2B2B"/><circle cx="70" cy="60" r="4" fill="#2B2B2B"/></svg></span><b>Розетки</b><span class="dir__go"><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
+        <li><a class="dir" href="#" data-stub="Страница категории в этом прототипе не создана."><span class="dir__img" style="--frame:#D8CBB8;--mech:#F2ECE0"><svg viewBox="0 0 120 120" aria-hidden="true"><rect x="10" y="10" width="100" height="100" rx="10" fill="var(--frame)"/><rect x="28" y="28" width="64" height="64" rx="6" fill="var(--mech)" stroke="#2B2B2B" stroke-opacity=".2"/></svg></span><b>Выключатели</b><span class="dir__go"><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
+        <li><a class="dir" href="#" data-stub="Страница категории в этом прототипе не создана."><span class="dir__img" style="--frame:#9A9DA2"><svg viewBox="0 0 120 120" aria-hidden="true"><rect x="10" y="10" width="100" height="100" rx="10" fill="var(--frame)"/><rect x="30" y="30" width="60" height="60" rx="4" fill="#F6F6F4"/></svg></span><b>Рамки</b><span class="dir__go"><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. Коллекции -->
+  <section class="sec wrap" id="collections" aria-labelledby="col-t">
+    <div class="head2"><h2 id="col-t">Выберите коллекцию</h2><a class="btn btn--ghost btn--sm" href="#" data-stub="Страница всех коллекций не создана.">Все коллекции</a></div>
+    <p class="note">Названия и цвета временные: список коллекций предоставит владелец.</p>
+    <ul class="cols">
+      <li><a class="col col--dark" href="#configurator" data-col="A" style="--frame:#2F3033;--mech:#4A4B4F"><h3>Коллекция A</h3><span class="chips"><i>Стекло</i><i>Тёмная</i></span><svg viewBox="0 0 520 200" aria-hidden="true"><use href="#set"/></svg><span class="btn btn--glass btn--sm">Подробнее <svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
+      <li><a class="col" href="#configurator" data-col="B" style="--frame:#E4E4E2;--mech:#FBFBFA"><h3>Коллекция B</h3><span class="chips"><i>Глянец</i><i>Светлая</i></span><svg viewBox="0 0 520 200" aria-hidden="true"><use href="#set"/></svg><span class="btn btn--glass btn--sm">Подробнее <svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
+      <li><a class="col col--sand" href="#configurator" data-col="C" style="--frame:#D8CBB8;--mech:#E9E1D3"><h3>Коллекция C</h3><span class="chips"><i>Soft Touch</i><i>Кашемир</i></span><svg viewBox="0 0 520 200" aria-hidden="true"><use href="#set"/></svg><span class="btn btn--glass btn--sm">Подробнее <svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
+    </ul>
+  </section>
+
+  <!-- 4. Преимущества крупным планом -->
+  <section class="sec wrap" id="features" aria-labelledby="f-t">
+    <h2 class="big" id="f-t">Лёгкость. <span>В каждой детали.</span></h2>
+    <ul class="feat">
+      <li class="feat__c feat__c--dark">
+        <h3>Покрытие Soft Touch</h3><p>Поверхность приятна на ощупь и не оставляет следов пальцев.</p>
+        <svg viewBox="0 0 220 140" aria-hidden="true"><rect x="10" y="20" width="200" height="110" rx="18" fill="#565656"/><rect x="10" y="20" width="200" height="110" rx="18" fill="url(#sheen)"/><rect x="30" y="40" width="160" height="70" rx="10" fill="#2B2B2B" stroke="#848484" stroke-opacity=".5"/></svg>
+        <span class="go"><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span>
+      </li>
+      <li class="feat__c">
+        <h3>Автозажимной механизм</h3><p>Розетки фиксируются без лишних винтов: монтаж проще и быстрее.</p>
+        <svg viewBox="0 0 220 140" aria-hidden="true"><circle cx="110" cy="70" r="54" fill="#E0E0E0" stroke="#B3B3B3" stroke-width="2"/><circle cx="92" cy="70" r="7" fill="#2B2B2B"/><circle cx="128" cy="70" r="7" fill="#2B2B2B"/><path d="M26 70h-14M208 70h-14" stroke="#B3B3B3" stroke-width="3" stroke-linecap="round"/></svg>
+        <span class="go"><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span>
+      </li>
+      <li class="feat__c feat__c--dark">
+        <h3>Рамка и механизм одной серии</h3><p>Выбирайте цвет рамки и механизма отдельно, комплект подходит друг к другу.</p>
+        <svg viewBox="0 0 220 140" aria-hidden="true"><rect x="22" y="20" width="110" height="100" rx="14" fill="#D8CBB8"/><rect x="40" y="38" width="74" height="64" rx="8" fill="#2B2B2B"/><rect x="104" y="40" width="94" height="84" rx="14" fill="#E0E0E0" fill-opacity=".92"/></svg>
+        <span class="go"><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span>
+      </li>
+    </ul>
+    <ul class="mini">
+      <li>Покупка онлайн с оформлением заказа</li>
+      <li>Шесть цветов рамки и механизма</li>
+      <li>Курьер, самовывоз и СДЭК</li>
+      <li>Условия для дизайнеров и монтажников</li>
+    </ul>
+    <p class="note">Описания преимуществ предварительные: формулировки и технические детали подтверждает владелец.</p>
+  </section>
+
+  <!-- 5. Подбор -->
+  <section class="sec wrap" id="configurator" aria-labelledby="cfg-t">
+    <div class="cfg">
+      <div class="cfg__view" id="cfg-view" style="--frame:#FBFBFA;--mech:#FBFBFA">
+        <svg viewBox="0 0 520 200" role="img" aria-label="Демонстрационное превью выбранных цветов"><use href="#set" filter="url(#lift)"/></svg>
+        <p class="stage__note">Демо: цветовая заливка, не слои изделий</p>
+      </div>
+      <div class="cfg__ctl">
+        <h2 id="cfg-t">Соберите комплект по цвету</h2>
+        <fieldset><legend id="l-f">Цвет рамки: <b id="o-f">Белый глянцевый</b></legend><div class="sw" role="radiogroup" aria-labelledby="l-f" data-part="frame"></div></fieldset>
+        <fieldset><legend id="l-m">Цвет механизма: <b id="o-m">Белый глянцевый</b></legend><div class="sw" role="radiogroup" aria-labelledby="l-m" data-part="mech"></div></fieldset>
+        <p class="note">Правила совместимости пока неизвестны, поэтому доступны все сочетания. Цена и артикул комплекта появятся после утверждения данных.</p>
+        <div class="actions"><a class="btn btn--dark" href="#" data-stub="Полный подбор и добавление комплекта в корзину — на странице подбора V3.">Открыть подбор <svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Новинки -->
+  <section class="sec wrap" id="new" aria-labelledby="new-t">
+    <div class="head2"><h2 id="new-t">Новинки</h2><a class="btn btn--ghost btn--sm" href="#" data-stub="Страница новинок не создана.">Все новинки</a></div>
+    <p class="note">Демонстрационные карточки: цены, артикулы и наличие появятся из данных 1С.</p>
+    <ul class="prod" id="prod"></ul>
+  </section>
+
+  <!-- 7. Шоурум -->
+  <section class="sec wrap" id="showroom" aria-labelledby="sr-t">
+    <div class="show">
+      <div class="show__t">
+        <h2 id="sr-t">Откройте шоурум FORKEL</h2>
+        <p>Посмотрите цвета и покрытие вживую, потрогайте механизмы и подберите комплект с консультантом.</p>
+        <p class="note note--inv">Адрес, дата открытия и часы работы — заглушка: данные предоставит владелец.</p>
+        <a class="btn btn--light" href="#contacts" data-stub="Запись на визит не подключена: форма появится после утверждения.">Записаться на визит <svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></a>
+      </div>
+      <div class="show__img" aria-hidden="true"><span>Заглушка: фото шоурума</span></div>
+    </div>
+  </section>
+
+  <!-- 8. Цифры доверия -->
+  <section class="sec wrap" aria-labelledby="tr-t">
+    <div class="split">
+      <h2 id="tr-t">Доверие, основанное на качестве</h2>
+      <ul class="nums">
+        <li><b>ХХ</b><span>лет на рынке</span></li><li><b>ХХ</b><span>реализованных проектов</span></li><li><b>ХХ</b><span>партнёров и дилеров</span></li><li><b>ХХ</b><span>лет гарантии</span></li>
+      </ul>
+    </div>
+    <p class="note">Заглушки: значения предоставит владелец, цифры без источника не публикуются.</p>
+  </section>
+
+  <!-- 9. Профессионалам -->
+  <section class="sec wrap" id="pro" aria-labelledby="pro-t">
+    <div class="pro">
+      <h2 id="pro-t">Профессионалам</h2>
+      <ul>
+        <li><h3>Дизайнерам и архитекторам</h3><p>Коллекции, цвета и помощь с подбором под проект.</p></li>
+        <li><h3>Монтажным организациям</h3><p>Быстрый монтаж и понятный заказ.</p></li>
+        <li><h3>Дилерам</h3><p>Условия сотрудничества.</p></li>
+      </ul>
+      <p class="note note--inv">Временные тексты: формулировки и условия предоставит владелец.</p>
+      <a class="btn btn--light" href="#contacts">Обсудить сотрудничество <svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></a>
+    </div>
+  </section>
+
+  <!-- 10. Доставка -->
+  <section class="sec wrap" id="delivery" aria-labelledby="d-t" data-proto-status="conditional">
+    <div class="split">
+      <div><h2 id="d-t">Доставка и оплата</h2><p class="note note--box">Условный блок: способы названы в ТЗ, но не утверждены. В рабочем сайте скрыт до подтверждения условий.</p></div>
+      <ul class="del">
+        <li><b>Курьером</b><span>Условия будут опубликованы после утверждения.</span></li>
+        <li><b>Самовывоз</b><span>Условия будут опубликованы после утверждения.</span></li>
+        <li><b>СДЭК</b><span>Условия будут опубликованы после утверждения.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 11. Финальный призыв -->
+  <section class="sec wrap" aria-labelledby="fin-t">
+    <div class="fin">
+      <h2 id="fin-t">Готовы выбрать свой комплект?</h2>
+      <p>Подберите цвета в подборе или напишите нам: поможем с выбором коллекции.</p>
+      <div class="actions"><a class="btn btn--light" href="#configurator">Собрать в подборе</a><a class="btn btn--glass" href="#contacts">Связаться с нами</a></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" id="contacts">
+  <div class="wrap foot__row">
+    <div><p class="logo logo--inv">FORKEL</p><p class="muted-inv">Розетки, выключатели и рамки.</p></div>
+    <nav aria-label="Разделы"><ul>
+      <li><a href="#collections">Коллекции</a></li><li><a href="#configurator">Подбор</a></li><li><a href="#new">Новинки</a></li><li><a href="#showroom">Шоурум</a></li><li><a href="#pro">Сотрудничество</a></li><li><a href="#delivery">Доставка и оплата</a></li>
+    </ul></nav>
+    <div><p>Телефон, email и адрес добавит владелец.</p><p class="muted-inv"><a href="#" data-stub="Страница политики не создана. Текст предоставит владелец.">Политика обработки персональных данных</a></p><p class="muted-inv">Юридические данные добавит владелец.</p></div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>
