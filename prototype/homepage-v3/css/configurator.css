@@ -1,0 +1,87 @@
+/* FORKEL V3 — компонент «Конфигуратор / подбор» (H-05): превью, шаги (коллекция, тип, цвет рамки, цвет механизма),
+   итог «Комплект». Общие части (.fk-chip, .fk-swatch, .fk-spec, .fk-kitimg) используются также каталогом и корзиной.
+   Подключается из styles.css (@import). Логика — configurator.js, разметка — index.html#configurator. */
+
+.fk-cfg { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px var(--fk-col-gap); }
+.fk-cfg > * { min-width: 0; }
+
+/* ---------- Превью ---------- */
+.fk-cfg__preview {
+  --wall: #E9E4DA; --shade: rgba(60, 45, 20, 0.15);
+  position: relative; aspect-ratio: 4 / 3; background: var(--wall); overflow: hidden; border-radius: var(--fk-r-lg);
+}
+.fk-cfg__preview svg { width: 100%; height: 100%; }
+.fk-cfg__tag { position: absolute; left: 16px; bottom: 16px; padding: 4px 12px; font-size: var(--fk-fs-small); line-height: 1.4; background: var(--fk-canvas); border: 1px dashed var(--fk-edge); border-radius: var(--fk-r-md); }
+.fk-cfg__preview .fk-cfg__tag { max-width: calc(100% - 32px); }
+.fk-cfg__photo { position: absolute; top: 25%; bottom: 25%; left: 50%; aspect-ratio: 1; transform: translateX(-50%); max-width: 50%; }
+.fk-cfg__photo img, .fk-kitimg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.fk-cfg__photo img { filter: drop-shadow(0 6px 10px rgba(60, 45, 20, 0.18)); }
+.fk-kitimg { position: relative; display: block; width: 100%; aspect-ratio: 1; }
+@media (min-width: 768px) and (max-width: 1023px) { .fk-cfg__preview { aspect-ratio: 16 / 9; max-height: 320px; } }
+
+/* ---------- Шаги: каждая группа — карточка с фоном ---------- */
+.fk-steps { display: grid; gap: 16px; list-style: none; margin: 0; padding: 0; }
+.fk-step { background: var(--fk-surface); border-radius: var(--fk-r-lg); padding: 20px; }
+.fk-step__label { display: flex; align-items: center; gap: 12px; font-size: 1.125rem; font-weight: 600; line-height: 1.3; margin-bottom: 16px; }
+.fk-step__n { display: inline-grid; place-items: center; flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--fk-action); color: var(--fk-on-action); font-size: var(--fk-fs-small); font-weight: 700; font-variant-numeric: tabular-nums; }
+.fk-step__val { margin-left: auto; font-size: var(--fk-fs-small); font-weight: 400; color: var(--fk-ink-muted); text-align: right; }
+
+.fk-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.fk-chip {
+  min-height: 52px; padding: 0 20px; font: inherit; font-size: 1rem; font-weight: 600; cursor: pointer;
+  background: var(--fk-surface); color: var(--fk-ink); border: 2px solid transparent; border-radius: var(--fk-r-md);
+  transition: background-color var(--fk-dur) ease-out, border-color var(--fk-dur) ease-out;
+}
+.fk-step .fk-chip, .fk-step .fk-type { background: var(--fk-canvas); }
+.fk-chip:hover { border-color: var(--fk-bright); }
+.fk-chip[aria-checked="true"] { background: var(--fk-action); color: var(--fk-on-action); border-color: var(--fk-action); }
+
+.fk-types { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.fk-type {
+  display: flex; flex-direction: column; align-items: center; gap: 8px; min-height: 52px; padding: 16px 4px;
+  font: inherit; font-size: var(--fk-fs-small); font-weight: 600; line-height: 1.25; text-align: center; cursor: pointer;
+  background: var(--fk-surface); color: var(--fk-ink); border: 2px solid transparent; border-radius: var(--fk-r-md);
+}
+.fk-type svg { width: 56px; height: 56px; }
+.fk-type span { overflow-wrap: break-word; }
+.fk-type:hover { border-color: var(--fk-bright); }
+.fk-type[aria-checked="true"] { border-color: var(--fk-ink); background: var(--fk-canvas); box-shadow: 0 0 0 3px var(--fk-action); }
+
+.fk-swatches { display: flex; flex-wrap: wrap; gap: 8px; }
+/* Образец: квадрат 40 px в зоне касания 52 px; контур --fk-edge, выбранный — двойное кольцо (ink + золото) */
+.fk-swatch { display: grid; place-items: center; width: 52px; height: 52px; padding: 0; background: transparent; border: 0; border-radius: var(--fk-r-md); cursor: pointer; }
+.fk-swatch::before { content: ""; width: 40px; height: 40px; background: var(--finish); border: 1px solid var(--fk-edge); border-radius: 12px; }
+/* Фон образца из --img (url) лежит в styles.css: адрес в переменной считается от файла стилей, где она применена */
+.fk-swatch:hover::before { border-color: var(--fk-ink); }
+.fk-swatch[aria-checked="true"]::before { box-shadow: 0 0 0 2px var(--fk-surface), 0 0 0 5px var(--fk-ink); }
+.fk-chip:disabled, .fk-type:disabled, .fk-swatch:disabled { opacity: 0.35; cursor: not-allowed; }
+.fk-chip:disabled:hover, .fk-type:disabled:hover { border-color: transparent; }
+.fk-swatch:disabled::before { background-image: linear-gradient(135deg, transparent 46%, var(--fk-edge) 46%, var(--fk-edge) 54%, transparent 54%); background-color: var(--finish); }
+
+/* ---------- Итог «Комплект»: тёмная карточка с золотой кнопкой ---------- */
+.fk-cfg .fk-note { margin-top: 16px; }
+.fk-result {
+  display: grid; gap: 12px; margin-top: 16px; padding: 24px;
+  background: var(--fk-ink); color: var(--fk-ink-inverse); border-radius: var(--fk-r-lg);
+}
+.fk-result h3 { display: flex; align-items: center; gap: 8px; font-size: var(--fk-fs-h3); line-height: 1.25; font-weight: 600; }
+.fk-result .fk-link { color: var(--fk-ink-inverse); }
+.fk-spec { margin: 0; }
+.fk-spec > div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 10px 0; border-top: 1px solid var(--fk-line); }
+.fk-spec dt { color: var(--fk-ink-muted); font-size: var(--fk-fs-small); }
+.fk-spec dd { margin: 0; font-weight: 600; text-align: right; }
+.fk-result .fk-spec > div { border-top-color: rgba(255, 255, 255, 0.2); }
+.fk-result .fk-spec dt { color: var(--fk-inverse-muted); }
+.fk-result [data-out="kit-price"] { color: var(--fk-bright); font-size: 1.375rem; }
+.fk-result__btn { width: 100%; min-height: 56px; margin-top: 4px; font-size: 1.0625rem; }
+.fk-result .fk-btn--primary:hover { background: var(--fk-ink-inverse); color: var(--fk-ink); }
+.no-js .fk-cfg__side { display: none; }
+
+@media (min-width: 1024px) {
+  .fk-cfg { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: start; column-gap: 32px; }
+  .fk-cfg__stage { grid-column: 1 / span 5; position: sticky; top: calc(var(--fk-header-h) + 16px); }
+  .fk-cfg__preview { aspect-ratio: 5 / 4; max-height: 380px; }
+  .fk-cfg__side { grid-column: 6 / span 7; }
+  .fk-step { padding: 24px; }
+}
+@media (prefers-reduced-motion: reduce) { .fk-chip { transition: none; } }

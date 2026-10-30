@@ -6,6 +6,10 @@
   var D = window.FKData, C = window.FKCart;
   var CATEGORIES = D.CATEGORIES, COLORS = D.COLORS, STOCKS = D.STOCKS, PRODUCTS = D.PRODUCTS;
   var catName = D.catName, tag = D.tag, illu = D.illu;
+  /* «Новинки» (new.html): признака новинки в исходных данных нет — условно показаны первые 8 демо-товаров, на главной — первые 4 */
+  var NEW_IDS = [1, 2, 3, 4, 5, 6, 7, 8];
+  var newPage = !!document.querySelector('[data-new-page]');
+  var POOL = newPage ? PRODUCTS.filter(function (p) { return NEW_IDS.indexOf(p.id) >= 0; }) : PRODUCTS;
 
   function card(p) {
     var url = 'product.html?id=' + p.id;
@@ -14,6 +18,7 @@
       '<h3 class="fk-product-card__name"><a href="' + url + '">' + p.name + '</a></h3>' +
       '<p class="fk-product-card__sku">Арт. <span class="fk-stub">' + p.sku + '</span></p>' +
       '<p class="fk-product-card__sku">Цвет: ' + COLORS[p.color] + '</p>' +
+      '<p class="fk-product-card__sku">' + p.col + ' · ' + D.MATERIALS[p.mat] + '</p>' +
       '<div class="fk-variants">' + D.dots(p) + '</div>' +
       '<p class="fk-product-card__price"><span class="fk-stub">' + D.fmt(D.price(p)) + '</span> ' + tag('демо') + '</p>' +
       '<p class="fk-product-card__stock">' + STOCKS[p.stock] + ' (демо)</p>' +
@@ -39,14 +44,33 @@
     var toggle = document.getElementById('cat-filters-toggle');
     var category = param('category');
     if (!CATEGORIES.some(function (c) { return c.key === category; })) category = '';
+    /* Страница коллекции (collection.html?collection=F70|F55): список товаров этой коллекции (демо-данные) */
+    var collection = '';
+    if (document.querySelector('[data-collection-page]')) {
+      collection = param('collection');
+      if (!D.COLLECTIONS[collection]) collection = 'F70';
+    }
 
     /* Категории: ссылки, текущая отмечена */
     [].forEach.call(document.querySelectorAll('.fk-cat-nav a'), function (a) {
       var on = (a.getAttribute('data-cat') || '') === category;
       if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+      if (collection) a.setAttribute('href', 'collection.html?collection=' + collection + (a.getAttribute('data-cat') ? '&category=' + a.getAttribute('data-cat') : ''));
     });
+    if (collection) {
+      [].forEach.call(document.querySelectorAll('[data-col]'), function (a) {
+        if (a.getAttribute('data-col') === collection) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+      });
+      [].forEach.call(document.querySelectorAll('[data-col-name]'), function (n) { n.textContent = D.COLLECTIONS[collection]; });
+      /* В фильтре цветов — только цвета этой коллекции */
+      [].forEach.call(panel.querySelectorAll('input[name="color"]'), function (i) {
+        if (D.COMPAT[collection].colors.indexOf(i.value) < 0) i.closest('label').hidden = true;
+      });
+      var cl = document.getElementById('col-cfg-link');
+      if (cl) cl.setAttribute('href', 'configurator.html?collection=' + collection);
+    }
     var h1 = document.getElementById('cat-title');
-    h1.textContent = category ? catName(category) : 'Каталог';
+    h1.textContent = newPage ? 'Новинки' : collection ? D.COLLECTIONS[collection] + (category ? ': ' + catName(category).toLowerCase() : '') : (category ? catName(category) : 'Каталог');
     document.title = 'FORKEL — ' + h1.textContent + ' (прототип)';
     var crumb = document.getElementById('cat-crumb');
     if (crumb) crumb.textContent = h1.textContent;
@@ -62,40 +86,46 @@
       'price-desc': function (a, b) { return b.group - a.group || a.id - b.id; }
     };
     /* Поиск, фильтры и сортировка хранятся в адресе: после перехода в товар и возврата они сохраняются */
-    function persist(q, colors, stocks, groups) {
+    function persist(q, colors, stocks, groups, mats, cols) {
       var parts = [];
+      if (collection) parts.push('collection=' + collection);
       if (category) parts.push('category=' + category);
       if (q) parts.push('q=' + encodeURIComponent(q));
       if (sort.value !== 'default') parts.push('sort=' + sort.value);
       if (colors.length) parts.push('color=' + colors.join(','));
       if (stocks.length) parts.push('stock=' + stocks.join(','));
       if (groups.length) parts.push('group=' + groups.join(','));
+      if (mats.length) parts.push('mat=' + mats.join(','));
+      if (cols.length) parts.push('col=' + cols.join(','));
       try { history.replaceState(null, '', location.pathname + (parts.length ? '?' + parts.join('&') : '')); } catch (e) { /* адрес не обновляется */ }
     }
     (function restore() {
       search.value = param('q');
       var sv = param('sort');
       if ([].some.call(sort.options, function (o) { return o.value === sv; })) sort.value = sv;
-      ['color', 'stock', 'group'].forEach(function (name) {
+      ['color', 'stock', 'group', 'mat', 'col'].forEach(function (name) {
         var vals = param(name).split(',');
         [].forEach.call(panel.querySelectorAll('input[name="' + name + '"]'), function (i) { i.checked = vals.indexOf(i.value) >= 0; });
       });
     })();
     function render() {
       var q = search.value.trim().toLowerCase();
-      var colors = checked('color'), stocks = checked('stock'), groups = checked('group');
-      var items = PRODUCTS.filter(function (p) {
+      var colors = checked('color'), stocks = checked('stock'), groups = checked('group'), mats = checked('mat'), cols = checked('col');
+      var items = POOL.filter(function (p) {
         if (category && p.cat !== category) return false;
         if (q && (p.name + ' ' + p.sku + ' ' + COLORS[p.color]).toLowerCase().indexOf(q) < 0) return false;
+        if (collection && p.col !== collection) return false;
         if (colors.length && colors.indexOf(p.color) < 0) return false;
+        if (mats.length && mats.indexOf(p.mat) < 0) return false;
+        if (cols.length && cols.indexOf(p.col) < 0) return false;
         if (stocks.length && stocks.indexOf(p.stock) < 0) return false;
         if (groups.length && groups.indexOf(String(p.group)) < 0) return false;
         return true;
       }).sort(sorters[sort.value] || sorters.default);
       list.innerHTML = items.map(card).join('');
       empty.hidden = items.length > 0;
-      persist(q ? search.value.trim() : '', colors, stocks, groups);
-      count.textContent = 'Показано демонстрационных товаров: ' + items.length + ' из ' + PRODUCTS.filter(function (p) { return !category || p.cat === category; }).length;
+      persist(q ? search.value.trim() : '', colors, stocks, groups, mats, cols);
+      count.textContent = 'Показано демонстрационных товаров: ' + items.length + ' из ' + POOL.filter(function (p) { return (!category || p.cat === category) && (!collection || p.col === collection); }).length;
     }
     panel.addEventListener('change', render);
     sort.addEventListener('change', render);
@@ -137,7 +167,7 @@
         ['Вес нетто, г', val('40')], ['Вес брутто, г', val('55')], ['Размер упаковки, мм', val('100 × 100 × 20')]
       ]],
       ['Дополнительно', [
-        frame ? ['Материал рамки', val('Пластик')] : null,
+        ['Материал рамки', dm(D.MATERIALS[p.mat])],
         frame ? ['Цвет рамки', dm(COLORS[p.color])] : null,
         frame ? ['Количество постов', val('1')] : null,
         ['Вид/марка материала', val('Демо-материал')],
@@ -196,7 +226,7 @@
         '</div>' +
         '<button class="fk-btn fk-btn--secondary fk-pdp__oneclick" type="button" data-stub="Демонстрационное действие: покупка в один клик не реализована.">Купить в один клик (демо)</button>' +
         '<p class="fk-pdp__more fk-pdp__cartlink" id="pdp-cartlink" hidden><a class="fk-link fk-link--tap" href="cart.html">Перейти в корзину</a></p>' +
-        '<p class="fk-pdp__more"><a class="fk-link fk-link--tap" href="index.html#configurator">Собрать в подборе</a></p>' +
+        '<p class="fk-pdp__more"><a class="fk-link fk-link--tap" href="configurator.html?collection=' + p.col + '">Собрать в подборе</a></p>' +
         '<div class="fk-variants">Цвета: ' + D.dots(p) + '</div>' +
       '</div>' +
       chars(p);
@@ -228,6 +258,7 @@
     });
   }
 
+  window.FKShopCard = card;
   if (document.getElementById('cat-list')) initCatalog();
   if (document.getElementById('pdp')) initProduct();
 })();

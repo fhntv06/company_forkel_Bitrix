@@ -1,0 +1,30 @@
+/* FORKEL V3 — компонент «Футер» (H-09): тёмная скруглённая панель по сетке контейнера — разделы, контакты-заглушка,
+   юридическая строка. Одинаковая разметка <footer class="fk-footer"> на всех страницах. Подключается из styles.css (@import). */
+
+.fk-footer { max-width: 1920px; margin-inline: auto; width: 100%; padding: 0 var(--fk-margin) 16px; }
+.fk-footer .fk-container {
+  padding: 32px 24px; background: var(--fk-ink); color: var(--fk-ink-inverse); border-radius: 32px;
+  --fk-focus: 0 0 0 2px var(--fk-ink), 0 0 0 4px var(--fk-bright);
+}
+.fk-footer__grid { display: grid; gap: 32px var(--fk-col-gap); }
+.fk-footer .fk-footer__logo { font-size: 1.75rem; font-weight: 700; letter-spacing: 0.04em; color: var(--fk-bright); }
+.fk-footer h2 { font-size: var(--fk-fs-small); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--fk-bright); margin-bottom: 12px; }
+.fk-footer p, .fk-footer li { color: var(--fk-inverse-muted); }
+.fk-footer a { display: inline-flex; align-items: center; min-height: 44px; color: var(--fk-ink-inverse); text-decoration-color: transparent; text-underline-offset: 4px; }
+.fk-footer a:hover { text-decoration: underline; text-decoration-color: var(--fk-bright); text-decoration-thickness: 2px; }
+.fk-footer__legal {
+  margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0 var(--fk-col-gap); font-size: var(--fk-fs-small);
+}
+@media (min-width: 768px) {
+  .fk-footer .fk-container { padding: 48px 40px; }
+  .fk-footer__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) {
+  .fk-footer .fk-container { padding: 64px; }
+  .fk-footer__grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .fk-footer__brand { grid-column: 1 / span 5; }
+  .fk-footer__nav { grid-column: 6 / span 4; }
+  .fk-footer__nav ul { columns: 2; column-gap: 24px; }
+  .fk-footer__contacts { grid-column: 10 / span 3; }
+}

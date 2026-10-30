@@ -1,0 +1,65 @@
+/* FORKEL V3 — страница «Каталог» (2.1): навигация по категориям, панель поиска и сортировки, фильтры, сетка товаров,
+   ссылки на коллекции. Карточка товара — css/products.css. Подключается из styles.css (@import). */
+
+.fk-cat-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.fk-cat-nav .fk-chip { display: inline-flex; align-items: center; text-decoration: none; }
+.fk-cat-nav .fk-chip[aria-current="page"] { background: var(--fk-action); color: var(--fk-on-action); border-color: var(--fk-action); }
+
+.fk-toolbar { display: grid; gap: 16px; margin-bottom: 24px; }
+
+.fk-catalog { display: grid; gap: 24px var(--fk-col-gap); grid-template-columns: minmax(0, 1fr); }
+.fk-filters { display: none; }
+.fk-filters.is-open { display: block; padding: 20px; background: var(--fk-surface); border-radius: var(--fk-r-lg); }
+.fk-filter { margin: 0 0 20px; padding: 0; border: 0; min-width: 0; }
+.fk-filter legend { padding: 0; margin-bottom: 8px; font-size: 1.0625rem; font-weight: 700; }
+.fk-check { display: flex; align-items: center; gap: 12px; min-height: 48px; cursor: pointer; }
+.fk-check input { width: 22px; height: 22px; margin: 0; accent-color: var(--fk-ink); flex: none; }
+.fk-check__chip { width: 24px; height: 24px; flex: none; background: var(--finish); border: 1px solid var(--fk-edge); border-radius: 8px; }
+.fk-filters .fk-btn { width: 100%; }
+
+.fk-results__count { margin-bottom: 16px; font-size: var(--fk-fs-small); color: var(--fk-ink-muted); }
+.fk-grid--catalog { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+/* Ссылки на коллекции (2.1, п. 8) */
+.fk-cat-links { margin-top: var(--fk-section-gap); padding: 24px; background: var(--fk-tint); border-radius: var(--fk-r-lg); }
+.fk-cat-links h2 { font-size: var(--fk-fs-h3); line-height: 1.25; font-weight: 600; margin-bottom: 16px; }
+.fk-cat-links .fk-chip { display: inline-flex; align-items: center; text-decoration: none; background: var(--fk-canvas); }
+
+@media (min-width: 768px) {
+  .fk-toolbar { grid-template-columns: 1fr 1fr; align-items: end; }
+  .fk-filters-toggle { justify-self: start; }
+  .fk-grid--catalog { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) {
+  .fk-toolbar { grid-template-columns: minmax(0, 1fr) 280px; }
+  .fk-toolbar .fk-filters-toggle { display: none; }
+  .fk-catalog { grid-template-columns: 300px minmax(0, 1fr); align-items: start; column-gap: 32px; }
+  .fk-filters, .fk-filters.is-open { display: block; padding: 24px; position: sticky; top: calc(var(--fk-header-h) + 16px); background: var(--fk-surface); border-radius: var(--fk-r-lg); }
+  .fk-grid--catalog { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fk-cat-links { padding: 32px 40px; }
+}
+@media (min-width: 1280px) { .fk-grid--catalog { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1680px) { .fk-grid--catalog { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* ---------- Страница коллекции (2.2): баннер ---------- */
+.fk-colhero {
+  display: grid; gap: 24px; margin: 8px 0 24px; padding: 24px; overflow: hidden;
+  background: var(--tone); color: var(--tone-ink); border-radius: 32px;
+  --fk-focus: 0 0 0 2px var(--fk-ink), 0 0 0 4px var(--fk-bright);
+}
+.fk-colhero__label { font-size: var(--fk-fs-small); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fk-bright); margin-bottom: 8px; }
+.fk-colhero__text { display: grid; gap: 16px; align-content: start; min-width: 0; }
+.fk-colhero .fk-note--proto { color: var(--fk-ink-inverse); border-color: #8A8F94; border-radius: var(--fk-r-md); padding: 10px 14px; }
+.fk-colhero__actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.fk-colhero__switch { display: flex; flex-wrap: wrap; gap: 8px; }
+.fk-colhero__switch .fk-chip { min-width: 52px; justify-content: center; text-decoration: none; display: inline-flex; align-items: center; background: rgba(255, 255, 255, 0.1); color: var(--fk-ink-inverse); }
+.fk-colhero__switch .fk-chip:hover { border-color: var(--fk-bright); }
+.fk-colhero__switch .fk-chip[aria-current="page"] { background: var(--fk-ink-inverse); color: var(--fk-ink); border-color: var(--fk-ink-inverse); }
+.fk-colhero__media { position: relative; min-height: 220px; }
+.fk-colhero__media svg { width: 100%; height: 100%; max-height: 360px; }
+.fk-colhero__media .fk-tag { position: absolute; left: 0; bottom: 0; border-radius: 999px; padding: 4px 12px; }
+@media (min-width: 1024px) {
+  .fk-colhero { grid-template-columns: repeat(12, minmax(0, 1fr)); padding: 56px; margin-bottom: 32px; align-items: center; }
+  .fk-colhero__text { grid-column: 1 / span 6; }
+  .fk-colhero__media { grid-column: 7 / span 6; min-height: 320px; }
+}

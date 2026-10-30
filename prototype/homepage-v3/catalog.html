@@ -57,7 +57,7 @@
 
   <div class="fk-proto-bar">
     <div class="fk-container">
-      Прототип: тексты и изображения временные, поиск не работает, корзина демонстрационная.
+      Прототип: тексты и изображения временные, поиск и корзина демонстрационные.
     </div>
   </div>
 
@@ -69,7 +69,7 @@
       <nav class="fk-nav" id="site-nav" aria-label="Основная навигация">
         <ul class="fk-nav__list">
           <li>
-            <button class="fk-catalog-btn" type="button" aria-expanded="false" aria-controls="catalog-panel">
+            <button class="fk-catalog-btn" type="button" data-current aria-expanded="false" aria-controls="catalog-panel">
               Каталог
               <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5"/></svg>
             </button>
@@ -79,10 +79,8 @@
                   <div>
                     <p class="fk-catalog-title">Коллекции</p>
                     <ul class="fk-catalog-list">
-                      <li><a href="index.html#collections">Коллекция A</a></li>
-                      <li><a href="index.html#collections">Коллекция B</a></li>
-                      <li><a href="index.html#collections">Коллекция C</a></li>
-                      <li><a href="index.html#collections">Коллекция D</a></li>
+                      <li><a href="collection.html?collection=F70">Коллекция F70</a></li>
+                      <li><a href="collection.html?collection=F55">Коллекция F55</a></li>
                     </ul>
                   </div>
                   <div>
@@ -101,26 +99,27 @@
           <!-- Запасные ссылки, если JavaScript недоступен -->
           <li class="fk-nav-fallback"><a class="fk-nav__link" href="index.html#collections">Коллекции</a></li>
           <li class="fk-nav-fallback"><a class="fk-nav__link" href="index.html#categories">Категории</a></li>
-          <li><a class="fk-nav__link" href="index.html#new">Новинки</a></li>
-          <li><a class="fk-nav__link" href="index.html#configurator">Подбор</a></li>
-          <li><a class="fk-nav__link" href="index.html#projects">Проекты</a></li>
-          <li><a class="fk-nav__link" href="index.html#pro">Сотрудничество</a></li>
+          <li><a class="fk-nav__link" href="new.html">Новинки</a></li>
+          <li><a class="fk-nav__link" href="configurator.html">Подбор</a></li>
+          <li><a class="fk-nav__link" href="projects.html">Проекты</a></li>
+          <li><a class="fk-nav__link" href="cooperation.html">Сотрудничество</a></li>
           <!-- В спецификации (H-01) этого пункта в шапке нет: оставлен только в мобильной панели -->
           <li class="fk-nav__mobile-only"><a class="fk-nav__link" href="index.html#delivery">Доставка и оплата</a></li>
-          <li><a class="fk-nav__link" href="index.html#contacts">Контакты</a></li>
+          <li><a class="fk-nav__link" href="contacts.html">Контакты</a></li>
+          <li class="fk-nav__mobile-only fk-nav__account"><a class="fk-nav__link" href="account.html">Личный кабинет</a></li>
           <li class="fk-nav__phone"><span class="fk-phone">Телефон (заглушка)</span></li>
         </ul>
       </nav>
 
       <div class="fk-actions">
-        <button class="fk-icon-btn" type="button" data-stub="Поиск не реализован в прототипе.">
+        <button class="fk-icon-btn fk-search-btn" type="button" aria-haspopup="dialog" aria-label="Поиск по товарам" data-stub="Окно поиска — следующий блок V3, пока не подключено.">
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
-          <span class="fk-vh">Поиск</span>
+          <span class="fk-search-btn__text" aria-hidden="true">Поиск по товарам</span>
         </button>
-        <button class="fk-icon-btn fk-icon-btn--account" type="button" data-stub="Личный кабинет не реализован в прототипе.">
+        <a class="fk-icon-btn fk-icon-btn--account" href="account.html" data-account>
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.75"/><path d="M4.5 20c.9-3.6 3.8-5.5 7.5-5.5s6.6 1.9 7.5 5.5"/></svg>
           <span class="fk-vh">Личный кабинет</span>
-        </button>
+        </a>
         <a class="fk-icon-btn fk-cart-link" href="cart.html">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6.5a3 3 0 016 0V8"/></svg>
           <span class="fk-vh">Корзина<span data-cart-sr></span></span>
@@ -172,13 +171,24 @@
       <div class="fk-catalog">
         <form class="fk-filters" id="cat-filters" aria-label="Фильтры" onsubmit="return false">
           <fieldset class="fk-filter">
+            <legend>Коллекция</legend>
+            <label class="fk-check"><input type="checkbox" name="col" value="F70">F70</label>
+            <label class="fk-check"><input type="checkbox" name="col" value="F55">F55</label>
+          </fieldset>
+          <fieldset class="fk-filter">
             <legend>Цвет</legend>
-            <label class="fk-check"><input type="checkbox" name="color" value="white"><span class="fk-check__chip fin-white"></span>Белый глянцевый</label>
-            <label class="fk-check"><input type="checkbox" name="color" value="whitem"><span class="fk-check__chip fin-whitem"></span>Белый матовый</label>
-            <label class="fk-check"><input type="checkbox" name="color" value="gold"><span class="fk-check__chip fin-gold"></span>Золотой</label>
-            <label class="fk-check"><input type="checkbox" name="color" value="cashmere"><span class="fk-check__chip fin-cashmere"></span>Кашемир матовый</label>
+            <label class="fk-check"><input type="checkbox" name="color" value="white"><span class="fk-check__chip fin-white"></span>Белый</label>
+            <label class="fk-check"><input type="checkbox" name="color" value="black"><span class="fk-check__chip fin-black"></span>Чёрный</label>
             <label class="fk-check"><input type="checkbox" name="color" value="gray"><span class="fk-check__chip fin-gray"></span>Серый</label>
-            <label class="fk-check"><input type="checkbox" name="color" value="black"><span class="fk-check__chip fin-black"></span>Чёрный матовый</label>
+            <label class="fk-check"><input type="checkbox" name="color" value="lightgray"><span class="fk-check__chip fin-lightgray"></span>Светло-серый</label>
+            <label class="fk-check"><input type="checkbox" name="color" value="cashmere"><span class="fk-check__chip fin-cashmere"></span>Кашемир</label>
+            <label class="fk-check"><input type="checkbox" name="color" value="gold"><span class="fk-check__chip fin-gold"></span>Золотой</label>
+          </fieldset>
+          <fieldset class="fk-filter">
+            <legend>Материал рамки <span class="fk-tag">демо</span></legend>
+            <label class="fk-check"><input type="checkbox" name="mat" value="glass">Стекло</label>
+            <label class="fk-check"><input type="checkbox" name="mat" value="aluminum">Алюминий</label>
+            <label class="fk-check"><input type="checkbox" name="mat" value="plastic">Термопласт</label>
           </fieldset>
           <fieldset class="fk-filter">
             <legend>Наличие <span class="fk-tag">демо</span></legend>
@@ -205,6 +215,15 @@
           </div>
         </div>
       </div>
+
+      <section class="fk-cat-links" aria-labelledby="cat-links-title">
+        <h2 id="cat-links-title">Коллекции</h2>
+        <div class="fk-chips">
+          <a class="fk-chip" href="collection.html?collection=F70">Коллекция F70</a>
+          <a class="fk-chip" href="collection.html?collection=F55">Коллекция F55</a>
+        </div>
+        <p class="fk-note">Страницы коллекций демонстрационные: описаний и фотографий нет, названия временные.</p>
+      </section>
     </div>
   </main>
 
@@ -221,11 +240,13 @@
             <li><a href="catalog.html">Каталог</a></li>
             <li><a href="index.html#collections">Коллекции</a></li>
             <li><a href="index.html#categories">Категории</a></li>
-            <li><a href="index.html#new">Новинки</a></li>
-            <li><a href="index.html#configurator">Подбор</a></li>
-            <li><a href="index.html#projects">Проекты</a></li>
-            <li><a href="index.html#pro">Сотрудничество</a></li>
+            <li><a href="new.html">Новинки</a></li>
+            <li><a href="configurator.html">Подбор</a></li>
+            <li><a href="projects.html">Проекты</a></li>
+            <li><a href="cooperation.html">Сотрудничество</a></li>
+            <li><a href="about.html">О компании</a></li>
             <li><a href="index.html#delivery">Доставка и оплата</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
           </ul>
         </nav>
         <div class="fk-footer__contacts">
@@ -245,6 +266,10 @@
   <script src="app.js"></script>
   <script src="data.js"></script>
   <script src="cart.js"></script>
+  <script src="auth.js"></script>
+  <script src="search.js"></script>
+  <script src="feedback.js"></script>
+  <script src="callback.js"></script>
   <script src="shop.js"></script>
 </body>
 </html>

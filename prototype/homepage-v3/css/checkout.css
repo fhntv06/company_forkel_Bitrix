@@ -1,0 +1,48 @@
+/* FORKEL V3 — страница «Оформление заказа» (4.2): карточки-шаги формы, выбор доставки и оплаты, тёмный итог (общий с корзиной),
+   экран «Демонстрация завершена». Разметку формирует checkout.js. Подключается из styles.css (@import). */
+
+.fk-co { align-items: start; }
+.fk-co-form { display: grid; gap: 16px; min-width: 0; }
+.fk-co-errors { padding: 16px 20px; background: #FDECEA; color: var(--fk-error); border-radius: var(--fk-r-md); font-weight: 600; }
+.fk-co-errors a { color: inherit; margin-right: 12px; display: inline-block; padding-block: 8px; }
+.fk-co-errors[hidden], .fk-co-error[hidden] { display: none; }
+.fk-co-card { display: grid; gap: 16px; min-width: 0; margin: 0; padding: 20px; background: var(--fk-surface); border: 0; border-radius: var(--fk-r-lg); }
+.fk-co-card legend { display: flex; align-items: center; gap: 12px; padding: 0; margin-bottom: 4px; float: left; width: 100%; font-size: 1.125rem; font-weight: 600; }
+.fk-co-card legend + * { clear: both; }
+.fk-co-card .fk-step__n { margin: 0; }
+.fk-co-row { display: grid; gap: 16px; }
+.fk-co-field { min-width: 0; }
+.fk-co-card .fk-field { background: var(--fk-canvas); }
+.fk-co-card .fk-field[aria-invalid="true"] { border-color: var(--fk-error); }
+.fk-co-error { margin-top: 6px; font-size: var(--fk-fs-small); font-weight: 600; color: var(--fk-error); }
+.fk-co-textarea { padding-block: 14px; min-height: 120px; resize: vertical; }
+
+.fk-co-choices { display: grid; gap: 8px; }
+.fk-co-choice { display: flex; align-items: center; gap: 14px; min-height: 64px; padding: 12px 16px; background: var(--fk-canvas); border: 2px solid transparent; border-radius: var(--fk-r-md); cursor: pointer; }
+.fk-co-choice input { width: 22px; height: 22px; margin: 0; accent-color: var(--fk-ink); flex: none; }
+.fk-co-choice:hover { border-color: var(--fk-bright); }
+.fk-co-choice:has(input:checked) { border-color: var(--fk-ink); box-shadow: 0 0 0 3px var(--fk-action); }
+.fk-co-choice:has(input:focus-visible) { outline: 2px solid var(--fk-ink); outline-offset: 3px; }
+.fk-co-choice__body { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; }
+.fk-co-choice__name { font-weight: 600; font-size: 1.0625rem; }
+.fk-co-consent { padding: 12px 20px; }
+.fk-co-consent .fk-check { align-items: flex-start; padding-block: 8px; }
+
+/* Итог (на базе карточки корзины) */
+.fk-co-lines { display: grid; gap: 10px; padding: 0; list-style: none; }
+.fk-co-lines li { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; }
+.fk-co-lines__name { min-width: 0; overflow-wrap: anywhere; }
+.fk-co-lines__meta { color: var(--fk-inverse-muted); }
+.fk-co-lines__sum { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.fk-co-done { display: grid; gap: 16px; justify-items: start; padding: 32px 24px; background: var(--fk-tint); border-radius: 32px; }
+.fk-co-done h2 { font-size: var(--fk-fs-h2); line-height: 1.15; font-weight: 700; }
+.fk-co-done h2:focus { outline: none; }
+.fk-co-done p { max-width: 60ch; }
+
+@media (min-width: 768px) {
+  .fk-co-card { padding: 28px; }
+  .fk-co-row { grid-template-columns: 1fr 1fr; }
+  .fk-co-done { padding: 56px; }
+}
+.fk-co-consent a { display: inline-block; padding-block: 12px; margin-block: -12px; text-decoration-color: var(--fk-bright); text-decoration-thickness: 2px; text-underline-offset: 4px; }

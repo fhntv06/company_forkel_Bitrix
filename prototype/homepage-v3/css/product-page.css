@@ -1,0 +1,58 @@
+/* FORKEL V3 — страница «Товар» (2.3): медиа, информационная карточка (цена, количество, кнопки), характеристики по группам,
+   связанные товары. Разметка формируется shop.js (#pdp). Подключается из styles.css (@import). Данные демонстрационные. */
+
+.fk-pdp { display: grid; gap: 16px var(--fk-col-gap); grid-template-columns: minmax(0, 1fr); margin-bottom: var(--fk-section-gap); }
+.fk-pdp__media { position: relative; aspect-ratio: 1 / 1; background: var(--tone); border-radius: var(--fk-r-lg); overflow: hidden; }
+.fk-pdp__media svg { width: 100%; height: 100%; }
+.fk-pdp__media .fk-cfg__tag { left: 16px; bottom: 16px; }
+.fk-pdp__proto { margin: 8px 0 16px; }
+
+/* Информационная карточка */
+.fk-pdp__info { display: grid; gap: 14px; align-content: start; min-width: 0; padding: 24px; background: var(--fk-surface); border-radius: var(--fk-r-lg); }
+.fk-pdp__title { font-size: var(--fk-fs-h2); line-height: 1.1; font-weight: 700; letter-spacing: -0.01em; overflow-wrap: break-word; }
+.fk-pdp__sku, .fk-pdp__stock { color: var(--fk-ink-muted); }
+.fk-pdp__price { font-size: 2rem; line-height: 1.15; font-weight: 700; padding-top: 8px; border-top: 1px solid var(--fk-line); }
+.fk-pdp__lead { max-width: 52ch; }
+.fk-pdp__buy { display: flex; flex-wrap: wrap; gap: 12px; align-items: stretch; margin-top: 8px; }
+.fk-pdp__cart { flex: 1 1 200px; white-space: nowrap; padding: 0 16px; min-height: 56px; font-size: 1.0625rem; }
+.fk-pdp__oneclick { width: 100%; }
+.fk-pdp__more[hidden] { display: none; }
+.fk-pdp .fk-variants { padding-inline: 0; }
+.fk-pdp__h { display: flex; align-items: center; gap: 8px; margin-top: 24px; font-size: var(--fk-fs-h3); line-height: 1.25; font-weight: 600; }
+
+/* Количество */
+.fk-qty { display: inline-flex; align-items: center; background: var(--fk-canvas); border-radius: var(--fk-r-md); padding: 4px; }
+.fk-qty__btn { width: 48px; min-height: 48px; padding: 0; font: inherit; font-size: 1.375rem; background: transparent; color: var(--fk-ink); border: 0; border-radius: 10px; cursor: pointer; }
+.fk-qty__btn:hover { background: var(--fk-action); color: var(--fk-on-action); }
+.fk-qty__input { width: 56px; min-height: 48px; padding: 0; font: inherit; font-weight: 600; text-align: center; color: var(--fk-ink); background: transparent; border: 0; -moz-appearance: textfield; appearance: textfield; }
+.fk-qty__input::-webkit-outer-spin-button, .fk-qty__input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* Характеристики: три карточки-группы */
+.fk-pdp__specs { grid-column: 1 / -1; min-width: 0; display: grid; gap: 24px; margin-top: 24px; }
+.fk-pdp__specs > h2 { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-size: var(--fk-fs-h2); line-height: 1.15; font-weight: 700; }
+.fk-chars-groups { display: grid; gap: 16px var(--fk-col-gap); grid-template-columns: minmax(0, 1fr); }
+.fk-chars { padding: 24px; background: var(--fk-surface); border-radius: var(--fk-r-lg); }
+.fk-chars h3 { font-size: var(--fk-fs-h3); line-height: 1.25; font-weight: 600; padding-bottom: 12px; margin-bottom: 4px; border-bottom: 2px solid var(--fk-bright); }
+.fk-chars dl { margin: 0; }
+.fk-char { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; padding: 10px 0; min-height: 48px; }
+.fk-char dt { display: flex; align-items: baseline; gap: 8px; flex: 1 1 8rem; min-width: 0; color: var(--fk-ink-muted); font-size: var(--fk-fs-small); }
+.fk-char dt::after { content: ""; flex: 1 1 12px; min-width: 12px; border-bottom: 1px dotted var(--fk-edge); transform: translateY(-3px); }
+.fk-char dd { margin: 0 0 0 auto; flex: 0 1 auto; max-width: 100%; min-width: 0; font-weight: 600; text-align: right; overflow-wrap: anywhere; }
+.fk-copy {
+  min-height: 44px; min-width: 44px; padding: 0 14px; margin: -8px 0 -8px 4px; font: inherit; font-size: var(--fk-fs-small); font-weight: 600;
+  color: var(--fk-ink); background: var(--fk-canvas); border: 0; border-radius: var(--fk-r-md); cursor: pointer;
+}
+.fk-copy:hover { background: var(--fk-action); color: var(--fk-on-action); }
+
+/* Связанные товары */
+.fk-pdp__related .fk-section-head { border-top: 0; padding-top: 0; }
+.fk-pdp__related h2 { font-size: var(--fk-fs-h2); font-weight: 700; }
+
+@media (min-width: 768px) { .fk-pdp__info { padding: 32px; } }
+@media (min-width: 1024px) {
+  .fk-pdp { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: start; column-gap: 32px; }
+  .fk-pdp__media { grid-column: 1 / span 7; aspect-ratio: 5 / 4; }
+  .fk-pdp__info { grid-column: 8 / span 5; padding: 40px; }
+  .fk-chars-groups { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: 32px; }
+  .fk-chars { padding: 32px; }
+}

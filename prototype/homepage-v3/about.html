@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="ru" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FORKEL — о компании (прототип)</title>
+  <meta name="description" content="Прототип страницы «О компании» FORKEL: серии F70 и F55, преимущества для партнёров, порядок сотрудничества. Тексты на согласовании.">
+  <meta name="robots" content="noindex, nofollow">
+  <script>document.documentElement.className = 'js';</script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Спрайт изделий. Цвета берутся из CSS-переменных (--finish, --finish-2, --edge) — см. styles.css, .fin-* -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <!-- Плоская длинная тень накладки 150×150 (косой свет слева сверху) -->
+      <polygon id="shade150" class="pl-shade" points="150,0 270,120 270,270 120,270 0,150 150,150"/>
+    </defs>
+    <symbol id="p-switch" viewBox="0 0 150 150">
+      <rect class="pl-face" x="0.5" y="0.5" width="149" height="149" rx="3"/>
+      <rect class="pl-inner" x="14" y="14" width="122" height="122" rx="2"/>
+      <rect class="pl-key" x="28" y="28" width="94" height="94" rx="2"/>
+      <path class="pl-line" d="M28 52H122"/>
+    </symbol>
+    <symbol id="p-double" viewBox="0 0 150 150">
+      <rect class="pl-face" x="0.5" y="0.5" width="149" height="149" rx="3"/>
+      <rect class="pl-inner" x="14" y="14" width="122" height="122" rx="2"/>
+      <rect class="pl-key" x="24" y="28" width="47" height="94" rx="2"/>
+      <rect class="pl-key" x="79" y="28" width="47" height="94" rx="2"/>
+      <path class="pl-line" d="M24 52H71M79 52H126"/>
+    </symbol>
+    <symbol id="p-socket" viewBox="0 0 150 150">
+      <rect class="pl-face" x="0.5" y="0.5" width="149" height="149" rx="3"/>
+      <circle class="pl-inner" cx="75" cy="75" r="50"/>
+      <circle class="pl-key" cx="75" cy="75" r="38"/>
+      <circle class="pl-hole" cx="62" cy="75" r="4.5"/>
+      <circle class="pl-hole" cx="88" cy="75" r="4.5"/>
+      <rect class="pl-hole" x="71" y="40" width="8" height="7" rx="1"/>
+      <rect class="pl-hole" x="71" y="103" width="8" height="7" rx="1"/>
+    </symbol>
+    <symbol id="p-frame" viewBox="0 0 150 150">
+      <rect class="pl-face" x="0.5" y="0.5" width="149" height="149" rx="3"/>
+      <rect class="pl-open" x="22" y="22" width="106" height="106" rx="1"/>
+    </symbol>
+    <symbol id="room" viewBox="0 0 400 300">
+      <path class="pl-room" d="M0 250H400M0 236H400"/>
+      <rect class="pl-room" x="36" y="58" width="92" height="178"/>
+      <path class="pl-room" d="M36 58h92M112 150v8"/>
+      <rect class="pl-room" x="236" y="64" width="120" height="104"/>
+      <path class="pl-room" d="M296 64v104M236 116h120"/>
+    </symbol>
+    <clipPath id="wall-clip"><rect x="0" y="0" width="840" height="540"/></clipPath>
+  </svg>
+
+  <a class="fk-skip" href="#main">К содержимому</a>
+
+  <div class="fk-proto-bar">
+    <div class="fk-container">
+      Прототип: тексты и изображения временные, поиск и корзина демонстрационные.
+    </div>
+  </div>
+
+  <!-- H-01 Шапка -->
+  <header class="fk-header" id="top">
+    <div class="fk-container fk-header__row">
+      <a class="fk-logo" href="index.html#top" aria-label="FORKEL, на главную">FORKEL</a>
+
+      <nav class="fk-nav" id="site-nav" aria-label="Основная навигация">
+        <ul class="fk-nav__list">
+          <li>
+            <button class="fk-catalog-btn" type="button" data-current aria-expanded="false" aria-controls="catalog-panel">
+              Каталог
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5"/></svg>
+            </button>
+            <div class="fk-catalog-panel" id="catalog-panel">
+              <div class="fk-container">
+                <div class="fk-catalog-cols">
+                  <div>
+                    <p class="fk-catalog-title">Коллекции</p>
+                    <ul class="fk-catalog-list">
+                      <li><a href="collection.html?collection=F70">Коллекция F70</a></li>
+                      <li><a href="collection.html?collection=F55">Коллекция F55</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="fk-catalog-title">Категории</p>
+                    <ul class="fk-catalog-list">
+                      <li><a href="catalog.html?category=sockets">Розетки</a></li>
+                      <li><a href="catalog.html?category=switches">Выключатели</a></li>
+                      <li><a href="catalog.html?category=frames">Рамки</a></li>
+                    </ul>
+                    <p class="fk-catalog-all"><a class="fk-link" href="catalog.html">Весь каталог</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <!-- Запасные ссылки, если JavaScript недоступен -->
+          <li class="fk-nav-fallback"><a class="fk-nav__link" href="index.html#collections">Коллекции</a></li>
+          <li class="fk-nav-fallback"><a class="fk-nav__link" href="index.html#categories">Категории</a></li>
+          <li><a class="fk-nav__link" href="new.html">Новинки</a></li>
+          <li><a class="fk-nav__link" href="configurator.html">Подбор</a></li>
+          <li><a class="fk-nav__link" href="projects.html">Проекты</a></li>
+          <li><a class="fk-nav__link" href="cooperation.html">Сотрудничество</a></li>
+          <!-- В спецификации (H-01) этого пункта в шапке нет: оставлен только в мобильной панели -->
+          <li class="fk-nav__mobile-only"><a class="fk-nav__link" href="index.html#delivery">Доставка и оплата</a></li>
+          <li><a class="fk-nav__link" href="contacts.html">Контакты</a></li>
+          <li class="fk-nav__mobile-only fk-nav__account"><a class="fk-nav__link" href="account.html">Личный кабинет</a></li>
+          <li class="fk-nav__phone"><span class="fk-phone">Телефон (заглушка)</span></li>
+        </ul>
+      </nav>
+
+      <div class="fk-actions">
+        <button class="fk-icon-btn fk-search-btn" type="button" aria-haspopup="dialog" aria-label="Поиск по товарам" data-stub="Окно поиска — следующий блок V3, пока не подключено.">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+          <span class="fk-search-btn__text" aria-hidden="true">Поиск по товарам</span>
+        </button>
+        <a class="fk-icon-btn fk-icon-btn--account" href="account.html" data-account>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.75"/><path d="M4.5 20c.9-3.6 3.8-5.5 7.5-5.5s6.6 1.9 7.5 5.5"/></svg>
+          <span class="fk-vh">Личный кабинет</span>
+        </a>
+        <a class="fk-icon-btn fk-cart-link" href="cart.html">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6.5a3 3 0 016 0V8"/></svg>
+          <span class="fk-vh">Корзина<span data-cart-sr></span></span>
+          <span class="fk-badge" data-cart-count hidden aria-hidden="true">0</span>
+        </a>
+        <span class="fk-phone fk-phone--header">Телефон (заглушка)</span>
+        <button class="fk-menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Меню</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <div class="fk-container fk-page fk-ab">
+      <nav class="fk-crumbs" aria-label="Хлебные крошки">
+        <ol><li><a href="index.html">Главная</a></li><li aria-current="page">О компании</li></ol>
+      </nav>
+
+      <section class="fk-ab-hero" aria-labelledby="ab-title">
+        <div class="fk-ab-hero__text">
+          <p class="fk-ab-hero__kicker">О компании FORKEL</p>
+          <h1 class="fk-ab-hero__title" id="ab-title">Розетки и выключатели, которые делают проект завершённым</h1>
+          <p class="fk-ab-hero__lead">FORKEL — электроустановочные изделия для современного интерьера. Две серии, три материала рамки и выверенная палитра: решения для тех, кто проектирует, монтирует и продаёт.</p>
+          <div class="fk-ab-hero__cta">
+            <button class="fk-btn fk-btn--inverse" type="button" data-feedback aria-haspopup="dialog">Стать партнёром</button>
+            <a class="fk-btn fk-btn--ghost" href="catalog.html">Смотреть каталог</a>
+          </div>
+          <p class="fk-note fk-note--proto">Прототип. Тексты написаны для демонстрации структуры и ждут согласования владельцем; цифры и условия не подтверждены.</p>
+        </div>
+        <div class="fk-ab-hero__art tone-light" aria-hidden="true">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" focusable="false"><use href="#room"/><use href="#shade150" transform="translate(120 70) scale(1.1)"/><use class="fin-white" href="#p-switch" x="120" y="70" width="165" height="165"/></svg>
+          <span class="fk-tag">Условная иллюстрация</span>
+        </div>
+      </section>
+
+      <ul class="fk-ab-stats" aria-label="Коротко о бренде">
+        <li><strong>2</strong><span>серии: F70 и F55</span></li>
+        <li><strong>3</strong><span>материала рамки: стекло, алюминий, термопласт</span></li>
+        <li><strong>6</strong><span>базовых цветов в серии F70 (в F55 — 4)</span></li>
+        <li><strong>5</strong><span>шагов в онлайн-подборе до готового комплекта</span></li>
+      </ul>
+
+      <section class="fk-coop-sec" aria-labelledby="ab-about">
+        <h2 id="ab-about">Кто мы</h2>
+        <div class="fk-ab-about">
+          <p class="fk-ab-about__lead">Мы создаём электроустановочные изделия, которые работают незаметно и выглядят безупречно. Для нас важны точная геометрия, честные материалы и понятный ассортимент.</p>
+          <div class="fk-ab-about__body">
+            <p>Ассортимент FORKEL построен вокруг двух серий — F70 и F55. Это позволяет оставаться в единой эстетике, меняя характер решения: от стеклянных рамок до алюминия и термопласта.</p>
+            <p>Мы развиваем сайт и каталог так, чтобы специалисту хватало нескольких минут: найти позицию, сверить артикул и наличие, собрать комплект и передать заказ в работу.</p>
+            <p><span class="fk-tag">заглушка</span> История компании, производство, сертификаты и география поставок — после передачи подтверждённых данных владельцем.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="fk-coop-sec" aria-labelledby="ab-adv">
+        <h2 id="ab-adv">Преимущества FORKEL</h2>
+        <ul class="fk-ab-grid">
+          <li class="fk-ab-adv"><span class="fk-ab-adv__n" aria-hidden="true">01</span><h3>Две серии — F70 и F55</h3><p>Каждая серия собирается в трёх исполнениях по материалу рамки, поэтому один проект можно решить в разном характере: от стекла до термопласта.</p></li>
+          <li class="fk-ab-adv"><span class="fk-ab-adv__n" aria-hidden="true">02</span><h3>Три материала рамки</h3><p>Стекло, алюминий и термопласт: подберите фактуру под интерьер и бюджет объекта, не меняя общей логики серии.</p></li>
+          <li class="fk-ab-adv"><span class="fk-ab-adv__n" aria-hidden="true">03</span><h3>Выверенная палитра</h3><p>Шесть базовых цветов у F70 и четыре у F55. Палитра рассчитана на сочетание рамок и механизмов и может расширяться.</p></li>
+          <li class="fk-ab-adv"><span class="fk-ab-adv__n" aria-hidden="true">04</span><h3>Главное — на карточке</h3><p>Артикул и наличие видны сразу, без лишних кликов: удобно сверять позиции со спецификацией и сметой.</p></li>
+          <li class="fk-ab-adv"><span class="fk-ab-adv__n" aria-hidden="true">05</span><h3>Подбор комплекта онлайн</h3><p>Конфигуратор собирает рамку и механизм в один комплект и сразу показывает артикул: меньше ошибок при заказе.</p></li>
+          <li class="fk-ab-adv"><span class="fk-ab-adv__n" aria-hidden="true">06</span><h3>Сайт, понятный профессионалам</h3><p>Каталог, фильтры, поиск по артикулу и демонстрационная корзина — всё под задачи дизайнеров, монтажников и дилеров.</p></li>
+          </ul>
+      </section>
+
+      <section class="fk-coop-sec" aria-labelledby="ab-aud">
+        <h2 id="ab-aud">С кем мы работаем</h2>
+        <ul class="fk-ab-grid fk-ab-grid--3">
+          <li class="fk-ab-aud"><h3>Дизайнерам и архитекторам</h3><p>Единая серия, чистая геометрия и спокойная палитра. Помогаем подобрать решение под проект и согласовать комплектацию.</p><span class="fk-tag">условия — заглушка</span><button class="fk-btn fk-btn--secondary" type="button" data-feedback aria-haspopup="dialog">Обсудить проект</button></li>
+          <li class="fk-ab-aud"><h3>Монтажным организациям</h3><p>Понятные артикулы и наличие, быстрый подбор механизмов и рамок под объект. Условия для организаций — по запросу.</p><span class="fk-tag">условия — заглушка</span><button class="fk-btn fk-btn--secondary" type="button" data-feedback aria-haspopup="dialog">Запросить условия</button></li>
+          <li class="fk-ab-aud"><h3>Дилерам и партнёрам</h3><p>Прозрачный ассортимент из двух серий и канал связи с командой бренда. Партнёрская программа уточняется.</p><span class="fk-tag">условия — заглушка</span><button class="fk-btn fk-btn--secondary" type="button" data-feedback aria-haspopup="dialog">Стать партнёром</button></li>
+          </ul>
+      </section>
+
+      <section class="fk-ab-range" aria-labelledby="ab-range">
+        <div>
+          <h2 id="ab-range">Две серии — один выбор</h2>
+          <p>Откройте коллекцию, чтобы увидеть изделия, или соберите комплект в подборе.</p>
+        </div>
+        <div class="fk-ab-range__links">
+          <a class="fk-btn fk-btn--inverse" href="collection.html?collection=F70">Серия F70</a>
+          <a class="fk-btn fk-btn--inverse" href="collection.html?collection=F55">Серия F55</a>
+          <a class="fk-btn fk-btn--ghost" href="configurator.html">Собрать в подборе</a>
+        </div>
+      </section>
+
+      <section class="fk-coop-sec" aria-labelledby="ab-steps">
+        <h2 id="ab-steps">Как начать сотрудничество</h2>
+        <ol class="fk-ab-steps">
+          <li><span class="fk-ab-step__n" aria-hidden="true">1</span><h3>Заявка</h3><p>Оставьте контакты — форма ниже или кнопка «Написать нам».</p></li>
+          <li><span class="fk-ab-step__n" aria-hidden="true">2</span><h3>Консультация</h3><p>Менеджер уточнит задачу, объект и сроки.</p></li>
+          <li><span class="fk-ab-step__n" aria-hidden="true">3</span><h3>Подбор</h3><p>Вместе выберем серию, материал рамки и цвета.</p></li>
+          <li><span class="fk-ab-step__n" aria-hidden="true">4</span><h3>Поставка</h3><p>Согласуем заказ и условия поставки.</p></li>
+          </ol>
+        <p class="fk-note">Порядок работы условный и будет уточнён после согласования с владельцем.</p>
+      </section>
+
+      <section class="fk-ab-lead" aria-labelledby="ab-form-title">
+        <div class="fk-ab-lead__intro">
+          <h2 id="ab-form-title">Обсудим сотрудничество?</h2>
+          <p>Оставьте контакты — мы свяжемся и подберём формат работы. <span class="fk-tag">демо</span> Форма демонстрационная: данные никуда не отправляются.</p>
+          <div class="fk-ab-lead__alt"><button class="fk-btn fk-btn--ghost" type="button" data-callback aria-haspopup="dialog">Заказать звонок</button></div>
+        </div>
+        <form class="fk-ab-form" id="ab-form" novalidate>
+          <div class="fk-co-errors" role="alert" hidden></div>
+          <div class="fk-co-field"><label class="fk-field__label" for="ab-name">Имя</label><input class="fk-field" id="ab-name" type="text" autocomplete="name" required aria-describedby="ab-name-err"><p class="fk-co-error" id="ab-name-err" hidden></p></div>
+          <div class="fk-co-field"><label class="fk-field__label" for="ab-contact">Телефон или email</label><input class="fk-field" id="ab-contact" type="text" autocomplete="off" required aria-describedby="ab-contact-err"><p class="fk-co-error" id="ab-contact-err" hidden></p></div>
+          <div class="fk-co-field"><label class="fk-field__label" for="ab-role">Вы</label><select class="fk-field" id="ab-role"><option>Дизайнер или архитектор</option><option>Монтажная организация</option><option>Дилер</option><option>Другое</option></select></div>
+          <div class="fk-co-field"><label class="fk-field__label" for="ab-msg">Сообщение (необязательно)</label><textarea class="fk-field fk-co-textarea" id="ab-msg" rows="3"></textarea></div>
+          <div class="fk-co-field"><label class="fk-check"><input type="checkbox" id="ab-consent" required aria-describedby="ab-consent-err"><span>Согласен с обработкой персональных данных (<a href="#" data-stub="Страница политики не создана. Текст предоставит владелец.">политика — заглушка</a>)</span></label><p class="fk-co-error" id="ab-consent-err" hidden></p></div>
+          <button class="fk-btn fk-btn--inverse fk-ab-form__submit" type="submit">Отправить (демо)</button>
+          <div class="fk-ab-done" id="ab-done" role="status" hidden tabindex="-1"><strong>Демонстрационное подтверждение.</strong> Заявка <strong>не отправлена</strong> и нигде не сохранена: в прототипе нет сервера.</div>
+        </form>
+      </section>
+
+      <section class="fk-coop-sec" aria-labelledby="ab-faq">
+        <h2 id="ab-faq">Частые вопросы</h2>
+        <div class="fk-ab-faq">
+          <details class="fk-ab-faq__item"><summary>Какие серии и материалы доступны?</summary><p>Сейчас в ассортименте две серии — F70 и F55. Рамки выпускаются в трёх материалах: стекло, алюминий и термопласт. Полный перечень товаров появится после передачи данных.</p></details>
+          <details class="fk-ab-faq__item"><summary>Какие условия для партнёров?</summary><p>Условия (скидки, минимальные объёмы, сроки, порядок оплаты) будут опубликованы после подтверждения владельцем. Сейчас они не заданы.</p></details>
+          <details class="fk-ab-faq__item"><summary>Можно ли получить образцы или каталог?</summary><p>Это уточняется. Оставьте заявку — мы вернёмся с ответом.</p></details>
+          <details class="fk-ab-faq__item"><summary>Как проверить наличие?</summary><p>Наличие отображается на карточке товара. Данные в прототипе демонстрационные.</p></details>
+          </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- H-09 Подвал -->
+  <footer class="fk-footer" id="contacts">
+    <div class="fk-container">
+      <div class="fk-footer__grid">
+        <div class="fk-footer__brand">
+          <p class="fk-footer__logo">FORKEL</p>
+        </div>
+        <nav class="fk-footer__nav" aria-label="Разделы">
+          <h2>Разделы</h2>
+          <ul>
+            <li><a href="catalog.html">Каталог</a></li>
+            <li><a href="index.html#collections">Коллекции</a></li>
+            <li><a href="index.html#categories">Категории</a></li>
+            <li><a href="new.html">Новинки</a></li>
+            <li><a href="configurator.html">Подбор</a></li>
+            <li><a href="projects.html">Проекты</a></li>
+            <li><a href="cooperation.html">Сотрудничество</a></li>
+            <li><a href="about.html" aria-current="page">О компании</a></li>
+            <li><a href="index.html#delivery">Доставка и оплата</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+          </ul>
+        </nav>
+        <div class="fk-footer__contacts">
+          <h2>Контакты</h2>
+          <p>Телефон, email и адрес добавит владелец.</p>
+        </div>
+      </div>
+      <div class="fk-footer__legal">
+        <a href="#" data-stub="Страница политики не создана. Текст предоставит владелец.">Политика обработки персональных данных</a>
+        <p>Юридические данные добавит владелец.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="fk-toast" id="proto-note" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+  <script src="data.js"></script>
+  <script src="cart.js"></script>
+  <script src="auth.js"></script>
+  <script src="search.js"></script>
+  <script src="feedback.js"></script>
+  <script src="callback.js"></script>
+  <script src="about.js"></script>
+</body>
+</html>
