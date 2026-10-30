@@ -4,7 +4,7 @@
   'use strict';
 
   var D = window.FKData, C = window.FKCart;
-  var CATEGORIES = D.CATEGORIES, COLORS = D.COLORS, STOCKS = D.STOCKS, PRODUCTS = D.PRODUCTS;
+  var CATEGORIES = D.CATEGORIES, COLORS = D.COLORS, STOCKS = D.STOCKS, PRODUCTS = D.PRODUCTS.filter(function (p) { return !p.hide; });
   var catName = D.catName, tag = D.tag, illu = D.illu;
   /* «Новинки» (new.html): признака новинки в исходных данных нет — условно показаны первые 8 демо-товаров, на главной — первые 4 */
   var NEW_IDS = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -20,14 +20,33 @@
       '<p class="fk-product-card__sku">Цвет: ' + COLORS[p.color] + '</p>' +
       '<p class="fk-product-card__sku">' + p.col + ' · ' + D.MATERIALS[p.mat] + '</p>' +
       '<div class="fk-variants">' + D.dots(p) + '</div>' +
-      '<p class="fk-product-card__price"><span class="fk-stub">' + D.fmt(D.price(p)) + '</span> ' + tag('демо') + '</p>' +
-      '<p class="fk-product-card__stock">' + STOCKS[p.stock] + ' (демо)</p>' +
+      '<p class="fk-product-card__price"><span class="fk-stub">' + D.fmt(D.price(p)) + '</span> ' + (p.real ? '' : tag('демо')) + '</p>' +
+      '<p class="fk-product-card__stock">' + STOCKS[p.stock] + (p.real ? '' : ' (демо)') + '</p>' +
       '<div class="fk-product-card__actions">' +
-      '<button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="' + p.id + '">В корзину<span class="fk-vh"> (демо) — ' + p.name + ', ' + COLORS[p.color] + '</span><span aria-hidden="true">&nbsp;(демо)</span></button>' +
+      '<button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="' + p.id + '">В корзину<span class="fk-vh"> — ' + p.name + ', ' + COLORS[p.color] + '</span><span aria-hidden="true"></span></button>' +
       '<a class="fk-btn fk-btn--secondary fk-btn--card" href="' + url + '">Подробнее<span class="fk-vh"> — ' + p.name + '</span></a>' +
       '</div>' +
       '</li>';
   }
+  /* Карточка от заказчика (offer 13238, см. D.REAL в data.js) */
+  // function realCard() {
+  //   var R = D.REAL, o = R.offers[0], url = 'product.html?id=' + o.id;
+  //   var dots = R.offers.map(function (x) {
+  //     return '<li style="--finish:' + x.hex + '" title="' + x.color + '"><span class="fk-vh">' + x.color + '</span></li>';
+  //   }).join('');
+  //   return '<li class="fk-product-card">' +
+  //       '<a class="fk-product-card__media tone-light" href="' + url + '" tabindex="-1" aria-hidden="true"><img src="' + encodeURI(o.img) + '" alt="" loading="lazy" style="width:100%;height:100%;object-fit:contain"></a>' +
+  //       '<h3 class="fk-product-card__name"><a href="' + url + '">' + R.name + '</a></h3>' +
+  //       '<p class="fk-product-card__sku">Арт. ' + o.sku + '</p>' +
+  //       '<p class="fk-product-card__sku">Цвет: ' + o.color + '</p>' +
+  //       '<div class="fk-variants"><ul class="fk-dots" aria-label="Цветовые варианты">' + dots + '</ul></div>' +
+  //       '<p class="fk-product-card__price">' + D.fmt(R.price) + '</p>' +
+  //       '<p class="fk-product-card__stock">В наличии</p>' +
+  //       '<div class="fk-product-card__actions">' +
+  //       '<button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-stub="Корзина для этой карточки в прототипе не подключена.">В корзину<span class="fk-vh"> — ' + R.name + '</span></button>' +
+  //       '<a class="fk-btn fk-btn--secondary fk-btn--card" href="' + url + '">Подробнее<span class="fk-vh"> — ' + R.name + '</span></a>' +
+  //       '</div></li>';
+  // }
   function param(name) {
     var m = new RegExp('[?&]' + name + '=([^&]*)').exec(location.search);
     return m ? decodeURIComponent(m[1]) : '';
@@ -82,8 +101,8 @@
       default: function (a, b) { return a.id - b.id; },
       name: function (a, b) { return a.name.localeCompare(b.name, 'ru') || a.id - b.id; },
       sku: function (a, b) { return a.sku.localeCompare(b.sku); },
-      'price-asc': function (a, b) { return a.group - b.group || a.id - b.id; },
-      'price-desc': function (a, b) { return b.group - a.group || a.id - b.id; }
+      'price-asc': function (a, b) { return D.price(a) - D.price(b) || a.id - b.id; },
+      'price-desc': function (a, b) { return D.price(b) - D.price(a) || b.id - a.id; }
     };
     /* Поиск, фильтры и сортировка хранятся в адресе: после перехода в товар и возврата они сохраняются */
     function persist(q, colors, stocks, groups, mats, cols) {
@@ -123,6 +142,9 @@
         return true;
       }).sort(sorters[sort.value] || sorters.default);
       list.innerHTML = items.map(card).join('');
+
+      // if ((!category || category === 'sockets') && !q && !colors.length && !stocks.length && !groups.length) list.insertAdjacentHTML('afterbegin', realCard());
+
       empty.hidden = items.length > 0;
       persist(q ? search.value.trim() : '', colors, stocks, groups, mats, cols);
       count.textContent = 'Показано демонстрационных товаров: ' + items.length + ' из ' + POOL.filter(function (p) { return (!category || p.cat === category) && (!collection || p.col === collection); }).length;
@@ -189,9 +211,47 @@
   }
 
   /* ---------- Карточка товара ---------- */
+  function initReal(id) {
+    var R = D.REAL, o = R.offers.filter(function (x) { return x.id === id; })[0];
+    var root = document.getElementById('pdp');
+    document.title = 'FORKEL — ' + R.name + ' (прототип)';
+    document.getElementById('pdp-crumb').textContent = R.name;
+    var cl = document.getElementById('pdp-cat-crumb'); cl.textContent = 'Розетки'; cl.href = 'catalog.html?category=sockets';
+    var rel = document.getElementById('pdp-related'); if (rel) rel.closest('section').hidden = true;
+    document.querySelector('.fk-pdp__proto').textContent = 'Данные карточки предоставлены заказчиком (источник — ledron.ru). Изображения загружаются с сайта-источника: права и пригодность для публикации не подтверждены. Корзина и покупка для этой карточки в прототипе не работают.';
+    function rows(a) { return a.map(function (r) { return '<div class="fk-char"><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>'; }).join(''); }
+    var groups = [
+      ['Основные', [['Бренд', 'FORKEL'], ['Серия', R.series], ['Тип', 'Розетка'], ['Артикул', o.sku], ['Гарантия', R.warranty]]],
+      ['Электрические', [['Питание', '250V 50–60 Гц'], ['Номинальный ток', '16 А'], ['Степень защиты', 'IP20'], ['Количество постов', '1'], ['Исполнение', 'с заземляющим штырём']]],
+      ['Монтаж и материал', [['Тип монтажа', 'встраиваемый'], ['Способ подключения', 'винтовой зажим, клемма'], ['Тип крепления', 'в распор (лапками) и винтами'], ['Материал', 'термопласт матовый'], ['Особенность', 'рамка на 1–5 постов комплектуется отдельно']]]
+    ];
+    var sw = R.offers.map(function (x) {
+      return '<a class="fk-swatch" href="product.html?id=' + x.id + '" style="--finish:' + x.hex + '" aria-label="' + x.color + '"' + (x.id === id ? ' aria-current="true"' : '') + '></a>';
+    }).join('');
+    root.innerHTML =
+        '<div class="fk-pdp__media tone-light"><img src="' + encodeURI(o.img) + '" alt="' + R.name + ', ' + o.color.toLowerCase() + '" style="width:100%;height:100%;object-fit:contain" onerror="this.style.display=\'none\'"></div>' +
+        '<div class="fk-pdp__info">' +
+        '<h1 class="fk-pdp__title">' + R.name + '</h1>' +
+        '<p class="fk-pdp__sku">Артикул: ' + o.sku + '</p>' +
+        '<p class="fk-pdp__price">' + D.fmt(R.price) + '</p>' +
+        '<p class="fk-pdp__stock">В наличии: ' + o.qty.toLocaleString('ru-RU') + ' шт.</p>' +
+        '<p class="fk-pdp__lead">Серия ' + R.series + ', гарантия ' + R.warranty + '. Рамка комплектуется отдельно.</p>' +
+        '<div><p class="fk-step__label">Цвет: ' + o.color + '</p><div class="fk-swatches">' + sw + '</div></div>' +
+        '<button class="fk-btn fk-btn--primary fk-pdp__cart" type="button" data-add="' + id + '">В корзину</button>' +
+        '<button class="fk-btn fk-btn--secondary fk-pdp__oneclick" type="button" data-stub="Покупка в один клик не реализована.">Купить в 1 клик</button>' +
+        '<button class="fk-btn fk-btn--secondary fk-pdp__oneclick" type="button" data-stub="Форма вопроса не реализована в прототипе.">Задать вопрос</button>' +
+        '</div>' +
+        '<section class="fk-pdp__specs"><h2>Характеристики</h2><div class="fk-chars-groups">' +
+        groups.map(function (g) { return '<div class="fk-chars"><h3>' + g[0] + '</h3><dl>' + rows(g[1]) + '</dl></div>'; }).join('') +
+        '</div></section>';
+  }
+
   function initProduct() {
     var root = document.getElementById('pdp');
     var id = parseInt(param('id'), 10);
+
+    if (D.REAL.offers.some(function (o) { return o.id === id; })) return initReal(id);
+
     var p = PRODUCTS.filter(function (x) { return x.id === id; })[0];
     if (!p) {
       document.title = 'FORKEL — товар не найден (прототип)';
@@ -222,9 +282,9 @@
             '<input class="fk-qty__input" id="pdp-qty" type="number" inputmode="numeric" min="1" max="99" value="1" aria-label="Количество">' +
             '<button type="button" class="fk-qty__btn" data-qty="1" aria-label="Увеличить количество">+</button>' +
           '</div>' +
-          '<button class="fk-btn fk-btn--primary fk-pdp__cart" type="button" id="pdp-add">В корзину (демо)</button>' +
+          '<button class="fk-btn fk-btn--primary fk-pdp__cart" type="button" id="pdp-add">В корзину</button>' +
         '</div>' +
-        '<button class="fk-btn fk-btn--secondary fk-pdp__oneclick" type="button" data-stub="Демонстрационное действие: покупка в один клик не реализована.">Купить в один клик (демо)</button>' +
+        '<button class="fk-btn fk-btn--secondary fk-pdp__oneclick" type="button" data-stub="Демонстрационное действие: покупка в один клик не реализована.">Купить в один клик</button>' +
         '<p class="fk-pdp__more fk-pdp__cartlink" id="pdp-cartlink" hidden><a class="fk-link fk-link--tap" href="cart.html">Перейти в корзину</a></p>' +
         '<p class="fk-pdp__more"><a class="fk-link fk-link--tap" href="configurator.html?collection=' + p.col + '">Собрать в подборе</a></p>' +
         '<div class="fk-variants">Цвета: ' + D.dots(p) + '</div>' +

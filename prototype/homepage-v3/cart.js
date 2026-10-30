@@ -34,11 +34,11 @@
   function describe(it) {
     if (it.kind === 'kit') {
       var k = D.kit(it);
-      return { key: k.key, kind: 'kit', name: k.name, sku: k.sku, unit: k.price, url: '', parts: k.parts, media: D.kitImg(it), meta: k.collection };
+      return { key: k.key, kind: 'kit', name: k.name, sku: k.sku, unit: k.price, url: '', parts: k.parts, media: D.kitImg(it), meta: k.collection, };
     }
     var p = D.byId(it.id);
     return { key: 'p:' + p.id, kind: 'product', name: p.name, sku: p.sku, unit: D.price(p), url: 'product.html?id=' + p.id,
-      media: D.illu(p), meta: 'Цвет: ' + D.COLORS[p.color], tone: p.tone };
+      media: D.illu(p), meta: 'Цвет: ' + D.COLORS[p.color], tone: p.tone, real: !!p.real };
   }
   function items() { return load(); }
   function count() { return load().reduce(function (s, it) { return s + it.qty; }, 0); }
@@ -112,8 +112,8 @@
         '<div class="fk-cart-item__body">' +
           '<h2 class="fk-cart-item__name">' + name + (d.kind === 'kit' ? ' ' + tag('комплект') : '') + '</h2>' +
           '<p class="fk-cart-item__meta">' + d.meta + '</p>' +
-          '<p class="fk-cart-item__meta">Арт. <span class="fk-stub">' + d.sku + '</span> ' + tag('заглушка') + '</p>' +
-          '<p class="fk-cart-item__meta">Цена за шт.: ' + fmt(d.unit) + ' ' + tag('демо') + '</p>' + parts +
+          '<p class="fk-cart-item__meta">Арт. <span class="fk-stub">' + d.sku + '</span> ' + (d.real ? '' : tag('заглушка')) + '</p>' +
+          '<p class="fk-cart-item__meta">Цена за шт.: ' + fmt(d.unit) + ' ' + (d.real ? '' : tag('демо')) + '</p>' + parts +
         '</div>' +
         '<div class="fk-cart-item__side">' +
           '<div class="fk-qty" role="group" aria-label="Количество: ' + d.name + '">' +
