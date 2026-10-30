@@ -5,14 +5,14 @@
    Всё содержимое ограничено классом .fk-hero и переменными --hero-*.
    Значения цвета, радиуса и шрифта — исследовательский вариант, не утверждённый стиль (D10, D13). */
 
-@property --wall-hi { syntax: '<color>'; inherits: true; initial-value: #3b3330; }
-@property --wall-lo { syntax: '<color>'; inherits: true; initial-value: #1d1917; }
+@property --wall-hi { syntax: '<color>'; inherits: true; initial-value: #123049; }
+@property --wall-lo { syntax: '<color>'; inherits: true; initial-value: #031627; }
 
 :root {
   --hero-font: "Golos Text", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --hero-accent: #D2B473;          /* оттенок кнопок на forkel.by (замер по скриншоту заказчика); бренд-цвет не утверждён */
-  --hero-on-accent: #1E2022;       /* белый на этом оранжевом даёт 3.44:1, тёмный — 4.75:1 */
-  --hero-ink: #1E2022;
+  --hero-accent: #FBE88E;          /* оттенок кнопок на forkel.by (замер по скриншоту заказчика); бренд-цвет не утверждён */
+  --hero-on-accent: #031627;       /* белый на этом оранжевом даёт 3.44:1, тёмный — 4.75:1 */
+  --hero-ink: #031627;
   --hero-margin: 16px;
   --hero-radius: 24px;
 }
@@ -25,7 +25,7 @@
   --frame-a: #DCCFC4; --frame-m: #CBBCAE; --frame-b: #B9A99B;
   --plate-a: #E6DBD1; --plate-b: #CBBDB0;
   --key-a:   #EFE5DC; --key-b:   #D6C9BD;
-  --wall-hi: #3b3330; --wall-lo: #1d1917;
+  --wall-hi: #123049; --wall-lo: #031627;
   --fg: #FFFFFF; --fg-muted: #D3CCC7; --fg-line: rgba(255,255,255,.55);
   --fg-hover: rgba(255,255,255,.14); --scrim: rgba(0,0,0,.35);
 }
@@ -79,8 +79,8 @@
   font: 600 1rem/1 var(--hero-font); text-decoration: none; cursor: pointer;
   transition: background-color .15s ease-out, border-color .15s ease-out, transform .15s ease-out;
 }
-.fk-hbtn--primary { background: #FFFFFF; color: var(--hero-ink); }
-.fk-hbtn--primary:hover { background: #DADCDE; }
+.fk-hbtn--primary { background: var(--hero-accent); color: var(--hero-on-accent); }
+.fk-hbtn--primary:hover { background: #F3D966; }
 .fk-hbtn--primary:active { transform: translateY(1px); }
 .fk-hbtn--secondary { background: transparent; color: var(--fg); border-color: var(--fg-line); }
 .fk-hbtn--secondary:hover { background: var(--fg-hover); border-color: var(--fg); }
