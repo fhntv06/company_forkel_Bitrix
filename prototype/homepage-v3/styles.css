@@ -247,3 +247,25 @@ a:hover > * > .fk-arrow, a:hover > .fk-arrow { transform: translateX(4px); }
 .fk-pdp__desc { grid-column: 1 / -1; width: 100%; max-width: 900px; margin-inline: auto; display: grid; gap: 12px; text-align: center; }
 .fk-pdp__desc > h2 { font-size: var(--fk-fs-h2); line-height: 1.15; font-weight: 600; }
 .fk-pdp__desc p { text-align: justify; line-height: 1.6; }
+
+/* Плавающий виджет соцсетей: закреплён справа внизу, раскрывается вверх */
+.fk-soc { position: fixed; right: 16px; bottom: 16px; z-index: 50; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.fk-soc__btn, .fk-soc__item { display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border-radius: 50%; border: 0; cursor: pointer; text-decoration: none; }
+.fk-soc__btn { color: var(--fk-ink-inverse); background: var(--fk-ink); box-shadow: 0 4px 16px rgba(30, 32, 34, 0.25); }
+.fk-soc__btn:hover { background: var(--fk-ink-muted); }
+.fk-soc__btn svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.fk-soc__x { display: none; }
+.fk-soc__btn[aria-expanded="true"] .fk-soc__chat { display: none; }
+.fk-soc__btn[aria-expanded="true"] .fk-soc__x { display: inline; }
+.fk-soc__list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.fk-soc__list[hidden] { display: none; }
+.fk-soc__item { font-size: .75rem; font-weight: 600; letter-spacing: .02em; color: var(--fk-ink); background: var(--fk-canvas); border: 1px solid var(--fk-edge); box-shadow: 0 4px 16px rgba(30, 32, 34, 0.15); }
+.fk-soc__item:hover { background: var(--fk-surface); }
+@media (prefers-reduced-motion: no-preference) {
+  .fk-soc__list:not([hidden]) .fk-soc__item { animation: fk-soc-up .18s ease-out both; }
+  .fk-soc__list li:nth-child(2) .fk-soc__item { animation-delay: .04s; }
+  .fk-soc__list li:nth-child(1) .fk-soc__item { animation-delay: .08s; }
+  @keyframes fk-soc-up { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+}
+/* Уведомление не должно перекрывать виджет */
+.fk-toast { right: 80px; }
