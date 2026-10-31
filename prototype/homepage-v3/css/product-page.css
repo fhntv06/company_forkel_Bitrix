@@ -1,7 +1,7 @@
 /* FORKEL V3 — страница «Товар» (2.3): медиа, информационная карточка (цена, количество, кнопки), характеристики по группам,
    связанные товары. Разметка формируется shop.js (#pdp). Подключается из styles.css (@import). Данные демонстрационные. */
 
-.fk-pdp { display: grid; gap: 16px var(--fk-col-gap); grid-template-columns: minmax(0, 1fr); margin-bottom: var(--fk-section-gap); }
+.fk-pdp { display: grid; gap: 64px var(--fk-col-gap); grid-template-columns: minmax(0, 1fr); margin-bottom: var(--fk-section-gap); }
 .fk-pdp__media { position: relative; aspect-ratio: 1 / 1; background: var(--tone); border-radius: var(--fk-r-lg); overflow: hidden; }
 .fk-pdp__media svg { width: 100%; height: 100%; }
 .fk-pdp__media .fk-cfg__tag { left: 16px; bottom: 16px; }
