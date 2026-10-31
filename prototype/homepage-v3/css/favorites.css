@@ -1,0 +1,31 @@
+/* Избранное: иконка в шапке, кнопка-сердце на карточке, страница favorites.html */
+.fk-fav-link { position: relative; text-decoration: none; }
+.fk-product-card { position: relative; }
+.fk-fav-btn {
+  position: absolute; top: 12px; right: 12px; z-index: 2;
+  display: grid; place-items: center; width: 44px; height: 44px; padding: 0;
+  border: 0; border-radius: 50%; background: var(--fk-surface); color: var(--fk-ink); cursor: pointer;
+  box-shadow: 0 1px 4px rgba(3, 22, 39, .18);
+}
+.fk-fav-btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linejoin: round; }
+.fk-fav-btn[aria-pressed="true"] svg { fill: var(--fk-bright); stroke: var(--fk-ink); }
+.fk-fav-btn:hover { background: var(--fk-bright); }
+.fk-fav-btn:focus-visible { outline: 3px solid var(--fk-ink); outline-offset: 2px; }
+.fk-fav-tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; margin-bottom: 24px; }
+.fk-fav-tools[hidden] { display: none; }
+.fk-fav-tools p { margin: 0; }
+
+/* Шапка: с четвёртой иконкой (избранное) на узких экранах кнопки компактнее, чтобы не было горизонтального скролла */
+@media (max-width: 1023px) {
+  .fk-actions { gap: 4px; }
+  .fk-actions .fk-icon-btn { min-width: 44px; min-height: 44px; }
+  .fk-actions .fk-menu-btn { min-height: 44px; padding-inline: 12px; }
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .fk-header .fk-header__row { gap: 4px; }
+  .fk-actions { gap: 4px; }
+  .fk-actions .fk-icon-btn { min-width: 44px; }
+  .fk-nav__list { gap: 0; }
+  .fk-nav__link, .fk-catalog-btn { padding: 0 8px; font-size: 0.9375rem; }
+  .fk-header .fk-header__row { padding-inline: calc(var(--fk-margin) + 8px); }
+}

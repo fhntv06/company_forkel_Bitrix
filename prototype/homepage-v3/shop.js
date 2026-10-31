@@ -14,6 +14,7 @@
   function card(p) {
     var url = 'product.html?id=' + p.id;
     return '<li class="fk-product-card">' +
+      '<button class="fk-fav-btn" type="button" data-fav="' + p.id + '" aria-pressed="' + (window.FKFav && window.FKFav.has(p.id)) + '" aria-label="В избранное — ' + p.name + '"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></button>' +
       '<a class="fk-product-card__media tone-' + p.tone + '" href="' + url + '" tabindex="-1" aria-hidden="true">' + illu(p) + '</a>' +
       '<h3 class="fk-product-card__name"><a href="' + url + '">' + p.name + '</a></h3>' +
       '<p class="fk-product-card__sku">Арт. <span class="fk-stub">' + p.sku + '</span></p>' +

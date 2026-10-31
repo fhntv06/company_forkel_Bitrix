@@ -23,8 +23,9 @@
   grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 .fk-footer__social {
-  grid-column: 11 / 12;
+  grid-column: 1 / -1;
 }
+@media (min-width: 768px) { .fk-footer__social { grid-column: 11 / 12; } }
 @media (min-width: 768px) {
   .fk-footer .fk-container { padding: 48px 40px; }
   .fk-footer__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
