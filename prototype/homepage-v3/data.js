@@ -125,7 +125,12 @@
       { id: 13242, color: 'Светло-серый', hex: '#D3D6D9', sku: 'EU Socket Light Grey', qty: 4638, img: L + '1d9/0bn5jkstynckk8owtz1t44z5xgi1jc1h/1366_600_0/EU light grey (1).webp' },
       { id: 13240, color: 'Кашемир', hex: '#CDBFAA', sku: 'EU Socket Cashmere', qty: 3447, img: L + 'b08/l3uurhvmk0b43egr48d3qk7mgq5dbphh/1366_600_0/EU cashmere (1).webp' },
       { id: 13241, color: 'Золотой', hex: '#C3A464', sku: 'EU Socket Gold', qty: 1128, img: L + '6e2/2exhlzd6uq419adyy7g054nm18rkwk9o/1366_600_0/EU gold (1).webp' }
-    ]
+    ],
+    links: {
+      model: 'https://disk.yandex.ru/d/GfGSGaCafXjPKg',
+      video: 'https://vkvideo.ru/video_ext.php?oid=-109431961&id=456240249',
+      manual: 'https://ledron.ru/upload/iblock/696/930imjoqbfaq3dgr0yx0bvm8r3as8203/%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D1%80%D0%BE%D0%B7%D0%B5%D1%82%D0%BE%D0%BA%20%D0%B8%20%D0%B2%D1%8B%D0%BA%D0%BB%D1%8E%D1%87%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9%20FORKEL.pdf'
+    },
   };
 
   REAL.offers.forEach(function (o, i) {

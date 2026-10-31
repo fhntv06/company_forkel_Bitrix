@@ -211,6 +211,41 @@
   }
 
   /* ---------- Карточка товара ---------- */
+  /* Кнопки материалов и попап с видео (только реальная карточка) */
+  function resButtons() {
+    var L = D.REAL.links, ext = ' target="_blank" rel="noopener noreferrer"';
+    return '<div class="fk-res" role="group" aria-label="Материалы к товару">' +
+        '<a class="fk-chip fk-btn--secondary" href="' + L.model + '"' + ext + '>3D-модель<span class="fk-vh"> (откроется в новой вкладке)</span></a>' +
+        '<button class="fk-chip fk-btn--secondary" type="button" data-video>Видео</button>' +
+        '<a class="fk-chip fk-btn--secondary" href="' + L.manual + '"' + ext + '>Инструкция<span class="fk-vh"> (PDF, откроется в новой вкладке)</span></a>' +
+        '</div>';
+  }
+  function openVideo(opener) {
+    var m = document.getElementById('fk-video');
+    if (!m) {
+      m = document.createElement('div');
+      m.id = 'fk-video'; m.className = 'fk-modal'; m.hidden = true;
+      m.innerHTML = '<div class="fk-modal__box" role="dialog" aria-modal="true" aria-label="Видео о товаре">' +
+          '<button type="button" class="fk-modal__x" aria-label="Закрыть видео">×</button>' +
+          '<div class="fk-modal__frame"><iframe title="Видео о товаре" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe></div></div>';
+      document.body.appendChild(m);
+      m.addEventListener('click', function (e) { if (e.target === m || e.target.closest('.fk-modal__x')) closeVideo(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !m.hidden) closeVideo(); });
+      document.addEventListener('focusin', function (e) { if (!m.hidden && !m.contains(e.target)) m.querySelector('.fk-modal__x').focus(); });
+    }
+    m._opener = opener;
+    m.querySelector('iframe').src = D.REAL.links.video;
+    m.hidden = false;
+    document.body.style.overflow = 'hidden';
+    m.querySelector('.fk-modal__x').focus();
+  }
+  function closeVideo() {
+    var m = document.getElementById('fk-video');
+    m.querySelector('iframe').removeAttribute('src');
+    m.hidden = true;
+    document.body.style.overflow = '';
+    if (m._opener) m._opener.focus();
+  }
   function initReal(id) {
     var R = D.REAL, o = R.offers.filter(function (x) { return x.id === id; })[0];
     var root = document.getElementById('pdp');
@@ -236,6 +271,7 @@
         '<p class="fk-pdp__price">' + D.fmt(R.price) + '</p>' +
         '<p class="fk-pdp__stock">В наличии: ' + o.qty.toLocaleString('ru-RU') + ' шт.</p>' +
         '<p class="fk-pdp__lead">Серия ' + R.series + ', гарантия ' + R.warranty + '. Рамка комплектуется отдельно.</p>' +
+        resButtons() +
         '<div><p class="fk-step__label">Цвет: ' + o.color + '</p><div class="fk-swatches">' + sw + '</div></div>' +
         '<button class="fk-btn fk-btn--primary fk-pdp__cart" type="button" data-add="' + id + '">В корзину</button>' +
         '<button class="fk-btn fk-btn--secondary fk-pdp__oneclick" type="button" data-stub="Покупка в один клик не реализована.">Купить в 1 клик</button>' +
@@ -244,6 +280,11 @@
         '<section class="fk-pdp__specs"><h2>Характеристики</h2><div class="fk-chars-groups">' +
         groups.map(function (g) { return '<div class="fk-chars"><h3>' + g[0] + '</h3><dl>' + rows(g[1]) + '</dl></div>'; }).join('') +
         '</div></section>';
+
+    root.addEventListener('click', function (e) {
+      var v = e.target.closest('[data-video]');
+      if (v) openVideo(v);
+    });
   }
 
   function initProduct() {
