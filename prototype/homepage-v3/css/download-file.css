@@ -1,0 +1,19 @@
+/* Скачать фото */
+.fk-dl { position: absolute; right: 12px; bottom: 12px; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; color: var(--fk-ink); background: var(--fk-canvas); border: 1px solid var(--fk-edge); border-radius: 50%; cursor: pointer; }
+.fk-dl:hover { background: var(--fk-surface); }
+.fk-dl svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Копирование характеристик: иконка видна при наведении (ПК) и фокусе; место под неё занято всегда */
+[data-copyable] { cursor: pointer; border-radius: var(--fk-radius); }
+[data-copyable]:hover { background: var(--fk-surface); }
+[data-copyable] dd::after {
+    content: ""; display: inline-block; width: 16px; height: 16px; margin-left: 8px; vertical-align: -2px; opacity: 0;
+    background: currentColor; transition: opacity var(--fk-dur) ease-out;
+    -webkit-mask: var(--ic-copy) center / contain no-repeat; mask: var(--ic-copy) center / contain no-repeat;
+}
+:root {
+    --ic-copy: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='11' height='11' rx='2'/%3E%3Cpath d='M5 15V6a2 2 0 0 1 2-2h9'/%3E%3C/svg%3E");
+    --ic-ok: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E");
+}
+[data-copyable]:hover dd::after, [data-copyable]:focus-visible dd::after { opacity: .7; }
+[data-copyable].is-copied dd::after { opacity: 1; -webkit-mask-image: var(--ic-ok); mask-image: var(--ic-ok); color: var(--fk-ok); }

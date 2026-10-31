@@ -24,6 +24,8 @@
 @import url("css/cooperation.css");
 @import url("css/account.css");
 @import url("css/about.css");
+@import url("css/about.css");
+@import url("css/download-file.css");
 
 :root {
   --fk-canvas: #F2F2F2;                /* фон сайта (заказчик, 2026-10-30) */

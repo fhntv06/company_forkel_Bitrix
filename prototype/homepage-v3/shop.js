@@ -250,6 +250,55 @@
   function descBlock(html) {
     return '<section class="fk-pdp__desc" aria-labelledby="desc-title"><h2 id="desc-title">Описание</h2>' + html + '</section>';
   }
+  /* Скачивание фото: через fetch и blob. Если сайт-источник запрещает такой запрос (CORS), открываем фото в новой вкладке */
+  function downloadPhoto(url, name) {
+    fetch(url).then(function (r) { if (!r.ok) throw new Error(r.status); return r.blob(); }).then(function (b) {
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(b); a.download = name;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+    }).catch(function () {
+      window.open(url, '_blank', 'noopener');
+      if (window.fkNote) window.fkNote('Прямое скачивание недоступно: фото открыто в новой вкладке, сохраните его оттуда.');
+    });
+  }
+
+  /* Копирование характеристик: клик или Enter/Пробел по строке копирует значение */
+  function charText(c) {
+    var dd = c.querySelector('dd').cloneNode(true);
+    [].forEach.call(dd.querySelectorAll('.fk-tag, .fk-copy, .fk-vh'), function (n) { n.remove(); });
+    return dd.textContent.trim();
+  }
+  function enhanceChars() {
+    [].forEach.call(document.querySelectorAll('.fk-char'), function (c) {
+      if (c.querySelector('.fk-copy')) return;
+      c.setAttribute('data-copyable', '');
+      c.tabIndex = 0; c.setAttribute('role', 'button');
+      c.setAttribute('aria-label', 'Скопировать: ' + c.querySelector('dt').textContent.trim() + ' — ' + charText(c));
+    });
+  }
+  function copyText(t, done) {
+    function fallback() {
+      var ta = document.createElement('textarea');
+      ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (e) { /* буфер недоступен */ }
+      ta.remove(); done();
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, fallback); else fallback();
+  }
+  function doCopy(c) {
+    var t = charText(c);
+    copyText(t, function () {
+      c.classList.add('is-copied'); setTimeout(function () { c.classList.remove('is-copied'); }, 1200);
+      if (window.fkNote) window.fkNote('Скопировано: ' + t);
+    });
+  }
+  document.addEventListener('click', function (e) { var c = e.target.closest('[data-copyable]'); if (c) doCopy(c); });
+  document.addEventListener('keydown', function (e) {
+    var c = e.target.closest && e.target.closest('[data-copyable]');
+    if (c && c === e.target && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); doCopy(c); }
+  });
   function initReal(id) {
     var R = D.REAL, o = R.offers.filter(function (x) { return x.id === id; })[0];
     var root = document.getElementById('pdp');
@@ -268,7 +317,8 @@
       return '<a class="fk-swatch" href="product.html?id=' + x.id + '" style="--finish:' + x.hex + '" aria-label="' + x.color + '"' + (x.id === id ? ' aria-current="true"' : '') + '></a>';
     }).join('');
     root.innerHTML =
-        '<div class="fk-pdp__media tone-light"><img src="' + encodeURI(o.img) + '" alt="' + R.name + ', ' + o.color.toLowerCase() + '" style="width:100%;height:100%;object-fit:contain" onerror="this.style.display=\'none\'"></div>' +
+        '<div class="fk-pdp__media tone-light"><img src="' + encodeURI(o.img) + '" alt="' + R.name + ', ' + o.color.toLowerCase() + '" style="width:100%;height:100%;object-fit:contain" onerror="this.style.display=\'none\'">' +
+        '<button type="button" class="fk-dl" data-dl aria-label="Скачать фото"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg></button></div>' +
         '<div class="fk-pdp__info">' +
         '<h1 class="fk-pdp__title">' + R.name + '</h1>' +
         '<p class="fk-pdp__sku">Артикул: ' + o.sku + '</p>' +
@@ -290,7 +340,9 @@
     root.addEventListener('click', function (e) {
       var v = e.target.closest('[data-video]');
       if (v) openVideo(v);
+      if (e.target.closest('[data-dl]')) downloadPhoto(o.img, o.sku.replace(/\s+/g, '-') + '.webp');
     });
+    enhanceChars();
   }
 
   function initProduct() {
@@ -337,6 +389,7 @@
       '</div>' +
       descBlock('<p>Демонстрационное описание: текст товара предоставит владелец. ' + tag('заглушка') + '</p>') + chars(p);
     document.getElementById('pdp-related').innerHTML = rel.map(card).join('');
+    enhanceChars();
     root.addEventListener('click', function (e) {
       var c = e.target.closest('[data-copy]');
       if (!c) return;
