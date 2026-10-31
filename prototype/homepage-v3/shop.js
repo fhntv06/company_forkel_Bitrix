@@ -246,6 +246,10 @@
     document.body.style.overflow = '';
     if (m._opener) m._opener.focus();
   }
+  /* Описание под карточкой товара: по центру, не шире 900 px (стили .fk-pdp__desc) */
+  function descBlock(html) {
+    return '<section class="fk-pdp__desc" aria-labelledby="desc-title"><h2 id="desc-title">Описание</h2>' + html + '</section>';
+  }
   function initReal(id) {
     var R = D.REAL, o = R.offers.filter(function (x) { return x.id === id; })[0];
     var root = document.getElementById('pdp');
@@ -270,13 +274,15 @@
         '<p class="fk-pdp__sku">Артикул: ' + o.sku + '</p>' +
         '<p class="fk-pdp__price">' + D.fmt(R.price) + '</p>' +
         '<p class="fk-pdp__stock">В наличии: ' + o.qty.toLocaleString('ru-RU') + ' шт.</p>' +
-        '<p class="fk-pdp__lead">Серия ' + R.series + ', гарантия ' + R.warranty + '. Рамка комплектуется отдельно.</p>' +
         resButtons() +
         '<div><p class="fk-step__label">Цвет: ' + o.color + '</p><div class="fk-swatches">' + sw + '</div></div>' +
         '<button class="fk-btn fk-btn--primary fk-pdp__cart" type="button" data-add="' + id + '">В корзину</button>' +
         '<button class="fk-btn fk-btn--secondary fk-pdp__oneclick" type="button" data-stub="Покупка в один клик не реализована.">Купить в 1 клик</button>' +
         '<button class="fk-btn fk-btn--secondary fk-pdp__oneclick" type="button" data-stub="Форма вопроса не реализована в прототипе.">Задать вопрос</button>' +
         '</div>' +
+        descBlock('<p>Розетка одинарная с заземлением и защитными шторками из серии ' + R.series + '. Номинальный ток 16 А, напряжение 250 В, 50–60 Гц, степень защиты IP20. ' +
+            'Монтаж встраиваемый: механизм крепится в распор лапками и винтами, провода подключаются винтовым зажимом. ' +
+            'Рамка на 1–5 постов приобретается отдельно. Гарантия ' + R.warranty + '.</p>') +
         '<section class="fk-pdp__specs"><h2>Характеристики</h2><div class="fk-chars-groups">' +
         groups.map(function (g) { return '<div class="fk-chars"><h3>' + g[0] + '</h3><dl>' + rows(g[1]) + '</dl></div>'; }).join('') +
         '</div></section>';
@@ -316,7 +322,6 @@
         '<p class="fk-pdp__sku">Артикул: <span class="fk-stub">' + p.sku + '</span> ' + tag('заглушка') + '</p>' +
         '<p class="fk-pdp__price"><span class="fk-stub">' + D.fmt(D.price(p)) + '</span> ' + tag('демо') + '</p>' +
         '<p class="fk-pdp__stock">' + STOCKS[p.stock] + ' ' + tag('демо') + '</p>' +
-        '<p class="fk-pdp__lead">Демонстрационное описание: текст товара предоставит владелец. ' + tag('заглушка') + '</p>' +
         '<div class="fk-pdp__buy">' +
           '<div class="fk-qty" role="group" aria-label="Количество">' +
             '<button type="button" class="fk-qty__btn" data-qty="-1" aria-label="Уменьшить количество">−</button>' +
@@ -330,7 +335,7 @@
         '<p class="fk-pdp__more"><a class="fk-link fk-link--tap" href="configurator.html?collection=' + p.col + '">Собрать в подборе</a></p>' +
         '<div class="fk-variants">Цвета: ' + D.dots(p) + '</div>' +
       '</div>' +
-      chars(p);
+      descBlock('<p>Демонстрационное описание: текст товара предоставит владелец. ' + tag('заглушка') + '</p>') + chars(p);
     document.getElementById('pdp-related').innerHTML = rel.map(card).join('');
     root.addEventListener('click', function (e) {
       var c = e.target.closest('[data-copy]');
