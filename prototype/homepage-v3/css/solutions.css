@@ -1,17 +1,17 @@
 /* FORKEL V3 — «Готовые решения» (H-11), прототип: один слайд-заглушка и одна точка-маркер с блоком из двух демо-товаров.
    Фото интерьера (2048×2048) от заказчика не передано: показана схематичная заглушка. */
 /* Слайдер: нативная прокрутка со «снапом» (Swiper недоступен в среде сборки), видна часть следующего слайда: 0.8 */
-.fk-sol-head { display: flex; flex-wrap: wrap; align-items: end; gap: 12px 24px; }
-.fk-sol-head h2 { margin-right: auto; }
-.fk-sol-head .fk-note { order: 3; flex-basis: 100%; }
-.fk-sol-nav { display: flex; gap: 8px; }
 .fk-sol-btn {
   display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 0; border-radius: 50%;
   background: var(--fk-surface); color: var(--fk-ink); cursor: pointer; transition: background var(--fk-dur) ease-out;
+  position: absolute; top: 50%; z-index: 4; margin-top: -24px; box-shadow: 0 4px 16px rgba(3, 22, 39, .22);
 }
+.fk-sol { position: relative; }
+.fk-sol-btn--prev { left: 12px; }
+.fk-sol-btn--next { right: 12px; }
 .fk-sol-btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 .fk-sol-btn:hover:not(:disabled) { background: var(--fk-bright); }
-.fk-sol-btn:disabled { opacity: .4; cursor: default; }
+.fk-sol-btn:disabled { opacity: 0; pointer-events: none; }
 .fk-sol-btn:focus-visible, .fk-sol__track:focus-visible { outline: 3px solid var(--fk-ink); outline-offset: 2px; }
 .fk-sol__track {
   display: flex; gap: 16px; margin: 0; padding: 0; list-style: none; overflow-x: auto;
