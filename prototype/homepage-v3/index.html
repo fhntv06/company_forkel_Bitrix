@@ -560,6 +560,28 @@
       </div>
     </section>
 
+    <!-- H-11 Готовые решения (прототип: один слайд-заглушка, одна точка) -->
+    <section class="fk-section fk-solutions" id="solutions" aria-labelledby="solutions-title" data-proto-status="demo">
+      <div class="fk-container">
+        <div class="fk-section-head">
+          <h2 id="solutions-title">Готовые решения</h2>
+          <p class="fk-note fk-note--proto">Прототип: фото интерьера и товары — заглушки. Слайдер и остальные точки пока не реализованы.</p>
+        </div>
+        <div class="fk-solutions__stage" id="solutions-stage">
+          <svg class="fk-solutions__bg" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+            <rect width="800" height="450" fill="#D9D4CB"/><rect y="340" width="800" height="110" fill="#B9B2A6"/>
+            <rect x="300" y="170" width="120" height="60" rx="6" fill="#F7F7F5" stroke="#9A948A"/>
+            <rect x="312" y="182" width="28" height="36" rx="4" fill="#E4E2DC"/><rect x="346" y="182" width="28" height="36" rx="4" fill="#E4E2DC"/><rect x="380" y="182" width="28" height="36" rx="4" fill="#E4E2DC"/>
+          </svg>
+          <span class="fk-tag">Заглушка: фото интерьера 2048×2048</span>
+          <button class="fk-hs" type="button" style="left:37.5%;top:44%" aria-expanded="false" aria-controls="hs-pop" aria-label="Показать товары из тройной розетки на фото">
+            <span class="fk-hs__dot"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v12M2 8h12"/></svg></span>
+          </button>
+          <ul class="fk-hs-pop" id="hs-pop" aria-label="Товары из этого элемента" hidden></ul>
+        </div>
+      </div>
+    </section>
+
     <!-- H-12 Интерьеры (заглушки) -->
     <section class="fk-section" id="interiors" aria-labelledby="interiors-title" data-proto-status="demo">
       <div class="fk-container">
@@ -726,6 +748,7 @@
   <script src="data.js"></script>
   <script src="cart.js"></script>
   <script src="favorites.js"></script>
+  <script src="solutions.js"></script>
   <script src="auth.js"></script>
   <script src="search.js"></script>
   <script src="feedback.js"></script>
