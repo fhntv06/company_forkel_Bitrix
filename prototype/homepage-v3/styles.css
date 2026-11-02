@@ -262,6 +262,7 @@ a:hover > * > .fk-arrow, a:hover > .fk-arrow { transform: translateX(4px); }
 .fk-soc__list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
 .fk-soc__list[hidden] { display: none; }
 .fk-soc__item { font-size: .75rem; font-weight: 600; letter-spacing: .02em; color: var(--fk-ink); background: var(--fk-canvas); border: 1px solid var(--fk-edge); box-shadow: 0 4px 16px rgba(30, 32, 34, 0.15); }
+.fk-soc__item svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
 .fk-soc__item:hover { background: var(--fk-surface); }
 @media (prefers-reduced-motion: no-preference) {
   .fk-soc__list:not([hidden]) .fk-soc__item { animation: fk-soc-up .18s ease-out both; }

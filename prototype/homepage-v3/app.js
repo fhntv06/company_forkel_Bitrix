@@ -133,14 +133,14 @@
   /* Плавающий виджет соцсетей (справа внизу). Адреса пока заглушки: url пустой → показывается пояснение.
    Список общий: window.FKSocial используется и подвалом. */
   var SOC = [
-    { id: 'vk', name: 'ВКонтакте', short: 'VK', url: '' },
-    { id: 'max', name: 'MAX', short: 'MAX', url: '' },
-    { id: 'tg', name: 'Telegram', short: 'TG', url: '' }
+    { id: 'vk', name: 'ВКонтакте', url: '', icon: '<path d="M4 8c.3 4.5 3 8 7 8h1.5v-3.5c1.8.2 3.2 1.8 4 3.5H20c-.8-2.3-2.2-3.7-3.7-4.3 1.2-.8 2.4-2.2 3-4H17c-.6 1.7-1.8 3.2-3.5 3.5V8H11v4.5C8.5 12 7.3 9.5 7 8H4z"/>' },
+    { id: 'max', name: 'MAX', url: '', icon: '<path d="M12 3.5a8.5 8.5 0 00-7.3 12.8L3.5 20.5l4.4-1.1A8.5 8.5 0 1012 3.5z"/><path d="M8.5 14.5v-5l3.5 3 3.5-3v5"/>' },
+    { id: 'tg', name: 'Telegram', url: '', icon: '<path d="M20.5 4L3.5 10.8l5.2 1.9 1.9 5.8 2.7-3.3 4.4 3.2L20.5 4z"/><path d="M8.7 12.7L17 7"/>' }
   ];
   window.FKSocial = SOC;
   function socLink(s, cls) {
     var a = document.createElement('a');
-    a.className = cls; a.textContent = s.short;
+    a.className = cls; a.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + s.icon + '</svg>';
     a.setAttribute('aria-label', s.name + (s.url ? ' (откроется в новой вкладке)' : ''));
     if (s.url) { a.href = s.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; }
     else { a.href = '#'; a.setAttribute('data-stub', 'Ссылка на ' + s.name + ' появится после получения адреса от владельца.'); }
