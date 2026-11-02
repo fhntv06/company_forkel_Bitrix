@@ -1,0 +1,80 @@
+/* FORKEL V3 — «Готовые решения» (H-11), прототип: один слайд-заглушка и одна точка-маркер с блоком из двух демо-товаров.
+   Фото интерьера (2048×2048) от заказчика не передано: показана схематичная заглушка. */
+/* Слайдер: нативная прокрутка со «снапом» (Swiper недоступен в среде сборки), видна часть следующего слайда: 0.8 */
+.fk-sol-head { display: flex; flex-wrap: wrap; align-items: end; gap: 12px 24px; }
+.fk-sol-head h2 { margin-right: auto; }
+.fk-sol-head .fk-note { order: 3; flex-basis: 100%; }
+.fk-sol-nav { display: flex; gap: 8px; }
+.fk-sol-btn {
+  display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 0; border-radius: 50%;
+  background: var(--fk-surface); color: var(--fk-ink); cursor: pointer; transition: background var(--fk-dur) ease-out;
+}
+.fk-sol-btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.fk-sol-btn:hover:not(:disabled) { background: var(--fk-bright); }
+.fk-sol-btn:disabled { opacity: .4; cursor: default; }
+.fk-sol-btn:focus-visible, .fk-sol__track:focus-visible { outline: 3px solid var(--fk-ink); outline-offset: 2px; }
+.fk-sol__track {
+  display: flex; gap: 16px; margin: 0; padding: 0; list-style: none; overflow-x: auto;
+  scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; border-radius: var(--fk-r-lg);
+}
+.fk-sol__track::-webkit-scrollbar { display: none; }
+.fk-sol__slide {
+  position: relative; flex: 0 0 80%; height: clamp(560px, 48vw, 720px); scroll-snap-align: start;
+  overflow: hidden; border-radius: var(--fk-r-lg); background: #D9D4CB; container-type: size;
+}
+/* «Фото» 1:1 (2048×2048) покрывает слайд, как object-fit: cover; точки привязаны к нему в процентах */
+.fk-sol__art { position: absolute; left: 50%; top: 50%; width: max(100cqw, 100cqh); aspect-ratio: 1 / 1; transform: translate(-50%, -50%); }
+.fk-sol__art > svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.fk-sol__slide > .fk-tag { position: absolute; left: 16px; bottom: 16px; z-index: 1; }
+.fk-sol-dots { display: flex; justify-content: center; margin-top: 8px; }
+.fk-sol-dot { width: 32px; height: 44px; padding: 0; border: 0; background: transparent; cursor: pointer; display: grid; place-items: center; }
+.fk-sol-dot::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--fk-edge); transition: width var(--fk-dur) ease-out, background var(--fk-dur) ease-out; }
+.fk-sol-dot[aria-current="true"]::before { width: 28px; border-radius: 5px; background: var(--fk-ink); }
+.fk-sol-dot:focus-visible { outline: 3px solid var(--fk-ink); outline-offset: -4px; border-radius: 8px; }
+@media (max-width: 767px) { .fk-sol__slide { height: 640px; } }
+@media (prefers-reduced-motion: reduce) { .fk-sol__track { scroll-behavior: auto; } .fk-sol-dot::before, .fk-sol-btn { transition: none; } }
+
+/* Точка: зона нажатия 48 px, видимый круг 32 px с пульсирующим кольцом */
+.fk-hs {
+  position: absolute; z-index: 2; width: 48px; height: 48px; margin: -24px 0 0 -24px; padding: 0;
+  display: grid; place-items: center; border: 0; background: transparent; cursor: pointer; color: var(--fk-ink);
+}
+.fk-hs__dot {
+  position: relative; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
+  background: var(--fk-bright); box-shadow: 0 2px 8px rgba(3, 22, 39, .3);
+}
+.fk-hs__dot::before {
+  content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--fk-bright);
+  animation: fk-hs-pulse 2s ease-out infinite;
+}
+.fk-hs__dot svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2.25; stroke-linecap: round; fill: none; transition: transform var(--fk-dur) ease-out; }
+.fk-hs[aria-expanded="true"] .fk-hs__dot svg { transform: rotate(45deg); }
+.fk-hs:focus-visible { outline: 3px solid var(--fk-ink); outline-offset: 0; border-radius: 50%; }
+@keyframes fk-hs-pulse { from { transform: scale(1); opacity: .9; } to { transform: scale(1.9); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .fk-hs__dot::before { animation: none; } .fk-hs__dot svg { transition: none; } }
+
+/* Блок товаров */
+.fk-hs-pop {
+  position: absolute; z-index: 3; margin: 0; padding: 8px; list-style: none;
+  display: flex; gap: 8px; background: var(--fk-surface); border-radius: var(--fk-r-md);
+  max-width: calc(100% - 16px); overflow-x: auto; overscroll-behavior-x: contain;
+  box-shadow: 0 12px 32px rgba(3, 22, 39, .22);
+}
+.fk-hs-pop[hidden] { display: none; }
+.fk-mini {
+  position: relative; box-sizing: border-box; flex: none; width: 150px; height: 280px; padding: 8px;
+  display: flex; flex-direction: column; gap: 4px; background: var(--fk-canvas); border-radius: 10px; overflow: hidden;
+}
+.fk-mini__media { display: block; flex: none; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; background: var(--tone); }
+.fk-mini__media.tone-light { background: var(--fk-surface); }
+.fk-mini__media svg { width: 100%; height: 100%; }
+.fk-mini .fk-fav-btn { top: 12px; right: 12px; width: 36px; height: 36px; }
+.fk-mini .fk-fav-btn svg { width: 18px; height: 18px; }
+.fk-mini__series { margin: 0; font-size: .75rem; line-height: 1.3; color: var(--fk-ink-muted); }
+.fk-mini__name { margin: 0; font-size: .8125rem; font-weight: 600; line-height: 1.3; }
+.fk-mini__name a {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  color: inherit; text-decoration: none;
+}
+.fk-mini__price { margin: 0; font-size: .9375rem; font-weight: 700; }
+.fk-mini .fk-btn { margin-top: auto; min-height: 44px; padding-inline: 8px; font-size: .875rem; }
