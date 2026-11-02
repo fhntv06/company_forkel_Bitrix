@@ -1,0 +1,53 @@
+/* FORKEL V3 — «Готовые решения» (H-11), прототип: один слайд-заглушка и одна точка-маркер с блоком из двух демо-товаров.
+   Фото интерьера (2048×2048) от заказчика не передано: показана схематичная заглушка. */
+.fk-solutions__stage {
+  position: relative; width: 100%; height: clamp(640px, 56vw, 760px); overflow: hidden;
+  border-radius: var(--fk-r-lg); background: #D9D4CB;
+}
+.fk-solutions__bg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.fk-solutions__stage > .fk-tag { position: absolute; left: 16px; bottom: 16px; z-index: 1; }
+
+/* Точка: зона нажатия 48 px, видимый круг 32 px с пульсирующим кольцом */
+.fk-hs {
+  position: absolute; z-index: 2; width: 48px; height: 48px; margin: -24px 0 0 -24px; padding: 0;
+  display: grid; place-items: center; border: 0; background: transparent; cursor: pointer; color: var(--fk-ink);
+}
+.fk-hs__dot {
+  position: relative; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
+  background: var(--fk-bright); box-shadow: 0 2px 8px rgba(3, 22, 39, .3);
+}
+.fk-hs__dot::before {
+  content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--fk-bright);
+  animation: fk-hs-pulse 2s ease-out infinite;
+}
+.fk-hs__dot svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2.25; stroke-linecap: round; fill: none; transition: transform var(--fk-dur) ease-out; }
+.fk-hs[aria-expanded="true"] .fk-hs__dot svg { transform: rotate(45deg); }
+.fk-hs:focus-visible { outline: 3px solid var(--fk-ink); outline-offset: 0; border-radius: 50%; }
+@keyframes fk-hs-pulse { from { transform: scale(1); opacity: .9; } to { transform: scale(1.9); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .fk-hs__dot::before { animation: none; } .fk-hs__dot svg { transition: none; } }
+
+/* Блок товаров */
+.fk-hs-pop {
+  position: absolute; z-index: 3; margin: 0; padding: 8px; list-style: none;
+  display: flex; gap: 8px; background: var(--fk-surface); border-radius: var(--fk-r-md);
+  box-shadow: 0 12px 32px rgba(3, 22, 39, .22);
+}
+.fk-hs-pop[hidden] { display: none; }
+.fk-mini {
+  position: relative; box-sizing: border-box; width: 150px; height: 280px; padding: 8px;
+  display: flex; flex-direction: column; gap: 4px; background: var(--fk-canvas); border-radius: 10px; overflow: hidden;
+}
+.fk-mini__media { display: block; flex: none; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; background: var(--tone); }
+.fk-mini__media.tone-light { background: var(--fk-surface); }
+.fk-mini__media svg { width: 100%; height: 100%; }
+.fk-mini .fk-fav-btn { top: 12px; right: 12px; width: 36px; height: 36px; }
+.fk-mini .fk-fav-btn svg { width: 18px; height: 18px; }
+.fk-mini__series { margin: 0; font-size: .75rem; line-height: 1.3; color: var(--fk-ink-muted); }
+.fk-mini__name { margin: 0; font-size: .8125rem; font-weight: 600; line-height: 1.3; }
+.fk-mini__name a {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  color: inherit; text-decoration: none;
+}
+.fk-mini__price { margin: 0; font-size: .9375rem; font-weight: 700; }
+.fk-mini .fk-btn { margin-top: auto; min-height: 44px; padding-inline: 8px; font-size: .875rem; }
+@media (max-width: 400px) { .fk-hs-pop { padding: 4px; gap: 4px; } }
