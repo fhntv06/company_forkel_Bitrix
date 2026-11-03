@@ -313,7 +313,7 @@
   var CODE_STUB = '00000019596';
   function codeRow() {
     return '<p class="fk-pdp__code">Код: <span data-code>' + CODE_STUB + '</span> ' +
-        '<button type="button" class="fk-copy-btn" data-copy-code aria-label="Скопировать код: ' + CODE_STUB + '"><span aria-hidden="true"></span></button> ' + tag('пример') + '</p>';
+        '<button type="button" class="fk-copy-btn" data-copy-code aria-label="Скопировать код: ' + CODE_STUB + '"><span aria-hidden="true"></span></button></p>';
   }
   function initReal(p) {
     var S = p.spec, root = document.getElementById('pdp');
