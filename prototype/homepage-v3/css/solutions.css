@@ -22,8 +22,11 @@
   position: relative; flex: 0 0 80%; height: clamp(560px, 48vw, 720px); scroll-snap-align: start;
   overflow: hidden; border-radius: var(--fk-r-lg); background: #D9D4CB; container-type: size;
 }
+/* Размытая копия фото заполняет пустые полосы на узких экранах */
+.fk-sol__slide::before { content: ""; position: absolute; inset: -24px; background: var(--img) center / cover; filter: blur(20px); }
 /* «Фото» 1:1 (2048×2048) покрывает слайд, как object-fit: cover; точки привязаны к нему в процентах */
-.fk-sol__art { position: absolute; left: 50%; top: 50%; width: max(100cqw, 100cqh); aspect-ratio: 1 / 1; transform: translate(-50%, -50%); }
+.fk-sol__art { position: absolute; left: 50%; top: 50%; width: max(100cqw, calc(100cqh * var(--ar, 1))); aspect-ratio: var(--ar, 1); transform: translate(-50%, -50%); }
+.fk-sol__art > img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .fk-sol__art > svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .fk-sol__slide > .fk-tag { position: absolute; left: 16px; bottom: 16px; z-index: 1; }
 .fk-sol-dots { display: flex; justify-content: center; margin-top: 8px; }
@@ -31,7 +34,11 @@
 .fk-sol-dot::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--fk-edge); transition: width var(--fk-dur) ease-out, background var(--fk-dur) ease-out; }
 .fk-sol-dot[aria-current="true"]::before { width: 28px; border-radius: 5px; background: var(--fk-ink); }
 .fk-sol-dot:focus-visible { outline: 3px solid var(--fk-ink); outline-offset: -4px; border-radius: 8px; }
-@media (max-width: 767px) { .fk-sol__slide { height: 640px; } }
+@media (max-width: 767px) {
+  /* узкий слайд: фото шире слайда в 1.5 раза и сдвинуто так, чтобы точки были видны; сверху и снизу — размытый фон */
+  .fk-sol__slide { height: 640px; }
+  .fk-sol__art { width: calc(100cqw * 1.5); aspect-ratio: var(--ar, 1); left: calc(100cqw * (0.5 - 1.5 * var(--cx, .5))); transform: translateY(-50%); }
+}
 @media (prefers-reduced-motion: reduce) { .fk-sol__track { scroll-behavior: auto; } .fk-sol-dot::before, .fk-sol-btn { transition: none; } }
 
 /* Точка: зона нажатия 48 px, видимый круг 32 px с пульсирующим кольцом */
