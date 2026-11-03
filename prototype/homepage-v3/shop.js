@@ -300,6 +300,20 @@
     var c = e.target.closest && e.target.closest('[data-copyable]');
     if (c && c === e.target && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); doCopy(c); }
   });
+  /* Код товара над артикулом: значок копирования. Реального кода в данных нет — пример-заглушка */
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-copy-code]'); if (!b) return;
+    var t = b.parentNode.querySelector('[data-code]').textContent.trim();
+    copyText(t, function () {
+      b.classList.add('is-copied'); setTimeout(function () { b.classList.remove('is-copied'); }, 1200);
+      if (window.fkNote) window.fkNote('Скопировано: ' + t);
+    });
+  });
+  var CODE_STUB = '00000019596';
+  function codeRow() {
+    return '<p class="fk-pdp__code">Код: <span data-code>' + CODE_STUB + '</span> ' +
+      '<button type="button" class="fk-copy-btn" data-copy-code aria-label="Скопировать код: ' + CODE_STUB + '"><span aria-hidden="true"></span></button> ' + tag('пример') + '</p>';
+  }
   function initReal(id) {
     var R = D.REAL, o = R.offers.filter(function (x) { return x.id === id; })[0];
     var root = document.getElementById('pdp');
@@ -322,6 +336,7 @@
         '<button type="button" class="fk-dl" data-dl aria-label="Скачать фото"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg></button></div>' +
         '<div class="fk-pdp__info">' +
         '<h1 class="fk-pdp__title">' + R.name + '</h1>' +
+        codeRow() +
         '<p class="fk-pdp__sku">Артикул: ' + o.sku + '</p>' +
         '<p class="fk-pdp__price">' + D.fmt(R.price) + '</p>' +
         '<p class="fk-pdp__stock">В наличии: ' + o.qty.toLocaleString('ru-RU') + ' шт.</p>' +
@@ -372,6 +387,7 @@
         '<p class="fk-cfg__tag">Иллюстрация, не фото</p></div>' +
       '<div class="fk-pdp__info">' +
         '<h1 class="fk-pdp__title">' + p.name + '</h1>' +
+        codeRow() +
         '<p class="fk-pdp__sku">Артикул: <span class="fk-stub">' + p.sku + '</span> ' + tag('заглушка') + '</p>' +
         '<p class="fk-pdp__price"><span class="fk-stub">' + D.fmt(D.price(p)) + '</span> ' + tag('демо') + '</p>' +
         '<p class="fk-pdp__stock">' + STOCKS[p.stock] + ' ' + tag('демо') + '</p>' +

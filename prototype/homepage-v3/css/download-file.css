@@ -17,3 +17,10 @@
 }
 [data-copyable]:hover dd::after, [data-copyable]:focus-visible dd::after { opacity: .7; }
 [data-copyable].is-copied dd::after { opacity: 1; -webkit-mask-image: var(--ic-ok); mask-image: var(--ic-ok); color: var(--fk-ok); }
+/* Код товара над артикулом + кнопка копирования (зона нажатия 44 px, иконка 18 px) */
+.fk-pdp__code { color: var(--fk-ink-muted); }
+.fk-copy-btn { display: inline-grid; place-items: center; width: 44px; height: 44px; margin: -12px -6px -12px 0; padding: 0; border: 0; background: transparent; color: var(--fk-ink); cursor: pointer; vertical-align: middle; border-radius: 50%; }
+.fk-copy-btn span { width: 18px; height: 18px; background: currentColor; -webkit-mask: var(--ic-copy) center / contain no-repeat; mask: var(--ic-copy) center / contain no-repeat; }
+.fk-copy-btn:hover { background: var(--fk-surface); }
+.fk-copy-btn:focus-visible { outline: 3px solid var(--fk-ink); outline-offset: 0; }
+.fk-copy-btn.is-copied span { color: var(--fk-ok); -webkit-mask-image: var(--ic-ok); mask-image: var(--ic-ok); }
