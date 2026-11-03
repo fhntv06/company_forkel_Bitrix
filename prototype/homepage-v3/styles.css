@@ -28,6 +28,7 @@
 @import url("css/solutions.css");
 @import url("css/interiors.css");
 @import url("css/download-file.css");
+@import url("css/accessories.css");
 
 :root {
   --fk-canvas: #F2F2F2;                /* фон сайта (заказчик, 2026-10-30) */
