@@ -8,7 +8,6 @@
   transition: transform var(--fk-dur) ease-out, box-shadow var(--fk-dur) ease-out;
 }
 .fk-interior:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(3, 22, 39, .14); }
-.fk-interior:focus-visible { outline: 3px solid var(--fk-ink); outline-offset: 2px; }
 .fk-interior__media { position: relative; display: block; aspect-ratio: 4 / 3; background: var(--tone, #D9D4CB); }
 .fk-interior__media svg { width: 100%; height: 100%; display: block; }
 .fk-interior__media img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .4s ease-out; }
@@ -25,5 +24,5 @@
   transition: background var(--fk-dur) ease-out, transform var(--fk-dur) ease-out;
 }
 .fk-interior__arrow svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
-.fk-interior:hover .fk-interior__arrow, .fk-interior:focus-visible .fk-interior__arrow { background: var(--fk-bright); transform: translate(2px, -2px); }
+.fk-interior:hover .fk-interior__arrow { background: var(--fk-bright); transform: translate(2px, -2px); }
 @media (prefers-reduced-motion: reduce) { .fk-interior, .fk-interior__arrow, .fk-interior__media img { transition: none; } .fk-interior:hover { transform: none; } .fk-interior:hover .fk-interior__media img { transform: none; } }
