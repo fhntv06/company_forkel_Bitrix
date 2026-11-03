@@ -213,15 +213,16 @@
 
   /* ---------- Карточка товара ---------- */
   /* Кнопки материалов и попап с видео (только реальная карточка) */
-  function resButtons() {
-    var L = D.REAL.links, ext = ' target="_blank" rel="noopener noreferrer"';
+  function resButtons(L) {
+    if (!L) return '';
+    var ext = ' target="_blank" rel="noopener noreferrer"';
     return '<div class="fk-res" role="group" aria-label="Материалы к товару">' +
-        '<a class="fk-chip fk-btn--secondary" href="' + L.model + '"' + ext + '>3D-модель<span class="fk-vh"> (откроется в новой вкладке)</span></a>' +
-        '<button class="fk-chip fk-btn--secondary" type="button" data-video>Видео</button>' +
-        '<a class="fk-chip fk-btn--secondary" href="' + L.manual + '"' + ext + '>Инструкция<span class="fk-vh"> (PDF, откроется в новой вкладке)</span></a>' +
+        (L.model ? '<a class="fk-chip fk-btn--secondary" href="' + L.model + '"' + ext + '>3D-модель<span class="fk-vh"> (откроется в новой вкладке)</span></a>' : '') +
+        (L.video ? '<button class="fk-chip fk-btn--secondary" type="button" data-video>Видео</button>' : '') +
+        (L.manual ? '<a class="fk-chip fk-btn--secondary" href="' + L.manual + '"' + ext + '>Инструкция<span class="fk-vh"> (PDF, откроется в новой вкладке)</span></a>' : '') +
         '</div>';
   }
-  function openVideo(opener) {
+  function openVideo(opener, src) {
     var m = document.getElementById('fk-video');
     if (!m) {
       m = document.createElement('div');
@@ -235,7 +236,7 @@
       document.addEventListener('focusin', function (e) { if (!m.hidden && !m.contains(e.target)) m.querySelector('.fk-modal__x').focus(); });
     }
     m._opener = opener;
-    m.querySelector('iframe').src = D.REAL.links.video;
+    m.querySelector('iframe').src = src;
     m.hidden = false;
     document.body.style.overflow = 'hidden';
     m.querySelector('.fk-modal__x').focus();
@@ -312,51 +313,48 @@
   var CODE_STUB = '00000019596';
   function codeRow() {
     return '<p class="fk-pdp__code">Код: <span data-code>' + CODE_STUB + '</span> ' +
-      '<button type="button" class="fk-copy-btn" data-copy-code aria-label="Скопировать код: ' + CODE_STUB + '"><span aria-hidden="true"></span></button> ' + tag('пример') + '</p>';
+        '<button type="button" class="fk-copy-btn" data-copy-code aria-label="Скопировать код: ' + CODE_STUB + '"><span aria-hidden="true"></span></button> ' + tag('пример') + '</p>';
   }
-  function initReal(id) {
-    var R = D.REAL, o = R.offers.filter(function (x) { return x.id === id; })[0];
-    var root = document.getElementById('pdp');
-    document.title = 'FORKEL — ' + R.name + ' (прототип)';
-    document.getElementById('pdp-crumb').textContent = R.name;
-    var cl = document.getElementById('pdp-cat-crumb'); cl.textContent = 'Розетки'; cl.href = 'catalog.html?category=sockets';
+  function initReal(p) {
+    var S = p.spec, root = document.getElementById('pdp');
+    var o = S.items.filter(function (x) { return x.id === p.id; })[0];
+    document.title = 'FORKEL — ' + S.name + ' (прототип)';
+    document.getElementById('pdp-crumb').textContent = S.name;
+    var cl = document.getElementById('pdp-cat-crumb'); cl.textContent = catName(S.cat); cl.href = 'catalog.html?category=' + S.cat;
     var rel = document.getElementById('pdp-related'); if (rel) rel.closest('section').hidden = true;
-    document.querySelector('.fk-pdp__proto').textContent = 'Данные карточки предоставлены заказчиком (источник — ledron.ru). Изображения загружаются с сайта-источника: права и пригодность для публикации не подтверждены. Корзина и покупка для этой карточки в прототипе не работают.';
+    var note = document.querySelector('.fk-pdp__proto'); if (note) note.hidden = true;
+    var acc = document.getElementById('pdp-accessories'); if (acc) acc.hidden = S.cat === 'frames';
     function rows(a) { return a.map(function (r) { return '<div class="fk-char"><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>'; }).join(''); }
-    var groups = [
-      ['Основные', [['Бренд', 'FORKEL'], ['Серия', R.series], ['Тип', 'Розетка'], ['Артикул', o.sku], ['Гарантия', R.warranty]]],
-      ['Электрические', [['Питание', '250V 50–60 Гц'], ['Номинальный ток', '16 А'], ['Степень защиты', 'IP20'], ['Количество постов', '1'], ['Исполнение', 'с заземляющим штырём']]],
-      ['Монтаж и материал', [['Тип монтажа', 'встраиваемый'], ['Способ подключения', 'винтовой зажим, клемма'], ['Тип крепления', 'в распор (лапками) и винтами'], ['Материал', 'термопласт матовый'], ['Особенность', 'рамка на 1–5 постов комплектуется отдельно']]]
-    ];
-    var sw = R.offers.map(function (x) {
-      return '<a class="fk-swatch" href="product.html?id=' + x.id + '" style="--finish:' + x.hex + '" aria-label="' + x.color + '"' + (x.id === id ? ' aria-current="true"' : '') + '></a>';
+    var groups = S.groups.map(function (g) { return [g[0], g[1].slice()]; });
+    if (o.sku !== '—') groups[0][1].push(['Артикул', o.sku]);
+    var sw = S.items.map(function (x) {
+      return '<a class="fk-swatch" href="product.html?id=' + x.id + '" style="--finish:' + D.PALETTE[x.color].hex + '" aria-label="' + COLORS[x.color] + '"' + (x.id === p.id ? ' aria-current="true"' : '') + '></a>';
     }).join('');
+
     root.innerHTML =
-        '<div class="fk-pdp__media tone-light"><img src="' + encodeURI(o.img) + '" alt="' + R.name + ', ' + o.color.toLowerCase() + '" style="width:100%;height:100%;object-fit:contain" onerror="this.style.display=\'none\'">' +
+        '<div class="fk-pdp__media tone-light"><img src="' + o.img + '" alt="' + S.name + ', ' + COLORS[o.color].toLowerCase() + '" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display=\'none\'">' +
         '<button type="button" class="fk-dl" data-dl aria-label="Скачать фото"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg></button></div>' +
         '<div class="fk-pdp__info">' +
-        '<h1 class="fk-pdp__title">' + R.name + '</h1>' +
+        '<h1 class="fk-pdp__title">' + S.name + '</h1>' +
         codeRow() +
-        '<p class="fk-pdp__sku">Артикул: ' + o.sku + '</p>' +
-        '<p class="fk-pdp__price">' + D.fmt(R.price) + '</p>' +
-        '<p class="fk-pdp__stock">В наличии: ' + o.qty.toLocaleString('ru-RU') + ' шт.</p>' +
-        resButtons() +
-        '<div><p class="fk-step__label">Цвет: ' + o.color + '</p><div class="fk-swatches">' + sw + '</div></div>' +
-        '<button class="fk-btn fk-btn--primary fk-pdp__cart" type="button" data-add="' + id + '">В корзину</button>' +
+        (o.sku !== '—' ? '<p class="fk-pdp__sku">Артикул: ' + o.sku + '</p>' : '') +
+        '<p class="fk-pdp__price">' + D.fmt(S.price) + '</p>' +
+        '<p class="fk-pdp__stock">' + (o.qty ? 'В наличии: ' + o.qty.toLocaleString('ru-RU') + ' шт.' : STOCKS.unknown) + '</p>' +
+        resButtons(S.links) +
+        '<div><p class="fk-step__label">Цвет: ' + COLORS[o.color] + '</p><div class="fk-swatches">' + sw + '</div></div>' +
+        '<button class="fk-btn fk-btn--primary fk-pdp__cart" type="button" data-add="' + p.id + '">В корзину</button>' +
         '<button class="fk-btn fk-btn--secondary fk-pdp__oneclick" type="button" data-stub="Покупка в один клик не реализована.">Купить в 1 клик</button>' +
         '<button class="fk-btn fk-btn--secondary fk-pdp__oneclick" type="button" data-stub="Форма вопроса не реализована в прототипе.">Задать вопрос</button>' +
         '</div>' +
-        descBlock('<p>Розетка одинарная с заземлением и защитными шторками из серии ' + R.series + '. Номинальный ток 16 А, напряжение 250 В, 50–60 Гц, степень защиты IP20. ' +
-            'Монтаж встраиваемый: механизм крепится в распор лапками и винтами, провода подключаются винтовым зажимом. ' +
-            'Рамка на 1–5 постов приобретается отдельно. Гарантия ' + R.warranty + '.</p>') +
         '<section class="fk-pdp__specs"><h2>Характеристики</h2><div class="fk-chars-groups">' +
         groups.map(function (g) { return '<div class="fk-chars"><h3>' + g[0] + '</h3><dl>' + rows(g[1]) + '</dl></div>'; }).join('') +
+        (S.desc ? descBlock(S.desc) : '') +
         '</div></section>';
 
     root.addEventListener('click', function (e) {
       var v = e.target.closest('[data-video]');
-      if (v) openVideo(v);
-      if (e.target.closest('[data-dl]')) downloadPhoto(o.img, o.sku.replace(/\s+/g, '-') + '.webp');
+      if (v) openVideo(v, S.links.video);
+      if (e.target.closest('[data-dl]')) downloadPhoto(o.img, (o.sku !== '—' ? o.sku : S.name + ' ' + COLORS[o.color]).replace(/\s+/g, '-') + '.webp');
     });
     enhanceChars();
   }
@@ -365,7 +363,9 @@
     var root = document.getElementById('pdp');
     var id = parseInt(param('id'), 10);
 
-    if (D.REAL.offers.some(function (o) { return o.id === id; })) return initReal(id);
+    var any = D.byId(id);
+    if (any && any.real) return initReal(any);
+    var accDemo = document.getElementById('pdp-accessories'); if (accDemo) accDemo.hidden = false;
 
     var p = PRODUCTS.filter(function (x) { return x.id === id; })[0];
     if (!p) {
@@ -374,6 +374,9 @@
       root.innerHTML = '<div class="fk-empty"><h1 class="fk-pdp__title">Товар не найден</h1><p>В прототипе есть только демонстрационные товары.</p><p><a class="fk-btn fk-btn--primary" href="catalog.html">Перейти в каталог</a></p></div>';
       return;
     }
+
+    if (accDemo && p.type === 'frame') accDemo.hidden = true;
+
     var cname = catName(p.cat);
     document.title = 'FORKEL — ' + p.name + ' (прототип)';
     document.getElementById('pdp-crumb').textContent = p.name;

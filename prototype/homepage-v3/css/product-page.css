@@ -53,6 +53,6 @@
   .fk-pdp { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: start; column-gap: 32px; }
   .fk-pdp__media { grid-column: 1 / span 7; aspect-ratio: 5 / 4; }
   .fk-pdp__info { grid-column: 8 / span 5; padding: 40px; }
-  .fk-chars-groups { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: 32px; }
+  .fk-chars-groups { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: 64px; }
   .fk-chars { padding: 32px; }
 }
