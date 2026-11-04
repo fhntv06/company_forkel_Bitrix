@@ -85,3 +85,5 @@
   .fk-logo { font-size: 1.1rem; letter-spacing: .06em; }
   .fk-menu-btn { padding-inline: 12px; }
 }
+/* Признак «демо-вход выполнен» на иконке кабинета (auth.js ставит .is-in) */
+.fk-icon-btn--account.is-in::after { content: ""; position: absolute; top: 8px; right: 8px; width: 10px; height: 10px; border-radius: 50%; background: var(--yellow); border: 2px solid var(--surface); }
