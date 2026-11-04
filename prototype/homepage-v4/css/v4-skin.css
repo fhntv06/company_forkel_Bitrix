@@ -24,10 +24,11 @@
   --fk-bright: var(--yellow);
   --fk-on-bright: var(--ink);
 
-  /* Статусы: в палитре V4 их нет — значения V3 сохранены до решения владельца (вопрос в work-log) */
-  --fk-ok: #1F7A3D;
-  --fk-warn: #8A5A00;
-  --fk-error: #B3261E;
+  /* Статусы (решение владельца 2026-11-04: оттенки под палитру V4, приглушённые, тёплые).
+     Контраст текста: на белом 6.2 / 6.3 / 6.8, на фоне V4 5.7 / 5.8 / 6.3 (WCAG AA) */
+  --fk-ok: #3E6B4B;
+  --fk-warn: #7D5A14;
+  --fk-error: #9E3A31;
 
   /* Шрифт, радиусы, ритм, фокус */
   --fk-font: var(--font);
@@ -52,3 +53,7 @@
   --wall: var(--surface);
   --shade: rgba(43, 43, 43, 0.08);
 }
+
+/* Общие утилиты разметки V3 (классы сохранены, вид — по V4) */
+.fk-container { width: 100%; max-width: 1360px; margin-inline: auto; padding-inline: var(--pad); }
+.fk-vh { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
