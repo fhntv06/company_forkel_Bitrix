@@ -57,3 +57,19 @@
 .fin-gold       { --finish: #C3A464; --finish-2: #B39455; --edge: rgba(30,32,34,.35); }
 .fin-anthracite { --finish: #4A4F55; --finish-2: #3B4046; --edge: #6D7278; --hole: #0F1011; }
 .fin-bronze     { --finish: #8A6F55; --finish-2: #7A6049; --edge: rgba(30,32,34,.45); --hole: #1E2022; }
+
+/* Поля форм, флажок и ошибки (общие для обратной связи, звонка, оформления, кабинета) */
+.fk-field__label { display: block; margin-bottom: 8px; font-size: .875rem; font-weight: 600; }
+.fk-field { display: block; width: 100%; min-height: 52px; padding: 0 18px; font: inherit; color: var(--ink); background: var(--surface); border: 1.5px solid var(--veil); border-radius: var(--r-s); }
+.fk-field:hover { border-color: var(--silver); }
+.fk-field:focus { border-color: var(--ink); background: var(--bg); }
+.fk-field::placeholder { color: var(--fog); opacity: 1; }
+.fk-field[aria-invalid="true"] { border-color: var(--fk-error); }
+.fk-co-field { min-width: 0; }
+.fk-co-textarea { min-height: 120px; padding-block: 14px; resize: vertical; }
+.fk-co-error { margin-top: 6px; font-size: .875rem; font-weight: 600; color: var(--fk-error); }
+.fk-co-errors { padding: 16px 20px; font-weight: 600; color: var(--fk-error); background: color-mix(in srgb, var(--fk-error) 10%, #fff); border-radius: var(--r-s); }
+.fk-co-errors a { display: inline-block; margin-right: 12px; padding-block: 8px; color: inherit; }
+.fk-co-errors[hidden], .fk-co-error[hidden] { display: none; }
+.fk-check { display: flex; align-items: center; gap: 12px; min-height: 48px; cursor: pointer; }
+.fk-check input { width: 22px; height: 22px; margin: 0; flex: none; accent-color: var(--ink); }

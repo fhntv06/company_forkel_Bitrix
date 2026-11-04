@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/header.css">
   <link rel="stylesheet" href="css/footer.css">
   <link rel="stylesheet" href="css/search.css">
+  <link rel="stylesheet" href="css/feedback.css">
   <!-- Компоненты V3 (css/*.css) подключаются здесь по мере переноса, затем слой оформления: -->
   <link rel="stylesheet" href="css/v4-skin.css">
 </head>
@@ -144,6 +145,8 @@
   <section class="sec wrap" aria-labelledby="page-t">
     <h1 id="page-t">Заголовок страницы</h1>
     <p class="muted">Шаблон страницы V4: сюда переносятся страницы V3 с сохранением структуры и функций.</p>
+    <!-- Пример кнопки, открывающей окно обратной связи (на страницах V3 — contacts, about, cooperation) -->
+    <p style="margin-top:20px"><button class="fk-btn fk-btn--primary" type="button" data-feedback aria-haspopup="dialog">Написать нам</button></p>
   </section>
 </main>
 
@@ -212,6 +215,7 @@
 <script src="favorites.js"></script>
 <script src="auth.js"></script>
 <script src="search.js"></script>
+<script src="feedback.js"></script>
 <script src="social.js"></script>
 </body>
 </html>
