@@ -84,7 +84,7 @@
   /* ---------- Новинки (демонстрационные карточки, без цен и остатков) ---------- */
   var items = [['Демонстрационный выключатель', 0], ['Демонстрационная розетка', 2], ['Демонстрационная рамка', 4], ['Демонстрационный светорегулятор', 5]];
   var prod = document.getElementById('prod');
-  items.forEach(function (it, i) {
+  if (prod) items.forEach(function (it, i) {
     var c = COLORS[it[1]];
     var li = document.createElement('li');
     li.className = 'card';

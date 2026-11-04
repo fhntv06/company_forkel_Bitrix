@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FORKEL — шаблон страницы V4 (прототип)</title>
+  <meta name="description" content="Шаблон страниц прототипа FORKEL V4. Не является рабочим сайтом.">
+  <meta name="robots" content="noindex, nofollow">
+  <script>document.documentElement.className = 'js';</script>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Компоненты V3 (css/*.css) подключаются здесь по мере переноса, затем слой оформления: -->
+  <link rel="stylesheet" href="css/v4-skin.css">
+</head>
+<body>
+
+<a class="skip" href="#main">К содержимому</a>
+
+<!-- Шапка: временный каркас V4 до этапа M2 (там — шапка V3 в стиле V4: каталог, поиск, избранное, корзина, ЛК) -->
+<header class="head" id="top">
+  <div class="wrap head__row">
+    <a class="logo" href="index.html" aria-label="FORKEL, на главную">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 24A16 16 0 0 1 20 4" fill="none" stroke="var(--yellow)" stroke-width="2.4" stroke-linecap="round"/></svg>FORKEL
+    </a>
+    <nav class="nav" id="nav" aria-label="Основная навигация">
+      <ul>
+        <li><a href="index.html#collections">Коллекции</a></li>
+        <li><a href="index.html#configurator">Подбор</a></li>
+        <li><a href="index.html#new">Новинки</a></li>
+        <li><a href="index.html#contacts">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="head__tools">
+      <button class="icon menu" type="button" aria-expanded="false" aria-controls="nav"><span class="vh">Меню</span><i></i></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="sec wrap" aria-labelledby="page-t">
+    <h1 id="page-t">Заголовок страницы</h1>
+    <p class="muted">Шаблон страницы V4: сюда переносятся страницы V3 с сохранением структуры и функций.</p>
+  </section>
+</main>
+
+<!-- Подвал: временный каркас V4 до этапа M3 -->
+<footer class="foot" id="contacts">
+  <div class="wrap foot__row">
+    <div><p class="logo logo--inv">FORKEL</p><p class="muted-inv">Розетки, выключатели и рамки.</p></div>
+    <div><p>Телефон, email и адрес добавит владелец.</p></div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>

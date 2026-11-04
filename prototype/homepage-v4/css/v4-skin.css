@@ -1,0 +1,54 @@
+/* FORKEL V4 — слой оформления (вариант A, docs/design/v3-to-v4-migration.md, раздел 4).
+   Связывает токены V3 (--fk-*) с токенами V4 из ../styles.css. Подключать ПОСЛЕ styles.css V4 и
+   ПОСЛЕ перенесённых компонентов V3 (css/*.css), чтобы значения здесь имели приоритет.
+   Новых цветов нет: все значения — токены V4 или производные от них. Исключение — статусные цвета (см. ниже). */
+
+:root {
+  /* Поверхности и текст */
+  --fk-canvas: var(--bg);
+  --fk-surface: var(--surface);
+  --fk-tint: var(--surface);
+  --fk-line: var(--veil);
+  --fk-edge: var(--fog);
+  --fk-ink: var(--ink);
+  --fk-ink-muted: var(--iron);
+  --fk-ink-inverse: #FFFFFF;
+  --fk-inverse-muted: var(--silver);
+
+  /* Акцент V4: тёмные основные кнопки (.btn--dark), жёлтый — только мелкие детали и выбранное состояние */
+  --fk-accent: var(--ink);
+  --fk-on-accent: #FFFFFF;
+  --fk-action: var(--yellow);
+  --fk-on-action: var(--ink);
+  --fk-action-hover: color-mix(in srgb, var(--yellow) 86%, var(--ink));
+  --fk-bright: var(--yellow);
+  --fk-on-bright: var(--ink);
+
+  /* Статусы: в палитре V4 их нет — значения V3 сохранены до решения владельца (вопрос в work-log) */
+  --fk-ok: #1F7A3D;
+  --fk-warn: #8A5A00;
+  --fk-error: #B3261E;
+
+  /* Шрифт, радиусы, ритм, фокус */
+  --fk-font: var(--font);
+  --fk-radius: var(--r-s);
+  --fk-r-md: var(--r-s);
+  --fk-r-lg: var(--r-m);
+  --fk-dur: 200ms;
+  --fk-focus: 0 0 0 2px var(--bg), 0 0 0 4px var(--ink);
+  --fk-margin: var(--pad);
+  --fk-col-gap: var(--gap);
+  --fk-section-gap: var(--sec);
+  --fk-header-h: 84px;
+
+  /* Размеры шрифта: как у заголовков V4 */
+  --fk-fs-display: clamp(2.1rem, 1.2rem + 3.6vw, 4.2rem);
+  --fk-fs-h2: clamp(1.6rem, 1.1rem + 1.8vw, 2.6rem);
+  --fk-fs-h3: 1.15rem;
+  --fk-fs-body: 1rem;
+  --fk-fs-small: 0.875rem;
+
+  /* Образцы изделий */
+  --wall: var(--surface);
+  --shade: rgba(43, 43, 43, 0.08);
+}
