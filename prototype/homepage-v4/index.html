@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="css/footer.css">
   <link rel="stylesheet" href="css/search.css">
   <link rel="stylesheet" href="css/feedback.css">
+  <link rel="stylesheet" href="configurator.css">
   <link rel="stylesheet" href="css/v4-skin.css">
 </head>
 <body>
@@ -237,17 +238,45 @@
 
   <!-- 5. Подбор -->
   <section class="sec wrap" id="configurator" aria-labelledby="cfg-t">
-    <div class="cfg">
-      <div class="cfg__view" id="cfg-view" style="--frame:#FBFBFA;--mech:#FBFBFA">
-        <svg viewBox="0 0 520 200" role="img" aria-label="Демонстрационное превью выбранных цветов"><use href="#set" filter="url(#lift)"/></svg>
-        <p class="stage__note">Демо: цветовая заливка, не слои изделий</p>
+    <div class="cfg" id="cfg">
+      <div class="cfg__view">
+        <div class="cfg__photo" id="cfg-photo" role="img" aria-label="Превью выбранной комбинации">
+          <img id="cfg-img-mech" src="assets/images/tcvet_mehanizma_belyy_glyantsevyy.png" alt="" width="500" height="500">
+          <img id="cfg-img-frame" src="assets/images/tcvet_ramki_belyy_glyantsevyy.png" alt="" width="500" height="500">
+        </div>
+        <p class="stage__note">Образцы цвета — слои из примера, не продукция FORKEL (заглушка)</p>
       </div>
       <div class="cfg__ctl">
         <h2 id="cfg-t">Соберите комплект по цвету</h2>
-        <fieldset><legend id="l-f">Цвет рамки: <b id="o-f">Белый глянцевый</b></legend><div class="sw" role="radiogroup" aria-labelledby="l-f" data-part="frame"></div></fieldset>
-        <fieldset><legend id="l-m">Цвет механизма: <b id="o-m">Белый глянцевый</b></legend><div class="sw" role="radiogroup" aria-labelledby="l-m" data-part="mech"></div></fieldset>
-        <p class="note">Правила совместимости пока неизвестны, поэтому доступны все сочетания. Цена и артикул комплекта появятся после утверждения данных.</p>
-        <div class="actions"><a class="btn btn--dark" href="configurator.html">Открыть подбор <svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></a></div>
+        <div class="cfg__step"><p class="cfg__lbl" id="cfg-collection-label">Коллекция</p>
+          <div class="fk-chips" role="radiogroup" aria-labelledby="cfg-collection-label" data-part="collection"><button type="button" role="radio" aria-checked="true" class="fk-chip" data-key="F70">F70</button><button type="button" role="radio" aria-checked="false" class="fk-chip" data-key="F55">F55</button></div></div>
+        <div class="cfg__step"><p class="cfg__lbl" id="cfg-material-label">Материал рамки</p>
+          <div class="fk-chips" role="radiogroup" aria-labelledby="cfg-material-label" data-part="material"><button type="button" role="radio" aria-checked="true" class="fk-chip" data-key="glass">Стекло</button><button type="button" role="radio" aria-checked="false" class="fk-chip" data-key="aluminum">Алюминий</button><button type="button" role="radio" aria-checked="false" class="fk-chip" data-key="plastic">Термопласт</button></div></div>
+        <div class="cfg__step"><p class="cfg__lbl" id="cfg-type-label">Тип изделия</p>
+          <div class="cfg__types" role="radiogroup" aria-labelledby="cfg-type-label" data-part="type"><button type="button" role="radio" aria-checked="true" class="cfg__type fin-white" data-symbol="p-switch" data-name="Выключатель"><svg viewBox="0 0 150 150" aria-hidden="true" focusable="false"><use href="#p-switch" width="150" height="150"/></svg><span>Выключатель</span></button><button type="button" role="radio" aria-checked="false" class="cfg__type fin-white" data-symbol="p-double" data-name="Двойной выключатель"><svg viewBox="0 0 150 150" aria-hidden="true" focusable="false"><use href="#p-double" width="150" height="150"/></svg><span>Двойной выключатель</span></button><button type="button" role="radio" aria-checked="false" class="cfg__type fin-white" data-symbol="p-socket" data-name="Розетка"><svg viewBox="0 0 150 150" aria-hidden="true" focusable="false"><use href="#p-socket" width="150" height="150"/></svg><span>Розетка</span></button></div></div>
+        <div class="cfg__step"><p class="cfg__lbl" id="cfg-frame-label">Цвет рамки: <b data-val="frame"></b></p>
+          <div class="sw sw--img" role="radiogroup" aria-labelledby="cfg-frame-label" data-part="frame"><button type="button" role="radio" aria-checked="true" data-fin="fin-white" data-name="Белый" title="Белый"><span class="vh">Белый</span></button><button type="button" role="radio" aria-checked="false" data-fin="fin-black" data-name="Чёрный" title="Чёрный"><span class="vh">Чёрный</span></button><button type="button" role="radio" aria-checked="false" data-fin="fin-gray" data-name="Серый" title="Серый"><span class="vh">Серый</span></button><button type="button" role="radio" aria-checked="false" data-fin="fin-lightgray" data-name="Светло-серый" title="Светло-серый"><span class="vh">Светло-серый</span></button><button type="button" role="radio" aria-checked="false" data-fin="fin-cashmere" data-name="Кашемир" title="Кашемир"><span class="vh">Кашемир</span></button><button type="button" role="radio" aria-checked="false" data-fin="fin-gold" data-name="Золотой" title="Золотой"><span class="vh">Золотой</span></button></div></div>
+        <div class="cfg__step"><p class="cfg__lbl" id="cfg-mech-label">Цвет механизма: <b data-val="mech"></b></p>
+          <div class="sw sw--img" role="radiogroup" aria-labelledby="cfg-mech-label" data-part="mech"><button type="button" role="radio" aria-checked="true" data-fin="fin-white" data-name="Белый" title="Белый"><span class="vh">Белый</span></button><button type="button" role="radio" aria-checked="false" data-fin="fin-black" data-name="Чёрный" title="Чёрный"><span class="vh">Чёрный</span></button><button type="button" role="radio" aria-checked="false" data-fin="fin-gray" data-name="Серый" title="Серый"><span class="vh">Серый</span></button><button type="button" role="radio" aria-checked="false" data-fin="fin-lightgray" data-name="Светло-серый" title="Светло-серый"><span class="vh">Светло-серый</span></button><button type="button" role="radio" aria-checked="false" data-fin="fin-cashmere" data-name="Кашемир" title="Кашемир"><span class="vh">Кашемир</span></button><button type="button" role="radio" aria-checked="false" data-fin="fin-gold" data-name="Золотой" title="Золотой"><span class="vh">Золотой</span></button></div></div>
+        <p class="note">Демо-режим. F70 — шесть цветов, F55 — четыре («Светло-серый» и «Кашемир» только у F70). Правила сочетания материала рамки и цвета не заданы, поэтому доступны все сочетания.</p>
+        <div class="fk-result" role="group" aria-labelledby="cfg-result-title">
+          <h3 id="cfg-result-title">Комплект <span class="fk-tag">демо</span></h3>
+          <dl class="cfg__spec">
+            <div><dt>Коллекция</dt><dd data-out="collection"></dd></div>
+            <div><dt>Материал рамки</dt><dd data-out="material"></dd></div>
+            <div><dt>Рамка</dt><dd data-out="frame"></dd></div>
+            <div><dt>Механизм</dt><dd data-out="mech"></dd></div>
+            <div><dt>Артикул комплекта</dt><dd data-out="kit-sku"></dd></div>
+            <div><dt>Цена комплекта</dt><dd data-out="kit-price"></dd></div>
+          </dl>
+          <p class="vh" id="cfg-summary" role="status"></p>
+          <div class="actions">
+            <button class="btn btn--dark" id="cfg-add" type="button">Добавить комплект в корзину</button>
+            <a class="btn btn--ghost" id="cfg-open" href="configurator.html">Открыть подбор <svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></a>
+          </div>
+          <p class="note"><a class="fk-link fk-link--tap" id="cfg-catalog-link" href="catalog.html">Подобрать отдельные изделия в каталоге</a></p>
+          <p class="note" id="cfg-cart-link" hidden><a class="fk-link fk-link--tap" href="cart.html">Перейти в корзину</a></p>
+        </div>
       </div>
     </div>
   </section>
@@ -387,6 +416,7 @@
 <script src="feedback.js"></script>
 <script src="callback.js"></script>
 <script src="social.js"></script>
+<script src="configurator.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

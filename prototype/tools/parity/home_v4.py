@@ -27,7 +27,7 @@ with sync_playwright() as p:
     pg=b.new_page(viewport={'width':1280,'height':800}); pg.goto(B+'index.html')
     hrefs=pg.evaluate("[...document.querySelectorAll('main a[href]')].map(a=>a.getAttribute('href'))")
     ck('3 direction tiles -> catalog categories',all(x in hrefs for x in ['catalog.html?category=sockets','catalog.html?category=switches','catalog.html?category=frames']))
-    ck('all-collections/new/configurator/cooperation/contacts links',all(x in hrefs for x in ['catalog.html','new.html','configurator.html','cooperation.html','contacts.html']))
+    ck('all-collections/new/configurator/cooperation/contacts links',all(x in hrefs for x in ['catalog.html','new.html','cooperation.html','contacts.html']) and any(h.startswith('configurator.html') for h in hrefs))
     stubs=pg.evaluate("[...document.querySelectorAll('[data-stub]')].map(a=>a.getAttribute('data-stub').slice(0,28))"); print('stubs left:',stubs)
     OKP=('Корзина не подключена','Запись на визит','Ссылка на','Страница гарантии','Страница политики','Поиск работает')
     ck('only expected stubs left (cards I3, showroom, social, guarantee, policy, search no-JS)',all(x.startswith(OKP) for x in stubs))

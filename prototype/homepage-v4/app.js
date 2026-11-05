@@ -1,4 +1,4 @@
-/* FORKEL — прототип главной V4. Только поведение интерфейса главной: выбор цвета в подборе, карточки новинок.
+/* FORKEL — прототип главной V4. Только поведение интерфейса главной: связки подбора, карточки новинок.
    Нет запросов к серверу и хранения данных. Цвета и карточки — демонстрационные. */
 (function () {
   'use strict';
@@ -10,51 +10,26 @@
 
   /* Пояснения [data-stub], меню и шапка — site.js (общие для всех страниц) */
 
-  /* ---------- Подбор по цвету: две радиогруппы, превью перекрашивается ---------- */
-  var view = document.getElementById('cfg-view');
-  var state = { frame: 0, mech: 0 };
-  var out = { frame: document.getElementById('o-f'), mech: document.getElementById('o-m') };
-
-  function paint(part) {
-    var c = COLORS[state[part]];
-    view.style.setProperty(part === 'frame' ? '--frame' : '--mech', c[2]);
-    out[part].textContent = c[1];
-  }
-  [].forEach.call(document.querySelectorAll('.sw'), function (group) {
-    var part = group.getAttribute('data-part');
-    COLORS.forEach(function (c) {
-      var b = document.createElement('button');
-      b.type = 'button'; b.setAttribute('role', 'radio'); b.title = c[1];
-      b.style.setProperty('--c', c[2]);
-      b.innerHTML = '<span class="vh">' + c[1] + '</span>';
-      group.appendChild(b);
-    });
-    var radios = [].slice.call(group.children);
-    function select(i, focus) {
-      state[part] = i;
-      radios.forEach(function (r, k) { r.setAttribute('aria-checked', String(k === i)); r.tabIndex = k === i ? 0 : -1; });
-      paint(part);
-      if (focus) radios[i].focus();
-    }
-    group.addEventListener('click', function (e) { var r = e.target.closest('[role="radio"]'); if (r) select(radios.indexOf(r), false); });
-    group.addEventListener('keydown', function (e) {
-      var i = radios.indexOf(document.activeElement);
-      var step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
-      if (i < 0 || !step) return;
-      e.preventDefault(); select((i + step + radios.length) % radios.length, true);
-    });
-    select(0, false);
-  });
-
-  /* Карточка коллекции переносит к подбору и подставляет цвет рамки коллекции (демо) */
+  /* ---------- Подбор: логика V3 — configurator.js (без изменений); здесь только связки главной ---------- */
+  /* Карточка коллекции (демо) подставляет цвет рамки в подборе */
   [].forEach.call(document.querySelectorAll('[data-col]'), function (a) {
     a.addEventListener('click', function () {
-      var map = { A: 5, B: 1, C: 3 };
-      var i = map[a.getAttribute('data-col')];
-      var radios = document.querySelectorAll('.sw[data-part="frame"] [role="radio"]');
-      if (radios[i]) radios[i].click();
+      var fin = { A: 'black', B: 'white', C: 'cashmere' }[a.getAttribute('data-col')];
+      var r = document.querySelector('#cfg [data-part="frame"] [data-fin="fin-' + fin + '"]');
+      if (r) r.click();
     });
   });
+  /* Ссылка «Открыть подбор» несёт выбранную коллекцию (страница подбора читает ?collection=) */
+  var cfg = document.getElementById('cfg'), open = document.getElementById('cfg-open');
+  if (cfg && open) {
+    var upd = function () {
+      var c = cfg.querySelector('[data-part="collection"] [aria-checked="true"]');
+      if (c) open.setAttribute('href', 'configurator.html?collection=' + c.getAttribute('data-key'));
+    };
+    cfg.addEventListener('click', function () { setTimeout(upd, 0); });
+    cfg.addEventListener('keydown', function () { setTimeout(upd, 0); });
+    upd();
+  }
 
   /* ---------- Новинки (демонстрационные карточки, без цен и остатков) ---------- */
   var items = [['Демонстрационный выключатель', 0], ['Демонстрационная розетка', 2], ['Демонстрационная рамка', 4], ['Демонстрационный светорегулятор', 5]];
