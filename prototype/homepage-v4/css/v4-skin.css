@@ -57,3 +57,6 @@
 /* Общие утилиты разметки V3 (классы сохранены, вид — по V4) */
 .fk-container { width: 100%; max-width: 1360px; margin-inline: auto; padding-inline: var(--pad); }
 .fk-vh { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* I3: на узких экранах подпись кнопки карточки «В корзину (демо)» переносится, а не упирается в края (в V3 — nowrap) */
+@media (max-width: 480px) { .fk-btn--card { white-space: normal; line-height: 1.2; padding: 6px 8px; } }

@@ -1,0 +1,13 @@
+/* FORKEL V4 — кнопка-сердце на карточке товара (избранное). Из V3 css/favorites.css перенесена только карточка (строки 1–14);
+   иконка в шапке — css/header.css, страница избранного — этап P. Значения — через токены v4-skin.css. */
+.fk-product-card { position: relative; }
+.fk-fav-btn {
+  position: absolute; top: 12px; right: 12px; z-index: 2;
+  display: grid; place-items: center; width: 44px; height: 44px; padding: 0;
+  border: 0; border-radius: 50%; background: var(--fk-surface); color: var(--fk-ink); cursor: pointer;
+  box-shadow: 0 1px 4px rgba(3, 22, 39, .18);
+}
+.fk-fav-btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linejoin: round; }
+.fk-fav-btn[aria-pressed="true"] svg { fill: var(--fk-bright); stroke: var(--fk-ink); }
+.fk-fav-btn:hover { background: var(--fk-bright); }
+.fk-fav-btn:focus-visible { outline: 3px solid var(--fk-ink); outline-offset: 2px; }

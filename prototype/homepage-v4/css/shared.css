@@ -73,3 +73,4 @@
 .fk-co-errors[hidden], .fk-co-error[hidden] { display: none; }
 .fk-check { display: flex; align-items: center; gap: 12px; min-height: 48px; cursor: pointer; }
 .fk-check input { width: 22px; height: 22px; margin: 0; flex: none; accent-color: var(--ink); }
+.fk-grid { display: grid; gap: var(--gap); }

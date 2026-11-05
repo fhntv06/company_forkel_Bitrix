@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="css/footer.css">
   <link rel="stylesheet" href="css/search.css">
   <link rel="stylesheet" href="css/feedback.css">
+  <link rel="stylesheet" href="css/products.css">
+  <link rel="stylesheet" href="css/favorites.css">
   <link rel="stylesheet" href="configurator.css">
   <link rel="stylesheet" href="css/v4-skin.css">
 </head>
@@ -284,8 +286,70 @@
   <!-- 6. Новинки -->
   <section class="sec wrap" id="new" aria-labelledby="new-t">
     <div class="head2"><h2 id="new-t">Новинки</h2><a class="btn btn--ghost btn--sm" href="new.html">Все новинки</a></div>
-    <p class="note">Демонстрационные карточки: цены, артикулы и наличие появятся из данных 1С.</p>
-    <ul class="prod" id="prod"></ul>
+    <p class="note">Демонстрационные данные: товары, артикулы, цены и остатки временные (из данных V3); появятся из данных 1С. Реальные товары заказчика помечены без «демо».</p>
+    <ul class="fk-grid fk-grid--products">
+          <li class="fk-product-card">
+            <a class="fk-product-card__media tone-light" href="product.html?id=13238" tabindex="-1" aria-hidden="true"><img src="https://ledron.ru/upload/webp/upload/resize_cache/iblock/063/a837nl6ruvlyujex721ocaehtz59ikui/1366_600_0/EU%20white%20(1).webp" alt="" loading="lazy" style="width:100%;height:100%;object-fit:contain"></a>
+            <h3 class="fk-product-card__name"><a href="product.html?id=13238">Розетка одинарная с заземлением с защитными шторками F70</a></h3>
+            <p class="fk-product-card__sku">Арт. EU Socket White</p>
+            <p class="fk-product-card__sku">Цвет: Белый</p>
+            <div class="fk-variants" data-variants="13238"></div>
+            <p class="fk-product-card__price">665&nbsp;₽</p>
+            <p class="fk-product-card__stock">В наличии</p>
+            <div class="fk-product-card__actions">
+              <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="13238">В корзину<span class="fk-vh"> — Розетка F70</span></button>
+              <a class="fk-btn fk-btn--secondary fk-btn--card" href="product.html?id=13238">Подробнее<span class="fk-vh"> — Розетка F70</span></a>
+            </div>
+          </li>
+          <li class="fk-product-card">
+            <span class="fk-product-card__media tone-light"><svg class="fin-white" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-switch" x="45" y="45" width="150" height="150"/></svg></span>
+            <h3 class="fk-product-card__name"><a href="product.html?id=1">Демонстрационный выключатель</a></h3>
+            <p class="fk-product-card__sku">Арт. <span class="fk-stub">ХХХ-001</span> <span class="fk-tag">заглушка</span></p>
+            <div class="fk-variants" data-variants="1"></div>
+            <p class="fk-product-card__price"><span class="fk-stub">200&nbsp;₽</span> <span class="fk-tag">демо</span></p>
+            <p class="fk-product-card__stock">Наличие уточняется</p>
+            <div class="fk-product-card__actions">
+              <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="1">В корзину<span class="fk-vh"> (демо) — Демонстрационный выключатель</span><span aria-hidden="true">&nbsp;(демо)</span></button>
+              <a class="fk-btn fk-btn--secondary fk-btn--card" href="product.html?id=1">Подробнее<span class="fk-vh"> — товар 1</span></a>
+            </div>
+          </li>
+          <li class="fk-product-card">
+            <span class="fk-product-card__media tone-sand"><svg class="fin-black" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-socket" x="45" y="45" width="150" height="150"/></svg></span>
+            <h3 class="fk-product-card__name"><a href="product.html?id=2">Демонстрационная розетка</a></h3>
+            <p class="fk-product-card__sku">Арт. <span class="fk-stub">ХХХ-002</span> <span class="fk-tag">заглушка</span></p>
+            <div class="fk-variants" data-variants="2"></div>
+            <p class="fk-product-card__price"><span class="fk-stub">100&nbsp;₽</span> <span class="fk-tag">демо</span></p>
+            <p class="fk-product-card__stock">Наличие уточняется</p>
+            <div class="fk-product-card__actions">
+              <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="2">В корзину<span class="fk-vh"> (демо) — Демонстрационная розетка</span><span aria-hidden="true">&nbsp;(демо)</span></button>
+              <a class="fk-btn fk-btn--secondary fk-btn--card" href="product.html?id=2">Подробнее<span class="fk-vh"> — товар 2</span></a>
+            </div>
+          </li>
+          <li class="fk-product-card">
+            <span class="fk-product-card__media tone-light"><svg class="fin-nickel" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-double" x="45" y="45" width="150" height="150"/></svg></span>
+            <h3 class="fk-product-card__name"><a href="product.html?id=3">Демонстрационный двойной выключатель</a></h3>
+            <p class="fk-product-card__sku">Арт. <span class="fk-stub">ХХХ-003</span> <span class="fk-tag">заглушка</span></p>
+            <div class="fk-variants" data-variants="3"></div>
+            <p class="fk-product-card__price"><span class="fk-stub">300&nbsp;₽</span> <span class="fk-tag">демо</span></p>
+            <p class="fk-product-card__stock">Наличие уточняется</p>
+            <div class="fk-product-card__actions">
+              <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="3">В корзину<span class="fk-vh"> (демо) — Демонстрационный двойной выключатель</span><span aria-hidden="true">&nbsp;(демо)</span></button>
+              <a class="fk-btn fk-btn--secondary fk-btn--card" href="product.html?id=3">Подробнее<span class="fk-vh"> — товар 3</span></a>
+            </div>
+          </li>
+          <li class="fk-product-card">
+            <span class="fk-product-card__media tone-stone"><svg class="fin-cashmere" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-frame" x="45" y="45" width="150" height="150"/></svg></span>
+            <h3 class="fk-product-card__name"><a href="product.html?id=4">Демонстрационная рамка</a></h3>
+            <p class="fk-product-card__sku">Арт. <span class="fk-stub">ХХХ-004</span> <span class="fk-tag">заглушка</span></p>
+            <div class="fk-variants" data-variants="4"></div>
+            <p class="fk-product-card__price"><span class="fk-stub">200&nbsp;₽</span> <span class="fk-tag">демо</span></p>
+            <p class="fk-product-card__stock">Наличие уточняется</p>
+            <div class="fk-product-card__actions">
+              <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="4">В корзину<span class="fk-vh"> (демо) — Демонстрационная рамка</span><span aria-hidden="true">&nbsp;(демо)</span></button>
+              <a class="fk-btn fk-btn--secondary fk-btn--card" href="product.html?id=4">Подробнее<span class="fk-vh"> — товар 4</span></a>
+            </div>
+          </li>
+        </ul>
   </section>
 
   <!-- 7. Шоурум -->

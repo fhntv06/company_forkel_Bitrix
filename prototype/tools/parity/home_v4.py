@@ -35,7 +35,7 @@ with sync_playwright() as p:
     pg.evaluate("FKCart.add({kind:'product',id:FKData.PRODUCTS[0].id},2)"); ck('cart counter in new header',pg.inner_text('[data-cart-count]')=='2'); pg.evaluate("localStorage.clear()")
     pg.click('.fk-search-btn'); ck('search dialog from home',pg.locator('.fk-sdlg').is_visible()); pg.keyboard.press('Escape')
     pg.locator('.fk-soc__btn').click(); ck('social widget',pg.locator('.fk-soc__item').count()==3)
-    ck('home config still works',pg.locator('.sw[data-part="frame"] [role=radio]').count()==6 and pg.locator('#prod li').count()==4)
+    ck('home config still works',pg.locator('.sw[data-part="frame"] [role=radio]').count()==6 and pg.locator('#new .fk-product-card').count()==5)
     m=b.new_page(viewport={'width':390,'height':760}); m.goto(B+'index.html'); m.click('.fk-menu-btn')
     h=m.evaluate("document.getElementById('site-nav').getBoundingClientRect().height"); ck('mobile menu full height (was 60px defect)',h>500); print('menu height',h)
     m.keyboard.press('Escape'); ck('menu closes',not m.locator('#site-nav').is_visible())
