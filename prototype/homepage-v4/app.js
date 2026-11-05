@@ -1,4 +1,4 @@
-/* FORKEL — прототип главной V4. Только поведение интерфейса: меню, выбор цвета в подборе, пояснения для неработающих элементов.
+/* FORKEL — прототип главной V4. Только поведение интерфейса главной: выбор цвета в подборе, карточки новинок.
    Нет запросов к серверу и хранения данных. Цвета и карточки — демонстрационные. */
 (function () {
   'use strict';
@@ -8,32 +8,7 @@
     ['cashmere', 'Кашемир матовый', '#D8CBB8'], ['gray', 'Серый', '#9A9DA2'], ['black', 'Чёрный матовый', '#2F3033']
   ];
 
-  /* ---------- Пояснения для неработающих элементов ---------- */
-  var toast = document.getElementById('toast'), timer;
-  function note(t) {
-    toast.textContent = t; toast.classList.add('on');
-    clearTimeout(timer); timer = setTimeout(function () { toast.classList.remove('on'); }, 3500);
-  }
-  document.addEventListener('click', function (e) {
-    var s = e.target.closest('[data-stub]');
-    if (!s) return;
-    e.preventDefault(); note(s.getAttribute('data-stub'));
-  });
-
-  /* ---------- Мобильное меню ---------- */
-  var btn = document.querySelector('.menu'), nav = document.getElementById('nav');
-  var wide = window.matchMedia('(min-width: 1100px)');
-  function setMenu(open) {
-    if (open) nav.setAttribute('data-open', ''); else nav.removeAttribute('data-open');
-    btn.setAttribute('aria-expanded', String(open));
-    document.body.style.overflow = open ? 'hidden' : '';
-  }
-  btn.addEventListener('click', function () { setMenu(btn.getAttribute('aria-expanded') !== 'true'); });
-  nav.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') { setMenu(false); btn.focus(); }
-  });
-  wide.addEventListener('change', function () { setMenu(false); });
+  /* Пояснения [data-stub], меню и шапка — site.js (общие для всех страниц) */
 
   /* ---------- Подбор по цвету: две радиогруппы, превью перекрашивается ---------- */
   var view = document.getElementById('cfg-view');
