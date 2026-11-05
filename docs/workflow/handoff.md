@@ -90,6 +90,17 @@
 
 ## 6. Текущая передача
 
+### Handoff — 2026-11-05 (PRT-003: группа M выполнена, следующий этап I1)
+
+**Состояние:** этапы M0–M7 выполнены и запушены в `role/implementation/ui-001-homepage`. В `prototype/homepage-v4/` есть: `css/v4-skin.css` (слой оформления), `css/shared.css`, `css/header.css`, `css/footer.css`, `css/search.css`, `css/feedback.css`; скрипты `site.js`, `cart.js`, `favorites.js`, `auth.js`, `search.js`, `feedback.js`, `callback.js`, `social.js`, `data.js` (скрипты V3 — без изменений); эталонная разметка шапки, подвала и спрайта изделий — `page-template.html`. `index.html` и `styles.css` главной V4 **не менялись** (эталон M0 `prototype/tools/parity/baseline/`).
+
+**Следующий этап:** I1 — подключить к главной V4 общие шапку и подвал, заменить `data-stub` и `#`-ссылки на страницы V3; перед правками предупредить, что главная осознанно меняется, после проверки обновить эталон отдельным коммитом. Старт этапа в новом чате — по `docs/workflow/stage-start-prompt.md`.
+
+**Известно:** мобильное меню на старой шапке главной V4 открывается высотой 60 px (в новой шапке исправлено); фото F70 с `ledron.ru` не загружаются из среды проверки; Safari/Firefox, реальные устройства, скринридеры не проверялись; ссылки шапки и подвала ведут на страницы V4, которых ещё нет (этапы P).
+
+**Решения владельца:** `docs/design/v3-to-v4-migration.md`, раздел 9.1; статусные цвета — оттенки V4 (2026-11-04).
+
+
 ### Handoff — 2026-11-03 (V3: избранное, соцсети, код товара, H-11 «Готовые решения», H-12 «Интерьеры»)
 
 **Передающая роль:** UI Implementation. **Изменено:** `prototype/homepage-v3/**`, `docs/design/parts_design_for_pages.md`, `current-state.md` (4.5), `task-queue.md`, `work-log.md`, этот файл. Документы Research (`homepage-requirements-map.md`, `homepage-spec.md`, `design-system.md`) и `docs/qa/**` не менялись.
