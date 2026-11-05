@@ -15,6 +15,9 @@
   <link rel="stylesheet" href="css/feedback.css">
   <link rel="stylesheet" href="css/products.css">
   <link rel="stylesheet" href="css/favorites.css">
+  <link rel="stylesheet" href="css/projects.css">
+  <link rel="stylesheet" href="css/solutions.css">
+  <link rel="stylesheet" href="css/interiors.css">
   <link rel="stylesheet" href="configurator.css">
   <link rel="stylesheet" href="css/v4-skin.css">
 </head>
@@ -352,6 +355,171 @@
         </ul>
   </section>
 
+  <!-- 6a. Проекты (H-10; разметка и данные V3) -->
+  <section class="sec wrap" id="projects" aria-labelledby="projects-title" data-proto-status="demo">
+    <div class="head2"><h2 id="projects-title">Проекты</h2><a class="btn btn--ghost btn--sm" href="projects.html">Все проекты</a></div>
+    <p class="note">Демонстрационные данные. Проектов, фотографий и использованных коллекций нет; на карточках — схематичные иллюстрации. Контент предоставит владелец.</p>
+    <div style="margin-top:24px">
+    <ul class="fk-grid fk-grid--projects">
+          <li class="is-p1">
+            <a class="fk-project-card tone-graphite" href="project.html?id=1">
+              <span class="fk-project-card__media">
+                <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use href="#room"/><use href="#shade150" transform="translate(250 120) scale(0.6667)"/><use class="fin-white" href="#p-switch" x="250" y="120" width="100" height="100"/><use href="#shade150" transform="translate(150 210) scale(0.4000)"/><use class="fin-white" href="#p-socket" x="150" y="210" width="60" height="60"/></svg>
+                <span class="fk-tag fk-tag--float">Заглушка: фото проекта</span>
+              </span>
+              <span class="fk-project-card__cap">
+                <h3 class="fk-project-card__name">Демонстрационный проект 1</h3>
+                <span class="fk-project-card__meta">Помещение — заглушка · Коллекция — заглушка</span>
+              </span>
+            </a>
+          </li>
+          <li class="">
+            <a class="fk-project-card tone-light" href="project.html?id=2">
+              <span class="fk-project-card__media">
+                <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use href="#room"/><use href="#shade150" transform="translate(165 100) scale(0.4667)"/><use class="fin-black" href="#p-socket" x="165" y="100" width="70" height="70"/></svg>
+                <span class="fk-tag fk-tag--float">Заглушка: фото проекта</span>
+              </span>
+              <span class="fk-project-card__cap">
+                <h3 class="fk-project-card__name">Демонстрационный проект 2</h3>
+                <span class="fk-project-card__meta">Помещение — заглушка · Коллекция — заглушка</span>
+              </span>
+            </a>
+          </li>
+          <li class="">
+            <a class="fk-project-card tone-sand" href="project.html?id=3">
+              <span class="fk-project-card__media">
+                <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use href="#room"/><use href="#shade150" transform="translate(140 92) scale(0.4267)"/><use class="fin-white" href="#p-double" x="140" y="92" width="64" height="64"/></svg>
+                <span class="fk-tag fk-tag--float">Заглушка: фото проекта</span>
+              </span>
+              <span class="fk-project-card__cap">
+                <h3 class="fk-project-card__name">Демонстрационный проект 3</h3>
+                <span class="fk-project-card__meta">Помещение — заглушка · Коллекция — заглушка</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+    </div>
+  </section>
+
+  <!-- 6b. Готовые решения (H-11; слайдер V3, нативный) -->
+  <section class="sec wrap fk-solutions" id="solutions" aria-labelledby="solutions-title" data-proto-status="demo">
+    <div class="head2"><h2 id="solutions-title">Готовые решения</h2></div>
+    <p class="note">Прототип: фото — материалы заказчика; товары в блоках — демонстрационные.</p>
+    <div style="margin-top:24px">
+    <div class="fk-sol" id="solutions-slider" role="region" aria-roledescription="карусель" aria-label="Готовые решения">
+          <button class="fk-sol-btn fk-sol-btn--prev" type="button" data-sol-prev aria-label="Предыдущий слайд"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button class="fk-sol-btn fk-sol-btn--next" type="button" data-sol-next aria-label="Следующий слайд"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+          <ul class="fk-sol__track" tabindex="0" aria-label="Слайды: прокрутка стрелками влево и вправо">
+          <li class="fk-sol__slide" style="--img:url('../assets/images/solutions/3P.jpg');--cx:.39" role="group" aria-roledescription="слайд" aria-label="Слайд 1 из 4">
+            <div class="fk-sol__art">
+              <img src="assets/images/solutions/3P.jpg" alt="Интерьер: три розетки в одной рамке на бежевой стене" decoding="async">
+            <button class="fk-hs" type="button" style="left:39%;top:50%" data-ids="1,2,3" aria-expanded="false" aria-label="Показать товары: средняя розетка"><span class="fk-hs__dot"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v12M2 8h12"/></svg></span></button>
+            </div>
+          </li>
+          <li class="fk-sol__slide" style="--img:url('../assets/images/solutions/2P.jpg');--cx:.5" role="group" aria-roledescription="слайд" aria-label="Слайд 2 из 4">
+            <div class="fk-sol__art">
+              <img src="assets/images/solutions/2P.jpg" alt="Интерьер: четырёхклавишный выключатель и розетка в одной рамке" loading="lazy" decoding="async">
+            <button class="fk-hs" type="button" style="left:50%;top:50%" data-ids="8,1" aria-expanded="false" aria-label="Показать товары: выключатель"><span class="fk-hs__dot"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v12M2 8h12"/></svg></span></button>
+            </div>
+          </li>
+          <li class="fk-sol__slide" style="--img:url('../assets/images/solutions/5ddb74f6_img_2K.jpg');--cx:.54" role="group" aria-roledescription="слайд" aria-label="Слайд 3 из 4">
+            <div class="fk-sol__art" style="--ar:1.2414">
+              <img src="assets/images/solutions/5ddb74f6_img_2K.jpg" alt="Интерьер: выключатель и розетка в серой рамке на кухне над мраморной столешницей" loading="lazy" decoding="async">
+            <button class="fk-hs" type="button" style="left:50%;top:50%" data-ids="4,5" aria-expanded="false" aria-label="Показать товары: выключатель"><span class="fk-hs__dot"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v12M2 8h12"/></svg></span></button>
+            </div>
+          </li>
+          <li class="fk-sol__slide" style="--img:url('../assets/images/solutions/a51201760d633fddf1e5fb9c2ee1ce92_1a6c08ec-f420-4d27-b8c9-562e8ca2fa67.jpg');--cx:.52" role="group" aria-roledescription="слайд" aria-label="Слайд 4 из 4">
+            <div class="fk-sol__art">
+              <img src="assets/images/solutions/a51201760d633fddf1e5fb9c2ee1ce92_1a6c08ec-f420-4d27-b8c9-562e8ca2fa67.jpg" alt="Интерьер: выключатель и розетка в рамке цвета металла над полкой с книгами" loading="lazy" decoding="async">
+            <button class="fk-hs" type="button" style="left:47%;top:48%" data-ids="6,7" aria-expanded="false" aria-label="Показать товары: выключатель"><span class="fk-hs__dot"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v12M2 8h12"/></svg></span></button>
+            </div>
+          </li>
+          </ul>
+        </div>
+        <div class="fk-sol-dots" role="group" aria-label="Выбор слайда"></div>
+    </div>
+  </section>
+
+  <!-- 6c. Интерьеры (H-12; разметка и тексты V3, карточки не ссылки) -->
+  <section class="sec wrap" id="interiors" aria-labelledby="interiors-title" data-proto-status="demo">
+    <div class="head2"><h2 id="interiors-title">Интерьеры</h2></div>
+    <p class="note">Прототип: фото — материалы заказчика.</p>
+    <div style="margin-top:24px">
+    <ul class="fk-grid fk-grid--interiors">
+          <li>
+            <a class="fk-interior" href="#">
+              <span class="fk-interior__media"><img src="assets/images/designs/09a7a6aa_img_4K.jpg" alt="" loading="lazy" decoding="async"></span>
+              <span class="fk-interior__body">
+                <h3 class="fk-interior__title">Гостиная с тройной рамкой в нейтральной гамме</h3>
+                <span class="fk-interior__text">Светлая гостиная с панорамным окном: блок выключателей на стене сочетается с отделкой и не перетягивает внимание.</span>
+              </span>
+              <span class="fk-interior__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+            </a>
+          </li>
+          <li>
+            <a class="fk-interior" href="#">
+              <span class="fk-interior__media"><img src="assets/images/designs/1G%20Cashmere.jpg" alt="" loading="lazy" decoding="async"></span>
+              <span class="fk-interior__body">
+                <h3 class="fk-interior__title">Холл с выключателем цвета «кашемир»</h3>
+                <span class="fk-interior__text">Тёплый бежевый выключатель в коридоре с зеркальными вставками и тонкой линейной подсветкой потолка.</span>
+              </span>
+              <span class="fk-interior__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+            </a>
+          </li>
+          <li>
+            <a class="fk-interior" href="#">
+              <span class="fk-interior__media"><img src="assets/images/designs/215850e6cd344fd9f815580cfbd74d4c_da1667d2-ec38-4e74-a2c0-c17b37f25be6.jpg" alt="" loading="lazy" decoding="async"></span>
+              <span class="fk-interior__body">
+                <h3 class="fk-interior__title">Кухня с двойной рамкой: выключатель и розетка</h3>
+                <span class="fk-interior__text">Серая рамка с выключателем и розеткой над рабочей зоной кухни, рядом с кофемашиной и зеленью.</span>
+              </span>
+              <span class="fk-interior__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+            </a>
+          </li>
+          <li>
+            <a class="fk-interior" href="#">
+              <span class="fk-interior__media"><img src="assets/images/designs/2e5a6406cab54b2416d63e19fc1e6c57_ca3ebba6-7e95-47d9-b108-03cc3c814268.jpg" alt="" loading="lazy" decoding="async"></span>
+              <span class="fk-interior__body">
+                <h3 class="fk-interior__title">Уютная кухня с деревом и медной посудой</h3>
+                <span class="fk-interior__text">Спокойный серый акцент на тёплой стене: сдвоенная рамка рядом с открытыми полками и деревянной столешницей.</span>
+              </span>
+              <span class="fk-interior__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+            </a>
+          </li>
+          <li>
+            <a class="fk-interior" href="#">
+              <span class="fk-interior__media"><img src="assets/images/designs/Thermostat.jpg" alt="" loading="lazy" decoding="async"></span>
+              <span class="fk-interior__body">
+                <h3 class="fk-interior__title">Гостиная с терморегулятором на стене</h3>
+                <span class="fk-interior__text">Тёмный терморегулятор с дисплеем на фактурной стене возле деревянных реек и мягкого кресла.</span>
+              </span>
+              <span class="fk-interior__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+            </a>
+          </li>
+          <li>
+            <a class="fk-interior" href="#">
+              <span class="fk-interior__media"><img src="assets/images/designs/a51201760d633fddf1e5fb9c2ee1ce92_1a6c08ec-f420-4d27-b8c9-562e8ca2fa67.jpg" alt="" loading="lazy" decoding="async"></span>
+              <span class="fk-interior__body">
+                <h3 class="fk-interior__title">Рабочий уголок с рамкой в металлическом цвете</h3>
+                <span class="fk-interior__text">Розетка и выключатель в рамке цвета металла над деревянной полкой с книгами и торшером.</span>
+              </span>
+              <span class="fk-interior__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+            </a>
+          </li>
+          <li>
+            <a class="fk-interior" href="#">
+              <span class="fk-interior__media"><img src="assets/images/designs/ed7610b49bb17b5ec2b457cf2966fc26_a36abffd-3740-4427-add8-19dd7800aa36.jpg" alt="" loading="lazy" decoding="async"></span>
+              <span class="fk-interior__body">
+                <h3 class="fk-interior__title">Кухонная зона со сдвоенной розеткой</h3>
+                <span class="fk-interior__text">Светлая рамка со сдвоенной розеткой над мраморной столешницей в минималистичной кухне.</span>
+              </span>
+              <span class="fk-interior__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+            </a>
+          </li>
+        </ul>
+    </div>
+  </section>
+
   <!-- 7. Шоурум -->
   <section class="sec wrap" id="showroom" aria-labelledby="sr-t">
     <div class="show">
@@ -480,6 +648,7 @@
 <script src="feedback.js"></script>
 <script src="callback.js"></script>
 <script src="social.js"></script>
+<script src="solutions.js"></script>
 <script src="configurator.js"></script>
 <script src="app.js"></script>
 </body>

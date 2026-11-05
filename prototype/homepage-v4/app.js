@@ -26,4 +26,10 @@
     upd();
   }
 
+  /* «Интерьеры»: карточки никуда не ведут (решение владельца 2026-11-03). В V3 клик по href="#" уводил страницу наверх —
+     в V4 переход отменяется (разметка V3 не менялась) */
+  [].forEach.call(document.querySelectorAll('.fk-interior[href="#"]'), function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); });
+  });
+
 })();
