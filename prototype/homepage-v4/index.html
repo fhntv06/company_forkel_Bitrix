@@ -1,642 +1,1001 @@
 <!doctype html>
 <html lang="ru" class="no-js">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FORKEL — прототип главной страницы V4</title>
-  <meta name="description" content="Визуальный прототип главной страницы FORKEL, версия 4. Не является рабочим сайтом.">
-  <meta name="robots" content="noindex, nofollow">
-  <script>document.documentElement.className = 'js';</script>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="css/shared.css">
-  <link rel="stylesheet" href="css/header.css">
-  <link rel="stylesheet" href="css/footer.css">
-  <link rel="stylesheet" href="css/search.css">
-  <link rel="stylesheet" href="css/feedback.css">
-  <link rel="stylesheet" href="css/products.css">
-  <link rel="stylesheet" href="css/favorites.css">
-  <link rel="stylesheet" href="css/projects.css">
-  <link rel="stylesheet" href="css/solutions.css">
-  <link rel="stylesheet" href="css/interiors.css">
-  <link rel="stylesheet" href="configurator.css">
-  <link rel="stylesheet" href="css/v4-skin.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FORKEL — прототип главной страницы V4</title>
+    <meta name="description"
+          content="Визуальный прототип главной страницы FORKEL, версия 4. Не является рабочим сайтом.">
+    <meta name="robots" content="noindex, nofollow">
+    <script>document.documentElement.className = 'js';</script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="css/feedback.css">
+    <link rel="stylesheet" href="css/products.css">
+    <link rel="stylesheet" href="css/favorites.css">
+    <link rel="stylesheet" href="css/projects.css">
+    <link rel="stylesheet" href="css/solutions.css">
+    <link rel="stylesheet" href="css/interiors.css">
+    <link rel="stylesheet" href="configurator.css">
+    <link rel="stylesheet" href="css/v4-skin.css">
 </head>
 <body>
 
 <!-- Спрайт изделий. Цвета берутся из CSS-переменных (--finish, --finish-2, --edge) — см. styles.css, .fin-* -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <defs>
-      <!-- Плоская длинная тень накладки 150×150 (косой свет слева сверху) -->
-      <polygon id="shade150" class="pl-shade" points="150,0 270,120 270,270 120,270 0,150 150,150"/>
+        <!-- Плоская длинная тень накладки 150×150 (косой свет слева сверху) -->
+        <polygon id="shade150" class="pl-shade" points="150,0 270,120 270,270 120,270 0,150 150,150"/>
     </defs>
     <symbol id="p-switch" viewBox="0 0 150 150">
-      <rect class="pl-face" x="0.5" y="0.5" width="149" height="149" rx="3"/>
-      <rect class="pl-inner" x="14" y="14" width="122" height="122" rx="2"/>
-      <rect class="pl-key" x="28" y="28" width="94" height="94" rx="2"/>
-      <path class="pl-line" d="M28 52H122"/>
+        <rect class="pl-face" x="0.5" y="0.5" width="149" height="149" rx="3"/>
+        <rect class="pl-inner" x="14" y="14" width="122" height="122" rx="2"/>
+        <rect class="pl-key" x="28" y="28" width="94" height="94" rx="2"/>
+        <path class="pl-line" d="M28 52H122"/>
     </symbol>
     <symbol id="p-double" viewBox="0 0 150 150">
-      <rect class="pl-face" x="0.5" y="0.5" width="149" height="149" rx="3"/>
-      <rect class="pl-inner" x="14" y="14" width="122" height="122" rx="2"/>
-      <rect class="pl-key" x="24" y="28" width="47" height="94" rx="2"/>
-      <rect class="pl-key" x="79" y="28" width="47" height="94" rx="2"/>
-      <path class="pl-line" d="M24 52H71M79 52H126"/>
+        <rect class="pl-face" x="0.5" y="0.5" width="149" height="149" rx="3"/>
+        <rect class="pl-inner" x="14" y="14" width="122" height="122" rx="2"/>
+        <rect class="pl-key" x="24" y="28" width="47" height="94" rx="2"/>
+        <rect class="pl-key" x="79" y="28" width="47" height="94" rx="2"/>
+        <path class="pl-line" d="M24 52H71M79 52H126"/>
     </symbol>
     <symbol id="p-socket" viewBox="0 0 150 150">
-      <rect class="pl-face" x="0.5" y="0.5" width="149" height="149" rx="3"/>
-      <circle class="pl-inner" cx="75" cy="75" r="50"/>
-      <circle class="pl-key" cx="75" cy="75" r="38"/>
-      <circle class="pl-hole" cx="62" cy="75" r="4.5"/>
-      <circle class="pl-hole" cx="88" cy="75" r="4.5"/>
-      <rect class="pl-hole" x="71" y="40" width="8" height="7" rx="1"/>
-      <rect class="pl-hole" x="71" y="103" width="8" height="7" rx="1"/>
+        <rect class="pl-face" x="0.5" y="0.5" width="149" height="149" rx="3"/>
+        <circle class="pl-inner" cx="75" cy="75" r="50"/>
+        <circle class="pl-key" cx="75" cy="75" r="38"/>
+        <circle class="pl-hole" cx="62" cy="75" r="4.5"/>
+        <circle class="pl-hole" cx="88" cy="75" r="4.5"/>
+        <rect class="pl-hole" x="71" y="40" width="8" height="7" rx="1"/>
+        <rect class="pl-hole" x="71" y="103" width="8" height="7" rx="1"/>
     </symbol>
     <symbol id="p-frame" viewBox="0 0 150 150">
-      <rect class="pl-face" x="0.5" y="0.5" width="149" height="149" rx="3"/>
-      <rect class="pl-open" x="22" y="22" width="106" height="106" rx="1"/>
+        <rect class="pl-face" x="0.5" y="0.5" width="149" height="149" rx="3"/>
+        <rect class="pl-open" x="22" y="22" width="106" height="106" rx="1"/>
     </symbol>
     <symbol id="room" viewBox="0 0 400 300">
-      <path class="pl-room" d="M0 250H400M0 236H400"/>
-      <rect class="pl-room" x="36" y="58" width="92" height="178"/>
-      <path class="pl-room" d="M36 58h92M112 150v8"/>
-      <rect class="pl-room" x="236" y="64" width="120" height="104"/>
-      <path class="pl-room" d="M296 64v104M236 116h120"/>
+        <path class="pl-room" d="M0 250H400M0 236H400"/>
+        <rect class="pl-room" x="36" y="58" width="92" height="178"/>
+        <path class="pl-room" d="M36 58h92M112 150v8"/>
+        <rect class="pl-room" x="236" y="64" width="120" height="104"/>
+        <path class="pl-room" d="M296 64v104M236 116h120"/>
     </symbol>
-    <clipPath id="wall-clip"><rect x="0" y="0" width="840" height="540"/></clipPath>
-  </svg>
+    <clipPath id="wall-clip">
+        <rect x="0" y="0" width="840" height="540"/>
+    </clipPath>
+</svg>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-  <defs>
-    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient>
-    <filter id="lift" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#2B2B2B" flood-opacity=".18"/></filter>
-  </defs>
-  <!-- Рамка на три поста: цвета рамки и механизма задаются переменными --frame и --mech (условная графика, не фото) -->
-  <symbol id="set" viewBox="0 0 520 200">
-    <rect width="520" height="200" rx="16" fill="var(--frame)"/>
-    <rect x=".5" y=".5" width="519" height="199" rx="15.5" fill="url(#sheen)" stroke="#2B2B2B" stroke-opacity=".14"/>
-    <g fill="var(--mech)" stroke="#2B2B2B" stroke-opacity=".16">
-      <rect x="22" y="25" width="150" height="150" rx="8"/><rect x="185" y="25" width="150" height="150" rx="8"/><rect x="348" y="25" width="150" height="150" rx="8"/>
-    </g>
-    <rect x="34" y="37" width="126" height="126" rx="6" fill="url(#sheen)" stroke="#2B2B2B" stroke-opacity=".12" fill-opacity=".9"/>
-    <circle cx="260" cy="100" r="50" fill="#2B2B2B" fill-opacity=".1"/>
-    <circle cx="260" cy="100" r="46" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="2"/>
-    <circle cx="241" cy="100" r="6" fill="#2B2B2B"/><circle cx="279" cy="100" r="6" fill="#2B2B2B"/>
-    <circle cx="423" cy="100" r="44" fill="url(#sheen)" stroke="#2B2B2B" stroke-opacity=".2"/>
-    <circle cx="423" cy="100" r="30" fill="none" stroke="#2B2B2B" stroke-opacity=".18"/>
-    <rect x="420" y="62" width="6" height="16" rx="3" fill="#2B2B2B" fill-opacity=".5"/>
-  </symbol>
-  <symbol id="arrow" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <defs>
+        <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fff" stop-opacity=".35"/>
+            <stop offset=".5" stop-color="#fff" stop-opacity="0"/>
+        </linearGradient>
+        <filter id="lift" x="-20%" y="-20%" width="140%" height="160%">
+            <feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#2B2B2B" flood-opacity=".18"/>
+        </filter>
+    </defs>
+    <!-- Рамка на три поста: цвета рамки и механизма задаются переменными --frame и --mech (условная графика, не фото) -->
+    <symbol id="set" viewBox="0 0 520 200">
+        <rect width="520" height="200" rx="16" fill="var(--frame)"/>
+        <rect x=".5" y=".5" width="519" height="199" rx="15.5" fill="url(#sheen)" stroke="#2B2B2B"
+              stroke-opacity=".14"/>
+        <g fill="var(--mech)" stroke="#2B2B2B" stroke-opacity=".16">
+            <rect x="22" y="25" width="150" height="150" rx="8"/>
+            <rect x="185" y="25" width="150" height="150" rx="8"/>
+            <rect x="348" y="25" width="150" height="150" rx="8"/>
+        </g>
+        <rect x="34" y="37" width="126" height="126" rx="6" fill="url(#sheen)" stroke="#2B2B2B" stroke-opacity=".12"
+              fill-opacity=".9"/>
+        <circle cx="260" cy="100" r="50" fill="#2B2B2B" fill-opacity=".1"/>
+        <circle cx="260" cy="100" r="46" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="2"/>
+        <circle cx="241" cy="100" r="6" fill="#2B2B2B"/>
+        <circle cx="279" cy="100" r="6" fill="#2B2B2B"/>
+        <circle cx="423" cy="100" r="44" fill="url(#sheen)" stroke="#2B2B2B" stroke-opacity=".2"/>
+        <circle cx="423" cy="100" r="30" fill="none" stroke="#2B2B2B" stroke-opacity=".18"/>
+        <rect x="420" y="62" width="6" height="16" rx="3" fill="#2B2B2B" fill-opacity=".5"/>
+    </symbol>
+    <symbol id="arrow" viewBox="0 0 24 24">
+        <path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round"/>
+    </symbol>
 </svg>
 
 <a class="skip" href="#main">К содержимому</a>
 
 <!-- Шапка V4 с функциями V3 (M2). Одна и та же разметка на всех страницах; aria-current="page" ставится на пункт текущей страницы -->
 <header class="fk-header" id="top">
-  <div class="fk-container fk-header__row">
-    <a class="fk-logo" href="index.html" aria-label="FORKEL, на главную">
-      <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 24A16 16 0 0 1 20 4" fill="none" stroke="var(--yellow)" stroke-width="2.4" stroke-linecap="round"/></svg>FORKEL
-    </a>
+    <div class="fk-container fk-header__row">
+        <a class="fk-logo" href="index.html" aria-label="FORKEL, на главную">
+            <svg viewBox="0 0 40 40" aria-hidden="true">
+                <path d="M6 24A16 16 0 0 1 20 4" fill="none" stroke="var(--yellow)" stroke-width="2.4"
+                      stroke-linecap="round"/>
+            </svg>
+            FORKEL
+        </a>
 
-    <nav class="fk-nav" id="site-nav" aria-label="Основная навигация">
-      <ul class="fk-nav__list">
-        <li>
-          <button class="fk-catalog-btn" type="button" aria-expanded="false" aria-controls="catalog-panel">
-            Каталог
-            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5"/></svg>
-          </button>
-          <div class="fk-catalog-panel" id="catalog-panel">
-            <div class="fk-container">
-              <div class="fk-catalog-cols">
-                <div>
-                  <p class="fk-catalog-title">Коллекции</p>
-                  <ul class="fk-catalog-list">
-                    <li><a href="collection.html?collection=F70">Коллекция F70</a></li>
-                    <li><a href="collection.html?collection=F55">Коллекция F55</a></li>
-                  </ul>
-                </div>
-                <div>
-                  <p class="fk-catalog-title">Категории</p>
-                  <ul class="fk-catalog-list">
-                    <li><a href="catalog.html?category=sockets">Розетки</a></li>
-                    <li><a href="catalog.html?category=switches">Выключатели</a></li>
-                    <li><a href="catalog.html?category=frames">Рамки</a></li>
-                    <li><a href="catalog.html?category=blinds">Управление жалюзи</a></li>
-                    <li><a href="catalog.html?category=thermostats">Терморегуляторы</a></li>
-                    <li><a href="catalog.html?category=dimmers">Диммеры</a></li>
-                  </ul>
-                  <p class="fk-catalog-all"><a class="fk-link" href="catalog.html">Весь каталог</a></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <!-- Запасные ссылки, если JavaScript недоступен -->
-        <li class="fk-nav-fallback"><a class="fk-nav__link" href="index.html#collections">Коллекции</a></li>
-        <li class="fk-nav-fallback"><a class="fk-nav__link" href="index.html#categories">Категории</a></li>
-        <li><a class="fk-nav__link" href="new.html">Новинки</a></li>
-        <li><a class="fk-nav__link" href="configurator.html">Подбор</a></li>
-        <li><a class="fk-nav__link" href="projects.html">Проекты</a></li>
-        <li><a class="fk-nav__link" href="cooperation.html">Сотрудничество</a></li>
-        <li class="fk-nav__mobile-only"><a class="fk-nav__link" href="index.html#delivery">Доставка и оплата</a></li>
-        <li><a class="fk-nav__link" href="contacts.html">Контакты</a></li>
-        <li class="fk-nav__mobile-only fk-nav__account"><a class="fk-nav__link" href="account.html">Личный кабинет</a></li>
-        <li class="fk-nav__phone"><span class="fk-phone">Телефон (заглушка)</span></li>
-      </ul>
-    </nav>
+        <nav class="fk-nav" id="site-nav" aria-label="Основная навигация">
+            <ul class="fk-nav__list">
+                <li>
+                    <button class="fk-catalog-btn" type="button" aria-expanded="false" aria-controls="catalog-panel">
+                        Каталог
+                        <svg viewBox="0 0 16 16" aria-hidden="true">
+                            <path d="M3 6l5 5 5-5"/>
+                        </svg>
+                    </button>
+                    <div class="fk-catalog-panel" id="catalog-panel">
+                        <div class="fk-container">
+                            <div class="fk-catalog-cols">
+                                <div>
+                                    <p class="fk-catalog-title">Коллекции</p>
+                                    <ul class="fk-catalog-list">
+                                        <li><a href="collection.html?collection=F70">Коллекция F70</a></li>
+                                        <li><a href="collection.html?collection=F55">Коллекция F55</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p class="fk-catalog-title">Категории</p>
+                                    <ul class="fk-catalog-list">
+                                        <li><a href="catalog.html?category=sockets">Розетки</a></li>
+                                        <li><a href="catalog.html?category=switches">Выключатели</a></li>
+                                        <li><a href="catalog.html?category=frames">Рамки</a></li>
+                                        <li><a href="catalog.html?category=blinds">Управление жалюзи</a></li>
+                                        <li><a href="catalog.html?category=thermostats">Терморегуляторы</a></li>
+                                        <li><a href="catalog.html?category=dimmers">Диммеры</a></li>
+                                    </ul>
+                                    <p class="fk-catalog-all"><a class="fk-link" href="catalog.html">Весь каталог</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <!-- Запасные ссылки, если JavaScript недоступен -->
+                <li class="fk-nav-fallback"><a class="fk-nav__link" href="index.html#collections">Коллекции</a></li>
+                <li class="fk-nav-fallback"><a class="fk-nav__link" href="index.html#categories">Категории</a></li>
+                <li><a class="fk-nav__link" href="new.html">Новинки</a></li>
+                <li><a class="fk-nav__link" href="configurator.html">Подбор</a></li>
+                <li><a class="fk-nav__link" href="projects.html">Проекты</a></li>
+                <li><a class="fk-nav__link" href="cooperation.html">Сотрудничество</a></li>
+                <li class="fk-nav__mobile-only"><a class="fk-nav__link" href="index.html#delivery">Доставка и оплата</a>
+                </li>
+                <li><a class="fk-nav__link" href="contacts.html">Контакты</a></li>
+                <li class="fk-nav__mobile-only fk-nav__account"><a class="fk-nav__link" href="account.html">Личный
+                    кабинет</a></li>
+                <li class="fk-nav__phone"><span class="fk-phone">Телефон (заглушка)</span></li>
+            </ul>
+        </nav>
 
-    <div class="fk-actions">
-      <button class="fk-icon-btn fk-search-btn" type="button" aria-haspopup="dialog" aria-label="Поиск по товарам" data-stub="Поиск работает при включённом JavaScript.">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
-        <span class="fk-search-btn__text" aria-hidden="true">Поиск по товарам</span>
-      </button>
-      <a class="fk-icon-btn fk-icon-btn--account" href="account.html" data-account>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.75"/><path d="M4.5 20c.9-3.6 3.8-5.5 7.5-5.5s6.6 1.9 7.5 5.5"/></svg>
-        <span class="fk-vh">Личный кабинет</span>
-      </a>
-      <a class="fk-icon-btn fk-fav-link" href="favorites.html">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg>
-        <span class="fk-vh">Избранное<span data-fav-sr></span></span>
-        <span class="fk-badge" data-fav-count hidden aria-hidden="true">0</span>
-      </a>
-      <a class="fk-icon-btn fk-cart-link" href="cart.html">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6.5a3 3 0 016 0V8"/></svg>
-        <span class="fk-vh">Корзина<span data-cart-sr></span></span>
-        <span class="fk-badge" data-cart-count hidden aria-hidden="true">0</span>
-      </a>
-      <span class="fk-phone fk-phone--header">Телефон (заглушка)</span>
-      <button class="fk-menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Меню</button>
+        <div class="fk-actions">
+            <button class="fk-icon-btn fk-search-btn" type="button" aria-haspopup="dialog" aria-label="Поиск по товарам"
+                    data-stub="Поиск работает при включённом JavaScript.">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="11" cy="11" r="6.5"/>
+                    <path d="M16 16l4.5 4.5"/>
+                </svg>
+                <span class="fk-search-btn__text" aria-hidden="true">Поиск по товарам</span>
+            </button>
+            <a class="fk-icon-btn fk-icon-btn--account" href="account.html" data-account>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="8.5" r="3.75"/>
+                    <path d="M4.5 20c.9-3.6 3.8-5.5 7.5-5.5s6.6 1.9 7.5 5.5"/>
+                </svg>
+                <span class="fk-vh">Личный кабинет</span>
+            </a>
+            <a class="fk-icon-btn fk-fav-link" href="favorites.html">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/>
+                </svg>
+                <span class="fk-vh">Избранное<span data-fav-sr></span></span>
+                <span class="fk-badge" data-fav-count hidden aria-hidden="true">0</span>
+            </a>
+            <a class="fk-icon-btn fk-cart-link" href="cart.html">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 8h14l-1 12H6L5 8z"/>
+                    <path d="M9 8V6.5a3 3 0 016 0V8"/>
+                </svg>
+                <span class="fk-vh">Корзина<span data-cart-sr></span></span>
+                <span class="fk-badge" data-cart-count hidden aria-hidden="true">0</span>
+            </a>
+            <span class="fk-phone fk-phone--header">Телефон (заглушка)</span>
+            <button class="fk-menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Меню</button>
+        </div>
     </div>
-  </div>
 </header>
 
 <main id="main">
 
-  <!-- 1. Первый экран -->
-  <section class="hero wrap" aria-labelledby="h1">
-    <div class="hero__text">
-      <h1 id="h1">Розетки и выключатели <span>для спокойного интерьера</span></h1>
-      <p class="lead">Рамки и механизмы одной серии. Выберите коллекцию, цвет и купите комплект онлайн.</p>
-      <div class="actions">
-        <a class="btn btn--dark" href="#collections">Смотреть коллекции <svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></a>
-        <a class="btn btn--ghost" href="#configurator">Собрать в подборе</a>
-      </div>
-    </div>
-    <div class="hero__stage">
-      <svg class="hero__svg" viewBox="0 0 520 200" role="img" aria-label="Временная визуализация: рамка на три поста с выключателем, розеткой и светорегулятором. Это не фотография изделия." style="--frame:#D8CBB8;--mech:#E9E1D3"><use href="#set" filter="url(#lift)"/></svg>
-      <a class="float float--a" href="#features"><b>Покрытие Soft Touch</b><span>Бархатистая поверхность, приятная на ощупь</span><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></a>
-      <a class="float float--b" href="#features"><b>Автозажимной механизм</b><span>Для розеток, быстрее монтаж</span><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></a>
-      <p class="stage__note">Временная визуализация, не фото изделия</p>
-    </div>
-  </section>
-
-  <!-- 2. Направления -->
-  <section class="sec wrap" aria-labelledby="dir-t">
-    <div class="split">
-      <div><h2 id="dir-t">Всё для подключения и управления светом</h2><p class="muted">Три категории из каталога. Остальные появятся после утверждения ассортимента.</p></div>
-      <ul class="dirs">
-        <li><a class="dir" href="catalog.html?category=sockets"><span class="dir__img" style="--frame:#E4E4E2;--mech:#F6F6F4"><svg viewBox="0 0 120 120" aria-hidden="true"><rect x="10" y="10" width="100" height="100" rx="10" fill="var(--frame)"/><circle cx="60" cy="60" r="30" fill="var(--mech)" stroke="#2B2B2B" stroke-opacity=".2"/><circle cx="50" cy="60" r="4" fill="#2B2B2B"/><circle cx="70" cy="60" r="4" fill="#2B2B2B"/></svg></span><b>Розетки</b><span class="dir__go"><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
-        <li><a class="dir" href="catalog.html?category=switches"><span class="dir__img" style="--frame:#D8CBB8;--mech:#F2ECE0"><svg viewBox="0 0 120 120" aria-hidden="true"><rect x="10" y="10" width="100" height="100" rx="10" fill="var(--frame)"/><rect x="28" y="28" width="64" height="64" rx="6" fill="var(--mech)" stroke="#2B2B2B" stroke-opacity=".2"/></svg></span><b>Выключатели</b><span class="dir__go"><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
-        <li><a class="dir" href="catalog.html?category=frames"><span class="dir__img" style="--frame:#9A9DA2"><svg viewBox="0 0 120 120" aria-hidden="true"><rect x="10" y="10" width="100" height="100" rx="10" fill="var(--frame)"/><rect x="30" y="30" width="60" height="60" rx="4" fill="#F6F6F4"/></svg></span><b>Рамки</b><span class="dir__go"><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- 3. Коллекции -->
-  <section class="sec wrap" id="collections" aria-labelledby="col-t">
-    <div class="head2"><h2 id="col-t">Выберите коллекцию</h2><a class="btn btn--ghost btn--sm" href="catalog.html">Все коллекции</a></div>
-    <p class="note">Названия и цвета временные: список коллекций предоставит владелец.</p>
-    <ul class="cols">
-      <li><a class="col col--dark" href="#configurator" data-col="A" style="--frame:#2F3033;--mech:#4A4B4F"><h3>Коллекция A</h3><span class="chips"><i>Стекло</i><i>Тёмная</i></span><svg viewBox="0 0 520 200" aria-hidden="true"><use href="#set"/></svg><span class="btn btn--glass btn--sm">Подробнее <svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
-      <li><a class="col" href="#configurator" data-col="B" style="--frame:#E4E4E2;--mech:#FBFBFA"><h3>Коллекция B</h3><span class="chips"><i>Глянец</i><i>Светлая</i></span><svg viewBox="0 0 520 200" aria-hidden="true"><use href="#set"/></svg><span class="btn btn--glass btn--sm">Подробнее <svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
-      <li><a class="col col--sand" href="#configurator" data-col="C" style="--frame:#D8CBB8;--mech:#E9E1D3"><h3>Коллекция C</h3><span class="chips"><i>Soft Touch</i><i>Кашемир</i></span><svg viewBox="0 0 520 200" aria-hidden="true"><use href="#set"/></svg><span class="btn btn--glass btn--sm">Подробнее <svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
-    </ul>
-  </section>
-
-  <!-- 4. Преимущества крупным планом -->
-  <section class="sec wrap" id="features" aria-labelledby="f-t">
-    <h2 class="big" id="f-t">Лёгкость. <span>В каждой детали.</span></h2>
-    <ul class="feat">
-      <li class="feat__c feat__c--dark">
-        <h3>Покрытие Soft Touch</h3><p>Поверхность приятна на ощупь и не оставляет следов пальцев.</p>
-        <svg viewBox="0 0 220 140" aria-hidden="true"><rect x="10" y="20" width="200" height="110" rx="18" fill="#565656"/><rect x="10" y="20" width="200" height="110" rx="18" fill="url(#sheen)"/><rect x="30" y="40" width="160" height="70" rx="10" fill="#2B2B2B" stroke="#848484" stroke-opacity=".5"/></svg>
-        <span class="go"><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span>
-      </li>
-      <li class="feat__c">
-        <h3>Автозажимной механизм</h3><p>Розетки фиксируются без лишних винтов: монтаж проще и быстрее.</p>
-        <svg viewBox="0 0 220 140" aria-hidden="true"><circle cx="110" cy="70" r="54" fill="#E0E0E0" stroke="#B3B3B3" stroke-width="2"/><circle cx="92" cy="70" r="7" fill="#2B2B2B"/><circle cx="128" cy="70" r="7" fill="#2B2B2B"/><path d="M26 70h-14M208 70h-14" stroke="#B3B3B3" stroke-width="3" stroke-linecap="round"/></svg>
-        <span class="go"><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span>
-      </li>
-      <li class="feat__c feat__c--dark">
-        <h3>Рамка и механизм одной серии</h3><p>Выбирайте цвет рамки и механизма отдельно, комплект подходит друг к другу.</p>
-        <svg viewBox="0 0 220 140" aria-hidden="true"><rect x="22" y="20" width="110" height="100" rx="14" fill="#D8CBB8"/><rect x="40" y="38" width="74" height="64" rx="8" fill="#2B2B2B"/><rect x="104" y="40" width="94" height="84" rx="14" fill="#E0E0E0" fill-opacity=".92"/></svg>
-        <span class="go"><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span>
-      </li>
-    </ul>
-    <ul class="mini">
-      <li>Покупка онлайн с оформлением заказа</li>
-      <li>Шесть цветов рамки и механизма</li>
-      <li>Курьер, самовывоз и СДЭК</li>
-      <li>Условия для дизайнеров и монтажников</li>
-    </ul>
-    <p class="note">Описания преимуществ предварительные: формулировки и технические детали подтверждает владелец.</p>
-  </section>
-
-  <!-- 5. Подбор -->
-  <section class="sec wrap" id="configurator" aria-labelledby="cfg-t">
-    <div class="cfg" id="cfg">
-      <div class="cfg__view">
-        <div class="cfg__photo" id="cfg-photo" role="img" aria-label="Превью выбранной комбинации">
-          <img id="cfg-img-mech" src="assets/images/tcvet_mehanizma_belyy_glyantsevyy.png" alt="" width="500" height="500">
-          <img id="cfg-img-frame" src="assets/images/tcvet_ramki_belyy_glyantsevyy.png" alt="" width="500" height="500">
+    <!-- 1. Первый экран -->
+    <section class="hero wrap" aria-labelledby="h1">
+        <div class="hero__text">
+            <h1 id="h1">Розетки и выключатели <span>для спокойного интерьера</span></h1>
+            <p class="lead">Рамки и механизмы одной серии. Выберите коллекцию, цвет и купите комплект онлайн.</p>
+            <div class="actions">
+                <a class="btn btn--dark" href="#collections">Смотреть коллекции
+                    <svg class="ar" aria-hidden="true">
+                        <use href="#arrow"/>
+                    </svg>
+                </a>
+                <a class="btn btn--ghost" href="#configurator">Собрать в подборе</a>
+            </div>
         </div>
-        <p class="stage__note">Образцы цвета — слои из примера, не продукция FORKEL (заглушка)</p>
-      </div>
-      <div class="cfg__ctl">
-        <h2 id="cfg-t">Соберите комплект по цвету</h2>
-        <div class="cfg__step"><p class="cfg__lbl" id="cfg-collection-label">Коллекция</p>
-          <div class="fk-chips" role="radiogroup" aria-labelledby="cfg-collection-label" data-part="collection"><button type="button" role="radio" aria-checked="true" class="fk-chip" data-key="F70">F70</button><button type="button" role="radio" aria-checked="false" class="fk-chip" data-key="F55">F55</button></div></div>
-        <div class="cfg__step"><p class="cfg__lbl" id="cfg-material-label">Материал рамки</p>
-          <div class="fk-chips" role="radiogroup" aria-labelledby="cfg-material-label" data-part="material"><button type="button" role="radio" aria-checked="true" class="fk-chip" data-key="glass">Стекло</button><button type="button" role="radio" aria-checked="false" class="fk-chip" data-key="aluminum">Алюминий</button><button type="button" role="radio" aria-checked="false" class="fk-chip" data-key="plastic">Термопласт</button></div></div>
-        <div class="cfg__step"><p class="cfg__lbl" id="cfg-type-label">Тип изделия</p>
-          <div class="cfg__types" role="radiogroup" aria-labelledby="cfg-type-label" data-part="type"><button type="button" role="radio" aria-checked="true" class="cfg__type fin-white" data-symbol="p-switch" data-name="Выключатель"><svg viewBox="0 0 150 150" aria-hidden="true" focusable="false"><use href="#p-switch" width="150" height="150"/></svg><span>Выключатель</span></button><button type="button" role="radio" aria-checked="false" class="cfg__type fin-white" data-symbol="p-double" data-name="Двойной выключатель"><svg viewBox="0 0 150 150" aria-hidden="true" focusable="false"><use href="#p-double" width="150" height="150"/></svg><span>Двойной выключатель</span></button><button type="button" role="radio" aria-checked="false" class="cfg__type fin-white" data-symbol="p-socket" data-name="Розетка"><svg viewBox="0 0 150 150" aria-hidden="true" focusable="false"><use href="#p-socket" width="150" height="150"/></svg><span>Розетка</span></button></div></div>
-        <div class="cfg__step"><p class="cfg__lbl" id="cfg-frame-label">Цвет рамки: <b data-val="frame"></b></p>
-          <div class="sw sw--img" role="radiogroup" aria-labelledby="cfg-frame-label" data-part="frame"><button type="button" role="radio" aria-checked="true" data-fin="fin-white" data-name="Белый" title="Белый"><span class="vh">Белый</span></button><button type="button" role="radio" aria-checked="false" data-fin="fin-black" data-name="Чёрный" title="Чёрный"><span class="vh">Чёрный</span></button><button type="button" role="radio" aria-checked="false" data-fin="fin-gray" data-name="Серый" title="Серый"><span class="vh">Серый</span></button><button type="button" role="radio" aria-checked="false" data-fin="fin-lightgray" data-name="Светло-серый" title="Светло-серый"><span class="vh">Светло-серый</span></button><button type="button" role="radio" aria-checked="false" data-fin="fin-cashmere" data-name="Кашемир" title="Кашемир"><span class="vh">Кашемир</span></button><button type="button" role="radio" aria-checked="false" data-fin="fin-gold" data-name="Золотой" title="Золотой"><span class="vh">Золотой</span></button></div></div>
-        <div class="cfg__step"><p class="cfg__lbl" id="cfg-mech-label">Цвет механизма: <b data-val="mech"></b></p>
-          <div class="sw sw--img" role="radiogroup" aria-labelledby="cfg-mech-label" data-part="mech"><button type="button" role="radio" aria-checked="true" data-fin="fin-white" data-name="Белый" title="Белый"><span class="vh">Белый</span></button><button type="button" role="radio" aria-checked="false" data-fin="fin-black" data-name="Чёрный" title="Чёрный"><span class="vh">Чёрный</span></button><button type="button" role="radio" aria-checked="false" data-fin="fin-gray" data-name="Серый" title="Серый"><span class="vh">Серый</span></button><button type="button" role="radio" aria-checked="false" data-fin="fin-lightgray" data-name="Светло-серый" title="Светло-серый"><span class="vh">Светло-серый</span></button><button type="button" role="radio" aria-checked="false" data-fin="fin-cashmere" data-name="Кашемир" title="Кашемир"><span class="vh">Кашемир</span></button><button type="button" role="radio" aria-checked="false" data-fin="fin-gold" data-name="Золотой" title="Золотой"><span class="vh">Золотой</span></button></div></div>
-        <p class="note">Демо-режим. F70 — шесть цветов, F55 — четыре («Светло-серый» и «Кашемир» только у F70). Правила сочетания материала рамки и цвета не заданы, поэтому доступны все сочетания.</p>
-        <div class="fk-result" role="group" aria-labelledby="cfg-result-title">
-          <h3 id="cfg-result-title">Комплект <span class="fk-tag">демо</span></h3>
-          <dl class="cfg__spec">
-            <div><dt>Коллекция</dt><dd data-out="collection"></dd></div>
-            <div><dt>Материал рамки</dt><dd data-out="material"></dd></div>
-            <div><dt>Рамка</dt><dd data-out="frame"></dd></div>
-            <div><dt>Механизм</dt><dd data-out="mech"></dd></div>
-            <div><dt>Артикул комплекта</dt><dd data-out="kit-sku"></dd></div>
-            <div><dt>Цена комплекта</dt><dd data-out="kit-price"></dd></div>
-          </dl>
-          <p class="vh" id="cfg-summary" role="status"></p>
-          <div class="actions">
-            <button class="btn btn--dark" id="cfg-add" type="button">Добавить комплект в корзину</button>
-            <a class="btn btn--ghost" id="cfg-open" href="configurator.html">Открыть подбор <svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></a>
-          </div>
-          <p class="note"><a class="fk-link fk-link--tap" id="cfg-catalog-link" href="catalog.html">Подобрать отдельные изделия в каталоге</a></p>
-          <p class="note" id="cfg-cart-link" hidden><a class="fk-link fk-link--tap" href="cart.html">Перейти в корзину</a></p>
+        <div class="hero__stage">
+            <svg class="hero__svg" viewBox="0 0 520 200" role="img"
+                 aria-label="Временная визуализация: рамка на три поста с выключателем, розеткой и светорегулятором. Это не фотография изделия."
+                 style="--frame:#D8CBB8;--mech:#E9E1D3">
+                <use href="#set" filter="url(#lift)"/>
+            </svg>
+            <a class="float float--a" href="#features"><b>Покрытие Soft Touch</b><span>Бархатистая поверхность, приятная на ощупь</span>
+                <svg class="ar" aria-hidden="true">
+                    <use href="#arrow"/>
+                </svg>
+            </a>
+            <a class="float float--b" href="#features"><b>Автозажимной
+                механизм</b><span>Для розеток, быстрее монтаж</span>
+                <svg class="ar" aria-hidden="true">
+                    <use href="#arrow"/>
+                </svg>
+            </a>
+            <p class="stage__note">Временная визуализация, не фото изделия</p>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 6. Новинки -->
-  <section class="sec wrap" id="new" aria-labelledby="new-t">
-    <div class="head2"><h2 id="new-t">Новинки</h2><a class="btn btn--ghost btn--sm" href="new.html">Все новинки</a></div>
-    <p class="note">Демонстрационные данные: товары, артикулы, цены и остатки временные (из данных V3); появятся из данных 1С. Реальные товары заказчика помечены без «демо».</p>
-    <ul class="fk-grid fk-grid--products">
-          <li class="fk-product-card">
-            <a class="fk-product-card__media tone-light" href="product.html?id=13238" tabindex="-1" aria-hidden="true"><img src="https://ledron.ru/upload/webp/upload/resize_cache/iblock/063/a837nl6ruvlyujex721ocaehtz59ikui/1366_600_0/EU%20white%20(1).webp" alt="" loading="lazy" style="width:100%;height:100%;object-fit:contain"></a>
-            <h3 class="fk-product-card__name"><a href="product.html?id=13238">Розетка одинарная с заземлением с защитными шторками F70</a></h3>
-            <p class="fk-product-card__sku">Арт. EU Socket White</p>
-            <p class="fk-product-card__sku">Цвет: Белый</p>
-            <div class="fk-variants" data-variants="13238"></div>
-            <p class="fk-product-card__price">665&nbsp;₽</p>
-            <p class="fk-product-card__stock">В наличии</p>
-            <div class="fk-product-card__actions">
-              <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="13238">В корзину<span class="fk-vh"> — Розетка F70</span></button>
-              <a class="fk-btn fk-btn--secondary fk-btn--card" href="product.html?id=13238">Подробнее<span class="fk-vh"> — Розетка F70</span></a>
-            </div>
-          </li>
-          <li class="fk-product-card">
-            <span class="fk-product-card__media tone-light"><svg class="fin-white" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-switch" x="45" y="45" width="150" height="150"/></svg></span>
-            <h3 class="fk-product-card__name"><a href="product.html?id=1">Демонстрационный выключатель</a></h3>
-            <p class="fk-product-card__sku">Арт. <span class="fk-stub">ХХХ-001</span> <span class="fk-tag">заглушка</span></p>
-            <div class="fk-variants" data-variants="1"></div>
-            <p class="fk-product-card__price"><span class="fk-stub">200&nbsp;₽</span> <span class="fk-tag">демо</span></p>
-            <p class="fk-product-card__stock">Наличие уточняется</p>
-            <div class="fk-product-card__actions">
-              <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="1">В корзину<span class="fk-vh"> (демо) — Демонстрационный выключатель</span><span aria-hidden="true">&nbsp;(демо)</span></button>
-              <a class="fk-btn fk-btn--secondary fk-btn--card" href="product.html?id=1">Подробнее<span class="fk-vh"> — товар 1</span></a>
-            </div>
-          </li>
-          <li class="fk-product-card">
-            <span class="fk-product-card__media tone-sand"><svg class="fin-black" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-socket" x="45" y="45" width="150" height="150"/></svg></span>
-            <h3 class="fk-product-card__name"><a href="product.html?id=2">Демонстрационная розетка</a></h3>
-            <p class="fk-product-card__sku">Арт. <span class="fk-stub">ХХХ-002</span> <span class="fk-tag">заглушка</span></p>
-            <div class="fk-variants" data-variants="2"></div>
-            <p class="fk-product-card__price"><span class="fk-stub">100&nbsp;₽</span> <span class="fk-tag">демо</span></p>
-            <p class="fk-product-card__stock">Наличие уточняется</p>
-            <div class="fk-product-card__actions">
-              <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="2">В корзину<span class="fk-vh"> (демо) — Демонстрационная розетка</span><span aria-hidden="true">&nbsp;(демо)</span></button>
-              <a class="fk-btn fk-btn--secondary fk-btn--card" href="product.html?id=2">Подробнее<span class="fk-vh"> — товар 2</span></a>
-            </div>
-          </li>
-          <li class="fk-product-card">
-            <span class="fk-product-card__media tone-light"><svg class="fin-nickel" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-double" x="45" y="45" width="150" height="150"/></svg></span>
-            <h3 class="fk-product-card__name"><a href="product.html?id=3">Демонстрационный двойной выключатель</a></h3>
-            <p class="fk-product-card__sku">Арт. <span class="fk-stub">ХХХ-003</span> <span class="fk-tag">заглушка</span></p>
-            <div class="fk-variants" data-variants="3"></div>
-            <p class="fk-product-card__price"><span class="fk-stub">300&nbsp;₽</span> <span class="fk-tag">демо</span></p>
-            <p class="fk-product-card__stock">Наличие уточняется</p>
-            <div class="fk-product-card__actions">
-              <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="3">В корзину<span class="fk-vh"> (демо) — Демонстрационный двойной выключатель</span><span aria-hidden="true">&nbsp;(демо)</span></button>
-              <a class="fk-btn fk-btn--secondary fk-btn--card" href="product.html?id=3">Подробнее<span class="fk-vh"> — товар 3</span></a>
-            </div>
-          </li>
-          <li class="fk-product-card">
-            <span class="fk-product-card__media tone-stone"><svg class="fin-cashmere" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><use href="#shade150" transform="translate(45 45)"/><use href="#p-frame" x="45" y="45" width="150" height="150"/></svg></span>
-            <h3 class="fk-product-card__name"><a href="product.html?id=4">Демонстрационная рамка</a></h3>
-            <p class="fk-product-card__sku">Арт. <span class="fk-stub">ХХХ-004</span> <span class="fk-tag">заглушка</span></p>
-            <div class="fk-variants" data-variants="4"></div>
-            <p class="fk-product-card__price"><span class="fk-stub">200&nbsp;₽</span> <span class="fk-tag">демо</span></p>
-            <p class="fk-product-card__stock">Наличие уточняется</p>
-            <div class="fk-product-card__actions">
-              <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="4">В корзину<span class="fk-vh"> (демо) — Демонстрационная рамка</span><span aria-hidden="true">&nbsp;(демо)</span></button>
-              <a class="fk-btn fk-btn--secondary fk-btn--card" href="product.html?id=4">Подробнее<span class="fk-vh"> — товар 4</span></a>
-            </div>
-          </li>
+    <!-- 2. Направления -->
+    <section class="sec wrap" aria-labelledby="dir-t">
+        <div class="split">
+            <div><h2 id="dir-t">Всё для подключения и управления светом</h2>
+                <p class="muted">Три категории из каталога. Остальные появятся после утверждения ассортимента.</p></div>
+            <ul class="dirs">
+                <li><a class="dir" href="catalog.html?category=sockets"><span class="dir__img"
+                                                                              style="--frame:#E4E4E2;--mech:#F6F6F4"><svg
+                        viewBox="0 0 120 120" aria-hidden="true"><rect x="10" y="10" width="100" height="100" rx="10"
+                                                                       fill="var(--frame)"/><circle cx="60" cy="60"
+                                                                                                    r="30"
+                                                                                                    fill="var(--mech)"
+                                                                                                    stroke="#2B2B2B"
+                                                                                                    stroke-opacity=".2"/><circle
+                        cx="50" cy="60" r="4" fill="#2B2B2B"/><circle cx="70" cy="60" r="4"
+                                                                      fill="#2B2B2B"/></svg></span><b>Розетки</b><span
+                        class="dir__go"><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
+                <li><a class="dir" href="catalog.html?category=switches"><span class="dir__img"
+                                                                               style="--frame:#D8CBB8;--mech:#F2ECE0"><svg
+                        viewBox="0 0 120 120" aria-hidden="true"><rect x="10" y="10" width="100" height="100" rx="10"
+                                                                       fill="var(--frame)"/><rect x="28" y="28"
+                                                                                                  width="64" height="64"
+                                                                                                  rx="6"
+                                                                                                  fill="var(--mech)"
+                                                                                                  stroke="#2B2B2B"
+                                                                                                  stroke-opacity=".2"/></svg></span><b>Выключатели</b><span
+                        class="dir__go"><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
+                <li><a class="dir" href="catalog.html?category=frames"><span class="dir__img" style="--frame:#9A9DA2"><svg
+                        viewBox="0 0 120 120" aria-hidden="true"><rect x="10" y="10" width="100" height="100" rx="10"
+                                                                       fill="var(--frame)"/><rect x="30" y="30"
+                                                                                                  width="60" height="60"
+                                                                                                  rx="4"
+                                                                                                  fill="#F6F6F4"/></svg></span><b>Рамки</b><span
+                        class="dir__go"><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 3. Коллекции -->
+    <section class="sec wrap" id="collections" aria-labelledby="col-t">
+        <div class="head2"><h2 id="col-t">Выберите коллекцию</h2><a class="btn btn--ghost btn--sm" href="catalog.html">Все
+            коллекции</a></div>
+        <p class="note">Названия и цвета временные: список коллекций предоставит владелец.</p>
+        <ul class="cols">
+            <li><a class="col col--dark" href="#configurator" data-col="A" style="--frame:#2F3033;--mech:#4A4B4F"><h3>
+                Коллекция A</h3><span class="chips"><i>Стекло</i><i>Тёмная</i></span>
+                <svg viewBox="0 0 520 200" aria-hidden="true">
+                    <use href="#set"/>
+                </svg>
+                <span class="btn btn--glass btn--sm">Подробнее <svg class="ar" aria-hidden="true"><use
+                        href="#arrow"/></svg></span></a></li>
+            <li><a class="col" href="#configurator" data-col="B" style="--frame:#E4E4E2;--mech:#FBFBFA"><h3>Коллекция
+                B</h3><span class="chips"><i>Глянец</i><i>Светлая</i></span>
+                <svg viewBox="0 0 520 200" aria-hidden="true">
+                    <use href="#set"/>
+                </svg>
+                <span class="btn btn--glass btn--sm">Подробнее <svg class="ar" aria-hidden="true"><use
+                        href="#arrow"/></svg></span></a></li>
+            <li><a class="col col--sand" href="#configurator" data-col="C" style="--frame:#D8CBB8;--mech:#E9E1D3"><h3>
+                Коллекция C</h3><span class="chips"><i>Soft Touch</i><i>Кашемир</i></span>
+                <svg viewBox="0 0 520 200" aria-hidden="true">
+                    <use href="#set"/>
+                </svg>
+                <span class="btn btn--glass btn--sm">Подробнее <svg class="ar" aria-hidden="true"><use
+                        href="#arrow"/></svg></span></a></li>
         </ul>
-  </section>
+    </section>
 
-  <!-- 6a. Проекты (H-10; разметка и данные V3) -->
-  <section class="sec wrap" id="projects" aria-labelledby="projects-title" data-proto-status="demo">
-    <div class="head2"><h2 id="projects-title">Проекты</h2><a class="btn btn--ghost btn--sm" href="projects.html">Все проекты</a></div>
-    <p class="note">Демонстрационные данные. Проектов, фотографий и использованных коллекций нет; на карточках — схематичные иллюстрации. Контент предоставит владелец.</p>
-    <div style="margin-top:24px">
-    <ul class="fk-grid fk-grid--projects">
-          <li class="is-p1">
-            <a class="fk-project-card tone-graphite" href="project.html?id=1">
+    <!-- 4. Преимущества крупным планом -->
+    <section class="sec wrap" id="features" aria-labelledby="f-t">
+        <h2 class="big" id="f-t">Лёгкость. <span>В каждой детали.</span></h2>
+        <ul class="feat">
+            <li class="feat__c feat__c--dark">
+                <h3>Покрытие Soft Touch</h3>
+                <p>Поверхность приятна на ощупь и не оставляет следов пальцев.</p>
+                <svg viewBox="0 0 220 140" aria-hidden="true">
+                    <rect x="10" y="20" width="200" height="110" rx="18" fill="#565656"/>
+                    <rect x="10" y="20" width="200" height="110" rx="18" fill="url(#sheen)"/>
+                    <rect x="30" y="40" width="160" height="70" rx="10" fill="#2B2B2B" stroke="#848484"
+                          stroke-opacity=".5"/>
+                </svg>
+                <span class="go"><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span>
+            </li>
+            <li class="feat__c">
+                <h3>Автозажимной механизм</h3>
+                <p>Розетки фиксируются без лишних винтов: монтаж проще и быстрее.</p>
+                <svg viewBox="0 0 220 140" aria-hidden="true">
+                    <circle cx="110" cy="70" r="54" fill="#E0E0E0" stroke="#B3B3B3" stroke-width="2"/>
+                    <circle cx="92" cy="70" r="7" fill="#2B2B2B"/>
+                    <circle cx="128" cy="70" r="7" fill="#2B2B2B"/>
+                    <path d="M26 70h-14M208 70h-14" stroke="#B3B3B3" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+                <span class="go"><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span>
+            </li>
+            <li class="feat__c feat__c--dark">
+                <h3>Рамка и механизм одной серии</h3>
+                <p>Выбирайте цвет рамки и механизма отдельно, комплект подходит друг к другу.</p>
+                <svg viewBox="0 0 220 140" aria-hidden="true">
+                    <rect x="22" y="20" width="110" height="100" rx="14" fill="#D8CBB8"/>
+                    <rect x="40" y="38" width="74" height="64" rx="8" fill="#2B2B2B"/>
+                    <rect x="104" y="40" width="94" height="84" rx="14" fill="#E0E0E0" fill-opacity=".92"/>
+                </svg>
+                <span class="go"><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span>
+            </li>
+        </ul>
+        <ul class="mini">
+            <li>Покупка онлайн с оформлением заказа</li>
+            <li>Шесть цветов рамки и механизма</li>
+            <li>Курьер, самовывоз и СДЭК</li>
+            <li>Условия для дизайнеров и монтажников</li>
+        </ul>
+        <p class="note">Описания преимуществ предварительные: формулировки и технические детали подтверждает
+            владелец.</p>
+    </section>
+
+    <!-- 5. Подбор -->
+    <section class="sec wrap" id="configurator" aria-labelledby="cfg-t">
+        <div class="cfg" id="cfg">
+            <div class="cfg__view">
+                <div class="cfg__photo" id="cfg-photo" role="img" aria-label="Превью выбранной комбинации">
+                    <img id="cfg-img-mech" src="assets/images/tcvet_mehanizma_belyy_glyantsevyy.png" alt="" width="500"
+                         height="500">
+                    <img id="cfg-img-frame" src="assets/images/tcvet_ramki_belyy_glyantsevyy.png" alt="" width="500"
+                         height="500">
+                </div>
+                <p class="stage__note">Образцы цвета — слои из примера, не продукция FORKEL (заглушка)</p>
+            </div>
+            <div class="cfg__ctl">
+                <h2 id="cfg-t">Соберите комплект по цвету</h2>
+                <div class="cfg__step"><p class="cfg__lbl" id="cfg-collection-label">Коллекция</p>
+                    <div class="fk-chips" role="radiogroup" aria-labelledby="cfg-collection-label"
+                         data-part="collection">
+                        <button type="button" role="radio" aria-checked="true" class="fk-chip" data-key="F70">F70
+                        </button>
+                        <button type="button" role="radio" aria-checked="false" class="fk-chip" data-key="F55">F55
+                        </button>
+                    </div>
+                </div>
+                <div class="cfg__step"><p class="cfg__lbl" id="cfg-material-label">Материал рамки</p>
+                    <div class="fk-chips" role="radiogroup" aria-labelledby="cfg-material-label" data-part="material">
+                        <button type="button" role="radio" aria-checked="true" class="fk-chip" data-key="glass">Стекло
+                        </button>
+                        <button type="button" role="radio" aria-checked="false" class="fk-chip" data-key="aluminum">
+                            Алюминий
+                        </button>
+                        <button type="button" role="radio" aria-checked="false" class="fk-chip" data-key="plastic">
+                            Термопласт
+                        </button>
+                    </div>
+                </div>
+                <div class="cfg__step"><p class="cfg__lbl" id="cfg-type-label">Тип изделия</p>
+                    <div class="cfg__types" role="radiogroup" aria-labelledby="cfg-type-label" data-part="type">
+                        <button type="button" role="radio" aria-checked="true" class="cfg__type fin-white"
+                                data-symbol="p-switch" data-name="Выключатель">
+                            <svg viewBox="0 0 150 150" aria-hidden="true" focusable="false">
+                                <use href="#p-switch" width="150" height="150"/>
+                            </svg>
+                            <span>Выключатель</span></button>
+                        <button type="button" role="radio" aria-checked="false" class="cfg__type fin-white"
+                                data-symbol="p-double" data-name="Двойной выключатель">
+                            <svg viewBox="0 0 150 150" aria-hidden="true" focusable="false">
+                                <use href="#p-double" width="150" height="150"/>
+                            </svg>
+                            <span>Двойной выключатель</span></button>
+                        <button type="button" role="radio" aria-checked="false" class="cfg__type fin-white"
+                                data-symbol="p-socket" data-name="Розетка">
+                            <svg viewBox="0 0 150 150" aria-hidden="true" focusable="false">
+                                <use href="#p-socket" width="150" height="150"/>
+                            </svg>
+                            <span>Розетка</span></button>
+                    </div>
+                </div>
+                <div class="cfg__step"><p class="cfg__lbl" id="cfg-frame-label">Цвет рамки: <b data-val="frame"></b></p>
+                    <div class="sw sw--img" role="radiogroup" aria-labelledby="cfg-frame-label" data-part="frame">
+                        <button type="button" role="radio" aria-checked="true" data-fin="fin-white" data-name="Белый"
+                                title="Белый"><span class="vh">Белый</span></button>
+                        <button type="button" role="radio" aria-checked="false" data-fin="fin-black" data-name="Чёрный"
+                                title="Чёрный"><span class="vh">Чёрный</span></button>
+                        <button type="button" role="radio" aria-checked="false" data-fin="fin-gray" data-name="Серый"
+                                title="Серый"><span class="vh">Серый</span></button>
+                        <button type="button" role="radio" aria-checked="false" data-fin="fin-lightgray"
+                                data-name="Светло-серый" title="Светло-серый"><span class="vh">Светло-серый</span>
+                        </button>
+                        <button type="button" role="radio" aria-checked="false" data-fin="fin-cashmere"
+                                data-name="Кашемир" title="Кашемир"><span class="vh">Кашемир</span></button>
+                        <button type="button" role="radio" aria-checked="false" data-fin="fin-gold" data-name="Золотой"
+                                title="Золотой"><span class="vh">Золотой</span></button>
+                    </div>
+                </div>
+                <div class="cfg__step"><p class="cfg__lbl" id="cfg-mech-label">Цвет механизма: <b data-val="mech"></b>
+                </p>
+                    <div class="sw sw--img" role="radiogroup" aria-labelledby="cfg-mech-label" data-part="mech">
+                        <button type="button" role="radio" aria-checked="true" data-fin="fin-white" data-name="Белый"
+                                title="Белый"><span class="vh">Белый</span></button>
+                        <button type="button" role="radio" aria-checked="false" data-fin="fin-black" data-name="Чёрный"
+                                title="Чёрный"><span class="vh">Чёрный</span></button>
+                        <button type="button" role="radio" aria-checked="false" data-fin="fin-gray" data-name="Серый"
+                                title="Серый"><span class="vh">Серый</span></button>
+                        <button type="button" role="radio" aria-checked="false" data-fin="fin-lightgray"
+                                data-name="Светло-серый" title="Светло-серый"><span class="vh">Светло-серый</span>
+                        </button>
+                        <button type="button" role="radio" aria-checked="false" data-fin="fin-cashmere"
+                                data-name="Кашемир" title="Кашемир"><span class="vh">Кашемир</span></button>
+                        <button type="button" role="radio" aria-checked="false" data-fin="fin-gold" data-name="Золотой"
+                                title="Золотой"><span class="vh">Золотой</span></button>
+                    </div>
+                </div>
+                <p class="note">Демо-режим. F70 — шесть цветов, F55 — четыре («Светло-серый» и «Кашемир» только у F70).
+                    Правила сочетания материала рамки и цвета не заданы, поэтому доступны все сочетания.</p>
+                <div class="fk-result" role="group" aria-labelledby="cfg-result-title">
+                    <h3 id="cfg-result-title">Комплект <span class="fk-tag">демо</span></h3>
+                    <dl class="cfg__spec">
+                        <div>
+                            <dt>Коллекция</dt>
+                            <dd data-out="collection"></dd>
+                        </div>
+                        <div>
+                            <dt>Материал рамки</dt>
+                            <dd data-out="material"></dd>
+                        </div>
+                        <div>
+                            <dt>Рамка</dt>
+                            <dd data-out="frame"></dd>
+                        </div>
+                        <div>
+                            <dt>Механизм</dt>
+                            <dd data-out="mech"></dd>
+                        </div>
+                        <div>
+                            <dt>Артикул комплекта</dt>
+                            <dd data-out="kit-sku"></dd>
+                        </div>
+                        <div>
+                            <dt>Цена комплекта</dt>
+                            <dd data-out="kit-price"></dd>
+                        </div>
+                    </dl>
+                    <p class="vh" id="cfg-summary" role="status"></p>
+                    <div class="actions">
+                        <button class="btn btn--dark" id="cfg-add" type="button">Добавить комплект в корзину</button>
+                        <a class="btn btn--ghost" id="cfg-open" href="configurator.html">Открыть подбор
+                            <svg class="ar" aria-hidden="true">
+                                <use href="#arrow"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <p class="note"><a class="fk-link fk-link--tap" id="cfg-catalog-link" href="catalog.html">Подобрать
+                        отдельные изделия в каталоге</a></p>
+                    <p class="note" id="cfg-cart-link" hidden><a class="fk-link fk-link--tap" href="cart.html">Перейти в
+                        корзину</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Новинки -->
+    <section class="sec wrap" id="new" aria-labelledby="new-t">
+        <div class="head2"><h2 id="new-t">Новинки</h2><a class="btn btn--ghost btn--sm" href="new.html">Все новинки</a>
+        </div>
+        <p class="note">Демонстрационные данные: товары, артикулы, цены и остатки временные (из данных V3); появятся из
+            данных 1С. Реальные товары заказчика помечены без «демо».</p>
+        <ul class="fk-grid fk-grid--products">
+            <li class="fk-product-card">
+                <a class="fk-product-card__media tone-light" href="product.html?id=13238" tabindex="-1"
+                   aria-hidden="true"><img
+                        src="https://ledron.ru/upload/webp/upload/resize_cache/iblock/063/a837nl6ruvlyujex721ocaehtz59ikui/1366_600_0/EU%20white%20(1).webp"
+                        alt="" loading="lazy" style="width:100%;height:100%;object-fit:contain"></a>
+                <h3 class="fk-product-card__name"><a href="product.html?id=13238">Розетка одинарная с заземлением с
+                    защитными шторками F70</a></h3>
+                <p class="fk-product-card__sku">Арт. EU Socket White</p>
+                <p class="fk-product-card__sku">Цвет: Белый</p>
+                <div class="fk-variants" data-variants="13238"></div>
+                <p class="fk-product-card__price">665&nbsp;₽</p>
+                <p class="fk-product-card__stock">В наличии</p>
+                <div class="fk-product-card__actions">
+                    <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="13238">В корзину<span
+                            class="fk-vh"> — Розетка F70</span></button>
+                    <a class="fk-btn fk-btn--secondary fk-btn--card" href="product.html?id=13238">Подробнее<span
+                            class="fk-vh"> — Розетка F70</span></a>
+                </div>
+            </li>
+            <li class="fk-product-card">
+                <span class="fk-product-card__media tone-light"><svg class="fin-white" viewBox="0 0 240 240"
+                                                                     aria-hidden="true" focusable="false"><use
+                        href="#shade150" transform="translate(45 45)"/><use href="#p-switch" x="45" y="45" width="150"
+                                                                            height="150"/></svg></span>
+                <h3 class="fk-product-card__name"><a href="product.html?id=1">Демонстрационный выключатель</a></h3>
+                <p class="fk-product-card__sku">Арт. <span class="fk-stub">ХХХ-001</span> <span
+                        class="fk-tag">заглушка</span></p>
+                <div class="fk-variants" data-variants="1"></div>
+                <p class="fk-product-card__price"><span class="fk-stub">200&nbsp;₽</span> <span
+                        class="fk-tag">демо</span></p>
+                <p class="fk-product-card__stock">Наличие уточняется</p>
+                <div class="fk-product-card__actions">
+                    <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="1">В корзину<span
+                            class="fk-vh"> (демо) — Демонстрационный выключатель</span><span aria-hidden="true">&nbsp;(демо)</span>
+                    </button>
+                    <a class="fk-btn fk-btn--secondary fk-btn--card" href="product.html?id=1">Подробнее<span
+                            class="fk-vh"> — товар 1</span></a>
+                </div>
+            </li>
+            <li class="fk-product-card">
+                <span class="fk-product-card__media tone-sand"><svg class="fin-black" viewBox="0 0 240 240"
+                                                                    aria-hidden="true" focusable="false"><use
+                        href="#shade150" transform="translate(45 45)"/><use href="#p-socket" x="45" y="45" width="150"
+                                                                            height="150"/></svg></span>
+                <h3 class="fk-product-card__name"><a href="product.html?id=2">Демонстрационная розетка</a></h3>
+                <p class="fk-product-card__sku">Арт. <span class="fk-stub">ХХХ-002</span> <span
+                        class="fk-tag">заглушка</span></p>
+                <div class="fk-variants" data-variants="2"></div>
+                <p class="fk-product-card__price"><span class="fk-stub">100&nbsp;₽</span> <span
+                        class="fk-tag">демо</span></p>
+                <p class="fk-product-card__stock">Наличие уточняется</p>
+                <div class="fk-product-card__actions">
+                    <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="2">В корзину<span
+                            class="fk-vh"> (демо) — Демонстрационная розетка</span><span
+                            aria-hidden="true">&nbsp;(демо)</span></button>
+                    <a class="fk-btn fk-btn--secondary fk-btn--card" href="product.html?id=2">Подробнее<span
+                            class="fk-vh"> — товар 2</span></a>
+                </div>
+            </li>
+            <li class="fk-product-card">
+                <span class="fk-product-card__media tone-light"><svg class="fin-nickel" viewBox="0 0 240 240"
+                                                                     aria-hidden="true" focusable="false"><use
+                        href="#shade150" transform="translate(45 45)"/><use href="#p-double" x="45" y="45" width="150"
+                                                                            height="150"/></svg></span>
+                <h3 class="fk-product-card__name"><a href="product.html?id=3">Демонстрационный двойной выключатель</a>
+                </h3>
+                <p class="fk-product-card__sku">Арт. <span class="fk-stub">ХХХ-003</span> <span
+                        class="fk-tag">заглушка</span></p>
+                <div class="fk-variants" data-variants="3"></div>
+                <p class="fk-product-card__price"><span class="fk-stub">300&nbsp;₽</span> <span
+                        class="fk-tag">демо</span></p>
+                <p class="fk-product-card__stock">Наличие уточняется</p>
+                <div class="fk-product-card__actions">
+                    <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="3">В корзину<span
+                            class="fk-vh"> (демо) — Демонстрационный двойной выключатель</span><span aria-hidden="true">&nbsp;(демо)</span>
+                    </button>
+                    <a class="fk-btn fk-btn--secondary fk-btn--card" href="product.html?id=3">Подробнее<span
+                            class="fk-vh"> — товар 3</span></a>
+                </div>
+            </li>
+            <li class="fk-product-card">
+                <span class="fk-product-card__media tone-stone"><svg class="fin-cashmere" viewBox="0 0 240 240"
+                                                                     aria-hidden="true" focusable="false"><use
+                        href="#shade150" transform="translate(45 45)"/><use href="#p-frame" x="45" y="45" width="150"
+                                                                            height="150"/></svg></span>
+                <h3 class="fk-product-card__name"><a href="product.html?id=4">Демонстрационная рамка</a></h3>
+                <p class="fk-product-card__sku">Арт. <span class="fk-stub">ХХХ-004</span> <span
+                        class="fk-tag">заглушка</span></p>
+                <div class="fk-variants" data-variants="4"></div>
+                <p class="fk-product-card__price"><span class="fk-stub">200&nbsp;₽</span> <span
+                        class="fk-tag">демо</span></p>
+                <p class="fk-product-card__stock">Наличие уточняется</p>
+                <div class="fk-product-card__actions">
+                    <button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="4">В корзину<span
+                            class="fk-vh"> (демо) — Демонстрационная рамка</span><span
+                            aria-hidden="true">&nbsp;(демо)</span></button>
+                    <a class="fk-btn fk-btn--secondary fk-btn--card" href="product.html?id=4">Подробнее<span
+                            class="fk-vh"> — товар 4</span></a>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+    <!-- 6a. Проекты (H-10; разметка и данные V3) -->
+    <section class="sec wrap" id="projects" aria-labelledby="projects-title" data-proto-status="demo">
+        <div class="head2"><h2 id="projects-title">Проекты</h2><a class="btn btn--ghost btn--sm" href="projects.html">Все
+            проекты</a></div>
+        <p class="note">Демонстрационные данные. Проектов, фотографий и использованных коллекций нет; на карточках —
+            схематичные иллюстрации. Контент предоставит владелец.</p>
+        <div style="margin-top:24px">
+            <ul class="fk-grid fk-grid--projects">
+                <li class="is-p1">
+                    <a class="fk-project-card tone-graphite" href="project.html?id=1">
               <span class="fk-project-card__media">
-                <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use href="#room"/><use href="#shade150" transform="translate(250 120) scale(0.6667)"/><use class="fin-white" href="#p-switch" x="250" y="120" width="100" height="100"/><use href="#shade150" transform="translate(150 210) scale(0.4000)"/><use class="fin-white" href="#p-socket" x="150" y="210" width="60" height="60"/></svg>
+                <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use
+                        href="#room"/><use href="#shade150" transform="translate(250 120) scale(0.6667)"/><use
+                        class="fin-white" href="#p-switch" x="250" y="120" width="100" height="100"/><use
+                        href="#shade150" transform="translate(150 210) scale(0.4000)"/><use class="fin-white"
+                                                                                            href="#p-socket" x="150"
+                                                                                            y="210" width="60"
+                                                                                            height="60"/></svg>
                 <span class="fk-tag fk-tag--float">Заглушка: фото проекта</span>
               </span>
-              <span class="fk-project-card__cap">
+                        <span class="fk-project-card__cap">
                 <h3 class="fk-project-card__name">Демонстрационный проект 1</h3>
                 <span class="fk-project-card__meta">Помещение — заглушка · Коллекция — заглушка</span>
               </span>
-            </a>
-          </li>
-          <li class="">
-            <a class="fk-project-card tone-light" href="project.html?id=2">
+                    </a>
+                </li>
+                <li class="">
+                    <a class="fk-project-card tone-light" href="project.html?id=2">
               <span class="fk-project-card__media">
-                <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use href="#room"/><use href="#shade150" transform="translate(165 100) scale(0.4667)"/><use class="fin-black" href="#p-socket" x="165" y="100" width="70" height="70"/></svg>
+                <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use
+                        href="#room"/><use href="#shade150" transform="translate(165 100) scale(0.4667)"/><use
+                        class="fin-black" href="#p-socket" x="165" y="100" width="70" height="70"/></svg>
                 <span class="fk-tag fk-tag--float">Заглушка: фото проекта</span>
               </span>
-              <span class="fk-project-card__cap">
+                        <span class="fk-project-card__cap">
                 <h3 class="fk-project-card__name">Демонстрационный проект 2</h3>
                 <span class="fk-project-card__meta">Помещение — заглушка · Коллекция — заглушка</span>
               </span>
-            </a>
-          </li>
-          <li class="">
-            <a class="fk-project-card tone-sand" href="project.html?id=3">
+                    </a>
+                </li>
+                <li class="">
+                    <a class="fk-project-card tone-sand" href="project.html?id=3">
               <span class="fk-project-card__media">
-                <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use href="#room"/><use href="#shade150" transform="translate(140 92) scale(0.4267)"/><use class="fin-white" href="#p-double" x="140" y="92" width="64" height="64"/></svg>
+                <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use
+                        href="#room"/><use href="#shade150" transform="translate(140 92) scale(0.4267)"/><use
+                        class="fin-white" href="#p-double" x="140" y="92" width="64" height="64"/></svg>
                 <span class="fk-tag fk-tag--float">Заглушка: фото проекта</span>
               </span>
-              <span class="fk-project-card__cap">
+                        <span class="fk-project-card__cap">
                 <h3 class="fk-project-card__name">Демонстрационный проект 3</h3>
                 <span class="fk-project-card__meta">Помещение — заглушка · Коллекция — заглушка</span>
               </span>
-            </a>
-          </li>
-        </ul>
-    </div>
-  </section>
-
-  <!-- 6b. Готовые решения (H-11; слайдер V3, нативный) -->
-  <section class="sec wrap fk-solutions" id="solutions" aria-labelledby="solutions-title" data-proto-status="demo">
-    <div class="head2"><h2 id="solutions-title">Готовые решения</h2></div>
-    <p class="note">Прототип: фото — материалы заказчика; товары в блоках — демонстрационные.</p>
-    <div style="margin-top:24px">
-    <div class="fk-sol" id="solutions-slider" role="region" aria-roledescription="карусель" aria-label="Готовые решения">
-          <button class="fk-sol-btn fk-sol-btn--prev" type="button" data-sol-prev aria-label="Предыдущий слайд"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-          <button class="fk-sol-btn fk-sol-btn--next" type="button" data-sol-next aria-label="Следующий слайд"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
-          <ul class="fk-sol__track" tabindex="0" aria-label="Слайды: прокрутка стрелками влево и вправо">
-          <li class="fk-sol__slide" style="--img:url('../assets/images/solutions/3P.jpg');--cx:.39" role="group" aria-roledescription="слайд" aria-label="Слайд 1 из 4">
-            <div class="fk-sol__art">
-              <img src="assets/images/solutions/3P.jpg" alt="Интерьер: три розетки в одной рамке на бежевой стене" decoding="async">
-            <button class="fk-hs" type="button" style="left:39%;top:50%" data-ids="1,2,3" aria-expanded="false" aria-label="Показать товары: средняя розетка"><span class="fk-hs__dot"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v12M2 8h12"/></svg></span></button>
-            </div>
-          </li>
-          <li class="fk-sol__slide" style="--img:url('../assets/images/solutions/2P.jpg');--cx:.5" role="group" aria-roledescription="слайд" aria-label="Слайд 2 из 4">
-            <div class="fk-sol__art">
-              <img src="assets/images/solutions/2P.jpg" alt="Интерьер: четырёхклавишный выключатель и розетка в одной рамке" loading="lazy" decoding="async">
-            <button class="fk-hs" type="button" style="left:50%;top:50%" data-ids="8,1" aria-expanded="false" aria-label="Показать товары: выключатель"><span class="fk-hs__dot"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v12M2 8h12"/></svg></span></button>
-            </div>
-          </li>
-          <li class="fk-sol__slide" style="--img:url('../assets/images/solutions/5ddb74f6_img_2K.jpg');--cx:.54" role="group" aria-roledescription="слайд" aria-label="Слайд 3 из 4">
-            <div class="fk-sol__art" style="--ar:1.2414">
-              <img src="assets/images/solutions/5ddb74f6_img_2K.jpg" alt="Интерьер: выключатель и розетка в серой рамке на кухне над мраморной столешницей" loading="lazy" decoding="async">
-            <button class="fk-hs" type="button" style="left:50%;top:50%" data-ids="4,5" aria-expanded="false" aria-label="Показать товары: выключатель"><span class="fk-hs__dot"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v12M2 8h12"/></svg></span></button>
-            </div>
-          </li>
-          <li class="fk-sol__slide" style="--img:url('../assets/images/solutions/a51201760d633fddf1e5fb9c2ee1ce92_1a6c08ec-f420-4d27-b8c9-562e8ca2fa67.jpg');--cx:.52" role="group" aria-roledescription="слайд" aria-label="Слайд 4 из 4">
-            <div class="fk-sol__art">
-              <img src="assets/images/solutions/a51201760d633fddf1e5fb9c2ee1ce92_1a6c08ec-f420-4d27-b8c9-562e8ca2fa67.jpg" alt="Интерьер: выключатель и розетка в рамке цвета металла над полкой с книгами" loading="lazy" decoding="async">
-            <button class="fk-hs" type="button" style="left:47%;top:48%" data-ids="6,7" aria-expanded="false" aria-label="Показать товары: выключатель"><span class="fk-hs__dot"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v12M2 8h12"/></svg></span></button>
-            </div>
-          </li>
-          </ul>
+                    </a>
+                </li>
+            </ul>
         </div>
-        <div class="fk-sol-dots" role="group" aria-label="Выбор слайда"></div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 6c. Интерьеры (H-12; разметка и тексты V3, карточки не ссылки) -->
-  <section class="sec wrap" id="interiors" aria-labelledby="interiors-title" data-proto-status="demo">
-    <div class="head2"><h2 id="interiors-title">Интерьеры</h2></div>
-    <p class="note">Прототип: фото — материалы заказчика.</p>
-    <div style="margin-top:24px">
-    <ul class="fk-grid fk-grid--interiors">
-          <li>
-            <a class="fk-interior" href="#">
-              <span class="fk-interior__media"><img src="assets/images/designs/09a7a6aa_img_4K.jpg" alt="" loading="lazy" decoding="async"></span>
-              <span class="fk-interior__body">
+    <!-- 6b. Готовые решения (H-11; слайдер V3, нативный) -->
+    <section class="sec wrap fk-solutions" id="solutions" aria-labelledby="solutions-title" data-proto-status="demo">
+        <div class="head2"><h2 id="solutions-title">Готовые решения</h2></div>
+        <p class="note">Прототип: фото — материалы заказчика; товары в блоках — демонстрационные.</p>
+        <div style="margin-top:24px">
+            <div class="fk-sol" id="solutions-slider" role="region" aria-roledescription="карусель"
+                 aria-label="Готовые решения">
+                <button class="fk-sol-btn fk-sol-btn--prev" type="button" data-sol-prev aria-label="Предыдущий слайд">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M15 5l-7 7 7 7"/>
+                    </svg>
+                </button>
+                <button class="fk-sol-btn fk-sol-btn--next" type="button" data-sol-next aria-label="Следующий слайд">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M9 5l7 7-7 7"/>
+                    </svg>
+                </button>
+                <ul class="fk-sol__track" tabindex="0" aria-label="Слайды: прокрутка стрелками влево и вправо">
+                    <li class="fk-sol__slide" style="--img:url('../assets/images/solutions/3P.jpg');--cx:.39"
+                        role="group" aria-roledescription="слайд" aria-label="Слайд 1 из 4">
+                        <div class="fk-sol__art">
+                            <img src="assets/images/solutions/3P.jpg"
+                                 alt="Интерьер: три розетки в одной рамке на бежевой стене" decoding="async">
+                            <button class="fk-hs" type="button" style="left:39%;top:50%" data-ids="1,2,3"
+                                    aria-expanded="false" aria-label="Показать товары: средняя розетка"><span
+                                    class="fk-hs__dot"><svg viewBox="0 0 16 16" aria-hidden="true"><path
+                                    d="M8 2v12M2 8h12"/></svg></span></button>
+                        </div>
+                    </li>
+                    <li class="fk-sol__slide" style="--img:url('../assets/images/solutions/2P.jpg');--cx:.5"
+                        role="group" aria-roledescription="слайд" aria-label="Слайд 2 из 4">
+                        <div class="fk-sol__art">
+                            <img src="assets/images/solutions/2P.jpg"
+                                 alt="Интерьер: четырёхклавишный выключатель и розетка в одной рамке" loading="lazy"
+                                 decoding="async">
+                            <button class="fk-hs" type="button" style="left:50%;top:50%" data-ids="8,1"
+                                    aria-expanded="false" aria-label="Показать товары: выключатель"><span
+                                    class="fk-hs__dot"><svg viewBox="0 0 16 16" aria-hidden="true"><path
+                                    d="M8 2v12M2 8h12"/></svg></span></button>
+                        </div>
+                    </li>
+                    <li class="fk-sol__slide"
+                        style="--img:url('../assets/images/solutions/5ddb74f6_img_2K.jpg');--cx:.54" role="group"
+                        aria-roledescription="слайд" aria-label="Слайд 3 из 4">
+                        <div class="fk-sol__art" style="--ar:1.2414">
+                            <img src="assets/images/solutions/5ddb74f6_img_2K.jpg"
+                                 alt="Интерьер: выключатель и розетка в серой рамке на кухне над мраморной столешницей"
+                                 loading="lazy" decoding="async">
+                            <button class="fk-hs" type="button" style="left:50%;top:50%" data-ids="4,5"
+                                    aria-expanded="false" aria-label="Показать товары: выключатель"><span
+                                    class="fk-hs__dot"><svg viewBox="0 0 16 16" aria-hidden="true"><path
+                                    d="M8 2v12M2 8h12"/></svg></span></button>
+                        </div>
+                    </li>
+                    <li class="fk-sol__slide"
+                        style="--img:url('../assets/images/solutions/a51201760d633fddf1e5fb9c2ee1ce92_1a6c08ec-f420-4d27-b8c9-562e8ca2fa67.jpg');--cx:.52"
+                        role="group" aria-roledescription="слайд" aria-label="Слайд 4 из 4">
+                        <div class="fk-sol__art">
+                            <img src="assets/images/solutions/a51201760d633fddf1e5fb9c2ee1ce92_1a6c08ec-f420-4d27-b8c9-562e8ca2fa67.jpg"
+                                 alt="Интерьер: выключатель и розетка в рамке цвета металла над полкой с книгами"
+                                 loading="lazy" decoding="async">
+                            <button class="fk-hs" type="button" style="left:47%;top:48%" data-ids="6,7"
+                                    aria-expanded="false" aria-label="Показать товары: выключатель"><span
+                                    class="fk-hs__dot"><svg viewBox="0 0 16 16" aria-hidden="true"><path
+                                    d="M8 2v12M2 8h12"/></svg></span></button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="fk-sol-dots" role="group" aria-label="Выбор слайда"></div>
+        </div>
+    </section>
+
+    <!-- 6c. Интерьеры (H-12; разметка и тексты V3, карточки не ссылки) -->
+    <section class="sec wrap" id="interiors" aria-labelledby="interiors-title" data-proto-status="demo">
+        <div class="head2"><h2 id="interiors-title">Интерьеры</h2></div>
+        <p class="note">Прототип: фото — материалы заказчика.</p>
+        <div style="margin-top:24px">
+            <ul class="fk-grid fk-grid--interiors">
+                <li>
+                    <a class="fk-interior" href="#">
+                        <span class="fk-interior__media"><img src="assets/images/designs/09a7a6aa_img_4K.jpg" alt=""
+                                                              loading="lazy" decoding="async"></span>
+                        <span class="fk-interior__body">
                 <h3 class="fk-interior__title">Гостиная с тройной рамкой в нейтральной гамме</h3>
                 <span class="fk-interior__text">Светлая гостиная с панорамным окном: блок выключателей на стене сочетается с отделкой и не перетягивает внимание.</span>
               </span>
-              <span class="fk-interior__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
-            </a>
-          </li>
-          <li>
-            <a class="fk-interior" href="#">
-              <span class="fk-interior__media"><img src="assets/images/designs/1G%20Cashmere.jpg" alt="" loading="lazy" decoding="async"></span>
-              <span class="fk-interior__body">
+                        <span class="fk-interior__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path
+                                d="M7 17L17 7M9 7h8v8"/></svg></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="fk-interior" href="#">
+                        <span class="fk-interior__media"><img src="assets/images/designs/1G%20Cashmere.jpg" alt=""
+                                                              loading="lazy" decoding="async"></span>
+                        <span class="fk-interior__body">
                 <h3 class="fk-interior__title">Холл с выключателем цвета «кашемир»</h3>
                 <span class="fk-interior__text">Тёплый бежевый выключатель в коридоре с зеркальными вставками и тонкой линейной подсветкой потолка.</span>
               </span>
-              <span class="fk-interior__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
-            </a>
-          </li>
-          <li>
-            <a class="fk-interior" href="#">
-              <span class="fk-interior__media"><img src="assets/images/designs/215850e6cd344fd9f815580cfbd74d4c_da1667d2-ec38-4e74-a2c0-c17b37f25be6.jpg" alt="" loading="lazy" decoding="async"></span>
-              <span class="fk-interior__body">
+                        <span class="fk-interior__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path
+                                d="M7 17L17 7M9 7h8v8"/></svg></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="fk-interior" href="#">
+                        <span class="fk-interior__media"><img
+                                src="assets/images/designs/215850e6cd344fd9f815580cfbd74d4c_da1667d2-ec38-4e74-a2c0-c17b37f25be6.jpg"
+                                alt="" loading="lazy" decoding="async"></span>
+                        <span class="fk-interior__body">
                 <h3 class="fk-interior__title">Кухня с двойной рамкой: выключатель и розетка</h3>
                 <span class="fk-interior__text">Серая рамка с выключателем и розеткой над рабочей зоной кухни, рядом с кофемашиной и зеленью.</span>
               </span>
-              <span class="fk-interior__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
-            </a>
-          </li>
-          <li>
-            <a class="fk-interior" href="#">
-              <span class="fk-interior__media"><img src="assets/images/designs/2e5a6406cab54b2416d63e19fc1e6c57_ca3ebba6-7e95-47d9-b108-03cc3c814268.jpg" alt="" loading="lazy" decoding="async"></span>
-              <span class="fk-interior__body">
+                        <span class="fk-interior__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path
+                                d="M7 17L17 7M9 7h8v8"/></svg></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="fk-interior" href="#">
+                        <span class="fk-interior__media"><img
+                                src="assets/images/designs/2e5a6406cab54b2416d63e19fc1e6c57_ca3ebba6-7e95-47d9-b108-03cc3c814268.jpg"
+                                alt="" loading="lazy" decoding="async"></span>
+                        <span class="fk-interior__body">
                 <h3 class="fk-interior__title">Уютная кухня с деревом и медной посудой</h3>
                 <span class="fk-interior__text">Спокойный серый акцент на тёплой стене: сдвоенная рамка рядом с открытыми полками и деревянной столешницей.</span>
               </span>
-              <span class="fk-interior__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
-            </a>
-          </li>
-          <li>
-            <a class="fk-interior" href="#">
-              <span class="fk-interior__media"><img src="assets/images/designs/Thermostat.jpg" alt="" loading="lazy" decoding="async"></span>
-              <span class="fk-interior__body">
+                        <span class="fk-interior__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path
+                                d="M7 17L17 7M9 7h8v8"/></svg></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="fk-interior" href="#">
+                        <span class="fk-interior__media"><img src="assets/images/designs/Thermostat.jpg" alt=""
+                                                              loading="lazy" decoding="async"></span>
+                        <span class="fk-interior__body">
                 <h3 class="fk-interior__title">Гостиная с терморегулятором на стене</h3>
                 <span class="fk-interior__text">Тёмный терморегулятор с дисплеем на фактурной стене возле деревянных реек и мягкого кресла.</span>
               </span>
-              <span class="fk-interior__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
-            </a>
-          </li>
-          <li>
-            <a class="fk-interior" href="#">
-              <span class="fk-interior__media"><img src="assets/images/designs/a51201760d633fddf1e5fb9c2ee1ce92_1a6c08ec-f420-4d27-b8c9-562e8ca2fa67.jpg" alt="" loading="lazy" decoding="async"></span>
-              <span class="fk-interior__body">
+                        <span class="fk-interior__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path
+                                d="M7 17L17 7M9 7h8v8"/></svg></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="fk-interior" href="#">
+                        <span class="fk-interior__media"><img
+                                src="assets/images/designs/a51201760d633fddf1e5fb9c2ee1ce92_1a6c08ec-f420-4d27-b8c9-562e8ca2fa67.jpg"
+                                alt="" loading="lazy" decoding="async"></span>
+                        <span class="fk-interior__body">
                 <h3 class="fk-interior__title">Рабочий уголок с рамкой в металлическом цвете</h3>
                 <span class="fk-interior__text">Розетка и выключатель в рамке цвета металла над деревянной полкой с книгами и торшером.</span>
               </span>
-              <span class="fk-interior__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
-            </a>
-          </li>
-          <li>
-            <a class="fk-interior" href="#">
-              <span class="fk-interior__media"><img src="assets/images/designs/ed7610b49bb17b5ec2b457cf2966fc26_a36abffd-3740-4427-add8-19dd7800aa36.jpg" alt="" loading="lazy" decoding="async"></span>
-              <span class="fk-interior__body">
+                        <span class="fk-interior__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path
+                                d="M7 17L17 7M9 7h8v8"/></svg></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="fk-interior" href="#">
+                        <span class="fk-interior__media"><img
+                                src="assets/images/designs/ed7610b49bb17b5ec2b457cf2966fc26_a36abffd-3740-4427-add8-19dd7800aa36.jpg"
+                                alt="" loading="lazy" decoding="async"></span>
+                        <span class="fk-interior__body">
                 <h3 class="fk-interior__title">Кухонная зона со сдвоенной розеткой</h3>
                 <span class="fk-interior__text">Светлая рамка со сдвоенной розеткой над мраморной столешницей в минималистичной кухне.</span>
               </span>
-              <span class="fk-interior__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+                        <span class="fk-interior__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path
+                                d="M7 17L17 7M9 7h8v8"/></svg></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 7. Шоурум -->
+    <section class="sec wrap" id="showroom" aria-labelledby="sr-t">
+        <div class="show">
+            <div class="show__t">
+                <h2 id="sr-t">Откройте шоурум FORKEL</h2>
+                <p>Посмотрите цвета и покрытие вживую, потрогайте механизмы и подберите комплект с консультантом.</p>
+                <p class="note note--inv">Адрес, дата открытия и часы работы — заглушка: данные предоставит
+                    владелец.</p>
+                <a class="btn btn--light" href="#contacts"
+                   data-stub="Запись на визит не подключена: форма появится после утверждения.">Записаться на визит
+                    <svg class="ar" aria-hidden="true">
+                        <use href="#arrow"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="show__img" aria-hidden="true"><span>Заглушка: фото шоурума</span></div>
+        </div>
+    </section>
+
+    <!-- 8. Цифры доверия -->
+    <section class="sec wrap" aria-labelledby="tr-t">
+        <div class="split">
+            <h2 id="tr-t">Доверие, основанное на качестве</h2>
+            <ul class="nums">
+                <li><b>ХХ</b><span>лет на рынке</span></li>
+                <li><b>ХХ</b><span>реализованных проектов</span></li>
+                <li><b>ХХ</b><span>партнёров и дилеров</span></li>
+                <li><b>ХХ</b><span>лет гарантии</span></li>
+            </ul>
+        </div>
+        <p class="note">Заглушки: значения предоставит владелец, цифры без источника не публикуются.</p>
+    </section>
+
+    <!-- 9. Профессионалам -->
+    <section class="sec wrap" id="pro" aria-labelledby="pro-t">
+        <div class="pro">
+            <h2 id="pro-t">Профессионалам</h2>
+            <ul>
+                <li><h3>Дизайнерам и архитекторам</h3>
+                    <p>Коллекции, цвета и помощь с подбором под проект.</p></li>
+                <li><h3>Монтажным организациям</h3>
+                    <p>Быстрый монтаж и понятный заказ.</p></li>
+                <li><h3>Дилерам</h3>
+                    <p>Условия сотрудничества.</p></li>
+            </ul>
+            <p class="note note--inv">Временные тексты: формулировки и условия предоставит владелец.</p>
+            <a class="btn btn--light" href="cooperation.html">Обсудить сотрудничество
+                <svg class="ar" aria-hidden="true">
+                    <use href="#arrow"/>
+                </svg>
             </a>
-          </li>
-        </ul>
-    </div>
-  </section>
+        </div>
+    </section>
 
-  <!-- 7. Шоурум -->
-  <section class="sec wrap" id="showroom" aria-labelledby="sr-t">
-    <div class="show">
-      <div class="show__t">
-        <h2 id="sr-t">Откройте шоурум FORKEL</h2>
-        <p>Посмотрите цвета и покрытие вживую, потрогайте механизмы и подберите комплект с консультантом.</p>
-        <p class="note note--inv">Адрес, дата открытия и часы работы — заглушка: данные предоставит владелец.</p>
-        <a class="btn btn--light" href="#contacts" data-stub="Запись на визит не подключена: форма появится после утверждения.">Записаться на визит <svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></a>
-      </div>
-      <div class="show__img" aria-hidden="true"><span>Заглушка: фото шоурума</span></div>
-    </div>
-  </section>
+    <!-- 10. Доставка -->
+    <section class="sec wrap" id="delivery" aria-labelledby="d-t" data-proto-status="conditional">
+        <div class="split">
+            <div><h2 id="d-t">Доставка и оплата</h2>
+                <p class="note note--box">Условный блок: способы названы в ТЗ, но не утверждены. В рабочем сайте скрыт
+                    до подтверждения условий.</p></div>
+            <ul class="del">
+                <li><b>Курьером</b><span>Условия будут опубликованы после утверждения.</span></li>
+                <li><b>Самовывоз</b><span>Условия будут опубликованы после утверждения.</span></li>
+                <li><b>СДЭК</b><span>Условия будут опубликованы после утверждения.</span></li>
+            </ul>
+        </div>
+    </section>
 
-  <!-- 8. Цифры доверия -->
-  <section class="sec wrap" aria-labelledby="tr-t">
-    <div class="split">
-      <h2 id="tr-t">Доверие, основанное на качестве</h2>
-      <ul class="nums">
-        <li><b>ХХ</b><span>лет на рынке</span></li><li><b>ХХ</b><span>реализованных проектов</span></li><li><b>ХХ</b><span>партнёров и дилеров</span></li><li><b>ХХ</b><span>лет гарантии</span></li>
-      </ul>
-    </div>
-    <p class="note">Заглушки: значения предоставит владелец, цифры без источника не публикуются.</p>
-  </section>
-
-  <!-- 9. Профессионалам -->
-  <section class="sec wrap" id="pro" aria-labelledby="pro-t">
-    <div class="pro">
-      <h2 id="pro-t">Профессионалам</h2>
-      <ul>
-        <li><h3>Дизайнерам и архитекторам</h3><p>Коллекции, цвета и помощь с подбором под проект.</p></li>
-        <li><h3>Монтажным организациям</h3><p>Быстрый монтаж и понятный заказ.</p></li>
-        <li><h3>Дилерам</h3><p>Условия сотрудничества.</p></li>
-      </ul>
-      <p class="note note--inv">Временные тексты: формулировки и условия предоставит владелец.</p>
-      <a class="btn btn--light" href="cooperation.html">Обсудить сотрудничество <svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></a>
-    </div>
-  </section>
-
-  <!-- 10. Доставка -->
-  <section class="sec wrap" id="delivery" aria-labelledby="d-t" data-proto-status="conditional">
-    <div class="split">
-      <div><h2 id="d-t">Доставка и оплата</h2><p class="note note--box">Условный блок: способы названы в ТЗ, но не утверждены. В рабочем сайте скрыт до подтверждения условий.</p></div>
-      <ul class="del">
-        <li><b>Курьером</b><span>Условия будут опубликованы после утверждения.</span></li>
-        <li><b>Самовывоз</b><span>Условия будут опубликованы после утверждения.</span></li>
-        <li><b>СДЭК</b><span>Условия будут опубликованы после утверждения.</span></li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- 11. Финальный призыв -->
-  <section class="sec wrap" aria-labelledby="fin-t">
-    <div class="fin">
-      <h2 id="fin-t">Готовы выбрать свой комплект?</h2>
-      <p>Подберите цвета в подборе или напишите нам: поможем с выбором коллекции.</p>
-      <div class="actions"><a class="btn btn--light" href="#configurator">Собрать в подборе</a><a class="btn btn--glass" href="contacts.html">Связаться с нами</a></div>
-    </div>
-  </section>
+    <!-- 11. Финальный призыв -->
+    <section class="sec wrap" aria-labelledby="fin-t">
+        <div class="fin">
+            <h2 id="fin-t">Готовы выбрать свой комплект?</h2>
+            <p>Подберите цвета в подборе или напишите нам: поможем с выбором коллекции.</p>
+            <div class="actions"><a class="btn btn--light" href="#configurator">Собрать в подборе</a><a
+                    class="btn btn--glass" href="contacts.html">Связаться с нами</a></div>
+        </div>
+    </section>
 </main>
 
 <!-- Подвал V4 с функциями V3 (M3). Одна и та же разметка на всех страницах -->
 <footer class="foot fk-footer" id="contacts">
     <div class="fk-container">
-      <div class="fk-footer__grid">
-        <div class="fk-footer__row">
-          <div class="fk-footer__brand">
-            <p class="fk-footer__logo"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 24A16 16 0 0 1 20 4" fill="none" stroke="var(--yellow)" stroke-width="2.4" stroke-linecap="round"/></svg>FORKEL</p>
-          </div>
-          <nav class="fk-footer__social" aria-label="Соцсети">
-            <h2>Мы в соцсетях</h2>
-            <ul class="fk-social-list">
-              <li><a class="fk-social-link" href="#" aria-label="ВКонтакте" data-stub="Ссылка на ВКонтакте появится после получения адреса от владельца."><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8c.3 4.5 3 8 7 8h1.5v-3.5c1.8.2 3.2 1.8 4 3.5H20c-.8-2.3-2.2-3.7-3.7-4.3 1.2-.8 2.4-2.2 3-4H17c-.6 1.7-1.8 3.2-3.5 3.5V8H11v4.5C8.5 12 7.3 9.5 7 8H4z"/></svg></a></li>
-              <li><a class="fk-social-link" href="#" aria-label="MAX" data-stub="Ссылка на MAX появится после получения адреса от владельца."><svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"> <g clip-path="url(#clip0_8510_8338)"> <mask id="mask0_8510_8338" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"> <path d="M50.7571 0.261719C78.2929 0.261719 99.8857 22.5974 99.8857 50.1474C99.8857 77.6974 77.6071 99.4903 51.0214 99.4903C41.5857 99.4903 37.0143 98.1617 29.65 92.9474C29.1429 92.5903 28.45 92.6831 28.0214 93.1403C22.3571 99.1831 7.85 103.426 7.18571 95.176C7.18571 80.7903 0 71.4474 0 49.876C0 21.5546 23.2214 0.261719 50.7571 0.261719ZM51.5286 24.8117C38.4643 24.126 28.2643 33.1974 26.0143 47.3831C24.15 59.1332 27.45 73.4546 30.2786 74.176C31.4786 74.4832 34.3571 72.276 36.4571 70.2974C36.85 69.926 37.45 69.8617 37.9071 70.1474C41.1786 72.1474 44.8786 73.6474 48.9571 73.8617C62.3714 74.5617 74.2571 64.0617 74.9643 50.6474C75.6643 37.2331 64.9429 25.5046 51.5286 24.8046V24.8117Z" fill="white"/> </mask> <g mask="url(#mask0_8510_8338)"> <path d="M49.6996 50.0808L-12.4076 84.5022C-13.4076 82.6951 -14.329 80.8451 -15.1719 78.9594L49.6924 50.0808H49.6996Z" fill="white"/> <path d="M49.6975 50.0808L-15.1739 78.9594C-16.0167 77.0737 -16.7739 75.1522 -17.4453 73.1951L49.6904 50.0808H49.6975Z" fill="white"/> <path d="M49.6969 50.0808L-17.446 73.1951C-18.1174 71.2451 -18.7031 69.2594 -19.2031 67.2594L49.6969 50.0808Z" fill="white"/> <path d="M49.6982 50.0808L-19.2018 67.2594C-19.7018 65.2522 -20.1161 63.2308 -20.4375 61.188L49.6911 50.0808H49.6982Z" fill="white"/> <path d="M49.6997 50.0808L-20.4289 61.188C-20.7503 59.1451 -20.986 57.0951 -21.1289 55.0308L49.7068 50.0808H49.6997Z" fill="white"/> <path d="M49.6979 50.0821L-21.1379 55.0321C-21.2807 52.9678 -21.3379 50.9035 -21.3021 48.8392L49.6907 50.0821H49.6979Z" fill="white"/> <path d="M49.696 50.082L-21.2969 48.8392C-21.2612 46.7749 -21.1326 44.7106 -20.9183 42.6534L49.696 50.0749V50.082Z" fill="white"/> <path d="M49.6963 50.0817L-20.918 42.6603C-20.7037 40.6032 -20.3965 38.5603 -20.0037 36.5317L49.6963 50.0817Z" fill="white"/> <path d="M49.6993 50.0819L-20.0078 36.5319C-19.615 34.5034 -19.1292 32.4962 -18.565 30.5105L49.6922 50.0819H49.6993Z" fill="white"/> <path d="M49.6986 50.0801L-18.5586 30.5086C-17.9872 28.5229 -17.33 26.5658 -16.5943 24.6372L49.6986 50.0872V50.0801Z" fill="white"/> <path d="M49.6991 50.0822L-16.5938 24.6322C-15.8509 22.7036 -15.0295 20.8108 -14.1223 18.9536L49.6991 50.0822Z" fill="white"/> <path d="M49.6964 50.0814L-14.125 18.9529C-13.2179 17.0957 -12.2321 15.2814 -11.1679 13.51L49.6964 50.0814Z" fill="white"/> <path d="M49.6963 50.0811L-11.168 13.5096C-10.1037 11.7382 -8.96083 10.0168 -7.74654 8.34534L49.6963 50.0811Z" fill="white"/> <path d="M49.6961 50.0818L-7.75391 8.34609C-6.53962 6.67466 -5.25391 5.06038 -3.89676 3.49609L49.6889 50.0818H49.6961Z" fill="white"/> <path d="M49.6983 50.0825L-3.89453 3.49676C-2.53739 1.93962 -1.11596 0.43962 0.369754 -0.996094L49.6912 50.0825H49.6983Z" fill="white"/> <path d="M49.6997 50.0824L0.371094 -0.996129C1.85681 -2.43184 3.40681 -3.80327 5.01395 -5.10327L49.6997 50.0824Z" fill="white"/> <path d="M49.6974 50.0824L5.01172 -5.10335C6.61886 -6.40335 8.276 -7.63192 9.99029 -8.78906L49.6974 50.0752V50.0824Z" fill="white"/> <path d="M49.6993 50.0814L9.99219 -8.79004C11.7065 -9.94718 13.4636 -11.0258 15.2708 -12.0258L49.6922 50.0814H49.6993Z" fill="white"/> <path d="M49.6981 50.0807L15.2695 -12.0265C17.0767 -13.0265 18.9267 -13.9479 20.8124 -14.7908L49.691 50.0735H49.6981V50.0807Z" fill="white"/> <path d="M49.6982 50.0808L20.8125 -14.7906C22.6982 -15.6334 24.6196 -16.3906 26.5768 -17.062L49.6911 50.0737H49.6982V50.0808Z" fill="white"/> <path d="M49.6996 50.0814L26.5781 -17.0543C28.5281 -17.7257 30.5138 -18.3114 32.521 -18.8114L49.6996 50.0886V50.0814Z" fill="white"/> <path d="M49.6981 50.0798L32.5195 -18.8202C34.5267 -19.3202 36.5481 -19.7345 38.591 -20.0559L49.6981 50.0798Z" fill="white"/> <path d="M49.697 50.0808L38.5898 -20.0478C40.6327 -20.3692 42.6827 -20.6049 44.747 -20.7478L49.697 50.0879V50.0808Z" fill="white"/> <path d="M49.6961 50.0812L44.7461 -20.7546C46.8104 -20.8974 48.8747 -20.9546 50.939 -20.9188L49.6961 50.074V50.0812Z" fill="white"/> <path d="M49.6992 50.0804L50.9421 -20.9125C53.0064 -20.8768 55.0706 -20.7482 57.1278 -20.5339L49.7064 50.0804H49.6992Z" fill="white"/> <path d="M49.6992 50.0813L57.1206 -20.533C59.1778 -20.3187 61.2206 -20.0115 63.2492 -19.6187L49.6992 50.0813Z" fill="white"/> <path d="M49.6992 50.0822L63.2492 -19.6178C65.2778 -19.2249 67.2849 -18.7392 69.2706 -18.1749L49.6992 50.0822Z" fill="white"/> <path d="M49.6986 50.0818L69.27 -18.1753C71.2557 -17.6039 73.2128 -16.9467 75.1414 -16.211L49.6914 50.0818H49.6986Z" fill="white"/> <path d="M49.6986 50.0819L75.1414 -16.2109C77.07 -15.4681 78.9628 -14.6467 80.82 -13.7395L49.6914 50.0819H49.6986Z" fill="white"/> <path d="M49.6992 50.0825L80.8278 -13.7389C82.6849 -12.8317 84.4992 -11.846 86.2706 -10.7817L49.6992 50.0825Z" fill="white"/> <path d="M49.6992 50.0802L86.2706 -10.7841C88.0421 -9.71977 89.7635 -8.57691 91.4349 -7.36263L49.6992 50.0802Z" fill="white"/> <path d="M49.6992 50.0823L91.4349 -7.3606C93.1064 -6.14631 94.7206 -4.8606 96.2849 -3.50345L49.6992 50.0823Z" fill="white"/> <path d="M49.6992 50.0799L96.2849 -3.51294C97.8421 -2.1558 99.3421 -0.734368 100.778 0.751347L49.6992 50.0728V50.0799Z" fill="white"/> <path d="M49.6992 50.0819L100.778 0.753296C102.214 2.23901 103.585 3.78901 104.885 5.39615L49.6992 50.0819Z" fill="white"/> <path d="M49.6992 50.0818L104.878 5.39612C106.178 7.00326 107.406 8.6604 108.564 10.3747L49.6992 50.0818Z" fill="white"/> <path d="M49.6986 50.0809L108.563 10.3738C109.72 12.0881 110.799 13.8452 111.799 15.6523L49.6914 50.0738H49.6986V50.0809Z" fill="white"/> <path d="M49.6992 50.0799L111.806 15.6584C112.806 17.4656 113.728 19.3156 114.571 21.2013L49.7064 50.0799H49.6992Z" fill="white"/> <path d="M49.6992 50.0811L114.563 21.2025C115.406 23.0882 116.163 25.0097 116.835 26.9668L49.6992 50.0811Z" fill="white"/> <path d="M49.6986 50.0813L116.834 26.967C117.506 28.917 118.091 30.9028 118.591 32.9099L49.6914 50.0885L49.6986 50.0813Z" fill="white"/> <path d="M49.6992 50.0803L118.599 32.9017C119.099 34.9089 119.514 36.9303 119.835 38.9732L49.6992 50.0803Z" fill="white"/> <path d="M49.6986 50.0803L119.827 38.9731C120.149 41.016 120.384 43.066 120.527 45.1303L49.6914 50.0803H49.6986Z" fill="white"/> <path d="M49.6992 50.0811L120.535 45.1311C120.678 47.1954 120.735 49.2597 120.699 51.324L49.7064 50.0811H49.6992Z" fill="white"/> <path d="M49.6992 50.0808L120.692 51.3237C120.656 53.388 120.528 55.4522 120.314 57.5094L49.6992 50.088V50.0808Z" fill="white"/> <path d="M49.6992 50.0808L120.314 57.5022C120.099 59.5594 119.792 61.6022 119.399 63.6308L49.6992 50.0808Z" fill="white"/> <path d="M49.6992 50.0808L119.399 63.6308C119.006 65.6594 118.521 67.6665 117.956 69.6522L49.6992 50.0808Z" fill="white"/> <path d="M49.6992 50.0825L117.956 69.6539C117.385 71.6396 116.728 73.5967 115.992 75.5253L49.6992 50.0753V50.0825Z" fill="white"/> <path d="M49.6992 50.0808L115.992 75.5308C115.249 77.4594 114.428 79.3522 113.521 81.2094L49.6992 50.0808Z" fill="white"/> <path d="M49.6992 50.0808L113.521 81.2094C112.613 83.0665 111.628 84.8808 110.563 86.6522L49.6992 50.0808Z" fill="white"/> <path d="M49.6992 50.0808L110.563 86.6522C109.499 88.4237 108.356 90.1451 107.142 91.8165L49.6992 50.0808Z" fill="white"/> <path d="M49.6992 50.0808L107.142 91.8165C105.928 93.4879 104.642 95.1022 103.285 96.6665L49.6992 50.0808Z" fill="white"/> <path d="M49.6992 50.0808L103.285 96.6665C101.928 98.2237 100.506 99.7237 99.0206 101.159L49.6992 50.0808Z" fill="white"/> <path d="M49.6992 50.0808L99.0207 101.159C97.5349 102.595 95.9849 103.967 94.3849 105.267L49.6992 50.0808Z" fill="white"/> <path d="M49.6992 50.0808L94.3849 105.267C92.7778 106.567 91.1206 107.795 89.4064 108.952L49.6992 50.088V50.0808Z" fill="white"/> <path d="M49.6992 50.0825L89.4064 108.947C87.6921 110.104 85.9349 111.182 84.1278 112.182L49.7064 50.0753H49.6992V50.0825Z" fill="white"/> <path d="M49.6992 50.0808L84.1206 112.188C82.3135 113.188 80.4635 114.109 78.5778 114.952L49.6992 50.088V50.0808Z" fill="white"/> <path d="M49.6992 50.0808L78.5778 114.945C76.6921 115.788 74.7706 116.545 72.8135 117.217L49.6992 50.0808Z" fill="white"/> <path d="M49.6986 50.0825L72.8128 117.218C70.8557 117.89 68.8771 118.475 66.87 118.975L49.6914 50.0753H49.6986V50.0825Z" fill="white"/> <path d="M49.6992 50.0808L66.8778 118.981C64.8706 119.481 62.8492 119.895 60.8064 120.217L49.6992 50.088V50.0808Z" fill="white"/> <path d="M49.6992 50.0808L60.8064 120.217C58.7635 120.538 56.7135 120.774 54.6492 120.917L49.6992 50.0808Z" fill="white"/> <path d="M49.696 50.0808L54.646 120.917C52.5817 121.059 50.5174 121.117 48.4531 121.081L49.696 50.088V50.0808Z" fill="white"/> <path d="M49.6981 50.0808L48.4552 121.074C46.391 121.038 44.3267 120.909 42.2695 120.695L49.691 50.0808H49.6981Z" fill="white"/> <path d="M49.6984 50.0808L42.277 120.695C40.2199 120.481 38.177 120.174 36.1484 119.781L49.6984 50.0808Z" fill="white"/> <path d="M49.6964 50.0808L36.1464 119.781C34.1179 119.388 32.1107 118.902 30.125 118.338L49.6964 50.0808Z" fill="white"/> <path d="M49.6968 50.0808L30.1253 118.338C28.1396 117.767 26.1825 117.109 24.2539 116.374L49.7039 50.0808H49.6968Z" fill="white"/> <path d="M49.6989 50.0808L24.2489 116.374C22.3203 115.631 20.4275 114.809 18.5703 113.902L49.6989 50.0808Z" fill="white"/> <path d="M49.6964 50.0808L18.5679 113.902C16.7107 112.995 14.8964 112.009 13.125 110.945L49.6964 50.0808Z" fill="white"/> <path d="M49.6967 50.0808L13.1252 110.945C11.3538 109.881 9.63237 108.738 7.96094 107.524L49.6967 50.0808Z" fill="white"/> <path d="M49.6983 50.0808L7.95547 107.524C6.28404 106.309 4.66975 105.024 3.10547 103.667L49.6912 50.0808H49.6983Z" fill="white"/> <path d="M49.6997 50.0808L3.11395 103.667C1.55681 102.309 0.0568079 100.888 -1.37891 99.4022L49.6997 50.0808Z" fill="white"/> <path d="M49.6974 50.0808L-1.38114 99.4022C-2.81685 97.9165 -4.18828 96.3665 -5.48828 94.7665L49.6974 50.0808Z" fill="white"/> <path d="M49.6996 50.0808L-5.48616 94.7665C-6.78616 93.1594 -8.01473 91.5022 -9.17188 89.7879L49.6924 50.0808H49.6996Z" fill="white"/> <path d="M49.697 50.0808L-9.17444 89.788C-10.3316 88.0737 -11.4102 86.3094 -12.4102 84.5022L49.697 50.0808Z" fill="white"/> <g filter="url(#filter0_f_8510_8338)"> <path d="M49.6996 50.0808L-12.4076 84.5022C-13.4076 82.6951 -14.329 80.8451 -15.1719 78.9594L49.6924 50.0808H49.6996Z" fill="white"/> <path d="M49.6975 50.0808L-15.1739 78.9594C-16.0167 77.0737 -16.7739 75.1522 -17.4453 73.1951L49.6904 50.0808H49.6975Z" fill="white"/> <path d="M49.6969 50.0808L-17.446 73.1951C-18.1174 71.2451 -18.7031 69.2594 -19.2031 67.2594L49.6969 50.0808Z" fill="white"/> <path d="M49.6982 50.0808L-19.2018 67.2594C-19.7018 65.2522 -20.1161 63.2308 -20.4375 61.188L49.6911 50.0808H49.6982Z" fill="white"/> <path d="M49.6997 50.0808L-20.4289 61.188C-20.7503 59.1451 -20.986 57.0951 -21.1289 55.0308L49.7068 50.0808H49.6997Z" fill="white"/> <path d="M49.6979 50.0821L-21.1379 55.0321C-21.2807 52.9678 -21.3379 50.9035 -21.3021 48.8392L49.6907 50.0821H49.6979Z" fill="white"/> <path d="M49.696 50.082L-21.2969 48.8392C-21.2612 46.7749 -21.1326 44.7106 -20.9183 42.6534L49.696 50.0749V50.082Z" fill="white"/> <path d="M49.6963 50.0817L-20.918 42.6603C-20.7037 40.6032 -20.3965 38.5603 -20.0037 36.5317L49.6963 50.0817Z" fill="white"/> <path d="M49.6993 50.0819L-20.0078 36.5319C-19.615 34.5034 -19.1292 32.4962 -18.565 30.5105L49.6922 50.0819H49.6993Z" fill="white"/> <path d="M49.6986 50.0801L-18.5586 30.5086C-17.9872 28.5229 -17.33 26.5658 -16.5943 24.6372L49.6986 50.0872V50.0801Z" fill="white"/> <path d="M49.6991 50.0822L-16.5938 24.6322C-15.8509 22.7036 -15.0295 20.8108 -14.1223 18.9536L49.6991 50.0822Z" fill="white"/> <path d="M49.6964 50.0814L-14.125 18.9529C-13.2179 17.0957 -12.2321 15.2814 -11.1679 13.51L49.6964 50.0814Z" fill="white"/> <path d="M49.6963 50.0811L-11.168 13.5096C-10.1037 11.7382 -8.96083 10.0168 -7.74654 8.34534L49.6963 50.0811Z" fill="white"/> <path d="M49.6961 50.0818L-7.75391 8.34609C-6.53962 6.67466 -5.25391 5.06038 -3.89676 3.49609L49.6889 50.0818H49.6961Z" fill="white"/> <path d="M49.6983 50.0825L-3.89453 3.49676C-2.53739 1.93962 -1.11596 0.43962 0.369754 -0.996094L49.6912 50.0825H49.6983Z" fill="white"/> <path d="M49.6997 50.0824L0.371094 -0.996129C1.85681 -2.43184 3.40681 -3.80327 5.01395 -5.10327L49.6997 50.0824Z" fill="white"/> <path d="M49.6974 50.0824L5.01172 -5.10335C6.61886 -6.40335 8.276 -7.63192 9.99029 -8.78906L49.6974 50.0752V50.0824Z" fill="white"/> <path d="M49.6993 50.0814L9.99219 -8.79004C11.7065 -9.94718 13.4636 -11.0258 15.2708 -12.0258L49.6922 50.0814H49.6993Z" fill="white"/> <path d="M49.6981 50.0807L15.2695 -12.0265C17.0767 -13.0265 18.9267 -13.9479 20.8124 -14.7908L49.691 50.0735H49.6981V50.0807Z" fill="white"/> <path d="M49.6982 50.0808L20.8125 -14.7906C22.6982 -15.6334 24.6196 -16.3906 26.5768 -17.062L49.6911 50.0737H49.6982V50.0808Z" fill="white"/> <path d="M49.6996 50.0814L26.5781 -17.0543C28.5281 -17.7257 30.5138 -18.3114 32.521 -18.8114L49.6996 50.0886V50.0814Z" fill="white"/> <path d="M49.6981 50.0798L32.5195 -18.8202C34.5267 -19.3202 36.5481 -19.7345 38.591 -20.0559L49.6981 50.0798Z" fill="white"/> <path d="M49.697 50.0808L38.5898 -20.0478C40.6327 -20.3692 42.6827 -20.6049 44.747 -20.7478L49.697 50.0879V50.0808Z" fill="white"/> <path d="M49.6961 50.0812L44.7461 -20.7546C46.8104 -20.8974 48.8747 -20.9546 50.939 -20.9188L49.6961 50.074V50.0812Z" fill="white"/> <path d="M49.6992 50.0804L50.9421 -20.9125C53.0064 -20.8768 55.0706 -20.7482 57.1278 -20.5339L49.7064 50.0804H49.6992Z" fill="white"/> <path d="M49.6992 50.0813L57.1206 -20.533C59.1778 -20.3187 61.2206 -20.0115 63.2492 -19.6187L49.6992 50.0813Z" fill="white"/> <path d="M49.6992 50.0822L63.2492 -19.6178C65.2778 -19.2249 67.2849 -18.7392 69.2706 -18.1749L49.6992 50.0822Z" fill="white"/> <path d="M49.6986 50.0818L69.27 -18.1753C71.2557 -17.6039 73.2128 -16.9467 75.1414 -16.211L49.6914 50.0818H49.6986Z" fill="white"/> <path d="M49.6986 50.0819L75.1414 -16.2109C77.07 -15.4681 78.9628 -14.6467 80.82 -13.7395L49.6914 50.0819H49.6986Z" fill="white"/> <path d="M49.6992 50.0825L80.8278 -13.7389C82.6849 -12.8317 84.4992 -11.846 86.2706 -10.7817L49.6992 50.0825Z" fill="white"/> <path d="M49.6992 50.0802L86.2706 -10.7841C88.0421 -9.71977 89.7635 -8.57691 91.4349 -7.36263L49.6992 50.0802Z" fill="white"/> <path d="M49.6992 50.0823L91.4349 -7.3606C93.1064 -6.14631 94.7206 -4.8606 96.2849 -3.50345L49.6992 50.0823Z" fill="white"/> <path d="M49.6992 50.0799L96.2849 -3.51294C97.8421 -2.1558 99.3421 -0.734368 100.778 0.751347L49.6992 50.0728V50.0799Z" fill="white"/> <path d="M49.6992 50.0819L100.778 0.753296C102.214 2.23901 103.585 3.78901 104.885 5.39615L49.6992 50.0819Z" fill="white"/> <path d="M49.6992 50.0818L104.878 5.39612C106.178 7.00326 107.406 8.6604 108.564 10.3747L49.6992 50.0818Z" fill="white"/> <path d="M49.6986 50.0809L108.563 10.3738C109.72 12.0881 110.799 13.8452 111.799 15.6523L49.6914 50.0738H49.6986V50.0809Z" fill="white"/> <path d="M49.6992 50.0799L111.806 15.6584C112.806 17.4656 113.728 19.3156 114.571 21.2013L49.7064 50.0799H49.6992Z" fill="white"/> <path d="M49.6992 50.0811L114.563 21.2025C115.406 23.0882 116.163 25.0097 116.835 26.9668L49.6992 50.0811Z" fill="white"/> <path d="M49.6986 50.0813L116.834 26.967C117.506 28.917 118.091 30.9028 118.591 32.9099L49.6914 50.0885L49.6986 50.0813Z" fill="white"/> <path d="M49.6992 50.0803L118.599 32.9017C119.099 34.9089 119.514 36.9303 119.835 38.9732L49.6992 50.0803Z" fill="white"/> <path d="M49.6986 50.0803L119.827 38.9731C120.149 41.016 120.384 43.066 120.527 45.1303L49.6914 50.0803H49.6986Z" fill="white"/> <path d="M49.6992 50.0811L120.535 45.1311C120.678 47.1954 120.735 49.2597 120.699 51.324L49.7064 50.0811H49.6992Z" fill="white"/> <path d="M49.6992 50.0808L120.692 51.3237C120.656 53.388 120.528 55.4522 120.314 57.5094L49.6992 50.088V50.0808Z" fill="white"/> <path d="M49.6992 50.0808L120.314 57.5022C120.099 59.5594 119.792 61.6022 119.399 63.6308L49.6992 50.0808Z" fill="white"/> <path d="M49.6992 50.0808L119.399 63.6308C119.006 65.6594 118.521 67.6665 117.956 69.6522L49.6992 50.0808Z" fill="white"/> <path d="M49.6992 50.0825L117.956 69.6539C117.385 71.6396 116.728 73.5967 115.992 75.5253L49.6992 50.0753V50.0825Z" fill="white"/> <path d="M49.6992 50.0808L115.992 75.5308C115.249 77.4594 114.428 79.3522 113.521 81.2094L49.6992 50.0808Z" fill="white"/> <path d="M49.6992 50.0808L113.521 81.2094C112.613 83.0665 111.628 84.8808 110.563 86.6522L49.6992 50.0808Z" fill="white"/> <path d="M49.6992 50.0808L110.563 86.6522C109.499 88.4237 108.356 90.1451 107.142 91.8165L49.6992 50.0808Z" fill="white"/> <path d="M49.6992 50.0808L107.142 91.8165C105.928 93.4879 104.642 95.1022 103.285 96.6665L49.6992 50.0808Z" fill="white"/> <path d="M49.6992 50.0808L103.285 96.6665C101.928 98.2237 100.506 99.7237 99.0206 101.159L49.6992 50.0808Z" fill="white"/> <path d="M49.6992 50.0808L99.0207 101.159C97.5349 102.595 95.9849 103.967 94.3849 105.267L49.6992 50.0808Z" fill="white"/> <path d="M49.6992 50.0808L94.3849 105.267C92.7778 106.567 91.1206 107.795 89.4064 108.952L49.6992 50.088V50.0808Z" fill="white"/> <path d="M49.6992 50.0825L89.4064 108.947C87.6921 110.104 85.9349 111.182 84.1278 112.182L49.7064 50.0753H49.6992V50.0825Z" fill="white"/> <path d="M49.6992 50.0808L84.1206 112.188C82.3135 113.188 80.4635 114.109 78.5778 114.952L49.6992 50.088V50.0808Z" fill="white"/> <path d="M49.6992 50.0808L78.5778 114.945C76.6921 115.788 74.7706 116.545 72.8135 117.217L49.6992 50.0808Z" fill="white"/> <path d="M49.6986 50.0825L72.8128 117.218C70.8557 117.89 68.8771 118.475 66.87 118.975L49.6914 50.0753H49.6986V50.0825Z" fill="white"/> <path d="M49.6992 50.0808L66.8778 118.981C64.8706 119.481 62.8492 119.895 60.8064 120.217L49.6992 50.088V50.0808Z" fill="white"/> <path d="M49.6992 50.0808L60.8064 120.217C58.7635 120.538 56.7135 120.774 54.6492 120.917L49.6992 50.0808Z" fill="white"/> <path d="M49.696 50.0808L54.646 120.917C52.5817 121.059 50.5174 121.117 48.4531 121.081L49.696 50.088V50.0808Z" fill="white"/> <path d="M49.6981 50.0808L48.4552 121.074C46.391 121.038 44.3267 120.909 42.2695 120.695L49.691 50.0808H49.6981Z" fill="white"/> <path d="M49.6984 50.0808L42.277 120.695C40.2199 120.481 38.177 120.174 36.1484 119.781L49.6984 50.0808Z" fill="white"/> <path d="M49.6964 50.0808L36.1464 119.781C34.1179 119.388 32.1107 118.902 30.125 118.338L49.6964 50.0808Z" fill="white"/> <path d="M49.6968 50.0808L30.1253 118.338C28.1396 117.767 26.1825 117.109 24.2539 116.374L49.7039 50.0808H49.6968Z" fill="white"/> <path d="M49.6989 50.0808L24.2489 116.374C22.3203 115.631 20.4275 114.809 18.5703 113.902L49.6989 50.0808Z" fill="white"/> <path d="M49.6964 50.0808L18.5679 113.902C16.7107 112.995 14.8964 112.009 13.125 110.945L49.6964 50.0808Z" fill="white"/> <path d="M49.6967 50.0808L13.1252 110.945C11.3538 109.881 9.63237 108.738 7.96094 107.524L49.6967 50.0808Z" fill="white"/> <path d="M49.6983 50.0808L7.95547 107.524C6.28404 106.309 4.66975 105.024 3.10547 103.667L49.6912 50.0808H49.6983Z" fill="white"/> <path d="M49.6997 50.0808L3.11395 103.667C1.55681 102.309 0.0568079 100.888 -1.37891 99.4022L49.6997 50.0808Z" fill="white"/> <path d="M49.6974 50.0808L-1.38114 99.4022C-2.81685 97.9165 -4.18828 96.3665 -5.48828 94.7665L49.6974 50.0808Z" fill="white"/> <path d="M49.6996 50.0808L-5.48616 94.7665C-6.78616 93.1594 -8.01473 91.5022 -9.17188 89.7879L49.6924 50.0808H49.6996Z" fill="white"/> <path d="M49.697 50.0808L-9.17444 89.788C-10.3316 88.0737 -11.4102 86.3094 -12.4102 84.5022L49.697 50.0808Z" fill="white"/> </g> </g> </g> <defs> <filter id="filter0_f_8510_8338" x="-38.4554" y="-38.0721" width="176.309" height="176.306" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"> <feFlood flood-opacity="0" result="BackgroundImageFix"/> <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/> <feGaussianBlur stdDeviation="8.57143" result="effect1_foregroundBlur_8510_8338"/> </filter> <clipPath id="clip0_8510_8338"> <rect width="100" height="100" fill="white"/> </clipPath> </defs> </svg></a></li>
-              <li><a class="fk-social-link" href="#" aria-label="Telegram" data-stub="Ссылка на Telegram появится после получения адреса от владельца."><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 4L3.5 10.8l5.2 1.9 1.9 5.8 2.7-3.3 4.4 3.2L20.5 4z"/><path d="M8.7 12.7L17 7"/></svg></a></li>
-            </ul>
-          </nav>
+        <div class="fk-footer__grid">
+            <div class="fk-footer__row">
+                <div class="fk-footer__brand">
+                    <p class="fk-footer__logo">
+                        <svg viewBox="0 0 40 40" aria-hidden="true">
+                            <path d="M6 24A16 16 0 0 1 20 4" fill="none" stroke="var(--yellow)" stroke-width="2.4"
+                                  stroke-linecap="round"/>
+                        </svg>
+                        FORKEL
+                    </p>
+                </div>
+                <nav class="fk-footer__social" aria-label="Соцсети">
+                    <h2>Мы в соцсетях</h2>
+                    <ul class="fk-social-list">
+                        <li>
+                            <a class="fk-social-link" href="#" aria-label="ВКонтакте"
+                               data-stub="Ссылка на ВКонтакте появится после получения адреса от владельца.">
+                                <img src="assets/images/icons/vk-By-Pixel-perfect.webp" alt="ВКонтакте" width="24" height="24"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="fk-social-link" href="#" aria-label="MAX"
+                               data-stub="Ссылка на MAX появится после получения адреса от владельца.">
+                                <img src="assets/images/icons/max_v5.webp" alt="MAX" width="24" height="24"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="fk-social-link" href="#" aria-label="Telegram"
+                               data-stub="Ссылка на Telegram появится после получения адреса от владельца.">
+                                <img src="assets/images/icons/telegram-By-Freepik.webp" alt="Telegram" width="24" height="24"/>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="fk-footer__row">
+                <nav class="fk-footer__nav" aria-label="Разделы">
+                    <h2>Разделы</h2>
+                    <ul>
+                        <li><a href="catalog.html">Каталог</a></li>
+                        <li><a href="index.html#collections">Коллекции</a></li>
+                        <li><a href="index.html#categories">Категории</a></li>
+                        <li><a href="new.html">Новинки</a></li>
+                        <li><a href="configurator.html">Подбор</a></li>
+                        <li><a href="projects.html">Проекты</a></li>
+                        <li><a href="cooperation.html">Сотрудничество</a></li>
+                        <li><a href="index.html#delivery">Доставка и оплата</a></li>
+                    </ul>
+                </nav>
+                <nav class="fk-footer__info" aria-label="Информация">
+                    <h2>Информация</h2>
+                    <ul>
+                        <li>
+                            <a href="contacts.html">Контакты</a>
+                        </li>
+                        <li>
+                            <a href="index.html#delivery">Доставка и оплата</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                               data-stub="Страница гарантии не создана. Текст предоставит владелец.">Гарантия</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="fk-footer__contacts">
+                    <h2>Контакты</h2>
+                    <p>Телефон, email и адрес добавит владелец.</p>
+                </div>
+            </div>
         </div>
-        <div class="fk-footer__row">
-          <nav class="fk-footer__nav" aria-label="Разделы">
-            <h2>Разделы</h2>
-            <ul>
-              <li><a href="catalog.html">Каталог</a></li>
-              <li><a href="index.html#collections">Коллекции</a></li>
-              <li><a href="index.html#categories">Категории</a></li>
-              <li><a href="new.html">Новинки</a></li>
-              <li><a href="configurator.html">Подбор</a></li>
-              <li><a href="projects.html">Проекты</a></li>
-              <li><a href="cooperation.html">Сотрудничество</a></li>
-              <li><a href="index.html#delivery">Доставка и оплата</a></li>
-            </ul>
-          </nav>
-          <nav class="fk-footer__info" aria-label="Информация">
-            <h2>Информация</h2>
-            <ul>
-              <li>
-                <a href="contacts.html">Контакты</a>
-              </li>
-              <li>
-                <a href="index.html#delivery">Доставка и оплата</a>
-              </li>
-              <li>
-                <a href="#" data-stub="Страница гарантии не создана. Текст предоставит владелец.">Гарантия</a>
-              </li>
-            </ul>
-          </nav>
-          <div class="fk-footer__contacts">
-            <h2>Контакты</h2>
-            <p>Телефон, email и адрес добавит владелец.</p>
-          </div>
+        <div class="fk-footer__legal">
+            <a href="#" data-stub="Страница политики не создана. Текст предоставит владелец.">Политика обработки
+                персональных данных</a>
+            <p>Юридические данные добавит владелец.</p>
         </div>
-      </div>
-      <div class="fk-footer__legal">
-        <a href="#" data-stub="Страница политики не создана. Текст предоставит владелец.">Политика обработки персональных данных</a>
-        <p>Юридические данные добавит владелец.</p>
-      </div>
     </div>
-  </footer>
+</footer>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script src="site.js"></script>
