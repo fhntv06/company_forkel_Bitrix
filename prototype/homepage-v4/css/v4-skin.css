@@ -60,3 +60,10 @@
 
 /* I3: на узких экранах подпись кнопки карточки «В корзину (демо)» переносится, а не упирается в края (в V3 — nowrap) */
 @media (max-width: 480px) { .fk-btn--card { white-space: normal; line-height: 1.2; padding: 6px 8px; } }
+
+/* P2: на тёмном баннере коллекции главная кнопка — светлая, как .btn--light V4 (тёмная primary сливалась бы с фоном) */
+.fk-colhero .fk-btn--primary { background: #fff; color: var(--ink); }
+.fk-colhero .fk-btn--primary:hover { background: var(--veil); color: var(--ink); }
+
+/* P2: shop.js скрывает недоступные цвета фильтра атрибутом hidden, но .fk-check { display: flex } его перекрывал — в V3 цвета, которых нет у F55, оставались видны */
+.fk-check[hidden] { display: none; }

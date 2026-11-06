@@ -1,5 +1,5 @@
 """I5: секции главной V4, которых нет в V3 («Лёгкость. В каждой детали.», «Шоурум», «Доверие», финальный блок), не изменены.
-Проверяет: styles.css (токены и компоненты V4) и разметка четырёх секций совпадают с манифестом baseline/v4-keep-sections.json
+Проверяет: styles.css (токены и компоненты V4) и разметка четырёх секций (без учёта отступов) совпадают с манифестом baseline/v4-keep-sections.json
 (`--save` перезаписывает манифест — только после решения владельца); порядок секций (они после «Интерьеров»: features стоит выше, showroom > trust > pro > delivery > final);
 7 ширин: нет горизонтальной прокрутки, ошибок консоли/HTTP, цели >= 44 px, один h1; фокус клавиатурой видим у кнопок секций; prefers-reduced-motion не ломает вид.
 Необязательно: FK_M0=http://localhost:8082/homepage-v4/ (исходная V4 до перехода, `git archive 6e1fdf6 prototype`) — сравнение геометрии секций (высота и позиции элементов).
@@ -10,7 +10,8 @@ B=os.environ.get('FK_BASE','http://localhost:8081/homepage-v4/'); M0=os.environ.
 def ck(n,c): r.append((n,bool(c)))
 HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=HERE+'/../../homepage-v4'; MAN=HERE+'/baseline/v4-keep-sections.json'
 IDS={'features':'f-t','showroom':'sr-t','trust':'tr-t','final':'fin-t'}
-def h(s): return hashlib.sha256(s.encode('utf-8')).hexdigest()[:16]
+def norm(s): return re.sub(r'>\s+<','><',re.sub(r'\s+',' ',s)).strip()  # без учёта отступов и переносов (редактор может переформатировать файл)
+def h(s,n=False): return hashlib.sha256((norm(s) if n else s).encode('utf-8')).hexdigest()[:16]
 html=open(ROOT+'/index.html',encoding='utf-8').read()
 main=re.search(r'<main.*?</main>',html,re.S).group(0)
 sec={}
@@ -18,7 +19,7 @@ for s in re.findall(r'<section\b.*?</section>',main,re.S):
     m=re.search(r'<h[12][^>]*id="([^"]+)"',s)
     if m: sec[m.group(1)]=s
 cur={'styles.css':h(open(ROOT+'/styles.css',encoding='utf-8').read())}
-for k,i in IDS.items(): cur[k]=h(sec.get(i,''))
+for k,i in IDS.items(): cur[k]=h(sec.get(i,''),True)
 if '--save' in sys.argv:
     json.dump(cur,open(MAN,'w'),indent=1,sort_keys=True); print('saved',cur)
 else:
