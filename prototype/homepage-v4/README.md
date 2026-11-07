@@ -26,6 +26,7 @@
 | `css/projects.css`, `css/solutions.css`, `css/interiors.css`, `solutions.js` | «Проекты», «Готовые решения» (нативный слайдер), «Интерьеры» (I4): идентичны V3, вид — через токены `v4-skin.css` |
 | `collection.html`, `shop.js`, `css/page.css`, `css/catalog.css`, `css/categories.css`, `css/collections.css` | страница коллекции (P2) и общий движок каталога V3 без изменений; P1/P3/P4 используют его же; порядок CSS как в V3 |
 | `product.html`, `css/product-page.css`, `css/accessories.css`, `css/download-file.css` | страница товара (P4): главная область V3, тот же `shop.js`; доп. правила — в `v4-skin.css` |
+| `favorites.html` | «Избранное» (P15): главная область V3, карточки строит `shop.js`; не проверялась |
 | `about.html`, `about.js`, `css/about.css` | «О компании» (P14): структура V3, тексты владельца; не проверялась |
 | `account.html`, `account.js`, `css/account.css` | личный кабинет (P13): главная область, js и css V3; не проверялся |
 | `cooperation.html`, `css/cooperation.css` | «Сотрудничество» (P12): главная область и css V3; не проверялась |

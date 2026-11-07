@@ -109,3 +109,8 @@
 /* P9: основная кнопка на тёмном блоке «Нужна консультация?» — светлая (как на баннере коллекции) */
 .fk-prj-cta .fk-btn--primary { background: #fff; color: var(--ink); }
 .fk-prj-cta .fk-btn--primary:hover { background: var(--veil); color: var(--ink); }
+
+/* P15: панель «Очистить избранное» (правила V3 favorites.css) */
+.fk-fav-tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; margin-bottom: 24px; }
+.fk-fav-tools[hidden] { display: none; }
+.fk-fav-tools p { margin: 0; }
