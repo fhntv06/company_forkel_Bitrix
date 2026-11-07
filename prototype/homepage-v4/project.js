@@ -38,7 +38,6 @@
       '<div class="fk-prj-cover__text"><p class="fk-prj-cover__label">Проект</p>' +
       '<h1 class="fk-page-title" id="prj-title" tabindex="-1">' + name + '</h1>' +
       '<p class="fk-prj-cover__lead">Краткое описание проекта — заглушка. Текст предоставит владелец.</p>' +
-      '<p class="fk-note fk-note--proto">Демонстрационные данные: проекта, фотографий, текстов и использованных изделий нет.</p></div>' +
     '</section>' +
     '<div class="fk-prj-body">' +
       '<section class="fk-prj-text" aria-labelledby="prj-about"><h2 id="prj-about">О проекте</h2>' +

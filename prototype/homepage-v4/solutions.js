@@ -55,7 +55,7 @@
         '<button class="fk-fav-btn" type="button" data-fav="' + p.id + '" aria-pressed="' + on + '" aria-label="В избранное — ' + p.name + '">' + HEART + '</button>' +
         '<p class="fk-mini__series">Серия ' + p.col + '</p>' +
         '<h3 class="fk-mini__name"><a href="' + url + '" title="' + p.name + '">' + p.name + '</a></h3>' +
-        '<p class="fk-mini__price">' + D.fmt(D.price(p)) + ' ' + D.tag('демо') + '</p>' +
+        '<p class="fk-mini__price">' + D.fmt(D.price(p)) + ' ' + '</p>' +
         '<a class="fk-btn fk-btn--secondary" href="' + url + '">К товару<span class="fk-vh"> — ' + p.name + '</span></a>' +
         '</li>';
     }).join('');

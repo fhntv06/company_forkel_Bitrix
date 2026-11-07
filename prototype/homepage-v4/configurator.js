@@ -57,14 +57,14 @@
     var k = D.kit(spec());
     out('collection', k.collection);
     out('material', k.material);
-    out('frame', D.COLORS[state.frame] + ' · ' + D.fmt(k.parts[0].price) + ' ' + D.tag('демо'));
-    out('mech', D.TYPES[state.type].mech + ', ' + D.COLORS[state.mech].toLowerCase() + ' · ' + D.fmt(k.parts[1].price) + ' ' + D.tag('демо'));
+    out('frame', D.COLORS[state.frame] + ' · ' + D.fmt(k.parts[0].price) + ' ' );
+    out('mech', D.TYPES[state.type].mech + ', ' + D.COLORS[state.mech].toLowerCase() + ' · ' + D.fmt(k.parts[1].price) + ' ');
     out('kit-sku', '<span class="fk-stub">' + k.sku + '</span> ' + D.tag('заглушка'));
-    out('kit-price', D.fmt(k.price) + ' ' + D.tag('демо'));
+    out('kit-price', D.fmt(k.price) + ' ');
     var cl = document.getElementById('cfg-catalog-link');
     if (cl) cl.setAttribute('href', 'catalog.html?category=' + (state.type === 'socket' ? 'sockets' : 'switches'));
-    summary.textContent = 'Выбрано (демо): ' + k.collection + ', рамка — ' + k.material.toLowerCase() + ', ' + D.TYPES[state.type].mech.toLowerCase() + ', механизм — ' +
-      D.COLORS[state.mech] + ', рамка — ' + D.COLORS[state.frame] + '. Цена комплекта: ' + D.fmt(k.price) + ' (демо).' +
+    summary.textContent = 'Выбрано: ' + k.collection + ', рамка — ' + k.material.toLowerCase() + ', ' + D.TYPES[state.type].mech.toLowerCase() + ', механизм — ' +
+      D.COLORS[state.mech] + ', рамка — ' + D.COLORS[state.frame] + '. Цена комплекта: ' + D.fmt(k.price) + '.' +
       (changed ? ' Недоступные в этой коллекции варианты заменены.' : '');
   }
 
@@ -118,7 +118,7 @@
 
   document.getElementById('cfg-add').addEventListener('click', function () {
     var r = C.add({ kind: 'kit', col: state.collection, mat: state.material, mech: state.type, mc: state.mech, fc: state.frame }, 1);
-    C.announceAdd(r, 'Комплект добавлен в корзину (демо)');
+    C.announceAdd(r, 'Комплект добавлен в корзину');
     if (cartLink) cartLink.hidden = false;
   });
   sync();

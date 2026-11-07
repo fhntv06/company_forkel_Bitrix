@@ -32,7 +32,7 @@
     if (bad.length) { $(bad[0][0]).focus(); return; }
     submit.disabled = true; submit.textContent = 'Отправка…';
     timer = setTimeout(function () {
-      form.reset(); submit.disabled = false; submit.textContent = 'Отправить (демо)';
+      form.reset(); submit.disabled = false; submit.textContent = 'Отправить';
       done.hidden = false; done.focus();
     }, 900);
   });

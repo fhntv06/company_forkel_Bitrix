@@ -34,7 +34,7 @@
   function summary() {
     var items = C.items();
     return '<aside class="fk-cart__summary fk-co-summary" aria-labelledby="co-sum-title">' +
-      '<h2 id="co-sum-title">Ваш заказ ' + tag('демо') + '</h2>' +
+      '<h2 id="co-sum-title">Ваш заказ ' + '</h2>' +
       '<ul class="fk-co-lines">' + items.map(function (it) {
         var d = C.describe(it);
         return '<li><span class="fk-co-lines__name">' + esc(d.name) + '<span class="fk-co-lines__meta"> × ' + it.qty + '</span></span>' +
@@ -42,8 +42,7 @@
       }).join('') + '</ul>' +
       '<dl class="fk-spec"><div><dt>Доставка</dt><dd>не рассчитана</dd></div>' +
       '<div class="fk-cart__total"><dt>Сумма</dt><dd>' + D.fmt(C.total()) + '</dd></div></dl>' +
-      '<button class="fk-btn fk-btn--primary" type="submit" form="co-form">Подтвердить заказ (демо)</button>' +
-      '<p class="fk-note">Цены демонстрационные. Нажатие не создаёт заказ и не списывает оплату.</p>' +
+      '<button class="fk-btn fk-btn--primary" type="submit" form="co-form">Подтвердить заказ</button>' +
       '<p><a class="fk-link fk-link--tap" href="cart.html">Вернуться в корзину</a></p></aside>';
   }
 
@@ -133,7 +132,7 @@
     root.innerHTML = '<section class="fk-co-done" aria-labelledby="co-done-title">' +
       '<h2 id="co-done-title" tabindex="-1">Демонстрация завершена</h2>' +
       '<p>Заказ <strong>не создан</strong>: форма проверена только на странице, данные никуда не отправлялись и не сохранялись, оплата не выполнялась.</p>' +
-      '<p class="fk-co-done__sum">В корзине осталось товаров: ' + n + ', сумма (демо): ' + D.fmt(total) + ' ' + tag('демо') + '</p>' +
+      '<p class="fk-co-done__sum">В корзине осталось товаров: ' + n + ', сумма: ' + D.fmt(total) + ' ' + '</p>' +
       '<div class="fk-empty__actions"><a class="fk-btn fk-btn--primary" href="catalog.html">Продолжить покупки</a>' +
       '<a class="fk-link fk-link--tap" href="cart.html">Вернуться в корзину</a></div></section>';
     var h = document.getElementById('co-done-title'); if (h) h.focus();

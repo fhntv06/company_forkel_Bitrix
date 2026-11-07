@@ -61,9 +61,9 @@
       return '<li style="--finish:' + PALETTE[it.color].hex + '" title="' + COLORS[it.color] + '"><span class="fk-vh">' + COLORS[it.color] + '</span></li>';
     }).join('') + '</ul>';
 
-    return '<ul class="fk-dots" aria-label="Цветовые варианты (демо)">' + variants(p).map(function (c) {
+    return '<ul class="fk-dots" aria-label="Цветовые варианты">' + variants(p).map(function (c) {
       return '<li class="fin-' + c + '" title="' + COLORS[c] + '"><span class="fk-vh">' + COLORS[c] + '</span></li>';
-    }).join('') + '</ul><span class="fk-tag">демо</span>';
+    }).join('') + '</ul>';
   }
   function byId(id) { return PRODUCTS.filter(function (p) { return p.id === id; })[0]; }
   function catName(key) { return CATEGORIES.filter(function (c) { return c.key === key; })[0].name; }

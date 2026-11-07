@@ -6,7 +6,7 @@
   /* Пояснения [data-stub], меню и шапка — site.js (общие для всех страниц) */
 
   /* ---------- Подбор: логика V3 — configurator.js (без изменений); здесь только связки главной ---------- */
-  /* Карточка коллекции (демо) подставляет цвет рамки в подборе */
+  /* Карточка коллекции  поставляет цвет рамки в подборе */
   [].forEach.call(document.querySelectorAll('[data-col]'), function (a) {
     a.addEventListener('click', function () {
       var fin = { A: 'black', B: 'white', C: 'cashmere' }[a.getAttribute('data-col')];

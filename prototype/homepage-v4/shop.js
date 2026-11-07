@@ -21,8 +21,8 @@
       '<p class="fk-product-card__sku">Цвет: ' + COLORS[p.color] + '</p>' +
       '<p class="fk-product-card__sku">' + p.col + ' · ' + D.MATERIALS[p.mat] + '</p>' +
       '<div class="fk-variants">' + D.dots(p) + '</div>' +
-      '<p class="fk-product-card__price"><span class="fk-stub">' + D.fmt(D.price(p)) + '</span> ' + (p.real ? '' : tag('демо')) + '</p>' +
-      '<p class="fk-product-card__stock">' + STOCKS[p.stock] + (p.real ? '' : ' (демо)') + '</p>' +
+      '<p class="fk-product-card__price"><span class="fk-stub">' + D.fmt(D.price(p)) + '</span> ' + (p?.real || '') + '</p>' +
+      '<p class="fk-product-card__stock">' + STOCKS[p.stock] + (p?.real || '') + '</p>' +
       '<div class="fk-product-card__actions">' +
       '<button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="' + p.id + '">В корзину<span class="fk-vh"> — ' + p.name + ', ' + COLORS[p.color] + '</span><span aria-hidden="true"></span></button>' +
       '<a class="fk-btn fk-btn--secondary fk-btn--card" href="' + url + '">Подробнее<span class="fk-vh"> — ' + p.name + '</span></a>' +
@@ -176,9 +176,9 @@
   function chars(p) {
     var frame = p.type === 'frame', full = p.id === DEMO_FULL_ID;
     var U = '<span class="fk-stub">Уточняется владельцем</span>';
-    function dm(v) { return v + ' ' + tag('демо'); }
+    function dm(v) { return v + ' '; }
     function val(v) { return full ? dm(v) : U; }
-    var sku = '<span class="fk-stub" id="pdp-sku-val">' + p.sku + '</span> ' + tag('заглушка') +
+    var sku = '<span class="fk-stub" id="pdp-sku-val">' + p.sku + '</span> ' +
       '<button type="button" class="fk-copy" data-copy="' + p.sku + '" aria-label="Копировать артикул ' + p.sku + '">Копировать</button>';
     var groups = [
       ['Основные', [
@@ -193,7 +193,7 @@
         ['Материал рамки', dm(D.MATERIALS[p.mat])],
         frame ? ['Цвет рамки', dm(COLORS[p.color])] : null,
         frame ? ['Количество постов', val('1')] : null,
-        ['Вид/марка материала', val('Демо-материал')],
+        ['Вид/марка материала', val('Материал')],
         ['Отделка поверхности', val('Матовая')],
         ['Не содержит галогенов', val('Да')],
         frame ? null : ['Степень защиты (IP)', U],
@@ -202,8 +202,7 @@
       ]]
     ];
     return '<section class="fk-pdp__specs" aria-labelledby="specs-title">' +
-      '<h2 id="specs-title">Характеристики ' + tag('демо-данные') + '</h2>' +
-      '<p class="fk-note fk-note--proto">Структура — по примеру заказчика. Значения показывают плотность страницы и не подтверждены: это не данные FORKEL и не характеристики Kollinger Eclipse. «Уточняется владельцем» — данных нет, значение не придумано.</p>' +
+      '<h2 id="specs-title">Характеристики ' + '</h2>' +
       '<div class="fk-chars-groups">' + groups.map(function (g) {
         return '<div class="fk-chars"><h3>' + g[0] + '</h3><dl>' + g[1].filter(Boolean).map(function (r) {
           return '<div class="fk-char"><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>';
@@ -382,7 +381,7 @@
     document.getElementById('pdp-crumb').textContent = p.name;
     var catLink = document.getElementById('pdp-cat-crumb');
     catLink.textContent = cname; catLink.href = 'catalog.html?category=' + p.cat;
-    var unk = '<span class="fk-stub">не указано</span> ' + tag('заглушка');
+    var unk = '<span class="fk-stub">не указано</span> ';
     var rel = PRODUCTS.filter(function (x) { return x.id !== p.id && x.cat === p.cat; })
       .concat(PRODUCTS.filter(function (x) { return x.id !== p.id && x.cat !== p.cat; })).slice(0, 4);
     root.innerHTML =
@@ -391,9 +390,9 @@
       '<div class="fk-pdp__info">' +
         '<h1 class="fk-pdp__title">' + p.name + '</h1>' +
         codeRow() +
-        '<p class="fk-pdp__sku">Артикул: <span class="fk-stub">' + p.sku + '</span> ' + tag('заглушка') + '</p>' +
-        '<p class="fk-pdp__price"><span class="fk-stub">' + D.fmt(D.price(p)) + '</span> ' + tag('демо') + '</p>' +
-        '<p class="fk-pdp__stock">' + STOCKS[p.stock] + ' ' + tag('демо') + '</p>' +
+        '<p class="fk-pdp__sku">Артикул: <span class="fk-stub">' + p.sku + '</span> ' + '</p>' +
+        '<p class="fk-pdp__price"><span class="fk-stub">' + D.fmt(D.price(p)) + '</span> ' + '</p>' +
+        '<p class="fk-pdp__stock">' + STOCKS[p.stock] + ' ' + '</p>' +
         '<div class="fk-pdp__buy">' +
           '<div class="fk-qty" role="group" aria-label="Количество">' +
             '<button type="button" class="fk-qty__btn" data-qty="-1" aria-label="Уменьшить количество">−</button>' +
@@ -407,14 +406,14 @@
         '<p class="fk-pdp__more"><a class="fk-link fk-link--tap" href="configurator.html?collection=' + p.col + '">Собрать в подборе</a></p>' +
         '<div class="fk-variants">Цвета: ' + D.dots(p) + '</div>' +
       '</div>' +
-      descBlock('<p>Демонстрационное описание: текст товара предоставит владелец. ' + tag('заглушка') + '</p>') + chars(p);
+      descBlock('<p>Демонстрационное описание: текст товара предоставит владелец. ' + '</p>') + chars(p);
     document.getElementById('pdp-related').innerHTML = rel.map(card).join('');
     enhanceChars();
     root.addEventListener('click', function (e) {
       var c = e.target.closest('[data-copy]');
       if (!c) return;
       var v = c.getAttribute('data-copy');
-      function done() { if (window.fkNote) window.fkNote('Демо-артикул скопирован: ' + v); }
+      function done() { if (window.fkNote) window.fkNote('Артикул скопирован: ' + v); }
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(v).then(done, done);
       else done();
     });

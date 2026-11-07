@@ -16,9 +16,9 @@
 
   /* Условные заказы: состав из демо-товаров, статусы выбраны для показа состояний */
   var ORDERS = [
-    { no: 'ДЕМО-0003', status: 'new', lines: [[1, 2], [4, 1]] },
-    { no: 'ДЕМО-0002', status: 'shipping', lines: [[2, 1], [6, 2], [8, 1]] },
-    { no: 'ДЕМО-0001', status: 'done', lines: [[3, 1]] }
+    { no: '0003', status: 'new', lines: [[1, 2], [4, 1]] },
+    { no: '0002', status: 'shipping', lines: [[2, 1], [6, 2], [8, 1]] },
+    { no: '0001', status: 'done', lines: [[3, 1]] }
   ];
   var STATUS = { new: 'В обработке', shipping: 'Передан в доставку', done: 'Выполнен' };
   var addresses = [{ id: 1, label: 'Дом', text: 'Адрес — заглушка' }];
@@ -58,7 +58,6 @@
   function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()); }
   function nameFrom(email) { return email.split('@')[0] || 'Пользователь'; }
 
-  var DEMO_NOTE = '<p class="fk-note fk-note--proto">Демонстрационный вход: сервера и настоящих учётных записей нет. Подойдут любой корректный email и пароль от 6 символов — пароль не проверяется и не сохраняется.</p>';
   var ERRBOX = '<div class="fk-co-errors" role="alert" hidden></div>';
 
   function authTabs(cur) {
@@ -68,30 +67,30 @@
   }
   function loginView() {
     return '<section class="fk-acc-card" aria-labelledby="acc-h">' + authTabs('login') +
-      '<h2 id="acc-h" tabindex="-1">Вход ' + tag('демо') + '</h2>' + DEMO_NOTE +
+      '<h2 id="acc-h" tabindex="-1">Вход ' + '</h2>' +
       '<form id="acc-form" novalidate>' + ERRBOX +
       field('acc-email', 'Email', 'type="email" autocomplete="email" required') +
       field('acc-pass', 'Пароль', 'type="password" autocomplete="current-password" required') +
       '<p><a class="fk-link fk-link--tap" href="#recover">Забыли пароль?</a></p>' +
-      '<div class="fk-acc-actions"><button class="fk-btn fk-btn--primary" type="submit">Войти (демо)</button>' +
-      '<button class="fk-btn fk-btn--secondary" type="button" id="acc-demo">Войти как демо-пользователь</button></div></form></section>';
+      '<div class="fk-acc-actions"><button class="fk-btn fk-btn--primary" type="submit">Войти</button>' +
+      '<button class="fk-btn fk-btn--secondary" type="button" id="acc-demo">Войти как пользователь</button></div></form></section>';
   }
   function registerView() {
     return '<section class="fk-acc-card" aria-labelledby="acc-h">' + authTabs('register') +
-      '<h2 id="acc-h" tabindex="-1">Регистрация ' + tag('демо') + '</h2>' + DEMO_NOTE +
+      '<h2 id="acc-h" tabindex="-1">Регистрация ' + '</h2>' +
       '<form id="acc-form" novalidate>' + ERRBOX +
       field('acc-name', 'Имя', 'type="text" autocomplete="name" required') +
       field('acc-email', 'Email', 'type="email" autocomplete="email" required') +
       field('acc-pass', 'Пароль', 'type="password" autocomplete="new-password" required', 'Не короче 6 символов.') +
       field('acc-pass2', 'Повторите пароль', 'type="password" autocomplete="new-password" required') +
       '<div class="fk-co-field"><label class="fk-check"><input type="checkbox" id="acc-consent" required aria-describedby="acc-consent-err"><span>Согласен с обработкой персональных данных (<a href="#" data-stub="Страница политики не создана. Текст предоставит владелец.">политика — заглушка</a>)</span></label><p class="fk-co-error" id="acc-consent-err" hidden></p></div>' +
-      '<div class="fk-acc-actions"><button class="fk-btn fk-btn--primary" type="submit">Зарегистрироваться (демо)</button></div></form></section>';
+      '<div class="fk-acc-actions"><button class="fk-btn fk-btn--primary" type="submit">Зарегистрироваться</button></div></form></section>';
   }
   function recoverView() {
-    return '<section class="fk-acc-card" aria-labelledby="acc-h"><h2 id="acc-h" tabindex="-1">Восстановление доступа ' + tag('демо') + '</h2>' +
+    return '<section class="fk-acc-card" aria-labelledby="acc-h"><h2 id="acc-h" tabindex="-1">Восстановление доступа ' + '</h2>' +
       '<p class="fk-note fk-note--proto">Демонстрация: письмо не отправляется.</p>' +
       '<form id="acc-form" novalidate>' + ERRBOX + field('acc-email', 'Email', 'type="email" autocomplete="email" required') +
-      '<div class="fk-acc-actions"><button class="fk-btn fk-btn--primary" type="submit">Восстановить (демо)</button>' +
+      '<div class="fk-acc-actions"><button class="fk-btn fk-btn--primary" type="submit">Восстановить</button>' +
       '<a class="fk-btn fk-btn--secondary" href="#login">Назад ко входу</a></div></form>' +
       '<div class="fk-acc-done" id="acc-done" role="status" hidden><strong>Демонстрационное подтверждение.</strong> Письмо для восстановления <strong>не отправлено</strong>: в прототипе нет почтового сервера.</div></section>';
   }
@@ -103,13 +102,13 @@
   function profileView() {
     var u = A.user();
     return '<section class="fk-acc-card" aria-labelledby="acc-h">' + cabTabs('profile') +
-      '<h2 id="acc-h" tabindex="-1">Профиль ' + tag('демо') + '</h2>' +
-      '<p class="fk-note fk-note--proto">Демо-вход выполнен. Данные хранятся только в этой вкладке до её закрытия и никуда не передаются.</p>' +
+      '<h2 id="acc-h" tabindex="-1">Профиль ' + '</h2>' +
+      '<p class="fk-note fk-note--proto">Вход выполнен. Данные хранятся только в этой вкладке до её закрытия и никуда не передаются.</p>' +
       '<form id="acc-form" novalidate>' + ERRBOX +
       field('acc-name', 'Имя', 'type="text" autocomplete="name" value="' + esc(u.name || '') + '" required') +
       field('acc-email', 'Email', 'type="email" autocomplete="email" value="' + esc(u.email) + '" required') +
       field('acc-phone', 'Телефон', 'type="tel" autocomplete="tel" inputmode="tel" value="' + esc(u.phone || '') + '" placeholder="+7 ___ ___-__-__"') +
-      '<div class="fk-acc-actions"><button class="fk-btn fk-btn--primary" type="submit">Сохранить (демо)</button></div>' +
+      '<div class="fk-acc-actions"><button class="fk-btn fk-btn--primary" type="submit">Сохранить</button></div>' +
       '<p class="fk-note" id="acc-saved" role="status" hidden>Сохранено в демо-режиме (только в этой вкладке).</p></form></section>';
   }
   function ordersView() {
@@ -122,13 +121,12 @@
       return '<li class="fk-acc-order"><details><summary><span class="fk-acc-order__no">Заказ ' + o.no + '</span>' +
         '<span class="fk-acc-status fk-acc-status--' + o.status + '">' + STATUS[o.status] + '</span>' +
         '<span class="fk-acc-order__sum">' + D.fmt(total) + '</span></summary>' +
-        '<div class="fk-acc-order__body"><p class="fk-note">Дата — заглушка. Статус и состав условные. ' + tag('демо') + '</p><ul class="fk-acc-lines">' + lines + '</ul>' +
-        '<p class="fk-acc-order__total">Итого: <strong>' + D.fmt(total) + '</strong> ' + tag('демо') + '</p>' +
-        '<button class="fk-btn fk-btn--secondary" type="button" data-repeat="' + o.no + '">Повторить заказ (демо)</button></div></details></li>';
+        '<div class="fk-acc-order__body"><p class="fk-note">Дата — заглушка. Статус и состав условные. ' + '</p><ul class="fk-acc-lines">' + lines + '</ul>' +
+        '<p class="fk-acc-order__total">Итого: <strong>' + D.fmt(total) + '</strong> ' + '</p>' +
+        '<button class="fk-btn fk-btn--secondary" type="button" data-repeat="' + o.no + '">Повторить заказ</button></div></details></li>';
     }).join('');
     return '<section class="fk-acc-card" aria-labelledby="acc-h">' + cabTabs('orders') +
-      '<h2 id="acc-h" tabindex="-1">История заказов ' + tag('демо') + '</h2>' +
-      '<p class="fk-note fk-note--proto">Реальных заказов нет: список условный. «Повторить заказ» кладёт демо-товары в демо-корзину, заказ не создаётся.</p>' +
+      '<h2 id="acc-h" tabindex="-1">История заказов ' + '</h2>' +
       '<ul class="fk-acc-orders">' + list + '</ul><p class="fk-acc-repeat" id="acc-repeat" role="status" hidden></p></section>';
   }
   function addressesView() {
@@ -136,12 +134,11 @@
       return '<li><span><strong>' + esc(a.label) + '</strong><br>' + esc(a.text) + '</span><button class="fk-btn fk-btn--secondary" type="button" data-del="' + a.id + '">Удалить<span class="fk-vh"> адрес «' + esc(a.label) + '»</span></button></li>';
     }).join('') + '</ul>' : '<div class="fk-empty"><p>Адресов нет. Добавьте демонстрационный адрес.</p></div>';
     return '<section class="fk-acc-card" aria-labelledby="acc-h">' + cabTabs('addresses') +
-      '<h2 id="acc-h" tabindex="-1">Адреса доставки ' + tag('демо') + '</h2>' +
-      '<p class="fk-note fk-note--proto">Демонстрация: адреса живут только на этой странице и пропадают при перезагрузке.</p>' + list +
+      '<h2 id="acc-h" tabindex="-1">Адреса доставки ' + '</h2>' +
       '<h3 class="fk-acc-sub">Добавить адрес</h3><form id="acc-form" novalidate>' + ERRBOX +
       field('acc-label', 'Название', 'type="text" required placeholder="Например, Офис"') +
       field('acc-text', 'Адрес', 'type="text" autocomplete="street-address" required') +
-      '<div class="fk-acc-actions"><button class="fk-btn fk-btn--primary" type="submit">Добавить (демо)</button></div></form></section>';
+      '<div class="fk-acc-actions"><button class="fk-btn fk-btn--primary" type="submit">Добавить</button></div></form></section>';
   }
 
   var VIEWS = { login: loginView, register: registerView, recover: recoverView, profile: profileView, orders: ordersView, addresses: addressesView };

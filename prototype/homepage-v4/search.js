@@ -26,7 +26,7 @@
     '<input class="fk-search__input" id="fk-search-input" type="text" autocomplete="off" placeholder="Название, артикул, цвет, коллекция" aria-describedby="fk-search-demo">' +
     '<button class="fk-search__clear" type="button" aria-label="Очистить запрос" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>' +
     '</form>' +
-    '<p class="fk-search__demo" id="fk-search-demo"><span class="fk-tag">демо</span> Поиск идёт по демонстрационным данным.</p>' +
+    '<p class="fk-search__demo" id="fk-search-demo">Поиск идёт по демонстрационным данным.</p>' +
     '<div class="fk-search__body" aria-live="polite"></div></div>';
   document.body.appendChild(dlg);
 
@@ -46,7 +46,7 @@
     return '<li><a class="fk-search__item" href="' + url + '"><span class="fk-search__thumb tone-' + p.tone + '">' + D.illu(p) + '</span>' +
       '<span class="fk-search__text"><span class="fk-search__name">' + esc(p.name) + '</span>' +
       '<span class="fk-search__meta">' + esc(D.COLORS[p.color]) + ' · ' + esc(p.col) + ', ' + esc(D.MATERIALS[p.mat].toLowerCase()) + ' · Арт. ' + esc(p.sku) + '</span></span>' +
-      '<span class="fk-search__price">' + D.fmt(D.price(p)) + ' <span class="fk-tag">демо</span></span></a></li>';
+      '<span class="fk-search__price">' + D.fmt(D.price(p)) + '</span></a></li>';
   }
   function projectRow(i) {
     return '<li><a class="fk-search__item fk-search__item--prj" href="project.html?id=' + i + '"><span class="fk-search__thumb fk-search__thumb--prj" aria-hidden="true">' + i + '</span>' +

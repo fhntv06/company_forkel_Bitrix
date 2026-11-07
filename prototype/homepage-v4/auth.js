@@ -26,7 +26,7 @@
     [].forEach.call(document.querySelectorAll('[data-account]'), function (a) {
       a.classList.toggle('is-in', !!u);
       var s = a.querySelector('.fk-vh');
-      if (s) s.textContent = u ? 'Личный кабинет (демо-вход выполнен)' : 'Личный кабинет';
+      if (s) s.textContent = u ? 'Личный кабинет (вход выполнен)' : 'Личный кабинет';
     });
   }
   window.FKAuth = { user: user, login: login, logout: logout };

@@ -157,7 +157,6 @@
         <div class="fk-colhero__text">
           <p class="fk-colhero__label">Коллекция</p>
           <h1 class="fk-page-title" id="cat-title">Коллекция</h1>
-          <p class="fk-note fk-note--proto">Демонстрационная страница. Название, описание и фотографии коллекции предоставит владелец; правил совместимости нет, поэтому показаны все демонстрационные товары.</p>
           <div class="fk-colhero__actions">
             <a class="fk-btn fk-btn--primary" id="col-cfg-link" href="configurator.html">Собрать в подборе</a>
           </div>
@@ -171,8 +170,6 @@
           <span class="fk-tag">Заглушка: фото коллекции</span>
         </div>
       </section>
-      <noscript><p class="fk-note fk-note--proto">Для списка товаров в прототипе нужен JavaScript.</p></noscript>
-
       <nav class="fk-cat-nav" aria-label="Категории каталога">
         <a class="fk-chip" href="catalog.html" data-cat="">Все</a>
         <a class="fk-chip" href="catalog.html?category=sockets" data-cat="sockets">Розетки</a>
@@ -194,8 +191,8 @@
             <option value="default">По умолчанию</option>
             <option value="name">По названию</option>
             <option value="sku">По артикулу</option>
-            <option value="price-asc">Цена: по возрастанию (демо)</option>
-            <option value="price-desc">Цена: по убыванию (демо)</option>
+            <option value="price-asc">Цена: по возрастанию</option>
+            <option value="price-desc">Цена: по убыванию</option>
           </select>
         </div>
         <button class="fk-btn fk-btn--secondary fk-filters-toggle" id="cat-filters-toggle" type="button" aria-expanded="false" aria-controls="cat-filters">Фильтры</button>
@@ -213,18 +210,18 @@
             <label class="fk-check"><input type="checkbox" name="color" value="gold"><span class="fk-check__chip fin-gold"></span>Золотой</label>
           </fieldset>
           <fieldset class="fk-filter">
-            <legend>Материал рамки <span class="fk-tag">демо</span></legend>
+            <legend>Материал рамки</legend>
             <label class="fk-check"><input type="checkbox" name="mat" value="glass">Стекло</label>
             <label class="fk-check"><input type="checkbox" name="mat" value="aluminum">Алюминий</label>
             <label class="fk-check"><input type="checkbox" name="mat" value="plastic">Термопласт</label>
           </fieldset>
           <fieldset class="fk-filter">
-            <legend>Наличие <span class="fk-tag">демо</span></legend>
+            <legend>Наличие</legend>
             <label class="fk-check"><input type="checkbox" name="stock" value="in">В наличии</label>
             <label class="fk-check"><input type="checkbox" name="stock" value="order">Под заказ</label>
           </fieldset>
           <fieldset class="fk-filter">
-            <legend>Цена <span class="fk-tag">демо</span></legend>
+            <legend>Цена</legend>
             <label class="fk-check"><input type="checkbox" name="group" value="1">100&nbsp;₽</label>
             <label class="fk-check"><input type="checkbox" name="group" value="2">200&nbsp;₽</label>
             <label class="fk-check"><input type="checkbox" name="group" value="3">300&nbsp;₽</label>

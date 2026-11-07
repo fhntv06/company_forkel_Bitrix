@@ -13,14 +13,14 @@
     '<button class="fk-fb__close" type="button" aria-label="Закрыть окно"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button></div>' +
     '<div class="fk-fb__body">' +
     '<form class="fk-fb__form" novalidate>' +
-    '<p class="fk-fb__lead">Оставьте номер и удобное время — мы перезвоним. <span class="fk-tag">демо</span> Форма демонстрационная: данные никуда не отправляются.</p>' +
+    '<p class="fk-fb__lead">Оставьте номер и удобное время — мы перезвоним. Форма демонстрационная: данные никуда не отправляются.</p>' +
     '<div class="fk-fb__errors fk-co-errors" role="alert" hidden></div>' +
     '<div class="fk-co-field"><label class="fk-field__label" for="cb-phone">Телефон</label><input class="fk-field" id="cb-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7 ___ ___-__-__" required aria-describedby="cb-phone-err"><p class="fk-co-error" id="cb-phone-err" hidden></p></div>' +
     '<div class="fk-co-field"><label class="fk-field__label" for="cb-time">Удобное время звонка <span class="fk-tag">варианты — заглушка</span></label>' +
     '<select class="fk-field" id="cb-time" name="time"><option value="asap">Как можно скорее</option><option value="morning">Утром</option><option value="day">Днём</option><option value="evening">Вечером</option></select></div>' +
     '<div class="fk-co-field fk-fb__consent"><label class="fk-check"><input type="checkbox" id="cb-consent" required aria-describedby="cb-consent-err"><span>Согласен с обработкой персональных данных (<a href="#" class="fk-fb__policy">политика — заглушка</a>)</span></label><p class="fk-co-error" id="cb-consent-err" hidden></p></div>' +
     '<p class="fk-note fk-fb__policy-note" role="status" hidden>Страница политики конфиденциальности не создана. Текст предоставит владелец.</p>' +
-    '<button class="fk-btn fk-btn--primary fk-fb__submit" type="submit">Заказать звонок (демо)</button>' +
+    '<button class="fk-btn fk-btn--primary fk-fb__submit" type="submit">Заказать звонок</button>' +
     '</form>' +
     '<div class="fk-fb__done" hidden><h3 class="fk-fb__done-title" tabindex="-1">Демонстрационное подтверждение</h3>' +
     '<p>Это прототип: заявка на звонок <strong>не отправлена</strong> и нигде не сохранена. В рабочей версии здесь появится подтверждение.</p>' +
@@ -59,7 +59,7 @@
     clearTimeout(timer);
     form.reset(); form.hidden = false; done.hidden = true; summary.hidden = true; pnote.hidden = true;
     ['cb-phone', 'cb-consent'].forEach(function (id) { setErr(id, ''); });
-    submit.disabled = false; submit.textContent = 'Заказать звонок (демо)'; form.removeAttribute('aria-busy');
+    submit.disabled = false; submit.textContent = 'Заказать звонок'; form.removeAttribute('aria-busy');
     title.textContent = 'Обратный звонок';
   }
   function open(el) {

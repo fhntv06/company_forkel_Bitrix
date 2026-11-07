@@ -77,7 +77,7 @@
   }
   function note(text) { if (window.fkNote) window.fkNote(text); }
   function announceAdd(r, label) {
-    note((label || 'Добавлено в корзину (демо)') + ': ' + r.name + '. ' + (r.clamped ? 'Количество ограничено 99. ' : '') + 'Товаров в корзине: ' + r.count + '.');
+    note((label || 'Добавлено в корзину') + ': ' + r.name + '. ' + (r.clamped ? 'Количество ограничено 99. ' : '') + 'Товаров в корзине: ' + r.count + '.');
   }
 
   document.addEventListener('click', function (e) {
@@ -103,7 +103,7 @@
         parts = '<details class="fk-cart-item__parts"><summary>Состав комплекта</summary><ul>' + d.parts.map(function (p) {
           return '<li><span class="fk-cart-item__role">' + p.role + '</span> ' + p.name + ', ' + D.COLORS[p.color] +
             '<span class="fk-cart-item__psku">Арт. <span class="fk-stub">' + p.sku + '</span> ' + tag('заглушка') + '</span>' +
-            '<span class="fk-cart-item__pprice">' + fmt(p.price) + ' ' + tag('демо') + '</span></li>';
+            '<span class="fk-cart-item__pprice">' + fmt(p.price) + ' ' + '</span></li>';
         }).join('') + '</ul></details>';
       }
       var name = d.url ? '<a href="' + d.url + '">' + d.name + '</a>' : d.name;
@@ -113,7 +113,7 @@
           '<h2 class="fk-cart-item__name">' + name + (d.kind === 'kit' ? ' ' + tag('комплект') : '') + '</h2>' +
           '<p class="fk-cart-item__meta">' + d.meta + '</p>' +
           '<p class="fk-cart-item__meta">Арт. <span class="fk-stub">' + d.sku + '</span> ' + (d.real ? '' : tag('заглушка')) + '</p>' +
-          '<p class="fk-cart-item__meta">Цена за шт.: ' + fmt(d.unit) + ' ' + (d.real ? '' : tag('демо')) + '</p>' + parts +
+          '<p class="fk-cart-item__meta">Цена за шт.: ' + fmt(d.unit) + ' ' + (d?.real || '') + '</p>' + parts +
         '</div>' +
         '<div class="fk-cart-item__side">' +
           '<div class="fk-qty" role="group" aria-label="Количество: ' + d.name + '">' +
@@ -136,11 +136,11 @@
       root.innerHTML = '<div class="fk-cart">' +
         '<ul class="fk-cart__list">' + list.map(line).join('') + '</ul>' +
         '<aside class="fk-cart__summary" aria-labelledby="cart-sum-title">' +
-          '<h2 id="cart-sum-title">Итого ' + tag('демо') + '</h2>' +
+          '<h2 id="cart-sum-title">Итого ' + '</h2>' +
           '<dl class="fk-spec"><div><dt>Позиций</dt><dd data-sum="positions">' + list.length + '</dd></div><div><dt>Товаров</dt><dd data-sum="units">' + units + '</dd></div>' +
           '<div><dt>Доставка</dt><dd>не рассчитана</dd></div>' +
           '<div class="fk-cart__total"><dt>Сумма</dt><dd data-sum="total">' + fmt(total()) + '</dd></div></dl>' +
-          '<a class="fk-btn fk-btn--primary" href="checkout.html">Оформить заказ (демо)</a>' +
+          '<a class="fk-btn fk-btn--primary" href="checkout.html">Оформить заказ</a>' +
           '<a class="fk-btn fk-btn--secondary" href="catalog.html">Продолжить покупки</a>' +
           '<p class="fk-note">Цены и артикулы демонстрационные. Корзина хранится только в этом браузере.</p>' +
         '</aside></div>';

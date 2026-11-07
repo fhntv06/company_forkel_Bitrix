@@ -16,14 +16,14 @@
     '<button class="fk-fb__close" type="button" aria-label="Закрыть окно"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button></div>' +
     '<div class="fk-fb__body">' +
     '<form class="fk-fb__form" novalidate>' +
-    '<p class="fk-fb__lead">Оставьте сообщение — мы свяжемся с вами. <span class="fk-tag">демо</span> Форма демонстрационная: данные никуда не отправляются.</p>' +
+    '<p class="fk-fb__lead">Оставьте сообщение — мы свяжемся с вами. Форма демонстрационная: данные никуда не отправляются.</p>' +
     '<div class="fk-fb__errors fk-co-errors" role="alert" hidden></div>' +
     '<div class="fk-co-field"><label class="fk-field__label" for="fb-name">Имя</label><input class="fk-field" id="fb-name" name="name" type="text" autocomplete="name" required aria-describedby="fb-name-err"><p class="fk-co-error" id="fb-name-err" hidden></p></div>' +
     '<div class="fk-co-field"><label class="fk-field__label" for="fb-contact">Телефон или email</label><input class="fk-field" id="fb-contact" name="contact" type="text" autocomplete="off" required aria-describedby="fb-contact-err"><p class="fk-co-error" id="fb-contact-err" hidden></p></div>' +
     '<div class="fk-co-field"><label class="fk-field__label" for="fb-msg">Сообщение</label><textarea class="fk-field fk-co-textarea" id="fb-msg" name="msg" rows="4" required aria-describedby="fb-msg-err"></textarea><p class="fk-co-error" id="fb-msg-err" hidden></p></div>' +
     '<div class="fk-co-field fk-fb__consent"><label class="fk-check"><input type="checkbox" id="fb-consent" required aria-describedby="fb-consent-err"><span>Согласен с обработкой персональных данных (<a href="#" class="fk-fb__policy">политика — заглушка</a>)</span></label><p class="fk-co-error" id="fb-consent-err" hidden></p></div>' +
     '<p class="fk-note fk-fb__policy-note" role="status" hidden>Страница политики конфиденциальности не создана. Текст предоставит владелец.</p>' +
-    '<button class="fk-btn fk-btn--primary fk-fb__submit" type="submit">Отправить (демо)</button>' +
+    '<button class="fk-btn fk-btn--primary fk-fb__submit" type="submit">Отправить</button>' +
     '</form>' +
     '<div class="fk-fb__done" hidden><h3 class="fk-fb__done-title" tabindex="-1">Демонстрационное подтверждение</h3>' +
     '<p>Это прототип: сообщение <strong>не отправлено</strong> и нигде не сохранено. В рабочей версии здесь появится подтверждение отправки.</p>' +
@@ -66,7 +66,7 @@
     clearTimeout(timer);
     form.reset(); form.hidden = false; done.hidden = true; summary.hidden = true; pnote.hidden = true;
     ['fb-name', 'fb-contact', 'fb-msg', 'fb-consent'].forEach(function (id) { setErr(id, ''); });
-    submit.disabled = false; submit.textContent = 'Отправить (демо)'; form.removeAttribute('aria-busy');
+    submit.disabled = false; submit.textContent = 'Отправить'; form.removeAttribute('aria-busy');
   }
   function open(el) {
     opener = el; reset();
