@@ -26,23 +26,23 @@
 @media (min-width: 1200px) { :root { --gap: 24px; --pad: 40px; --sec: 120px; } }
 
 *, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
 html { scroll-padding-top: 96px; -webkit-text-size-adjust: 100%; }
-body { margin: 0; font-family: var(--font); font-size: 1rem; line-height: 1.55; color: var(--ink); background: var(--bg); }
-h1, h2, h3, p, ul { margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 1rem; line-height: 1.55; color: var(--ink); background: var(--bg); }
 ul { list-style: none; }
 a { color: inherit; }
 svg { display: block; }
 :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 10px; }
 .vh { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.wrap { width: 100%; max-width: 1360px; margin-inline: auto; padding-inline: var(--pad); }
+.wrap { width: 100%; max-width: 1920px; margin-inline: auto; padding-inline: var(--pad); }
 .skip { position: absolute; left: 16px; top: 8px; z-index: 100; padding: 10px 16px; background: var(--ink); color: #fff; border-radius: 999px; transform: translateY(-200%); }
 .skip:focus { transform: none; }
 
-h1 { font-size: clamp(2.1rem, 1.2rem + 3.6vw, 4.2rem); line-height: 1.04; letter-spacing: -0.03em; font-weight: 600; }
+h1 { font-size: clamp(4rem, 1.2rem + 3.6vw, 8rem); line-height: 1.04; letter-spacing: -0.03em; font-weight: 600; }
 h1 span, .big span { color: var(--fog); }
-h2 { font-size: clamp(1.6rem, 1.1rem + 1.8vw, 2.6rem); line-height: 1.12; letter-spacing: -0.02em; font-weight: 600; }
-h2.big { font-size: clamp(2.2rem, 1.2rem + 4vw, 4.6rem); line-height: 1.02; letter-spacing: -0.03em; }
-h3 { font-size: 1.15rem; line-height: 1.25; font-weight: 600; letter-spacing: -0.01em; }
+h2 { font-size: clamp(2.5rem, 1.1rem + 1.8vw, 4rem); line-height: 1.12; letter-spacing: -0.02em; font-weight: 600; }
+h2.big { font-size: clamp(3rem, 1.2rem + 4vw, 6rem); line-height: 1.02; letter-spacing: -0.03em; }
+h3 { font-size: clamp(2rem, 1.2rem + 2vw, 2.5rem); line-height: 1.25; font-weight: 600; letter-spacing: -0.01em; }
 .lead { font-size: 1.1rem; color: var(--iron); max-width: 36ch; }
 .muted { color: var(--iron); max-width: 44ch; margin-top: 12px; }
 .note { font-size: .875rem; color: var(--fog); max-width: 70ch; margin-top: 10px; }
@@ -95,7 +95,7 @@ h3 { font-size: 1.15rem; line-height: 1.25; font-weight: 600; letter-spacing: -0
 }
 
 /* Секции */
-.sec { padding-top: var(--sec); }
+.sec {  padding-top: var(--sec); }
 .split { display: grid; gap: 28px; }
 .head2 { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; }
 @media (min-width: 1000px) { .split { grid-template-columns: 4fr 7fr; gap: 48px; align-items: start; } }
@@ -214,7 +214,7 @@ legend b { color: var(--ink); }
 @media (min-width: 700px) { .del li { grid-template-columns: 1fr 2fr; gap: 24px; } }
 
 /* Финал и подвал */
-.fin { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 40px 24px; border-radius: var(--r-l); background: linear-gradient(135deg, var(--iron), var(--ink)); color: #fff; }
+.fin { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; max-width: 1280px; padding: 40px 24px; border-radius: var(--r-l); background: linear-gradient(135deg, var(--iron), var(--ink)); color: #fff; }
 .fin p { color: var(--veil); max-width: 44ch; }
 @media (min-width: 900px) { .fin { padding: 64px; } }
 .foot { margin-top: var(--sec); padding-block: 48px; background: var(--ink); color: #fff; }
