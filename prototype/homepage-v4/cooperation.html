@@ -157,6 +157,49 @@
       </div>
       <p class="fk-coop-intro">Вступительный текст о сотрудничестве с FORKEL — заглушка, формулировку предоставит владелец.</p>
 
+      <section class="fk-partner" aria-labelledby="partner-title">
+        <div class="fk-partner__head">
+          <h2 id="partner-title">Анкета партнёра</h2>
+          <a class="fk-partner__close" href="index.html" aria-label="Закрыть анкету, перейти на главную">&times;</a>
+        </div>
+        <div class="fk-partner__tabs" role="tablist" aria-label="Направление сотрудничества">
+          <button class="fk-partner__tab" type="button" role="tab" id="ptab-designer" aria-selected="false" tabindex="-1" data-role="Дизайнер">Дизайнер</button>
+          <button class="fk-partner__tab" type="button" role="tab" id="ptab-wholesale" aria-selected="true" data-role="Оптовик">Оптовик</button>
+          <button class="fk-partner__tab" type="button" role="tab" id="ptab-electrician" aria-selected="false" tabindex="-1" data-role="Электрик">Электрик</button>
+        </div>
+        <form class="fk-partner__form" id="partner-form" aria-busy="false" aria-labelledby="partner-title">
+          <input type="hidden" name="direction" id="partner-direction" value="Оптовик">
+          <div class="fk-partner__row">
+            <div class="fk-co-field"><label class="fk-field__label" for="pf-name">Имя</label><input class="fk-field" id="pf-name" name="name" type="text" autocomplete="name" required placeholder="Как к вам обращаться?"></div>
+            <div class="fk-co-field"><label class="fk-field__label" for="pf-phone">Телефон</label><input class="fk-field" id="pf-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+7 (___) ___-__-__"></div>
+          </div>
+          <div class="fk-partner__row">
+            <div class="fk-co-field"><label class="fk-field__label" for="pf-company">Компания / студия</label><input class="fk-field" id="pf-company" name="company" type="text" autocomplete="organization"></div>
+            <div class="fk-co-field"><label class="fk-field__label" for="pf-city">Город</label><input class="fk-field" id="pf-city" name="city" type="text" autocomplete="address-level2"></div>
+          </div>
+          <div class="fk-co-field">
+            <label class="fk-field__label" for="pf-task">Расскажите о задаче</label>
+            <textarea class="fk-field fk-co-textarea" id="pf-task" name="task" rows="4" required maxlength="500" placeholder="Объект, стиль, серии и цвета" aria-describedby="pf-counter"></textarea>
+            <p class="fk-partner__counter" id="pf-counter" aria-live="off"><span id="pf-count">0</span>/500</p>
+          </div>
+          <details class="fk-partner__more">
+            <summary>Дополнительные сведения</summary>
+            <div class="fk-partner__row">
+              <div class="fk-co-field"><label class="fk-field__label" for="pf-email">E-mail</label><input class="fk-field" id="pf-email" name="email" type="email" autocomplete="email"></div>
+              <div class="fk-co-field"><label class="fk-field__label" for="pf-format">Формат работы</label>
+                <select class="fk-field" id="pf-format" name="format"><option value="">Выберите вариант</option><option>Частный специалист</option><option>Студия-компания</option><option>Магазин-поставщик</option><option>Монтажная бригада</option><option>Объект-застройщик</option></select></div>
+            </div>
+            <div class="fk-partner__row">
+              <div class="fk-co-field"><label class="fk-field__label" for="pf-volume">Примерный объём закупки в месяц</label><input class="fk-field" id="pf-volume" name="volume" type="text"></div>
+              <div class="fk-co-field"><label class="fk-field__label" for="pf-time">Удобное время связи</label><input class="fk-field" id="pf-time" name="time" type="text"></div>
+            </div>
+          </details>
+          <label class="fk-check fk-partner__consent"><input type="checkbox" id="pf-consent" name="consent" required><span>Согласен на обработку персональных данных (<a href="#" target="_blank" rel="noopener" data-stub="Страница «Согласие» не создана. Текст предоставит владелец.">Согласие</a>, <a href="#" target="_blank" rel="noopener" data-stub="Страница политики не создана. Текст предоставит владелец.">Политика обработки данных</a>)</span></label>
+          <button class="fk-btn fk-btn--primary fk-partner__submit" type="submit">Отправить анкету</button>
+          <p class="fk-note fk-partner__note" id="pf-note" role="status" hidden>Менеджер свяжется с вами. <span class="fk-tag">демо</span> Анкета никуда не отправляется и не сохраняется.</p>
+        </form>
+      </section>
+
       <section class="fk-coop-sec" aria-labelledby="coop-aud">
         <h2 id="coop-aud">Для кого</h2>
         <ul class="fk-coop-grid">
@@ -274,6 +317,7 @@
 <script src="search.js"></script>
 <script src="feedback.js"></script>
 <script src="callback.js"></script>
+<script src="partner-form.js"></script>
 <script src="social.js"></script>
 </body>
 </html>

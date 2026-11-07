@@ -29,7 +29,7 @@
 | `favorites.html` | «Избранное» (P15): главная область V3, карточки строит `shop.js`; не проверялась |
 | `about.html`, `about.js`, `css/about.css` | «О компании» (P14): структура V3, тексты владельца; не проверялась |
 | `account.html`, `account.js`, `css/account.css` | личный кабинет (P13): главная область, js и css V3; не проверялся |
-| `cooperation.html`, `css/cooperation.css` | «Сотрудничество» (P12): главная область и css V3; не проверялась |
+| `cooperation.html`, `partner-form.js`, `css/cooperation.css` | «Сотрудничество» (P12): главная область и css V3 + форма «Анкета партнёра» (вкладки, счётчик, демо-отправка); не проверялась |
 | `search.html`, `search-page.js`, `css/search-page.css` | результаты поиска (P11): главная область и js V3; не проверялась |
 | `contacts.html`, `css/contacts.css` | «Контакты» (P10): главная область V3, css из V3; не проверялась |
 | `project.html`, `project.js` | страница проекта (P9): `?id=1..6`, строится `project.js` (V3), данные — заглушки |
