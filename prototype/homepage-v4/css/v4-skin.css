@@ -67,3 +67,32 @@
 
 /* P2: shop.js скрывает недоступные цвета фильтра атрибутом hidden, но .fk-check { display: flex } его перекрывал — в V3 цвета, которых нет у F55, оставались видны */
 .fk-check[hidden] { display: none; }
+
+/* P4: образцы цвета и подпись шага из V3 css/configurator.css (нужны карточке товара); подбор V4 использует свои .sw. Правила перенесены без изменений */
+.fk-step__label { display: flex; align-items: center; gap: 12px; font-size: 1.125rem; font-weight: 600; line-height: 1.3; margin-bottom: 16px; }
+.fk-swatches { display: flex; flex-wrap: wrap; gap: 8px; }
+.fk-swatch { display: grid; place-items: center; width: 52px; height: 52px; padding: 0; background: transparent; border: 0; border-radius: var(--fk-r-md); cursor: pointer; }
+.fk-swatch::before { content: ""; width: 40px; height: 40px; background: var(--finish); border: 1px solid var(--fk-edge); border-radius: 12px; }
+.fk-swatch:hover::before { border-color: var(--fk-ink); }
+.fk-swatch[aria-checked="true"]::before { box-shadow: 0 0 0 2px var(--fk-surface), 0 0 0 5px var(--fk-ink); }
+.fk-swatch:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* P4: правила карточки товара из V3 styles.css (в V4 styles.css — токены, их там нет): отступ секции, кнопки материалов, окно видео, описание. Перенесены без изменений */
+.fk-section { padding-block: 0 var(--fk-section-gap); }
+.fk-res { display: flex; flex-wrap: wrap; gap: 8px; }
+.fk-res .fk-chip { display: inline-flex; align-items: center; padding: 0 14px; font-size: var(--fk-fs-small); color: var(--fk-ink); text-decoration: none; }
+.fk-modal { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 64px 16px 16px; background: rgba(30, 32, 34, 0.72); }
+.fk-modal[hidden] { display: none; }
+.fk-modal__box { position: relative; width: min(960px, 100%); background: #000; border-radius: var(--fk-radius); }
+.fk-modal__frame { aspect-ratio: 16 / 9; }
+.fk-modal__frame iframe { display: block; width: 100%; height: 100%; border: 0; }
+.fk-modal__x { position: absolute; top: -52px; right: 0; width: 44px; height: 44px; padding: 0; font-size: 1.75rem; line-height: 1; color: var(--fk-ink); background: var(--fk-canvas); border: 0; border-radius: 50%; cursor: pointer; }
+
+/* Описание товара: под карточкой, по центру, не шире 900 px */
+.fk-pdp__desc { grid-column: 1 / -1; width: 100%; max-width: 900px; margin-inline: auto; display: grid; gap: 12px; text-align: center; }
+.fk-pdp__desc > h2 { font-size: var(--fk-fs-h2); line-height: 1.15; font-weight: 600; }
+.fk-pdp__desc p { text-align: justify; line-height: 1.6; }
+
+/* P4: колонка информации не должна раздвигаться содержимым (1024 px, V4-отступы) */
+.fk-pdp__info { grid-template-columns: minmax(0, 1fr); }
+.fk-pdp__info > * { min-width: 0; }
