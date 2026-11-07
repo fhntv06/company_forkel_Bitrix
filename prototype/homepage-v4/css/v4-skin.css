@@ -154,3 +154,14 @@
 .fk-qty__btn:hover { background: var(--fk-action); color: var(--fk-on-action); }
 .fk-qty__input { width: 56px; min-height: 48px; padding: 0; font: inherit; font-weight: 600; text-align: center; color: var(--fk-ink); background: transparent; border: 0; -moz-appearance: textfield; appearance: textfield; }
 .fk-qty__input::-webkit-outer-spin-button, .fk-qty__input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* F2: после правки классов шапки (.fk-header и .fk-header__row оба .fk-container) боковые отступы удваивались — на 360 px шапка шире экрана на 3 px */
+.fk-header.fk-container > .fk-header__row.fk-container { padding-inline: 0; }
+/* F2: точки слайдера «Готовые решения» — цель нажатия не уже 44 px */
+.fk-sol-dot { width: 44px; }
+
+/* F2: крупные заголовки (clamp от 4rem/2.5rem/2rem в styles.css) на узких экранах не должны вылезать за экран: длинные слова переносятся */
+h1, h2, h3 { overflow-wrap: anywhere; }
+
+/* F2: «Проекты» на главной <768 px — база сетки (6 колонок, css/projects.css) оставляла карточки по одной колонке и растягивала страницу (934–1164 px); карточки — на всю ширину */
+@media (max-width: 767px) { .fk-grid--projects { grid-template-columns: minmax(0, 1fr); } .fk-grid--projects > li { grid-column: 1 / -1; } }
