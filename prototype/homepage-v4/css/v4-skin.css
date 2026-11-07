@@ -142,3 +142,8 @@
   .fk-partner { padding: 40px; }
   .fk-partner__row { grid-template-columns: 1fr 1fr; }
 }
+.fk-partner .fk-field { background: var(--bg); }
+.fk-partner .fk-field:focus { background: var(--surface); }
+
+/* F1: «О компании» — тексты владельца длиннее заглушек V3, лид-абзац мельче, чтобы не занимал полэкрана */
+.fk-ab-about__lead { font-size: 1.25rem; line-height: 1.5; font-weight: 500; }
