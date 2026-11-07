@@ -96,3 +96,12 @@
 /* P4: колонка информации не должна раздвигаться содержимым (1024 px, V4-отступы) */
 .fk-pdp__info { grid-template-columns: minmax(0, 1fr); }
 .fk-pdp__info > * { min-width: 0; }
+
+/* P7: правила V3, которые жили в configurator.css (шаги формы, спецификация), и светлая кнопка на тёмном итоге */
+.fk-step__n { display: inline-grid; place-items: center; flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--fk-action); color: var(--fk-on-action); font-size: var(--fk-fs-small); font-weight: 700; font-variant-numeric: tabular-nums; }
+.fk-spec { margin: 0; }
+.fk-spec > div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 10px 0; border-top: 1px solid var(--fk-line); }
+.fk-spec dt { color: var(--fk-ink-muted); font-size: var(--fk-fs-small); }
+.fk-spec dd { margin: 0; font-weight: 600; text-align: right; }
+.fk-cart__summary .fk-btn--primary { background: #fff; color: var(--ink); }
+.fk-cart__summary .fk-btn--primary:hover { background: var(--veil); color: var(--ink); }
