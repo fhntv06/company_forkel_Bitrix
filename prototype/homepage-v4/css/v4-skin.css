@@ -105,3 +105,7 @@
 .fk-spec dd { margin: 0; font-weight: 600; text-align: right; }
 .fk-cart__summary .fk-btn--primary { background: #fff; color: var(--ink); }
 .fk-cart__summary .fk-btn--primary:hover { background: var(--veil); color: var(--ink); }
+
+/* P9: основная кнопка на тёмном блоке «Нужна консультация?» — светлая (как на баннере коллекции) */
+.fk-prj-cta .fk-btn--primary { background: #fff; color: var(--ink); }
+.fk-prj-cta .fk-btn--primary:hover { background: var(--veil); color: var(--ink); }
