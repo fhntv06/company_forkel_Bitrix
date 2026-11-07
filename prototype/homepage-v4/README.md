@@ -34,6 +34,7 @@
 | `contacts.html`, `css/contacts.css` | «Контакты» (P10): главная область V3, css из V3; не проверялась |
 | `project.html`, `project.js` | страница проекта (P9): `?id=1..6`, строится `project.js` (V3), данные — заглушки |
 | `projects.html` | страница «Проекты» (P8): 6 демо-карточек, разметка V3, `css/projects.css` из I4 |
+| `cart.html` | корзина (P6): main V3, страницу строит `cart.js`, стили `css/cart.css` |
 | `checkout.html`, `checkout.js`, `css/checkout.css`, `css/cart.css` | оформление заказа (P7): разметка и логика V3 без изменений; `cart.css` общий с корзиной (P6) |
 | `configurator.html` | страница подбора (P5): компонент `#cfg` с главной V4, `configurator.js`/`data.js` из V3 |
 | `catalog.html` | каталог (P1): 19 демо-товаров, оболочка как у `collection.html`, главная область V3, тот же `shop.js` |
