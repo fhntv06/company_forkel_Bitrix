@@ -165,3 +165,6 @@ h1, h2, h3 { overflow-wrap: anywhere; }
 
 /* F2: «Проекты» на главной <768 px — база сетки (6 колонок, css/projects.css) оставляла карточки по одной колонке и растягивала страницу (934–1164 px); карточки — на всю ширину */
 @media (max-width: 767px) { .fk-grid--projects { grid-template-columns: minmax(0, 1fr); } .fk-grid--projects > li { grid-column: 1 / -1; } }
+
+/* QA D5: ссылка-название карточки (padding 12 + 1 строка = 43,5 px на 360–390) — цель не меньше 44 px */
+.fk-product-card__name a { min-height: 44px; box-sizing: border-box; }

@@ -76,6 +76,10 @@ with sync_playwright() as p:
     pg.click('button:has-text("Очистить избранное")'); pg.wait_for_timeout(250)
     ck('P15 «Очистить избранное»: пусто, ключ fk-demo-fav-v1 пуст',pg.locator('.fk-product-card').count()==0 and pg.evaluate("(JSON.parse(localStorage.getItem('fk-demo-fav-v1')||'[]')).length")==0)
     ck('P15 нет ошибок страницы',not pg._errs,str(pg._errs))
+    # --- QA D1: мусорные значения в карточках товаров
+    for u in ('catalog.html','collection.html?collection=f70','new.html','favorites.html'):
+        pg=page(u); t=pg.inner_text('main')
+        ck('D1 нет «true/undefined/null/NaN» в тексте '+u,not __import__('re').search(r'\b(true|undefined|null|NaN)\b',t),__import__('re').findall(r'.{12}\b(?:true|undefined|null|NaN)\b',t)[:2].__str__())
     b.close()
 for n,c,i in r: print('OK ' if c else 'FAIL',n,('— '+i) if (not c and i) else '')
 print('OK' if all(c for _,c,_ in r) else 'FAIL: есть отклонения')
