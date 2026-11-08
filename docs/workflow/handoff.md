@@ -284,3 +284,12 @@
 - **Что проверить QA:** раздел 6 `docs/design/v3-to-v4-migration.md`; запуск: `python3 -m http.server 8081 --directory prototype`, затем скрипты `prototype/tools/parity/*_v4.py`, `f1_parity.py`, `f2_a11y.py`, `pages_p10_p15_v4.py` (`python3 -I`).
 - **Ограничения:** автоматические проверки — только Chromium; приёмка QA не проводилась, статус DONE её не заменяет. Открытые вопросы — в записи work-log 2026-11-08.
 
+---
+
+### Handoff — 2026-11-08 — закрытие PRT-003
+
+- **Статус:** PRT-003 DONE по решению владельца. Отчёт QA: FAIL (D1–D7); D1, D3, D5, D7 устранены, D2 — не дефект (пометки «демо» убраны намеренно), D4 и D6 отложены. Повторная приёмка не проводилась.
+- **Ветка:** `role/implementation/ui-001-homepage`; PR не создавался, слияния в `main` не было.
+- **Проверки (выполнены):** F1 PASS; F2 PASS 176/176; `pages_p10_p15_v4.py` OK; `manifest_check.py` OK; все `*_v4.py` 0 FAIL. Не проверены: Safari, Firefox, устройства, скринридеры, контраст.
+- **Следующее:** PRT-004 (хвосты); для изменений V4 — обновлять `baseline/v4-accepted-divergence*.json` вместе с причиной.
+
