@@ -73,3 +73,28 @@
   .fk-ab-range { grid-template-columns: minmax(0, 1fr) auto; padding: 56px 64px; }
   .fk-ab-lead { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 48px; padding: 56px 64px; align-items: start; }
 }
+
+/* P14 (2): страница «О компании» — чередование блоков по сетке: текст на всю ширину / текст слева + фото справа / фото слева + текст справа */
+.fk-ab-flow { display: grid; gap: 48px; margin-block: 48px; }
+.fk-ab-block { display: grid; gap: 24px; min-width: 0; }
+.fk-ab-block__text { display: grid; gap: 16px; align-content: center; min-width: 0; }
+.fk-ab-block__text h2 { margin: 0; font-size: clamp(1.75rem, 1.2rem + 2vw, 2.5rem); line-height: 1.15; font-weight: 700; }
+.fk-ab-block__text p { margin: 0; font-size: 1.0625rem; line-height: 1.6; max-width: 70ch; }
+.fk-ab-block--full .fk-ab-block__text p { max-width: none; }
+.fk-ab-block__motto { font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem) !important; font-weight: 700; line-height: 1.3 !important; }
+.fk-ab-list { display: grid; gap: 12px; margin: 0; padding-left: 1.25em; font-size: 1.0625rem; line-height: 1.6; }
+.fk-ab-list li::marker { color: var(--fk-bright, currentColor); }
+.fk-ab-block__media { margin: 0; overflow: hidden; border-radius: var(--fk-r-lg, 24px); background: var(--fk-surface, #eee); aspect-ratio: 4 / 3; }
+.fk-ab-block__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+@media (min-width: 768px) {
+  .fk-ab-flow { gap: 72px; margin-block: 72px; }
+  .fk-ab-block--text-left, .fk-ab-block--photo-left { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; align-items: center; }
+  .fk-ab-block--photo-left .fk-ab-block__media { order: -1; }
+}
+@media (min-width: 1200px) {
+  .fk-ab-flow { gap: 96px; }
+  .fk-ab-block--text-left, .fk-ab-block--photo-left { gap: 72px; }
+  .fk-ab-block__media { aspect-ratio: 5 / 4; }
+}
+.fk-ab-block .fk-ab-list { list-style: disc outside; padding-inline-start: 1.25em; margin: 0; }
+.fk-ab-hero__art { margin: 0; }
