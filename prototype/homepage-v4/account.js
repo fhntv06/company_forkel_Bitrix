@@ -83,7 +83,7 @@
       field('acc-email', 'Email', 'type="email" autocomplete="email" required') +
       field('acc-pass', 'Пароль', 'type="password" autocomplete="new-password" required', 'Не короче 6 символов.') +
       field('acc-pass2', 'Повторите пароль', 'type="password" autocomplete="new-password" required') +
-      '<div class="fk-co-field"><label class="fk-check"><input type="checkbox" id="acc-consent" required aria-describedby="acc-consent-err"><span>Согласен с обработкой персональных данных (<a href="#" data-stub="Страница политики не создана. Текст предоставит владелец.">политика — заглушка</a>)</span></label><p class="fk-co-error" id="acc-consent-err" hidden></p></div>' +
+      '<div class="fk-co-field"><label class="fk-check"><input type="checkbox" id="acc-consent" required aria-describedby="acc-consent-err"><span>Согласен с обработкой персональных данных (<a href="#" data-stub="Страница политики не создана.">политика — заглушка</a>)</span></label><p class="fk-co-error" id="acc-consent-err" hidden></p></div>' +
       '<div class="fk-acc-actions"><button class="fk-btn fk-btn--primary" type="submit">Зарегистрироваться</button></div></form></section>';
   }
   function recoverView() {

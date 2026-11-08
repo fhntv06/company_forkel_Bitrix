@@ -63,7 +63,7 @@
         '<fieldset class="fk-co-card"><legend id="delivery-label"><span class="fk-step__n" aria-hidden="true">2</span>Способ доставки</legend>' +
           choice('delivery', DELIVERY, 'Условия, сроки и стоимость доставки не утверждены.') +
           '<div id="co-address-wrap">' + field('co-address', 'Адрес доставки', 'type="text" autocomplete="street-address" required') + '</div>' +
-          '<p class="fk-note" id="co-pickup-note" hidden>Пункт самовывоза не утверждён: адрес владелец предоставит позже.</p>' +
+          '<p class="fk-note" id="co-pickup-note" hidden>Пункт самовывоза.</p>' +
         '</fieldset>' +
         '<fieldset class="fk-co-card"><legend id="payment-label"><span class="fk-step__n" aria-hidden="true">3</span>Способ оплаты</legend>' +
           choice('payment', PAYMENT, 'Способы оплаты не утверждены. Оплата в прототипе не подключена.') +
@@ -73,7 +73,7 @@
           '<textarea class="fk-field fk-co-textarea" id="co-comment" rows="3"></textarea>' +
         '</fieldset>' +
         '<div class="fk-co-card fk-co-consent"><label class="fk-check"><input type="checkbox" id="co-consent" required aria-describedby="co-consent-err">' +
-          '<span>Согласен с обработкой персональных данных (<a href="#" data-stub="Страница политики не создана. Текст предоставит владелец.">политика — заглушка</a>)</span></label>' +
+          '<span>Согласен с обработкой персональных данных (<a href="#" data-stub="Страница политики не создана.">политика — заглушка</a>)</span></label>' +
           '<p class="fk-co-error" id="co-consent-err" hidden></p></div>' +
       '</form>' + summary() + '</div>';
     bind();

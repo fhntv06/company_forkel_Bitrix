@@ -19,7 +19,7 @@
     '<div class="fk-co-field"><label class="fk-field__label" for="cb-time">Удобное время звонка <span class="fk-tag">варианты — заглушка</span></label>' +
     '<select class="fk-field" id="cb-time" name="time"><option value="asap">Как можно скорее</option><option value="morning">Утром</option><option value="day">Днём</option><option value="evening">Вечером</option></select></div>' +
     '<div class="fk-co-field fk-fb__consent"><label class="fk-check"><input type="checkbox" id="cb-consent" required aria-describedby="cb-consent-err"><span>Согласен с обработкой персональных данных (<a href="#" class="fk-fb__policy">политика — заглушка</a>)</span></label><p class="fk-co-error" id="cb-consent-err" hidden></p></div>' +
-    '<p class="fk-note fk-fb__policy-note" role="status" hidden>Страница политики конфиденциальности не создана. Текст предоставит владелец.</p>' +
+    '<p class="fk-note fk-fb__policy-note" role="status" hidden>Страница политики конфиденциальности не создана.</p>' +
     '<button class="fk-btn fk-btn--primary fk-fb__submit" type="submit">Заказать звонок</button>' +
     '</form>' +
     '<div class="fk-fb__done" hidden><h3 class="fk-fb__done-title" tabindex="-1">Демонстрационное подтверждение</h3>' +

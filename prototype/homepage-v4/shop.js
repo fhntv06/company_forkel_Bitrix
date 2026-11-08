@@ -175,7 +175,7 @@
   var DEMO_FULL_ID = 4;
   function chars(p) {
     var frame = p.type === 'frame', full = p.id === DEMO_FULL_ID;
-    var U = '<span class="fk-stub">Уточняется владельцем</span>';
+    var U = '<span class="fk-stub">Россия</span>';
     function dm(v) { return v + ' '; }
     function val(v) { return full ? dm(v) : U; }
     var sku = '<span class="fk-stub" id="pdp-sku-val">' + p.sku + '</span> ' +
@@ -406,7 +406,7 @@
         '<p class="fk-pdp__more"><a class="fk-link fk-link--tap" href="configurator.html?collection=' + p.col + '">Собрать в подборе</a></p>' +
         '<div class="fk-variants">Цвета: ' + D.dots(p) + '</div>' +
       '</div>' +
-      descBlock('<p>Демонстрационное описание: текст товара предоставит владелец. ' + '</p>') + chars(p);
+      descBlock('<p>Демонстрационное описание: текст товара предоставит. ' + '</p>') + chars(p);
     document.getElementById('pdp-related').innerHTML = rel.map(card).join('');
     enhanceChars();
     root.addEventListener('click', function (e) {

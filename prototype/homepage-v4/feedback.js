@@ -22,7 +22,7 @@
     '<div class="fk-co-field"><label class="fk-field__label" for="fb-contact">Телефон или email</label><input class="fk-field" id="fb-contact" name="contact" type="text" autocomplete="off" required aria-describedby="fb-contact-err"><p class="fk-co-error" id="fb-contact-err" hidden></p></div>' +
     '<div class="fk-co-field"><label class="fk-field__label" for="fb-msg">Сообщение</label><textarea class="fk-field fk-co-textarea" id="fb-msg" name="msg" rows="4" required aria-describedby="fb-msg-err"></textarea><p class="fk-co-error" id="fb-msg-err" hidden></p></div>' +
     '<div class="fk-co-field fk-fb__consent"><label class="fk-check"><input type="checkbox" id="fb-consent" required aria-describedby="fb-consent-err"><span>Согласен с обработкой персональных данных (<a href="#" class="fk-fb__policy">политика — заглушка</a>)</span></label><p class="fk-co-error" id="fb-consent-err" hidden></p></div>' +
-    '<p class="fk-note fk-fb__policy-note" role="status" hidden>Страница политики конфиденциальности не создана. Текст предоставит владелец.</p>' +
+    '<p class="fk-note fk-fb__policy-note" role="status" hidden>Страница политики конфиденциальности не создана.</p>' +
     '<button class="fk-btn fk-btn--primary fk-fb__submit" type="submit">Отправить</button>' +
     '</form>' +
     '<div class="fk-fb__done" hidden><h3 class="fk-fb__done-title" tabindex="-1">Демонстрационное подтверждение</h3>' +
