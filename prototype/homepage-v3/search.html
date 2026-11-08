@@ -145,10 +145,18 @@
       <nav class="fk-crumbs" aria-label="Хлебные крошки">
         <ol><li><a href="index.html">Главная</a></li><li aria-current="page">Результаты поиска</li></ol>
       </nav>
-      <div class="fk-section-head">
-        <h1 class="fk-page-title" id="sr-title" tabindex="-1">Результаты поиска</h1>
-        <p class="fk-note fk-note--proto">Демонстрационные данные. Поиск идёт в браузере по демонстрационным товарам и заглушкам проектов; сервера и индекса нет.</p>
-      </div>
+      <section class="fk-ab-hero" aria-labelledby="sr-title">
+        <div class="fk-ab-hero__text">
+          <p class="fk-ab-hero__kicker">Поиск</p>
+          <h1 class="fk-ab-hero__title" id="sr-title" tabindex="-1">Результаты поиска</h1>
+          <p class="fk-ab-hero__lead">Найдите изделия и проекты по названию, артикулу или цвету.</p>
+          <p class="fk-note fk-note--proto">Демонстрационные данные. Поиск идёт в браузере по демонстрационным товарам и заглушкам проектов; сервера и индекса нет.</p>
+        </div>
+        <div class="fk-ab-hero__art tone-light" aria-hidden="true">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" focusable="false"><use href="#room"/><use href="#shade150" transform="translate(120 70) scale(1.1)"/><use class="fin-white" href="#p-switch" x="120" y="70" width="165" height="165"/></svg>
+          <span class="fk-tag">Условная иллюстрация</span>
+        </div>
+      </section>
 
       <form class="fk-sr-form" id="sr-form" role="search" action="search.html" method="get">
         <label class="fk-field__label" for="sr-input">Поиск по товарам и проектам</label>

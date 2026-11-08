@@ -145,10 +145,18 @@
       <nav class="fk-crumbs" aria-label="Хлебные крошки">
         <ol><li><a href="index.html">Главная</a></li><li aria-current="page">Избранное</li></ol>
       </nav>
-      <div class="fk-section-head">
-        <h1 class="fk-page-title">Избранное</h1>
-        <p class="fk-note fk-note--proto">Прототип: список хранится только в этом браузере, без аккаунта и сервера.</p>
-      </div>
+      <section class="fk-ab-hero" aria-labelledby="fav-title">
+        <div class="fk-ab-hero__text">
+          <p class="fk-ab-hero__kicker">Избранное</p>
+          <h1 class="fk-ab-hero__title" id="fav-title">Избранное</h1>
+          <p class="fk-ab-hero__lead">Изделия, которые вы сохранили, чтобы вернуться к ним позже.</p>
+          <p class="fk-note fk-note--proto">Прототип: список хранится только в этом браузере, без аккаунта и сервера.</p>
+        </div>
+        <div class="fk-ab-hero__art tone-light" aria-hidden="true">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" focusable="false"><use href="#room"/><use href="#shade150" transform="translate(120 70) scale(1.1)"/><use class="fin-white" href="#p-switch" x="120" y="70" width="165" height="165"/></svg>
+          <span class="fk-tag">Условная иллюстрация</span>
+        </div>
+      </section>
       <noscript><p class="fk-note fk-note--proto">Для избранного в прототипе нужен JavaScript.</p></noscript>
       <div class="fk-fav-tools" id="fav-tools" hidden>
         <p id="fav-count" role="status" aria-live="polite"></p>
