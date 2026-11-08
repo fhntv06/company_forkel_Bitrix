@@ -111,6 +111,7 @@
 
 /* Пустое состояние */
 .fk-empty {
+    grid-column: span 6;
     display: grid;
     gap: 12px;
     justify-items: start;
