@@ -21,8 +21,8 @@
       '<p class="fk-product-card__sku">Цвет: ' + COLORS[p.color] + '</p>' +
       '<p class="fk-product-card__sku">' + p.col + ' · ' + D.MATERIALS[p.mat] + '</p>' +
       '<div class="fk-variants">' + D.dots(p) + '</div>' +
-      '<p class="fk-product-card__price"><span class="fk-stub">' + D.fmt(D.price(p)) + '</span> ' + (p?.real || '') + '</p>' +
-      '<p class="fk-product-card__stock">' + STOCKS[p.stock] + (p?.real || '') + '</p>' +
+      '<p class="fk-product-card__price"><span class="fk-stub">' + D.fmt(D.price(p)) + '</span> ' + '</p>' +
+      '<p class="fk-product-card__stock">' + STOCKS[p.stock] + '</p>' +
       '<div class="fk-product-card__actions">' +
       '<button class="fk-btn fk-btn--primary fk-btn--card" type="button" data-add="' + p.id + '">В корзину<span class="fk-vh"> — ' + p.name + ', ' + COLORS[p.color] + '</span><span aria-hidden="true"></span></button>' +
       '<a class="fk-btn fk-btn--secondary fk-btn--card" href="' + url + '">Подробнее<span class="fk-vh"> — ' + p.name + '</span></a>' +
