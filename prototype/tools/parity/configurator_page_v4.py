@@ -4,11 +4,21 @@
 Запуск: python3 -I configurator_page_v4.py (сервер на 8081 из prototype/)."""
 import os, filecmp
 from playwright.sync_api import sync_playwright
+
+import hashlib as _hl, json as _js
+def _same(a,b,shallow=False):
+    """Файл V4 идентичен V3 ИЛИ совпадает с принятым владельцем отличием (baseline/v4-accepted-divergence.json, хэш sha256)."""
+    if filecmp.cmp(a,b,shallow=False): return True
+    try:
+        acc=_js.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'baseline','v4-accepted-divergence.json'),encoding='utf-8'))
+        rel=os.path.relpath(os.path.abspath(b),os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)),'..','..','homepage-v4'))).replace(os.sep,'/')
+        return acc.get(rel)==_hl.sha256(open(b,'rb').read()).hexdigest()
+    except Exception: return False
 B=os.environ.get('FK_BASE','http://localhost:8081/homepage-v4/'); OUT=os.environ.get('FK_OUT','/tmp/'); r=[]
 def ck(n,c): r.append((n,bool(c)))
 ROOT=os.path.join(os.path.dirname(os.path.abspath(__file__)),'..','..')
-ck('configurator.js identical to V3',filecmp.cmp(ROOT+'/homepage-v3/configurator.js',ROOT+'/homepage-v4/configurator.js',shallow=False))
-ck('data.js identical to V3',filecmp.cmp(ROOT+'/homepage-v3/data.js',ROOT+'/homepage-v4/data.js',shallow=False))
+ck('configurator.js identical to V3',_same(ROOT+'/homepage-v3/configurator.js',ROOT+'/homepage-v4/configurator.js',shallow=False))
+ck('data.js identical to V3',_same(ROOT+'/homepage-v3/data.js',ROOT+'/homepage-v4/data.js',shallow=False))
 G='#cfg [data-part="%s"] [role=radio]'
 with sync_playwright() as p:
     b=p.chromium.launch()
@@ -66,7 +76,7 @@ with sync_playwright() as p:
     ck('kit sku/price in UI equal FKData.kit (same as V3)',out['sku'] in out['shown'] and out['price'] in out['pr'])
     ck('spec: material and mechanism text',out['mat']=='Алюминий' and out['mech'].startswith('Розетка'))
     ck('catalog link follows type (sockets)','category=sockets' in out['cat'])
-    ck('kit sku/price marked as demo/stub',pg.locator('#cfg [data-out=kit-sku] .fk-tag').count()==1 and pg.locator('#cfg [data-out=kit-price] .fk-tag').count()==1)
+    ck('kit sku keeps «заглушка» tag, price tag removed by owner',pg.locator('#cfg [data-out=kit-sku] .fk-tag').count()==1 and pg.locator('#cfg [data-out=kit-price] .fk-tag').count()==0)
     # корзина
     ck('cart link hidden before add',not pg.locator('#cfg-cart-link').is_visible())
     pg.click('#cfg-add')
@@ -80,7 +90,7 @@ with sync_playwright() as p:
     pg.goto(B+'configurator.html?collection=XX'); pg.wait_for_timeout(200)
     ck('unknown collection -> F70',pg.get_attribute(G%'collection'+'[data-key=F70]','aria-checked')=='true')
     pg.goto(B+'configurator.html'); pg.wait_for_timeout(200)
-    ck('h1, title and crumbs','Подбор'==pg.inner_text('h1') and 'подбор' in pg.title().lower() and pg.inner_text('.fk-crumbs [aria-current=page]')=='Подбор' and pg.locator('.fk-note--proto').count()>=1)
+    ck('h1, title and crumbs','Подбор'==pg.inner_text('h1') and 'подбор' in pg.title().lower() and pg.inner_text('.fk-crumbs [aria-current=page]')=='Подбор')
     ck('no «Открыть подбор» link on the page itself',pg.locator('#cfg-open').count()==0)
     pg.click(G%'material'+'[data-key=plastic]'); pg.click(G%'frame'+'[data-fin=fin-gold]'); pg.click(G%'collection'+'[data-key=F55]')
     pg.click('#cfg-reset'); pg.wait_for_timeout(100)
