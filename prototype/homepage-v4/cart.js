@@ -113,7 +113,7 @@
           '<h2 class="fk-cart-item__name">' + name + (d.kind === 'kit' ? ' ' + tag('комплект') : '') + '</h2>' +
           '<p class="fk-cart-item__meta">' + d.meta + '</p>' +
           '<p class="fk-cart-item__meta">Арт. <span class="fk-stub">' + d.sku + '</span> ' + (d.real ? '' : tag('заглушка')) + '</p>' +
-          '<p class="fk-cart-item__meta">Цена за шт.: ' + fmt(d.unit) + ' ' + (d?.real || '') + '</p>' + parts +
+          '<p class="fk-cart-item__meta">Цена за шт.: ' + fmt(d.unit) + ' ' + '</p>' + parts +
         '</div>' +
         '<div class="fk-cart-item__side">' +
           '<div class="fk-qty" role="group" aria-label="Количество: ' + d.name + '">' +

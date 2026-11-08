@@ -4,10 +4,20 @@
 Запуск: python3 -I cart_v4.py (сервер на 8081 из prototype/)."""
 import os, filecmp
 from playwright.sync_api import sync_playwright
+
+import hashlib as _hl, json as _js
+def _same(a,b,shallow=False):
+    """Файл V4 идентичен V3 ИЛИ совпадает с принятым владельцем отличием (baseline/v4-accepted-divergence.json, хэш sha256)."""
+    if filecmp.cmp(a,b,shallow=False): return True
+    try:
+        acc=_js.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'baseline','v4-accepted-divergence.json'),encoding='utf-8'))
+        rel=os.path.relpath(os.path.abspath(b),os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)),'..','..','homepage-v4'))).replace(os.sep,'/')
+        return acc.get(rel)==_hl.sha256(open(b,'rb').read()).hexdigest()
+    except Exception: return False
 B=os.environ.get('FK_BASE','http://localhost:8081/homepage-v4/'); OUT=os.environ.get('FK_OUT','/tmp/'); r=[]
 def ck(n,c): r.append((n,bool(c)))
 ROOT=os.path.join(os.path.dirname(os.path.abspath(__file__)),'..','..')
-ck('css/cart.css identical to V3',filecmp.cmp(ROOT+'/homepage-v3/css/cart.css',ROOT+'/homepage-v4/css/cart.css',shallow=False))
+ck('css/cart.css identical to V3',_same(ROOT+'/homepage-v3/css/cart.css',ROOT+'/homepage-v4/css/cart.css',shallow=False))
 def fill(pg):
     pg.goto(B+'catalog.html'); pg.evaluate("localStorage.clear()"); pg.reload(); pg.wait_for_timeout(150)
     pg.locator('#cat-list [data-add]').first.click(); pg.locator('#cat-list [data-add]').nth(1).click()

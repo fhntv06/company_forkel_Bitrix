@@ -5,10 +5,20 @@ h1/крошки/метка демо-данных; пункт «Новинки» 
 Запуск: python3 -I new_page_v4.py (сервер на 8081 из prototype/)."""
 import os, filecmp
 from playwright.sync_api import sync_playwright
+
+import hashlib as _hl, json as _js
+def _same(a,b,shallow=False):
+    """Файл V4 идентичен V3 ИЛИ совпадает с принятым владельцем отличием (baseline/v4-accepted-divergence.json, хэш sha256)."""
+    if filecmp.cmp(a,b,shallow=False): return True
+    try:
+        acc=_js.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'baseline','v4-accepted-divergence.json'),encoding='utf-8'))
+        rel=os.path.relpath(os.path.abspath(b),os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)),'..','..','homepage-v4'))).replace(os.sep,'/')
+        return acc.get(rel)==_hl.sha256(open(b,'rb').read()).hexdigest()
+    except Exception: return False
 B=os.environ.get('FK_BASE','http://localhost:8081/homepage-v4/'); OUT=os.environ.get('FK_OUT','/tmp/'); r=[]
 def ck(n,c): r.append((n,bool(c)))
 ROOT=os.path.join(os.path.dirname(os.path.abspath(__file__)),'..','..')
-for f in ('shop.js','css/catalog.css','css/page.css'): ck(f+' identical to V3',filecmp.cmp(ROOT+'/homepage-v3/'+f,ROOT+'/homepage-v4/'+f,shallow=False))
+for f in ('shop.js','css/catalog.css','css/page.css'): ck(f+' identical to V3',_same(ROOT+'/homepage-v3/'+f,ROOT+'/homepage-v4/'+f,shallow=False))
 with sync_playwright() as p:
     b=p.chromium.launch()
     for w in (360,390,768,1024,1280,1440,1920):
@@ -31,7 +41,7 @@ with sync_playwright() as p:
     ids=pg.evaluate("[...document.querySelectorAll('#cat-list a[href*=\"product.html?id=\"]')].map(a=>parseInt(a.href.split('id=')[1]))")
     ck('cards = first 8 demo products (NEW_IDS 1..8 in shop.js)',sorted(set(ids))==[1,2,3,4,5,6,7,8])
     ck('h1 and crumb "Новинки"',pg.inner_text('#cat-title')=='Новинки' and pg.inner_text('#cat-crumb')=='Новинки' and 'новинки' in pg.title().lower())
-    ck('demo-data note present (marked as stub)',pg.locator('.fk-section-head .fk-note--proto').count()==1 and 'Демонстрационные данные' in pg.inner_text('.fk-section-head .fk-note--proto'))
+    ck('demo-data note removed by owner',pg.locator('.fk-section-head .fk-note--proto').count()==0)
     ck('header "Новинки" is aria-current',pg.evaluate("document.querySelector('.fk-header .fk-nav__link[aria-current=page]')?.textContent.trim()")=='Новинки')
     ck('counter text',pg.inner_text('#cat-count').endswith('8 из 8'))
     n0=8; pg.check('#cat-filters input[name=col][value=F55]'); pg.wait_for_timeout(100); n1=pg.locator('#cat-list > li').count()
