@@ -1,5 +1,5 @@
 /* FORKEL — демонстрационные данные прототипа. Реальных товаров, артикулов, цен, остатков и правил совместимости нет.
-   Цены 100/200/300 ₽, артикулы «ХХХ-…» и правила совместимости — условные, везде помечаются «демо» или «заглушка». */
+   Цены 100/200/300 ₽, артикулы «ХХХ-…» и правила совместимости — условные, везде помечаются. */
 (function () {
   'use strict';
 
@@ -99,7 +99,7 @@
     frame: { white: 'tcvet_ramki_belyy_glyantsevyy', gold: 'tcvet_ramki_zolotoy', cashmere: 'tcvet_ramki_kashemir-matovyy', gray: 'tcvet_ramki_seryy', black: 'tcvet_ramki_chernyy_matovyy' },
     mech: { white: 'tcvet_mehanizma_belyy_glyantsevyy', gold: 'tcvet_mehanizma_zolotoy', cashmere: 'tcvet_mehanizma_kashemir-matovyy', gray: 'tcvet_mehanizma_seryy', black: 'tcvet_mehanizma_chyernyy_matovyy' }
   };
-  /* Светло-серого образца в присланных файлах нет: показан серый слой, осветлённый фильтром (заглушка) */
+  /* Светло-серого образца в присланных файлах нет: показан серый слой, осветлённый фильтром */
   var IMG_ALIAS = { lightgray: 'gray' };
   var IMG_FILTER = { lightgray: 'brightness(1.32) saturate(0.8)' };
   function imgUrl(part, color) { return IMG_BASE + IMG[part][IMG_ALIAS[color] || color] + '.png'; }

@@ -50,7 +50,7 @@
   }
   function projectRow(i) {
     return '<li><a class="fk-search__item fk-search__item--prj" href="project.html?id=' + i + '"><span class="fk-search__thumb fk-search__thumb--prj" aria-hidden="true">' + i + '</span>' +
-      '<span class="fk-search__text"><span class="fk-search__name">Демонстрационный проект ' + i + '</span><span class="fk-search__meta">Заглушка: данные проекта не заполнены</span></span></a></li>';
+      '<span class="fk-search__text"><span class="fk-search__name">Демонстрационный проект ' + i + '</span><span class="fk-search__meta">данные проекта не заполнены</span></span></a></li>';
   }
   function find(q) {
     var words = norm(q).split(/\s+/).filter(Boolean);

@@ -12,9 +12,9 @@
   function card(i) {
     var a = ART[i - 1];
     return '<li><a class="fk-project-card ' + a.tone + '" href="project.html?id=' + i + '">' +
-      '<span class="fk-project-card__media">' + a.svg + '<span class="fk-tag fk-tag--float">Заглушка: фото проекта</span></span>' +
+      '<span class="fk-project-card__media">' + a.svg + '<span class="fk-tag fk-tag--float">фото проекта</span></span>' +
       '<span class="fk-project-card__cap"><h3 class="fk-project-card__name">Демонстрационный проект ' + i + '</h3>' +
-      '<span class="fk-project-card__meta">Помещение — заглушка · Коллекция — заглушка</span></span></a></li>';
+      '<span class="fk-project-card__meta">Помещение · Коллекция</span></span></a></li>';
   }
 
   if (!id) {
@@ -30,25 +30,25 @@
   var others = [], k;
   for (k = 1; k <= ART.length && others.length < 3; k++) { var n = ((id - 1 + k) % ART.length) + 1; if (n !== id) others.push(n); }
   var tiles = [0, 1, 2].map(function (t) {
-    return '<li class="fk-prj-tile"><span class="fk-tag">Заглушка: фото ' + (t + 1) + '</span></li>';
+    return '<li class="fk-prj-tile"><span class="fk-tag">фото ' + (t + 1) + '</span></li>';
   }).join('');
   root.innerHTML =
     '<section class="fk-prj-cover ' + a.tone + '" aria-labelledby="prj-title">' +
-      '<div class="fk-prj-cover__media" role="img" aria-label="Схематичная иллюстрация проекта (заглушка, не фото)">' + a.svg + '</div>' +
+      '<div class="fk-prj-cover__media" role="img" aria-label="Схематичная иллюстрация проекта (не фото)">' + a.svg + '</div>' +
       '<div class="fk-prj-cover__text"><p class="fk-prj-cover__label">Проект</p>' +
       '<h1 class="fk-page-title" id="prj-title" tabindex="-1">' + name + '</h1>' +
-      '<p class="fk-prj-cover__lead">Краткое описание проекта — заглушка.</p>' +
+      '<p class="fk-prj-cover__lead">Краткое описание проекта.</p>' +
     '</section>' +
     '<div class="fk-prj-body">' +
       '<section class="fk-prj-text" aria-labelledby="prj-about"><h2 id="prj-about">О проекте</h2>' +
-        '<p>Основной текст проекта — заглушка: задача, решение, использованные материалы и результат опишет.</p>' +
-        '<p><span class="fk-tag">заглушка</span></p></section>' +
+        '<p>Основной текст проекта: задача, решение, использованные материалы и результат опишет.</p>' +
+        '</section>' +
       '<aside class="fk-prj-facts" aria-labelledby="prj-facts"><h2 id="prj-facts">Использовано</h2>' +
-        '<dl class="fk-spec"><div><dt>Помещение</dt><dd>заглушка</dd></div><div><dt>Коллекция</dt><dd>заглушка</dd></div><div><dt>Изделия</dt><dd>заглушка</dd></div></dl>' +
+        '<dl class="fk-spec"><div><dt>Помещение</dt></div><div><dt>Коллекция</dt></div><div><dt>Изделия</dt></div></dl>' +
         '<p class="fk-note">Связь проекта с коллекциями и товарами не подтверждена, ссылок на них нет.</p></aside>' +
     '</div>' +
     '<section class="fk-prj-gallery" aria-labelledby="prj-gal"><h2 id="prj-gal">Галерея</h2><ul class="fk-prj-tiles">' + tiles + '</ul></section>' +
-    '<section class="fk-prj-cta" aria-labelledby="prj-cta"><div><h2 id="prj-cta">Нужна консультация?</h2><p>Текст предложения — заглушка. Контакты предоставит.</p></div>' +
+    '<section class="fk-prj-cta" aria-labelledby="prj-cta"><div><h2 id="prj-cta">Нужна консультация?</h2><p>Текст предложения. Контакты предоставит.</p></div>' +
       '<button class="fk-btn fk-btn--primary" type="button" data-feedback aria-haspopup="dialog">Связаться с нами</button></section>' +
     '<section class="fk-prj-more" aria-labelledby="prj-more"><div class="fk-section-head fk-section-head__row"><h2 id="prj-more">Другие проекты</h2>' +
       '<a class="fk-link fk-link--tap" href="projects.html">Все проекты</a></div><ul class="fk-grid fk-grid--projects-page fk-grid--projects-more">' + others.map(card).join('') + '</ul></section>';

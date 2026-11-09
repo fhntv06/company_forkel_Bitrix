@@ -21,9 +21,9 @@
   function projCard(i) {
     var a = ART[i - 1];
     return '<li><a class="fk-project-card ' + a.tone + '" href="project.html?id=' + i + '">' +
-      '<span class="fk-project-card__media">' + a.svg + '<span class="fk-tag fk-tag--float">Заглушка: фото проекта</span></span>' +
+      '<span class="fk-project-card__media">' + a.svg + '<span class="fk-tag fk-tag--float">фото проекта</span></span>' +
       '<span class="fk-project-card__cap"><h3 class="fk-project-card__name">Демонстрационный проект ' + i + '</h3>' +
-      '<span class="fk-project-card__meta">Помещение — заглушка · Коллекция — заглушка</span></span></a></li>';
+      '<span class="fk-project-card__meta">Помещение · Коллекция</span></span></a></li>';
   }
   function chips() {
     return '<ul class="fk-search__chips">' +

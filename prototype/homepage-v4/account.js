@@ -21,7 +21,7 @@
     { no: '0001', status: 'done', lines: [[3, 1]] }
   ];
   var STATUS = { new: 'В обработке', shipping: 'Передан в доставку', done: 'Выполнен' };
-  var addresses = [{ id: 1, label: 'Дом', text: 'Адрес — заглушка' }];
+  var addresses = [{ id: 1, label: 'Дом', text: 'Адрес' }];
   var nextAddr = 2;
 
   function view() {
@@ -83,7 +83,7 @@
       field('acc-email', 'Email', 'type="email" autocomplete="email" required') +
       field('acc-pass', 'Пароль', 'type="password" autocomplete="new-password" required', 'Не короче 6 символов.') +
       field('acc-pass2', 'Повторите пароль', 'type="password" autocomplete="new-password" required') +
-      '<div class="fk-co-field"><label class="fk-check"><input type="checkbox" id="acc-consent" required aria-describedby="acc-consent-err"><span>Согласен с обработкой персональных данных (<a href="#" data-stub="Страница политики не создана.">политика — заглушка</a>)</span></label><p class="fk-co-error" id="acc-consent-err" hidden></p></div>' +
+      '<div class="fk-co-field"><label class="fk-check"><input type="checkbox" id="acc-consent" required aria-describedby="acc-consent-err"><span>Согласен с обработкой персональных данных (<a href="#" data-stub="Страница политики не создана.">политика</a>)</span></label><p class="fk-co-error" id="acc-consent-err" hidden></p></div>' +
       '<div class="fk-acc-actions"><button class="fk-btn fk-btn--primary" type="submit">Зарегистрироваться</button></div></form></section>';
   }
   function recoverView() {
@@ -121,7 +121,7 @@
       return '<li class="fk-acc-order"><details><summary><span class="fk-acc-order__no">Заказ ' + o.no + '</span>' +
         '<span class="fk-acc-status fk-acc-status--' + o.status + '">' + STATUS[o.status] + '</span>' +
         '<span class="fk-acc-order__sum">' + D.fmt(total) + '</span></summary>' +
-        '<div class="fk-acc-order__body"><p class="fk-note">Дата — заглушка. Статус и состав условные. ' + '</p><ul class="fk-acc-lines">' + lines + '</ul>' +
+        '<div class="fk-acc-order__body"><p class="fk-note">Дата. Статус и состав условные. ' + '</p><ul class="fk-acc-lines">' + lines + '</ul>' +
         '<p class="fk-acc-order__total">Итого: <strong>' + D.fmt(total) + '</strong> ' + '</p>' +
         '<button class="fk-btn fk-btn--secondary" type="button" data-repeat="' + o.no + '">Повторить заказ</button></div></details></li>';
     }).join('');

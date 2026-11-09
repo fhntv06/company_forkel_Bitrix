@@ -73,7 +73,7 @@
           '<textarea class="fk-field fk-co-textarea" id="co-comment" rows="3"></textarea>' +
         '</fieldset>' +
         '<div class="fk-co-card fk-co-consent"><label class="fk-check"><input type="checkbox" id="co-consent" required aria-describedby="co-consent-err">' +
-          '<span>Согласен с обработкой персональных данных (<a href="#" data-stub="Страница политики не создана.">политика — заглушка</a>)</span></label>' +
+          '<span>Согласен с обработкой персональных данных (<a href="#" data-stub="Страница политики не создана.">политика</a>)</span></label>' +
           '<p class="fk-co-error" id="co-consent-err" hidden></p></div>' +
       '</form>' + summary() + '</div>';
     bind();

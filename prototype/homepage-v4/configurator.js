@@ -59,7 +59,7 @@
     out('material', k.material);
     out('frame', D.COLORS[state.frame] + ' · ' + D.fmt(k.parts[0].price) + ' ' );
     out('mech', D.TYPES[state.type].mech + ', ' + D.COLORS[state.mech].toLowerCase() + ' · ' + D.fmt(k.parts[1].price) + ' ');
-    out('kit-sku', '<span class="fk-stub">' + k.sku + '</span> ' + D.tag('заглушка'));
+    out('kit-sku', '<span class="fk-stub">' + k.sku + '</span> ');
     out('kit-price', D.fmt(k.price) + ' ');
     var cl = document.getElementById('cfg-catalog-link');
     if (cl) cl.setAttribute('href', 'catalog.html?category=' + (state.type === 'socket' ? 'sockets' : 'switches'));

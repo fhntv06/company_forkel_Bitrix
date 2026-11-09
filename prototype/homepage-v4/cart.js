@@ -102,7 +102,7 @@
       if (d.kind === 'kit') {
         parts = '<details class="fk-cart-item__parts"><summary>Состав комплекта</summary><ul>' + d.parts.map(function (p) {
           return '<li><span class="fk-cart-item__role">' + p.role + '</span> ' + p.name + ', ' + D.COLORS[p.color] +
-            '<span class="fk-cart-item__psku">Арт. <span class="fk-stub">' + p.sku + '</span> ' + tag('заглушка') + '</span>' +
+            '<span class="fk-cart-item__psku">Арт. <span class="fk-stub">' + p.sku + '</span>  + '</span>' +
             '<span class="fk-cart-item__pprice">' + fmt(p.price) + ' ' + '</span></li>';
         }).join('') + '</ul></details>';
       }
@@ -112,7 +112,7 @@
         '<div class="fk-cart-item__body">' +
           '<h2 class="fk-cart-item__name">' + name + (d.kind === 'kit' ? ' ' + tag('комплект') : '') + '</h2>' +
           '<p class="fk-cart-item__meta">' + d.meta + '</p>' +
-          '<p class="fk-cart-item__meta">Арт. <span class="fk-stub">' + d.sku + '</span> ' + (d.real ? '' : tag('заглушка')) + '</p>' +
+          '<p class="fk-cart-item__meta">Арт. <span class="fk-stub">' + d.sku + '</span> ' + '' + '</p>' +
           '<p class="fk-cart-item__meta">Цена за шт.: ' + fmt(d.unit) + ' ' + '</p>' + parts +
         '</div>' +
         '<div class="fk-cart-item__side">' +
