@@ -1,0 +1,34 @@
+/* FORKEL V3 — компонент «Карточка товара» и блок «Новинки» (H-06). Карточку используют главная (новинки) и каталог (shop.js).
+   Подключается из styles.css (@import). Сетка каталога (.fk-grid--catalog) задаётся в styles.css и переопределяет число колонок. */
+
+.fk-grid--products { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (min-width: 768px) { .fk-grid--products { gap: 24px; } }
+@media (min-width: 1024px) { .fk-grid--products { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; } }
+@media (min-width: 1680px) { .fk-grid--products:not(.fk-grid--catalog) { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+
+.fk-product-card {
+  display: flex; flex-direction: column; gap: 6px; padding: 10px;
+  background: var(--fk-surface); border: 1px solid transparent; border-radius: var(--fk-r-lg);
+  transition: transform var(--fk-dur) ease-out, box-shadow var(--fk-dur) ease-out, border-color var(--fk-dur) ease-out;
+}
+.fk-product-card:hover, .fk-product-card:focus-within { border-color: var(--fk-bright); box-shadow: 0 12px 28px rgba(30, 32, 34, 0.12); }
+.fk-product-card__media { display: block; aspect-ratio: 1 / 1; background: var(--tone); border-radius: var(--fk-r-md); overflow: hidden; margin-bottom: 8px; }
+.fk-product-card__media.tone-light { background: var(--fk-canvas); }
+.fk-product-card__media svg { width: 100%; height: 100%; }
+.fk-product-card__name { padding-inline: 4px; font-size: 0.9375rem; font-weight: 600; line-height: 1.3; overflow-wrap: break-word; hyphens: auto; min-height: 2.6em; }
+.fk-product-card__name a { display: block; padding-block: 12px; margin-block: -12px; color: inherit; text-decoration: none; }
+.fk-product-card__name a:hover { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 2px; text-decoration-color: var(--fk-bright); }
+.fk-product-card__sku, .fk-product-card__stock { padding-inline: 4px; font-size: var(--fk-fs-small); line-height: 1.45; color: var(--fk-ink-muted); }
+.fk-product-card__price { padding-inline: 4px; font-size: 1.375rem; font-weight: 700; line-height: 1.2; margin-top: 2px; }
+.fk-product-card__stock { margin-bottom: 12px; }
+.fk-variants { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; min-height: 24px; margin: 2px 0 4px; padding-inline: 4px; }
+.fk-dots { display: flex; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.fk-dots li { width: 20px; height: 20px; background: var(--finish); border: 1px solid var(--fk-edge); border-radius: 50%; }
+.fk-product-card__actions { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; margin-top: auto; }
+.fk-product-card { min-width: 0; }
+.fk-btn--card { width: 100%; margin-top: auto; padding: 0 4px; min-height: 48px; font-size: 0.9375rem; white-space: nowrap; border-radius: var(--fk-r-md); }
+.fk-product-card__actions .fk-btn--card { margin-top: 0; }
+.fk-product-card .fk-btn--secondary { background: var(--fk-canvas); border-color: transparent; }
+.fk-product-card .fk-btn--secondary:hover { background: var(--fk-ink); color: var(--fk-ink-inverse); }
+@media (min-width: 768px) { .fk-product-card { padding: 16px; } .fk-product-card__name { font-size: 1.0625rem; } }
+@media (prefers-reduced-motion: reduce) { .fk-product-card { transition: none; } }

@@ -3,26 +3,70 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
 }
 /** @global CMain $APPLICATION */
+
+use Bitrix\Main\Page\Asset;
+
+$asset = Asset::getInstance();
+// Порядок как в прототипе V4; v4-skin.css всегда последний.
+    $asset->addCss(SITE_TEMPLATE_PATH . '/styles.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/shared.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/header.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/footer.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/search.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/feedback.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/products.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/favorites.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/projects.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/solutions.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/interiors.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/configurator.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/page.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/cooperation.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/about.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/account.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/cart.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/collections.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/categories.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/catalog.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/checkout.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/contacts.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/product-page.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/download-file.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/accessories.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/search-page.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/v4-skin.css');
+$asset->addString(
+    '<script>document.documentElement.className = "js"; window.FK = ' . \Bitrix\Main\Web\Json::encode([
+        'tpl' => SITE_TEMPLATE_PATH,
+        'social' => [
+            'vk' => fk_include_text('fk_social_vk'),
+            'max' => fk_include_text('fk_social_max'),
+            'tg' => fk_include_text('fk_social_tg'),
+        ],
+    ]) . ';</script>'
+);
+
+$collectionsId = fk_iblock_id('collections');
+$catalogId = fk_iblock_id('catalog');
 ?><!DOCTYPE html>
 <html lang="<?= LANGUAGE_ID ?>" class="no-js">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script>document.documentElement.className = 'js';</script>
     <title><?php $APPLICATION->ShowTitle(); ?></title>
-    <?php
-    // Выводит мета-теги, подключённые стили (в том числе template_styles.css этого шаблона) и скрипты.
-    $APPLICATION->ShowHead();
-    ?>
+    <?php $APPLICATION->ShowHead(); ?>
 </head>
 <body>
 <?php $APPLICATION->ShowPanel(); ?>
+<?php include __DIR__ . '/partials/sprite.php'; ?>
 
-<a class="fk-skip" href="#main">К содержимому</a>
+<a class="skip" href="#main">К содержимому</a>
 
-<!-- Шапка. Разметка из prototype/homepage-v3; ссылки заменены на адреса сайта. Меню статическое: компонент меню подключается отдельной задачей. -->
-<header class="fk-header" id="top">
+<header class="fk-header fk-container" id="top">
     <div class="fk-container fk-header__row">
-        <a class="fk-logo" href="/" aria-label="FORKEL, на главную">FORKEL</a>
+        <a class="fk-logo" href="/" aria-label="FORKEL, на главную">
+            <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 24A16 16 0 0 1 20 4" fill="none" stroke="var(--yellow)" stroke-width="2.4" stroke-linecap="round"/></svg>
+            FORKEL
+        </a>
 
         <nav class="fk-nav" id="site-nav" aria-label="Основная навигация">
             <ul class="fk-nav__list">
@@ -37,18 +81,51 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
                                 <div>
                                     <p class="fk-catalog-title">Коллекции</p>
                                     <ul class="fk-catalog-list">
-                                        <li><a href="/#collections">Коллекция A</a></li>
-                                        <li><a href="/#collections">Коллекция B</a></li>
-                                        <li><a href="/#collections">Коллекция C</a></li>
-                                        <li><a href="/#collections">Коллекция D</a></li>
+                                        <?php if ($collectionsId > 0) {
+                                            $APPLICATION->IncludeComponent('bitrix:news.list', 'fk_catalog_panel', [
+                                                'IBLOCK_TYPE' => '',
+                                                'IBLOCK_ID' => $collectionsId,
+                                                'NEWS_COUNT' => 20,
+                                                'SORT_BY1' => 'SORT',
+                                                'SORT_ORDER1' => 'ASC',
+                                                'SORT_BY2' => 'NAME',
+                                                'SORT_ORDER2' => 'ASC',
+                                                'FIELD_CODE' => ['NAME'],
+                                                'PROPERTY_CODE' => [],
+                                                'CHECK_DATES' => 'Y',
+                                                'SET_TITLE' => 'N',
+                                                'SET_BROWSER_TITLE' => 'N',
+                                                'SET_META_KEYWORDS' => 'N',
+                                                'SET_META_DESCRIPTION' => 'N',
+                                                'SET_LAST_MODIFIED' => 'N',
+                                                'ADD_SECTIONS_CHAIN' => 'N',
+                                                'INCLUDE_IBLOCK_INTO_CHAIN' => 'N',
+                                                'SET_STATUS_404' => 'N',
+                                                'SHOW_404' => 'N',
+                                                'DISPLAY_TOP_PAGER' => 'N',
+                                                'DISPLAY_BOTTOM_PAGER' => 'N',
+                                                'CACHE_TYPE' => 'A',
+                                                'CACHE_TIME' => 3600,
+                                            ], false);
+                                        } ?>
                                     </ul>
                                 </div>
                                 <div>
                                     <p class="fk-catalog-title">Категории</p>
                                     <ul class="fk-catalog-list">
-                                        <li><a href="/catalog/">Розетки</a></li>
-                                        <li><a href="/catalog/">Выключатели</a></li>
-                                        <li><a href="/catalog/">Рамки</a></li>
+                                        <?php if ($catalogId > 0) {
+                                            $APPLICATION->IncludeComponent('bitrix:catalog.section.list', 'fk_catalog_panel', [
+                                                'IBLOCK_TYPE' => '',
+                                                'IBLOCK_ID' => $catalogId,
+                                                'SECTION_ID' => 0,
+                                                'SECTION_CODE' => '',
+                                                'TOP_DEPTH' => 1,
+                                                'COUNT_ELEMENTS' => 'N',
+                                                'ADD_SECTIONS_CHAIN' => 'N',
+                                                'CACHE_TYPE' => 'A',
+                                                'CACHE_TIME' => 3600,
+                                            ], false);
+                                        } ?>
                                     </ul>
                                     <p class="fk-catalog-all"><a class="fk-link" href="/catalog/">Весь каталог</a></p>
                                 </div>
@@ -56,32 +133,40 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
                         </div>
                     </div>
                 </li>
-                <!-- Запасные ссылки, если JavaScript недоступен -->
-                <li class="fk-nav-fallback"><a class="fk-nav__link" href="/#collections">Коллекции</a></li>
-                <li class="fk-nav-fallback"><a class="fk-nav__link" href="/#categories">Категории</a></li>
-                <li><a class="fk-nav__link" href="/#new">Новинки</a></li>
-                <li><a class="fk-nav__link" href="/#projects">Проекты</a></li>
-                <li><a class="fk-nav__link" href="/#pro">Сотрудничество</a></li>
-                <li class="fk-nav__mobile-only"><a class="fk-nav__link" href="/about/delivery/">Доставка и оплата</a></li>
-                <li><a class="fk-nav__link" href="/about/contacts/">Контакты</a></li>
-                <li class="fk-nav__phone"><span class="fk-phone">Телефон (заглушка)</span></li>
+                <?php
+                // Остальные пункты — меню типа «top» (Контент → Структура сайта). «Каталог» и «Коллекции» в нём не нужны: их заменяет панель выше.
+                $APPLICATION->IncludeComponent('bitrix:menu', 'fk_top', [
+                    'ROOT_MENU_TYPE' => 'top',
+                    'MENU_CACHE_TYPE' => 'A',
+                    'MENU_CACHE_TIME' => 3600,
+                    'MENU_CACHE_USE_GROUPS' => 'N',
+                    'MENU_CACHE_GET_VARS' => [],
+                    'MAX_LEVEL' => 1,
+                    'CHILD_MENU_TYPE' => '',
+                    'USE_EXT' => 'N',
+                    'DELAY' => 'N',
+                    'ALLOW_MULTI_SELECT' => 'N',
+                ], false);
+                ?>
+                <li class="fk-nav__phone"><span class="fk-phone"><?php $APPLICATION->IncludeComponent('bitrix:main.include', '', ['AREA_FILE_SHOW' => 'file', 'PATH' => '/include/fk_phone.php'], false); ?></span></li>
             </ul>
         </nav>
 
         <div class="fk-actions">
-            <a class="fk-icon-btn" href="/search/">
+            <button class="fk-icon-btn fk-search-btn" type="button" aria-haspopup="dialog" aria-label="Поиск по товарам">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
-                <span class="fk-vh">Поиск</span>
-            </a>
-            <a class="fk-icon-btn fk-icon-btn--account" href="/personal/">
+                <span class="fk-search-btn__text" aria-hidden="true">Поиск по товарам</span>
+            </button>
+            <a class="fk-icon-btn fk-icon-btn--account" href="/personal/" data-account>
                 <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.75"/><path d="M4.5 20c.9-3.6 3.8-5.5 7.5-5.5s6.6 1.9 7.5 5.5"/></svg>
                 <span class="fk-vh">Личный кабинет</span>
             </a>
             <a class="fk-icon-btn fk-cart-link" href="/personal/cart/">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6.5a3 3 0 016 0V8"/></svg>
                 <span class="fk-vh">Корзина</span>
+                <span class="fk-badge" data-cart-count hidden aria-hidden="true">0</span>
             </a>
-            <span class="fk-phone fk-phone--header">Телефон (заглушка)</span>
+            <span class="fk-phone fk-phone--header"><?php $APPLICATION->IncludeComponent('bitrix:main.include', '', ['AREA_FILE_SHOW' => 'file', 'PATH' => '/include/fk_phone.php'], false); ?></span>
             <button class="fk-menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Меню</button>
         </div>
     </div>

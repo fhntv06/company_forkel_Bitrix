@@ -1,0 +1,6 @@
+/* Сопутствующие товары: горизонтальный слайдер на прокрутке, 4 карточки на десктопе */
+.fk-acc { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 3 * var(--fk-col-gap)) / 4); gap: 0 var(--fk-col-gap); margin-top: 32px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; }
+.fk-acc > li { scroll-snap-align: start; min-width: 0; }
+@media (max-width: 1023px) { .fk-acc { grid-auto-columns: calc((100% - var(--fk-col-gap)) / 2.3); } }
+@media (max-width: 599px) { .fk-acc { grid-auto-columns: 72%; } }
+@media (prefers-reduced-motion: no-preference) { .fk-acc { scroll-behavior: smooth; } }

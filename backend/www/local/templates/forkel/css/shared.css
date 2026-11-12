@@ -1,0 +1,76 @@
+/* FORKEL V4 — общие компоненты V3 в стиле V4: кнопки, ссылка, метка, чип, тона плиток, графика изделий (спрайт).
+   Подключается после styles.css, до css/v4-skin.css. Цвета изделий и тонов плиток — демонстрационные образцы, не палитра сайта. */
+
+/* Кнопки: «таблетка» V4 */
+.fk-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 26px; font: 600 .95rem/1.2 var(--font); text-decoration: none;
+  border: 1.5px solid transparent; border-radius: 999px; cursor: pointer; transition: background-color .2s, border-color .2s, color .2s; }
+.fk-btn--primary { background: var(--ink); color: #fff; }
+.fk-btn--primary:hover { background: var(--iron); color: #fff; }
+.fk-btn--secondary { background: transparent; color: var(--ink); border-color: var(--silver); }
+.fk-btn--secondary:hover { border-color: var(--ink); background: transparent; }
+.fk-btn--inverse { background: #fff; color: var(--ink); }
+.fk-btn--inverse:hover { background: var(--sand); }
+.fk-btn--ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,.5); }
+.fk-btn--ghost:hover { background: #fff; color: var(--ink); }
+
+.fk-link { font-weight: 600; text-decoration: underline; text-decoration-color: var(--yellow); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.fk-link--tap { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* Метка «демо / заглушка» */
+.fk-tag { display: inline-block; padding: 1px 8px; font-size: .75rem; line-height: 1.5; font-weight: 500; white-space: nowrap; color: var(--iron); background: var(--bg); border: 1px dashed var(--silver); border-radius: 999px; }
+.fk-stub { font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+.fk-note { max-width: 70ch; font-size: .875rem; line-height: 1.45; color: var(--fog); }
+.fk-note--proto { padding: 10px 14px; color: var(--iron); border: 1px dashed var(--silver); border-radius: var(--r-s); align-self: flex-start; }
+
+/* Чип (выбор, быстрые ссылки) */
+.fk-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.fk-chip { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; font: 600 .9rem/1.2 var(--font); text-decoration: none; cursor: pointer;
+  background: var(--surface); color: var(--ink); border: 1.5px solid var(--veil); border-radius: 999px; transition: background-color .2s, border-color .2s; }
+.fk-chip:hover { border-color: var(--ink); }
+.fk-chip[aria-pressed="true"], .fk-chip[aria-checked="true"], .fk-chip[aria-current="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+/* Тона плиток (фон и «стена» для изделий) */
+.tone-light    { --tone: #F3F4F5; --tone-ink: var(--ink); --tone-muted: var(--iron); --wall: #F3F4F5; --shade: rgba(43,43,43,.08); }
+.tone-sand     { --tone: var(--sand); --tone-ink: var(--ink); --tone-muted: var(--iron); --wall: var(--sand); --shade: rgba(60,45,20,.12); }
+.tone-stone    { --tone: #DFE2E5; --tone-ink: var(--ink); --tone-muted: var(--iron); --wall: #DFE2E5; --shade: rgba(43,43,43,.12); }
+.tone-gold     { --tone: #F3E8CC; --tone-ink: var(--ink); --tone-muted: var(--iron); --wall: #F3E8CC; --shade: rgba(90,65,10,.14); }
+.tone-graphite { --tone: var(--ink); --tone-ink: #fff; --tone-muted: var(--silver); --wall: var(--ink); --shade: rgba(0,0,0,.34); }
+
+/* Изделия (SVG-спрайт) */
+.pl-face  { fill: var(--finish); stroke: var(--edge); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.pl-inner { fill: var(--finish-2); stroke: var(--edge); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.pl-key   { fill: var(--finish); stroke: var(--edge); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.pl-line  { fill: none; stroke: var(--edge); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.pl-open  { fill: var(--wall); stroke: var(--edge); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.pl-hole  { fill: var(--hole, #1E2022); }
+.pl-wall  { fill: var(--wall); }
+.pl-floor { fill: var(--veil); }
+.pl-shade { fill: var(--shade); }
+.pl-room  { fill: none; stroke: currentColor; stroke-opacity: .4; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.fin-white      { --finish: #FBFBFA; --finish-2: #EEEFEF; --edge: rgba(30,32,34,.32); }
+.fin-black      { --finish: #2A2C2F; --finish-2: #1E2022; --edge: #53575C; --hole: #0F1011; }
+.fin-gray       { --finish: #9AA0A6; --finish-2: #8B9197; --edge: rgba(30,32,34,.38); }
+.fin-whitem     { --finish: #EDEDEA; --finish-2: #DEDEDA; --edge: rgba(30,32,34,.32); }
+.fin-lightgray  { --finish: #C9CDD1; --finish-2: #B9BEC3; --edge: rgba(30,32,34,.34); }
+.fin-nickel     { --finish: #CBCED1; --finish-2: #B8BCC0; --edge: rgba(30,32,34,.35); }
+.fin-cashmere   { --finish: #CDBFAA; --finish-2: #BCAE98; --edge: rgba(30,32,34,.35); }
+.fin-gold       { --finish: #C3A464; --finish-2: #B39455; --edge: rgba(30,32,34,.35); }
+.fin-anthracite { --finish: #4A4F55; --finish-2: #3B4046; --edge: #6D7278; --hole: #0F1011; }
+.fin-bronze     { --finish: #8A6F55; --finish-2: #7A6049; --edge: rgba(30,32,34,.45); --hole: #1E2022; }
+
+/* Поля форм, флажок и ошибки (общие для обратной связи, звонка, оформления, кабинета) */
+.fk-field__label { display: block; margin-bottom: 8px; font-size: .875rem; font-weight: 600; }
+.fk-field { display: block; width: 100%; min-height: 52px; padding: 0 18px; font: inherit; color: var(--ink); background: var(--surface); border: 1.5px solid var(--veil); border-radius: var(--r-s); }
+.fk-field:hover { border-color: var(--silver); }
+.fk-field:focus { border-color: var(--ink); background: var(--bg); }
+.fk-field::placeholder { color: var(--fog); opacity: 1; }
+.fk-field[aria-invalid="true"] { border-color: var(--fk-error); }
+.fk-co-field { min-width: 0; }
+.fk-co-textarea { min-height: 120px; padding-block: 14px; resize: vertical; }
+.fk-co-error { margin-top: 6px; font-size: .875rem; font-weight: 600; color: var(--fk-error); }
+.fk-co-errors { padding: 16px 20px; font-weight: 600; color: var(--fk-error); background: color-mix(in srgb, var(--fk-error) 10%, #fff); border-radius: var(--r-s); }
+.fk-co-errors a { display: inline-block; margin-right: 12px; padding-block: 8px; color: inherit; }
+.fk-co-errors[hidden], .fk-co-error[hidden] { display: none; }
+.fk-check { display: flex; align-items: center; gap: 12px; min-height: 48px; cursor: pointer; }
+.fk-check input { width: 22px; height: 22px; margin: 0; flex: none; accent-color: var(--ink); }
+.fk-grid { display: grid; gap: var(--gap); }
