@@ -5,7 +5,7 @@ FORKEL is an e-commerce project for electrical installation products. The reposi
 
 ## First steps for every task
 1. Read `docs/workflow/current-state.md`.
-2. Read `docs/workflow/roles.md` and identify the assigned role.
+2. Read `docs/workflow/roles.md` (Roles A/B/C) and `docs/workflow/agents-mapping.md` (how the Claude agents map to them) and identify the assigned role.
 3. Read the relevant requirements in `docs/project/requirements.md` and decisions in `docs/project/decisions.md`.
 4. Inspect the actual files and Git status before planning or editing.
 5. Consult only the relevant design, QA, or development documents.
@@ -15,7 +15,8 @@ FORKEL is an e-commerce project for electrical installation products. The reposi
 - Product requirements: `docs/project/requirements.md`.
 - Approved decisions: `docs/project/decisions.md`.
 - Verified project status: `docs/workflow/current-state.md`.
-- Work routing and role boundaries: `docs/workflow/roles.md`.
+- Work routing and role boundaries: `docs/workflow/roles.md`, `docs/workflow/role-permissions.md`, `docs/workflow/agents-mapping.md`.
+- Git and PR rules: `docs/workflow/github-workflow.md`.
 - Design: `docs/design/` documents, respecting their approval status.
 - Task status: `docs/workflow/task-queue.md`.
 
@@ -24,9 +25,10 @@ If documents and code disagree, report the conflict. Do not silently choose an i
 ## Role routing
 - Content, standard Bitrix admin configuration, and CMS-managed entities: Content Manager.
 - PHP, Bitrix components/templates, backend behavior, API, integration, or architecture: Bitrix Developer.
+- Prototype or frontend HTML/CSS/JS implementation: UI Implementation.
 - Visual specification, design system, or prototype research: Research & Design.
 - Independent validation of a completed change: QA Tester.
-- Multi-step, mixed, ambiguous, or cross-role tasks: Orchestrator coordinates and delegates.
+- Multi-step, mixed, ambiguous, or cross-role tasks: Orchestrator coordinates and delegates (run it as the main session: `claude --agent orchestrator`; subagents cannot start other subagents).
 
 For mixed tasks, split CMS/admin work from code work and define an explicit handoff. Do not let one role silently exceed its scope.
 
@@ -41,6 +43,11 @@ For mixed tasks, split CMS/admin work from code work and define an explicit hand
 - Do not expose `.env`, credentials, tokens, customer data, or database dumps.
 - Never claim a build, test, browser check, or QA pass unless it was actually performed.
 
+## Git rules
+- Work in a separate branch per task: `role/<role>/<task-id>-<short-name>`. Never commit directly to `main`.
+- No force push, no deleting or switching to another session's unfinished branch, no merging into `main` without explicit authorization.
+- Changes go through a Pull Request. Do not claim a change is committed, pushed or merged unless verified.
+
 ## Prototype boundary
 `prototype/` contains versioned design prototypes. Treat prior versions as frozen unless the task explicitly names them. Do not treat prototype HTML/CSS as a production Bitrix template. Before transferring prototype work into Bitrix, map it to the real template/component structure and approved requirements.
 
@@ -48,6 +55,7 @@ For mixed tasks, split CMS/admin work from code work and define an explicit hand
 Implementation is not complete merely because files were edited or committed. QA must check the agreed acceptance criteria independently. QA reports defects and evidence; it does not fix code unless separately assigned.
 
 Use statuses: `PASS`, `FAIL`, `BLOCKED`, or `PARTIAL`.
+QA loop: `FAIL` -> implementer fixes the confirmed defects -> QA retests those defects plus a short regression. At most 3 rounds, then escalate to the user. `BLOCKED` and `PARTIAL` do not count as completion.
 At task completion report:
 - task and status;
 - files/settings changed;
