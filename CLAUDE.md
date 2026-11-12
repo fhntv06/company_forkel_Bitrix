@@ -28,6 +28,7 @@ If documents and code disagree, report the conflict. Do not silently choose an i
 - Prototype or frontend HTML/CSS/JS implementation: UI Implementation.
 - Visual specification, design system, or prototype research: Research & Design.
 - Independent validation of a completed change: QA Tester.
+- New task described by the owner in chat (or `/task`): follow the `task-intake` skill (formalize in `docs/tasks/`, log, execute, QA, PR for review; the owner reviews and merges).
 - Multi-step, mixed, ambiguous, or cross-role tasks: Orchestrator coordinates and delegates (run it as the main session: `claude --agent orchestrator`; subagents cannot start other subagents).
 
 For mixed tasks, split CMS/admin work from code work and define an explicit handoff. Do not let one role silently exceed its scope.
