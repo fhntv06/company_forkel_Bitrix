@@ -161,7 +161,7 @@
 
 - **Роль:** UI Implementation
 - **Приоритет:** P2
-- **Статус:** IN_PROGRESS
+- **Статус:** REVIEW (QA PASS, ждёт ревью владельца)
 - **Зависимости:** отсутствуют
 - **Результат:** четыре правила размера h1 в `prototype/homepage-v4/` (`styles.css`, `css/about.css`, `css/projects.css`, `css/product-page.css`) уменьшены в 1,5 раза.
 - **Критерии приёмки:** `docs/tasks/TASK-001.md`, раздел 6.
