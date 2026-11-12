@@ -2,7 +2,7 @@
 .fk-ab-hero { display: grid; gap: 24px; margin: 8px 0 24px; padding: 24px; background: var(--fk-ink); color: var(--fk-ink-inverse); border-radius: 32px; --fk-focus: 0 0 0 2px var(--fk-ink), 0 0 0 4px var(--fk-bright); --tone-muted: var(--fk-inverse-muted); }
 .fk-ab-hero__text { display: grid; gap: 20px; align-content: center; justify-items: start; min-width: 0; }
 .fk-ab-hero__kicker { font-size: var(--fk-fs-small); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fk-bright); }
-.fk-ab-hero__title { font-size: clamp(1.25rem, 0.8rem + 1.733vw, 2.333rem); line-height: 1.08; font-weight: 700; letter-spacing: -0.02em; overflow-wrap: break-word; }
+.fk-ab-hero__title { font-size: clamp(1.625rem, 1.04rem + 2.253vw, 3.033rem); line-height: 1.08; font-weight: 700; letter-spacing: -0.02em; overflow-wrap: break-word; }
 .fk-ab-hero__lead { max-width: 56ch; font-size: 1.125rem; color: var(--fk-inverse-muted); }
 .fk-ab-hero__cta { display: flex; flex-wrap: wrap; gap: 12px; }
 .fk-ab-hero .fk-note--proto { color: var(--fk-ink-inverse); border-color: #8A8F94; border-radius: var(--fk-r-md); padding: 10px 14px; }
