@@ -377,7 +377,7 @@
 }
 
 .fk-prj-cover__text .fk-page-title {
-    font-size: clamp(1.167rem, 0.667rem + 1.333vw, 2rem);
+    font-size: clamp(1.517rem, 0.867rem + 1.733vw, 2.6rem);
     overflow-wrap: break-word;
     hyphens: auto;
 }
