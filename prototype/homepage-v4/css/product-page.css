@@ -9,7 +9,7 @@
 
 /* Информационная карточка */
 .fk-pdp__info { display: grid; gap: 14px; align-content: start; min-width: 0; padding: 24px; background: var(--fk-surface); border-radius: var(--fk-r-lg); }
-.fk-pdp__title { font-size: var(--fk-fs-h2); line-height: 1.1; font-weight: 700; letter-spacing: -0.01em; overflow-wrap: break-word; }
+.fk-pdp__title { font-size: clamp(1.067rem, 0.733rem + 1.2vw, 1.733rem); line-height: 1.1; font-weight: 700; letter-spacing: -0.01em; overflow-wrap: break-word; }
 .fk-pdp__sku, .fk-pdp__stock { color: var(--fk-ink-muted); }
 .fk-pdp__price { font-size: 2rem; line-height: 1.15; font-weight: 700; padding-top: 8px; border-top: 1px solid var(--fk-line); }
 .fk-pdp__lead { max-width: 52ch; }

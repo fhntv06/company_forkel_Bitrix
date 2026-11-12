@@ -1,19 +1,47 @@
-# Claude setup for FORKEL
+# Claude для FORKEL: роли и агенты
 
-This package is a proposed project-level Claude Code configuration based on the current public repository documentation. It is not written to GitHub.
+Конфигурация уже находится в репозитории — копировать ничего не нужно.
 
-## Included
-- Root `CLAUDE.md`: shared rules and routing.
-- `PROJECT_CONTEXT.md`: compact verified repository context.
-- `.claude/agents/`: Orchestrator, Content Manager, Bitrix Developer, QA Tester, Research & Design.
-- `.claude/skills/bitrix-task-routing/SKILL.md`: repeatable task classification and handoff procedure.
+## Что входит
+- `CLAUDE.md` — общие правила, маршрутизация, Git-правила, статусы QA.
+- `PROJECT_CONTEXT.md` — краткий проверенный контекст репозитория.
+- `.claude/agents/` — `orchestrator`, `content-manager`, `bitrix-developer`, `ui-implementation`, `research-design`, `qa-tester`.
+- `.claude/skills/bitrix-task-routing/SKILL.md` — навык выбора роли и передачи задачи.
+- `docs/workflow/agents-mapping.md` — соответствие агентов ролям A/B/C из `roles.md`.
 
-## Apply
-1. Review the files against the current repository and your actual permissions/tooling.
-2. Copy the root `CLAUDE.md` to the repository root (merge rather than blindly overwrite existing project instructions).
-3. Copy `.claude/` into the repository root.
-4. Keep `PROJECT_CONTEXT.md` if useful; it is supplemental and should be updated as verified facts change.
-5. In Claude Code, start with a task and ask the Orchestrator to route it. If agents were added after the session began, reload/restart the session if they are not discovered.
+## Подключение и запуск
+1. Откройте репозиторий в Claude Code (агенты и навык подхватываются из `.claude/` автоматически; если добавили их во время сессии — перезапустите сессию).
+2. Проверьте, что агенты видны: команда `/agents`.
+3. Запускайте Orchestrator как основную сессию, иначе он не сможет вызывать других агентов (субагенты не запускают субагентов):
+   ```
+   claude --agent orchestrator
+   ```
+   Чтобы так было по умолчанию, добавьте в `.claude/settings.json` `"agent": "orchestrator"` (тогда каждая сессия в репозитории начинается с Orchestrator).
+4. Поставьте задачу — см. раздел «Как ставить задачи» ниже.
+5. В старых версиях Claude Code инструмент запуска агентов называется `Task`; тогда в `tools` у `orchestrator` замените `Agent(...)` на `Task(...)`.
 
-## Important
-Content Manager assumes a UI/admin workflow. If Claude has no authenticated browser/admin access, it must provide a procedure, not pretend to make changes. The QA agent is intentionally read-only. This package does not make any repository changes or perform Bitrix deployment.
+## Как ставить задачи
+Напишите задачу в чат обычным текстом или командой `/task <описание>`. Дальше автоматически (навык `task-intake`):
+1. задача оформляется в `docs/tasks/TASK-NNN.md` по шаблону, с критериями приёмки и списком допущений;
+2. запись добавляется в `docs/workflow/task-queue.md` и `docs/workflow/work-log.md`, создаётся ветка `role/<role>/TASK-NNN-<slug>`, оформление коммитится и пушится;
+3. назначенный агент выполняет работу, затем независимый `qa-tester` проверяет её (при FAIL — до 3 кругов исправлений);
+4. открывается Pull Request по вашему шаблону — это единственное место, где нужны вы.
+
+От вас: ревью PR, слияние и приёмка (статус `DONE` ставится только после неё). Claude спросит вас по ходу работы только если задача двусмысленна, необратима, затрагивает прод/данные/зависимости/архитектуру или противоречит `requirements.md`/`decisions.md`. Задачи по коду Bitrix будут получать статус `BLOCKED`, пока в `backend/www/` нет кода сайта.
+
+## Схема
+```
+Пользователь -> Orchestrator
+  ├─ CMS / контент / настройки      -> Content Manager
+  ├─ PHP / Bitrix / API / интеграции -> Bitrix Developer
+  ├─ Frontend / прототип             -> UI Implementation
+  ├─ Дизайн / исследование           -> Research & Design
+  └─ После реализации                -> QA Tester -> PASS / FAIL / BLOCKED / PARTIAL
+                                         FAIL -> исполнитель исправляет -> QA перепроверяет (до 3 кругов)
+```
+
+## Важно
+- Content Manager без реального доступа к админке Bitrix не утверждает, что изменил контент: он выдаёт точную последовательность действий со статусом NOT EXECUTED. Чтобы дать ему доступ, добавьте браузерный MCP-инструмент в `tools` его файла.
+- QA пишет отчёты только в `docs/qa/` и не исправляет код.
+- Ограничения `tools` — это не техническая изоляция. Реальные права задаются настройками GitHub и защитой `main`.
+- Не считайте `backend/www/` готовым Bitrix-сайтом: Bitrix Developer обязан сначала проверить, что нужный код есть в чекауте.
