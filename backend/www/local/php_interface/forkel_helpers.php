@@ -44,3 +44,53 @@ if (!function_exists('fk_include_text')) {
         return trim(html_entity_decode(strip_tags((string)file_get_contents($file)), ENT_QUOTES, 'UTF-8'));
     }
 }
+
+if (!function_exists('fk_render_page_hero')) {
+    /**
+     * Hero внутренней страницы (V4). Вызывается отложенно через AddBufferContent,
+     * когда свойства страницы уже заданы. fk_no_hero=Y скрывает блок.
+     * Кнопки: fk_cta1_text/fk_cta1_link, fk_cta2_text/fk_cta2_link; ссылка «#feedback» открывает окно обратной связи.
+     */
+    function fk_render_page_hero(): string
+    {
+        global $APPLICATION;
+        if (!fk_page_has_wrapper() || $APPLICATION->GetProperty('fk_no_hero') === 'Y') {
+            return '';
+        }
+        $title = htmlspecialcharsbx((string)$APPLICATION->GetTitle());
+        $lead = trim((string)$APPLICATION->GetProperty('fk_lead'));
+        $cta = [];
+        foreach ([1 => 'fk-btn--inverse', 2 => 'fk-btn--ghost'] as $n => $mod) {
+            $t = trim((string)$APPLICATION->GetProperty('fk_cta' . $n . '_text'));
+            $l = trim((string)$APPLICATION->GetProperty('fk_cta' . $n . '_link'));
+            if ($t === '' || $l === '') {
+                continue;
+            }
+            $cta[] = $l === '#feedback'
+                ? '<button class="fk-btn ' . $mod . '" type="button" data-feedback aria-haspopup="dialog">' . htmlspecialcharsbx($t) . '</button>'
+                : '<a class="fk-btn ' . $mod . '" href="' . htmlspecialcharsbx($l) . '">' . htmlspecialcharsbx($t) . '</a>';
+        }
+        return '<section class="fk-ab-hero" aria-labelledby="fk-page-title"><div class="fk-ab-hero__text">'
+            . '<p class="fk-ab-hero__kicker">FORKEL</p>'
+            . '<h1 class="fk-ab-hero__title" id="fk-page-title">' . $title . '</h1>'
+            . ($lead !== '' ? '<p class="fk-ab-hero__lead">' . htmlspecialcharsbx($lead) . '</p>' : '')
+            . ($cta ? '<div class="fk-ab-hero__cta">' . implode('', $cta) . '</div>' : '')
+            . '</div></section>';
+    }
+}
+
+if (!function_exists('fk_page_has_wrapper')) {
+    /** Внутренние страницы (не главная) оборачиваются в fk-container fk-page: крошки + hero + содержимое. Закрывает обёртку footer.php. */
+    function fk_page_has_wrapper(): bool
+    {
+        global $APPLICATION;
+        return $APPLICATION->GetCurPage(false) !== '/';
+    }
+}
+
+if (!function_exists('fk_render_page_open')) {
+    function fk_render_page_open(): string
+    {
+        return fk_page_has_wrapper() ? '<div class="fk-container fk-page">' : '';
+    }
+}

@@ -153,19 +153,33 @@ $catalogId = fk_iblock_id('catalog');
         </nav>
 
         <div class="fk-actions">
-            <button class="fk-icon-btn fk-search-btn" type="button" aria-haspopup="dialog" aria-label="Поиск по товарам">
+            <a class="fk-icon-btn fk-search-btn" href="/search/" aria-label="Поиск по товарам">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
                 <span class="fk-search-btn__text" aria-hidden="true">Поиск по товарам</span>
-            </button>
+            </a>
             <a class="fk-icon-btn fk-icon-btn--account" href="/personal/" data-account>
                 <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.75"/><path d="M4.5 20c.9-3.6 3.8-5.5 7.5-5.5s6.6 1.9 7.5 5.5"/></svg>
                 <span class="fk-vh">Личный кабинет</span>
             </a>
+            <?php
+            if (\Bitrix\Main\Loader::includeModule('sale')) {
+                $APPLICATION->IncludeComponent('bitrix:sale.basket.basket.line', 'fk_badge', [
+                    'PATH_TO_BASKET' => '/personal/cart/',
+                    'SHOW_NUM_PRODUCTS' => 'Y',
+                    'SHOW_TOTAL_PRICE' => 'N',
+                    'SHOW_PERSONAL_LINK' => 'N',
+                    'SHOW_AUTHOR' => 'N',
+                    'SHOW_PRODUCTS' => 'N',
+                    'SHOW_EMPTY_VALUES' => 'Y',
+                    'HIDE_ON_BASKET_PAGES' => 'N',
+                    'POSITION_FIXED' => 'N',
+                ], false);
+            } else { ?>
             <a class="fk-icon-btn fk-cart-link" href="/personal/cart/">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6.5a3 3 0 016 0V8"/></svg>
                 <span class="fk-vh">Корзина</span>
-                <span class="fk-badge" data-cart-count hidden aria-hidden="true">0</span>
             </a>
+            <?php } ?>
             <span class="fk-phone fk-phone--header"><?php $APPLICATION->IncludeComponent('bitrix:main.include', '', ['AREA_FILE_SHOW' => 'file', 'PATH' => '/include/fk_phone.php'], false); ?></span>
             <button class="fk-menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Меню</button>
         </div>
@@ -173,3 +187,9 @@ $catalogId = fk_iblock_id('catalog');
 </header>
 
 <main id="main">
+<?php
+// Внутренние страницы: обёртка, крошки и hero (V4). Hero отложенный: свойства страницы задаются после header.php.
+$APPLICATION->AddBufferContent('fk_render_page_open');
+$APPLICATION->IncludeComponent('bitrix:breadcrumb', 'fk_crumbs', ['START_FROM' => 0, 'PATH' => '', 'SITE_ID' => SITE_ID], false);
+$APPLICATION->AddBufferContent('fk_render_page_hero');
+?>

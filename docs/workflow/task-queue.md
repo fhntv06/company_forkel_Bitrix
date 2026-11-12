@@ -187,6 +187,15 @@
 - **Критерии приёмки:** `docs/tasks/TASK-003.md`.
 - **Документы:** `docs/development/requirements/DISC-06`, `docs/tasks/TASK-003.md`.
 
+### TASK-004 — Этап 1 переноса V4: шаблон, шапка, подвал, формы
+
+- **Роль:** Bitrix Developer
+- **Приоритет:** P1
+- **Статус:** REVIEW (QA PARTIAL: статика пройдена, рендер подтверждён владельцем)
+- **Зависимости:** TASK-003
+- **Результат:** `backend/www/local/` (шаблон `forkel`, `php_interface`, `ajax/feedback.php`), `404.php`.
+- **Документы:** `docs/tasks/TASK-004.md`, `docs/qa/TASK-004-qa.md`.
+
 ## 6. Правила управления очередью
 
 - Не брать задачу в работу, если её зависимости не выполнены.

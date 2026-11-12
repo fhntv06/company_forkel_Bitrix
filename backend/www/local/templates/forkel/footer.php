@@ -10,6 +10,7 @@ $fkSocial = [
     'Telegram' => ['fk_social_tg', 'telegram-By-Freepik.webp'],
 ];
 ?>
+<?php if (fk_page_has_wrapper()) { ?></div><?php } ?>
 </main>
 
 <footer class="foot fk-footer" id="contacts">
@@ -63,7 +64,9 @@ $fkSocial = [
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<?php include __DIR__ . "/partials/feedback_dialog.php"; ?>
 <script src="<?= SITE_TEMPLATE_PATH ?>/js/site.js"></script>
+<script src="<?= SITE_TEMPLATE_PATH ?>/js/feedback.js"></script>
 <script src="<?= SITE_TEMPLATE_PATH ?>/js/social.js"></script>
 </body>
 </html>
