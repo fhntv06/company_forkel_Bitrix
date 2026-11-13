@@ -56,3 +56,18 @@
   .fk-chars-groups { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: 64px; }
   .fk-chars { padding: 32px; }
 }
+
+/* Фото под основным: миниатюры 120×120 со стрелками (картинка анонса + дополнительные, аналог MORE_PHOTO). Логика — shop.js (initThumbs). */
+.fk-pdp__gallery { display: grid; gap: 16px; min-width: 0; }
+.fk-pdp__gallery .fk-pdp__media { grid-column: auto; }
+.fk-pdp__thumbs { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 12px; min-width: 0; }
+.fk-pdp__thumbs-track { display: flex; gap: 12px; padding: 3px; margin: -3px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 3px; scroll-behavior: smooth; scrollbar-width: none; }
+.fk-pdp__thumbs-track::-webkit-scrollbar { display: none; }
+.fk-thumb { flex: 0 0 120px; width: 120px; height: 120px; padding: 0; border: 2px solid transparent; border-radius: var(--fk-r-md); background: var(--fk-surface); overflow: hidden; cursor: pointer; scroll-snap-align: start; }
+.fk-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.fk-thumb[aria-current="true"] { border-color: var(--fk-action); }
+.fk-pdp__arrow { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 1px solid currentColor; border-radius: 50%; background: transparent; color: inherit; cursor: pointer; }
+.fk-pdp__arrow[hidden] { display: none; }
+.fk-pdp__arrow:disabled { opacity: .35; cursor: default; }
+.fk-pdp__arrow svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+@media (min-width: 1024px) { .fk-pdp__gallery { grid-column: 1 / span 7; } }
