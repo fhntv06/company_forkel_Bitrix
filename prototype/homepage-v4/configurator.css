@@ -39,7 +39,7 @@
   .cfg--wide .cfg__view { grid-column: 1; grid-row: 2; }
   .cfg--wide .cfg__ctl { grid-column: 2; grid-row: 2; align-content: start; }
   .cfg--wide .cfg__photo { width: min(100%, 500px); }
-  .cfg--wide .fk-result { grid-row: 3; grid-template-columns: 1fr auto; align-items: end; column-gap: 48px; }
+  .cfg--wide .fk-result { grid-row: 3; grid-template-columns: 7fr 5fr; align-items: end; column-gap: 48px; }
   .cfg--wide .cfg__spec { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 32px; }
   .cfg--wide .fk-result .actions { flex-direction: column; align-items: stretch; min-width: 280px; }
 }
