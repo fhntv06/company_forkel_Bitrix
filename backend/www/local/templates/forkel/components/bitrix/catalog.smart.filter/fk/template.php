@@ -15,7 +15,7 @@ $e = static function ($v): string {
 ?>
 <div class="fk-filters" id="cat-filters" aria-label="Фильтры">
 <?php foreach ($arResult['ITEMS'] as $item) {
-    if (empty($item['VALUES'])) {
+    if (empty($item['VALUES']) || in_array($item['CODE'] ?? '', (array)($arParams['HIDE_CODES'] ?? []), true)) {
         continue;
     }
     ?>

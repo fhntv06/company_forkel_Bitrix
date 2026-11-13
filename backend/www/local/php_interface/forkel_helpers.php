@@ -94,3 +94,64 @@ if (!function_exists('fk_render_page_open')) {
         return fk_page_has_wrapper() ? '<div class="fk-container fk-page">' : '';
     }
 }
+
+if (!function_exists('fk_catalog_list')) {
+    /**
+     * Панель категорий, поиск, сортировка, фильтр и сетка товаров каталога.
+     * $arParams/$arResult — как у комплексного компонента bitrix:catalog (нужны IBLOCK_*, FILTER_NAME, URL_TEMPLATES, FOLDER, VARIABLES и параметры списка).
+     * $base — дополнительный фильтр (например, ['=PROPERTY_COLLECTION' => 5]); $hide — коды свойств, которые не показывать в фильтре.
+     */
+    function fk_catalog_list(array $arParams, array $arResult, $component, array $base = [], array $hide = []): void
+    {
+        global $APPLICATION;
+        include $_SERVER['DOCUMENT_ROOT'] . SITE_TEMPLATE_PATH . '/partials/catalog_list.php';
+    }
+}
+
+if (!function_exists('fk_catalog_params')) {
+    /** Параметры списка товаров каталога для страниц вне /catalog/ (коллекции). Держать в согласии с /catalog/index.php. */
+    function fk_catalog_params(): array
+    {
+        return [
+            'IBLOCK_TYPE' => 'catalog',
+            'IBLOCK_ID' => fk_iblock_id('catalog'),
+            'FILTER_NAME' => 'arrFilter',
+            'CACHE_TYPE' => 'A',
+            'CACHE_TIME' => '36000000',
+            'CACHE_GROUPS' => 'Y',
+            'SET_STATUS_404' => 'N',
+            'BASKET_URL' => '/personal/cart/',
+            'ACTION_VARIABLE' => 'action',
+            'PRODUCT_ID_VARIABLE' => 'id',
+            'SECTION_ID_VARIABLE' => 'SECTION_ID',
+            'PRODUCT_QUANTITY_VARIABLE' => 'quantity',
+            'PRODUCT_PROPS_VARIABLE' => 'prop',
+            'PRICE_CODE' => ['BASE'],
+            '~PRICE_CODE' => ['BASE'],
+            'USE_PRICE_COUNT' => 'N',
+            'SHOW_PRICE_COUNT' => '1',
+            'PRICE_VAT_INCLUDE' => 'Y',
+            'CONVERT_CURRENCY' => 'N',
+            'HIDE_NOT_AVAILABLE' => 'N',
+            'PAGE_ELEMENT_COUNT' => '12',
+            'ELEMENT_SORT_FIELD' => 'sort',
+            'ELEMENT_SORT_ORDER' => 'asc',
+            'ELEMENT_SORT_FIELD2' => 'id',
+            'ELEMENT_SORT_ORDER2' => 'desc',
+            'LIST_PROPERTY_CODE' => ['ARTICLE', 'COLLECTION', 'MATERIAL', 'NEW', 'MORE_PHOTO'],
+            'LIST_OFFERS_FIELD_CODE' => ['NAME', 'PREVIEW_PICTURE', 'DETAIL_PICTURE'],
+            'LIST_OFFERS_PROPERTY_CODE' => ['COLOR', 'MORE_PHOTO'],
+            'OFFERS_SORT_FIELD' => 'sort',
+            'OFFERS_SORT_ORDER' => 'asc',
+            'OFFERS_SORT_FIELD2' => 'id',
+            'OFFERS_SORT_ORDER2' => 'asc',
+            'PAGER_TEMPLATE' => 'round',
+            'DISPLAY_BOTTOM_PAGER' => 'Y',
+            'PAGER_SHOW_ALWAYS' => 'N',
+            'PAGER_DESC_NUMBERING' => 'N',
+            'PAGER_DESC_NUMBERING_CACHE_TIME' => '36000000',
+            'PAGER_SHOW_ALL' => 'N',
+            'FK_CHIPS_CURRENT' => -1,
+        ];
+    }
+}
