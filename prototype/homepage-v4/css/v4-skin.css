@@ -168,3 +168,31 @@ h1, h2, h3 { overflow-wrap: anywhere; }
 
 /* QA D5: ссылка-название карточки (padding 12 + 1 строка = 43,5 px на 360–390) — цель не меньше 44 px */
 .fk-product-card__name a { min-height: 44px; box-sizing: border-box; }
+
+/* Фото в блоках главной (ui-001). Фото светлые: текст и кнопки тёмные, у кромки с текстом — светлая подложка-градиент.
+   Изображения растянуты на весь блок (object-fit: cover). */
+.ph { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.hero__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero__stage .float { z-index: 1; }
+@media (max-width: 767px) {
+  .hero__stage { min-height: 0; padding: 0 0 16px; }
+  .hero__photo { position: static; height: auto; aspect-ratio: 4 / 3; }
+  .hero__stage .float { margin-inline: 16px; }
+}
+
+.dir__img img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+
+.col--photo, .feat__c--photo { isolation: isolate; color: var(--ink); }
+.col--photo > .ph, .feat__c--photo > .ph { position: absolute; inset: 0; z-index: -1; }
+.col--photo::after, .feat__c--photo::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,.86) 0%, rgba(255,255,255,.6) 40%, rgba(255,255,255,0) 72%); }
+.col--photo h3, .feat__c--photo h3, .feat__c--photo p { color: var(--ink); }
+.col--photo .chips i { background: rgba(255,255,255,.85); color: var(--ink); }
+.col--photo .btn { margin-top: auto; }
+.feat__c--photo .go { background: rgba(255,255,255,.75); opacity: 1; }
+
+.show__img { position: relative; overflow: hidden; }
+.show__img > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.col.col--photo .btn.btn--glass { background: #fff; border-color: #fff; color: var(--ink); }
+.col.col--photo .btn.btn--glass:hover { background: var(--veil); }

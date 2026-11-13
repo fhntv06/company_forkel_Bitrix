@@ -330,9 +330,26 @@
       return '<a class="fk-swatch" href="product.html?id=' + x.id + '" style="--finish:' + D.PALETTE[x.color].hex + '" aria-label="' + COLORS[x.color] + '"' + (x.id === p.id ? ' aria-current="true"' : '') + '></a>';
     }).join('');
 
+    // Фото под основным: картинка анонса (o.img) + дополнительные (o.more, аналог MORE_PHOTO в Битриксе).
+    // Демо: в данных прототипа дополнительных фото нет, поэтому берём фото остальных цветов этого товара.
+    var gal = [o.img].concat(o.more || []);
+    if (gal.length < 2) S.items.forEach(function (x) { if (x.img && gal.indexOf(x.img) < 0) gal.push(x.img); });
+    var curImg = o.img;
+    function thumbsHtml(list) {
+      if (list.length < 2) return '';
+      return '<div class="fk-pdp__thumbs" data-thumbs role="group" aria-label="Фотографии товара">' +
+        '<button type="button" class="fk-pdp__arrow" data-thumbs-prev aria-label="Предыдущие фото" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>' +
+        '<div class="fk-pdp__thumbs-track" data-thumbs-track>' +
+        list.map(function (src, i) {
+          return '<button type="button" class="fk-thumb" data-thumb="' + src + '" aria-label="Фото ' + (i + 1) + ' из ' + list.length + '"' + (i === 0 ? ' aria-current="true"' : '') + '>' +
+            '<img src="' + src + '" alt="" width="120" height="120" loading="lazy" onerror="this.style.display=\'none\'"></button>';
+        }).join('') + '</div>' +
+        '<button type="button" class="fk-pdp__arrow" data-thumbs-next aria-label="Следующие фото"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></div>';
+    }
+
     root.innerHTML =
-        '<div class="fk-pdp__media tone-light"><img src="' + o.img + '" alt="' + S.name + ', ' + COLORS[o.color].toLowerCase() + '" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display=\'none\'">' +
-        '<button type="button" class="fk-dl" data-dl aria-label="Скачать фото"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg></button></div>' +
+        '<div class="fk-pdp__gallery"><div class="fk-pdp__media tone-light"><img data-main-img src="' + o.img + '" alt="' + S.name + ', ' + COLORS[o.color].toLowerCase() + '" style="width:100%;height:100%;object-fit:contain" onerror="this.style.display=\'none\'">' +
+        '<button type="button" class="fk-dl" data-dl aria-label="Скачать фото"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg></button></div>' + thumbsHtml(gal) + '</div>' +
         '<div class="fk-pdp__info">' +
         '<h1 class="fk-pdp__title">' + S.name + '</h1>' +
         codeRow() +
@@ -353,9 +370,39 @@
     root.addEventListener('click', function (e) {
       var v = e.target.closest('[data-video]');
       if (v) openVideo(v, S.links.video);
-      if (e.target.closest('[data-dl]')) downloadPhoto(o.img, (o.sku !== '—' ? o.sku : S.name + ' ' + COLORS[o.color]).replace(/\s+/g, '-') + '.webp');
+      var th = e.target.closest('[data-thumb]');
+      if (th) {
+        curImg = th.getAttribute('data-thumb');
+        root.querySelector('[data-main-img]').src = curImg;
+        root.querySelector('[data-main-img]').style.display = '';
+        [].forEach.call(root.querySelectorAll('[data-thumb]'), function (t) { if (t === th) t.setAttribute('aria-current', 'true'); else t.removeAttribute('aria-current'); });
+      }
+      if (e.target.closest('[data-dl]')) downloadPhoto(curImg, (o.sku !== '—' ? o.sku : S.name + ' ' + COLORS[o.color]).replace(/\s+/g, '-') + '.webp');
     });
     enhanceChars();
+    initThumbs(root);
+  }
+
+  // Стрелки листают полосу миниатюр; на краях и когда всё помещается — отключены/скрыты.
+  function initThumbs(root) {
+    var box = root.querySelector('[data-thumbs]');
+    if (!box) return;
+    var track = box.querySelector('[data-thumbs-track]'), prev = box.querySelector('[data-thumbs-prev]'), next = box.querySelector('[data-thumbs-next]');
+    function update() {
+      var max = track.scrollWidth - track.clientWidth;
+      prev.hidden = next.hidden = max <= 1;
+      prev.disabled = track.scrollLeft <= 1;
+      next.disabled = track.scrollLeft >= max - 1;
+    }
+    function step(dir) {
+      var w = 132, n = Math.max(1, Math.floor(track.clientWidth / w));
+      track.scrollBy({ left: dir * n * w, behavior: 'smooth' });
+    }
+    prev.addEventListener('click', function () { step(-1); });
+    next.addEventListener('click', function () { step(1); });
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
   }
 
   function initProduct() {
