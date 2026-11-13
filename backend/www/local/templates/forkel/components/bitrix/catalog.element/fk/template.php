@@ -39,6 +39,31 @@ $photo = static function (array $el) use ($fileSrc): string {
     }
     return $fileSrc($v);
 };
+// Галерея под основным фото: основное фото (детальная картинка, иначе картинка анонса), картинка анонса, затем MORE_PHOTO.
+// Одинаковые файлы не повторяются. Миниатюры 240×240 (для 120×120 с запасом на ретину), крупное — до 1200 px.
+$gallery = static function (array $el): array {
+    $ids = [];
+    $add = static function ($v) use (&$ids): void {
+        $id = is_array($v) ? (int)($v['ID'] ?? 0) : (int)$v;
+        if ($id > 0 && !in_array($id, $ids, true)) {
+            $ids[] = $id;
+        }
+    };
+    $add($el['DETAIL_PICTURE'] ?? 0);
+    $add($el['PREVIEW_PICTURE'] ?? 0);
+    foreach ((array)($el['PROPERTIES']['MORE_PHOTO']['VALUE'] ?? []) as $id) {
+        $add($id);
+    }
+    $list = [];
+    foreach ($ids as $id) {
+        $t = \CFile::ResizeImageGet($id, ['width' => 240, 'height' => 240], BX_RESIZE_IMAGE_EXACT);
+        $f = \CFile::ResizeImageGet($id, ['width' => 1200, 'height' => 1200], BX_RESIZE_IMAGE_PROPORTIONAL);
+        if (!empty($t['src']) && !empty($f['src'])) {
+            $list[] = ['t' => $t['src'], 'f' => $f['src']];
+        }
+    }
+    return $list;
+};
 $prop = static function (array $el, string $code) use ($flat): string {
     return $flat($el['PROPERTIES'][$code]['VALUE'] ?? '');
 };
@@ -62,6 +87,7 @@ $stockText = static function (bool $can, int $qty): string {
 $name = $arResult['NAME'];
 $article = $prop($arResult, 'ARTICLE');
 $offers = $arResult['OFFERS'] ?? [];
+$parentGallery = $gallery($arResult);
 $selectedId = (int)($arResult['OFFER_ID_SELECTED'] ?? 0);
 $variants = [];
 if ($offers) {
@@ -77,6 +103,7 @@ if ($offers) {
             'qty' => $qtyOf($o),
             'code' => $prop($o, 'PRODUCT_CODE') ?: $prop($arResult, 'PRODUCT_CODE'),
             'img' => $photo($o) ?: $photo($arResult),
+            'gallery' => $gallery($o) ?: $parentGallery,
         ];
     }
 } else {
@@ -86,6 +113,7 @@ if ($offers) {
         'price' => $price ? ($price['PRINT_RATIO_PRICE'] ?? $price['PRINT_PRICE'] ?? '') : '',
         'can' => !empty($arResult['CAN_BUY']), 'qty' => $qtyOf($arResult),
         'code' => $prop($arResult, 'PRODUCT_CODE'), 'img' => $photo($arResult),
+        'gallery' => $parentGallery,
     ];
 }
 $cur = $variants[0];
@@ -130,9 +158,20 @@ if ($flat($arResult['DISPLAY_PROPERTIES']['MATERIAL']['DISPLAY_VALUE'] ?? '') !=
 $rows = array_merge($rows, $extra);
 ?>
 <div class="fk-pdp" id="pdp" data-pdp data-sessid-url="/local/ajax/sessid.php" data-add-url="/local/ajax/add2basket.php" data-cart-url="<?= $e($arParams['BASKET_URL'] ?? '/personal/cart/') ?>">
-    <div class="fk-pdp__media tone-light">
-        <img src="<?= $e($cur['img']) ?>" alt="<?= $e($name) ?>" style="width:100%;height:100%;object-fit:cover;background-color: white;" data-pdp-img>
-        <a class="fk-dl" href="<?= $e($cur['img']) ?>" download data-pdp-dl aria-label="Скачать фото"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg></a>
+    <div class="fk-pdp__gallery">
+        <div class="fk-pdp__media tone-light">
+            <img src="<?= $e($cur['img']) ?>" alt="<?= $e($name) ?>" style="width:100%;height:100%;object-fit:cover;background-color: white;" data-pdp-img>
+            <a class="fk-dl" href="<?= $e($cur['img']) ?>" download data-pdp-dl aria-label="Скачать фото"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg></a>
+        </div>
+        <div class="fk-pdp__thumbs" data-pdp-thumbs role="group" aria-label="Фотографии товара"<?= count($cur['gallery']) > 1 ? '' : ' hidden' ?>>
+            <button type="button" class="fk-pdp__arrow" data-thumbs-prev aria-label="Предыдущие фото" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <div class="fk-pdp__thumbs-track" data-thumbs-track>
+                <?php foreach ($cur['gallery'] as $i => $g) { ?>
+                <button type="button" class="fk-thumb" data-thumb="<?= $i ?>" data-full="<?= $e($g['f']) ?>" aria-label="Фото <?= $i + 1 ?> из <?= count($cur['gallery']) ?>"<?= $i === 0 ? ' aria-current="true"' : '' ?>><img src="<?= $e($g['t']) ?>" alt="" width="120" height="120" loading="lazy" decoding="async"></button>
+                <?php } ?>
+            </div>
+            <button type="button" class="fk-pdp__arrow" data-thumbs-next aria-label="Следующие фото"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
     </div>
     <div class="fk-pdp__info">
         <h1 class="fk-pdp__title"><?= $e($name) ?></h1>
