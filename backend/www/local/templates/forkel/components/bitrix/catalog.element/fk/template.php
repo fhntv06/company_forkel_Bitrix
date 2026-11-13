@@ -59,7 +59,7 @@ $gallery = static function (array $el): array {
         $t = \CFile::ResizeImageGet($id, ['width' => 240, 'height' => 240], BX_RESIZE_IMAGE_EXACT);
         $f = \CFile::ResizeImageGet($id, ['width' => 1200, 'height' => 1200], BX_RESIZE_IMAGE_PROPORTIONAL);
         if (!empty($t['src']) && !empty($f['src'])) {
-            $list[] = ['t' => $t['src'], 'f' => $f['src']];
+            $list[] = ['id' => $id, 't' => $t['src'], 'f' => $f['src']];
         }
     }
     return $list;
@@ -84,6 +84,20 @@ $stockText = static function (bool $can, int $qty): string {
     return $qty > 0 ? 'В наличии: ' . number_format($qty, 0, '', ' ') . ' шт.' : 'В наличии';
 };
 
+// Фото предложения (цвета) идут первыми, затем общие фото товара (MORE_PHOTO); один файл не повторяется.
+$mergeGallery = static function (array $own, array $parent): array {
+    $seen = [];
+    foreach ($own as $g) {
+        $seen[$g['id']] = true;
+    }
+    foreach ($parent as $g) {
+        if (!isset($seen[$g['id']])) {
+            $own[] = $g;
+        }
+    }
+    return $own;
+};
+
 $name = $arResult['NAME'];
 $article = $prop($arResult, 'ARTICLE');
 $offers = $arResult['OFFERS'] ?? [];
@@ -103,7 +117,7 @@ if ($offers) {
             'qty' => $qtyOf($o),
             'code' => $prop($o, 'PRODUCT_CODE') ?: $prop($arResult, 'PRODUCT_CODE'),
             'img' => $photo($o) ?: $photo($arResult),
-            'gallery' => $gallery($o) ?: $parentGallery,
+            'gallery' => $mergeGallery($gallery($o), $parentGallery),
         ];
     }
 } else {
