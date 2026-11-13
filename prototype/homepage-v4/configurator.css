@@ -24,3 +24,22 @@
 .fk-result .actions { margin-top: 6px; }
 .fk-result .note { margin-top: 0; }
 @media (max-width: 480px) { .cfg__spec > div { grid-template-columns: 1fr; gap: 0; } .fk-result .actions .btn { width: 100%; } }
+
+/* Широкая раскладка подбора на главной (.cfg--wide): заголовок сверху, вид и выбор в два столбца, итог на всю ширину.
+   Класс-модификатор: страница configurator.html остаётся на прежней раскладке. */
+.cfg--wide .cfg__title { margin: 0; }
+.cfg--wide .cfg__view { align-self: stretch; }
+.cfg--wide .fk-result { gap: 20px; }
+.cfg--wide .fk-result__info { display: grid; gap: 10px; align-content: start; }
+.cfg--wide .fk-result .actions { margin-top: 0; }
+@media (min-width: 960px) {
+  .cfg--wide { grid-template-columns: 7fr 5fr; row-gap: 32px; }
+  .cfg--wide .cfg__title,
+  .cfg--wide .fk-result { grid-column: 1 / -1; }
+  .cfg--wide .cfg__view { grid-column: 1; grid-row: 2; }
+  .cfg--wide .cfg__ctl { grid-column: 2; grid-row: 2; align-content: start; }
+  .cfg--wide .cfg__photo { width: min(100%, 500px); }
+  .cfg--wide .fk-result { grid-row: 3; grid-template-columns: 1fr auto; align-items: end; column-gap: 48px; }
+  .cfg--wide .cfg__spec { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 32px; }
+  .cfg--wide .fk-result .actions { flex-direction: column; align-items: stretch; min-width: 280px; }
+}

@@ -348,7 +348,8 @@
 
     <!-- 5. Подбор -->
     <section class="sec wrap" id="configurator" aria-labelledby="cfg-t">
-        <div class="cfg" id="cfg">
+        <div class="cfg cfg--wide" id="cfg">
+            <h2 class="cfg__title" id="cfg-t">Соберите комплект по цвету</h2>
             <div class="cfg__view">
                 <div class="cfg__photo" id="cfg-photo" role="img" aria-label="Превью выбранной комбинации">
                     <img id="cfg-img-mech" src="assets/images/tcvet_mehanizma_belyy_glyantsevyy.png" alt="" width="500"
@@ -359,7 +360,6 @@
                 <p class="stage__note">Образцы цвета — слои из примера, не продукция FORKEL</p>
             </div>
             <div class="cfg__ctl">
-                <h2 id="cfg-t">Соберите комплект по цвету</h2>
                 <div class="cfg__step"><p class="cfg__lbl" id="cfg-collection-label">Коллекция</p>
                     <div class="fk-chips" role="radiogroup" aria-labelledby="cfg-collection-label"
                          data-part="collection">
@@ -438,7 +438,9 @@
                                 title="Золотой"><span class="vh">Золотой</span></button>
                     </div>
                 </div>
-                <div class="fk-result" role="group" aria-labelledby="cfg-result-title">
+            </div>
+            <div class="fk-result" role="group" aria-labelledby="cfg-result-title">
+                <div class="fk-result__info">
                     <h3 id="cfg-result-title">Комплект <span class="fk-tag">демо</span></h3>
                     <dl class="cfg__spec">
                         <div>
@@ -467,7 +469,12 @@
                         </div>
                     </dl>
                     <p class="vh" id="cfg-summary" role="status"></p>
-                    <div class="actions">
+                    <p class="note"><a class="fk-link fk-link--tap" id="cfg-catalog-link" href="catalog.html">Подобрать
+                        отдельные изделия в каталоге</a></p>
+                    <p class="note" id="cfg-cart-link" hidden><a class="fk-link fk-link--tap" href="cart.html">Перейти в
+                        корзину</a></p>
+                </div>
+                <div class="actions">
                         <button class="btn btn--dark" id="cfg-add" type="button">Добавить комплект в корзину</button>
                         <a class="btn btn--ghost" id="cfg-open" href="configurator.html">Открыть подбор
                             <svg class="ar" aria-hidden="true">
@@ -475,11 +482,6 @@
                             </svg>
                         </a>
                     </div>
-                    <p class="note"><a class="fk-link fk-link--tap" id="cfg-catalog-link" href="catalog.html">Подобрать
-                        отдельные изделия в каталоге</a></p>
-                    <p class="note" id="cfg-cart-link" hidden><a class="fk-link fk-link--tap" href="cart.html">Перейти в
-                        корзину</a></p>
-                </div>
             </div>
         </div>
     </section>
