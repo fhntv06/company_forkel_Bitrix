@@ -11,6 +11,7 @@ $fkColorClass = [
     'Светло-серый' => 'lightgray', 'Кашемир' => 'cashmere', 'Золотой' => 'gold',
 ];
 $items = $arResult['ITEMS'] ?? [];
+$compact = ($arParams['FK_COMPACT'] ?? '') === 'Y'; // блок на странице товара: без счётчика, пустого состояния и страниц
 // Адрес картинки: основное фото, иначе первое из MORE_PHOTO (файл по ID).
 $fileSrc = static function ($id): string {
     $id = (int)$id;
@@ -37,7 +38,8 @@ $flat = static function ($v): string {
     return trim(strip_tags(is_array($v) ? implode(', ', $v) : (string)$v));
 };
 ?>
-<p class="fk-results__count" role="status" aria-live="polite"><?= $items ? 'Найдено: ' . (int)($arResult['NAV_RESULT']->NavRecordCount ?? count($items)) : '' ?></p>
+<?php if (!$compact) { ?><p class="fk-results__count" role="status" aria-live="polite"><?= $items ? 'Найдено: ' . (int)($arResult['NAV_RESULT']->NavRecordCount ?? count($items)) : '' ?></p><?php } ?>
+<?php if (!$items && $compact) { return; } ?>
 <?php if (!$items) { ?>
 <div class="fk-empty">
     <h2>Ничего не найдено</h2>
@@ -108,4 +110,4 @@ $flat = static function ($v): string {
     </li>
 <?php } ?>
 </ul>
-<?= $arResult['NAV_STRING'] ?? '' ?>
+<?= $compact ? '' : ($arResult['NAV_STRING'] ?? '') ?>

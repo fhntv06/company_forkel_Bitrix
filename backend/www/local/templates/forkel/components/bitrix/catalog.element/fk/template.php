@@ -46,7 +46,11 @@ $prop = static function (array $el, string $code) use ($flat): string {
 // Остаток для показа: только если включён количественный учёт, иначе просто «В наличии».
 $qtyOf = static function (array $el): int {
     $p = $el['PRODUCT'] ?? [];
-    return (($p['QUANTITY_TRACE'] ?? 'N') === 'Y' || ($p['QUANTITY_TRACE'] ?? '') === '1') ? max(0, (int)($p['QUANTITY'] ?? 0)) : -1;
+    $trace = (string)($p['QUANTITY_TRACE'] ?? 'N');
+    if ($trace === 'D') { // «по настройке магазина»
+        $trace = (string)\Bitrix\Main\Config\Option::get('catalog', 'default_quantity_trace', 'N');
+    }
+    return ($trace === 'Y' || $trace === '1') ? max(0, (int)($p['QUANTITY'] ?? 0)) : -1;
 };
 $stockText = static function (bool $can, int $qty): string {
     if (!$can) {
@@ -125,7 +129,7 @@ if ($flat($arResult['DISPLAY_PROPERTIES']['MATERIAL']['DISPLAY_VALUE'] ?? '') !=
 }
 $rows = array_merge($rows, $extra);
 ?>
-<div class="fk-pdp" id="pdp" data-pdp data-sessid="<?= $e(bitrix_sessid()) ?>" data-add-url="/local/ajax/add2basket.php" data-cart-url="<?= $e($arParams['BASKET_URL'] ?? '/personal/cart/') ?>">
+<div class="fk-pdp" id="pdp" data-pdp data-sessid-url="/local/ajax/sessid.php" data-add-url="/local/ajax/add2basket.php" data-cart-url="<?= $e($arParams['BASKET_URL'] ?? '/personal/cart/') ?>">
     <div class="fk-pdp__media tone-light">
         <img src="<?= $e($cur['img']) ?>" alt="<?= $e($name) ?>" style="width:100%;height:100%;object-fit:cover;background-color: white;" data-pdp-img>
         <a class="fk-dl" href="<?= $e($cur['img']) ?>" download data-pdp-dl aria-label="Скачать фото"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg></a>
@@ -188,5 +192,10 @@ $rows = array_merge($rows, $extra);
     <?php } ?>
 </div>
 
-
-
+<?php
+// Сопутствующие товары: свойство ACCESSORIES (привязка к товарам каталога, множественное). Похожие — из того же раздела.
+$accIds = array_values(array_filter(array_map('intval', (array)($arResult['PROPERTIES']['ACCESSORIES']['VALUE'] ?? []))));
+if ($accIds) {
+    fk_product_block('Сопутствующие товары', ['ID' => $accIds], 0, 8);
+}
+fk_product_block('Похожие товары', ['!ID' => (int)$arResult['ID']], (int)($arResult['IBLOCK_SECTION_ID'] ?? 0), 4);

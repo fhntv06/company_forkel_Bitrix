@@ -10,5 +10,5 @@ $root = $arParams['CATALOG_URL'] ?? '/catalog/';
 ?>
 <a class="fk-chip" href="<?= htmlspecialcharsbx($root) ?>"<?= $current === 0 ? ' aria-current="page"' : '' ?>>Все</a>
 <?php foreach ($arResult['SECTIONS'] as $section) { ?>
-<a class="fk-chip" href="<?= htmlspecialcharsbx($section['SECTION_PAGE_URL']) ?>"<?= (int)$section['ID'] === $current ? ' aria-current="page"' : '' ?>><?= htmlspecialcharsbx($section['NAME']) ?></a>
+<a class="fk-chip" href="<?= htmlspecialcharsbx(rtrim($section['SECTION_PAGE_URL'], '/') . '/') ?>"<?= (int)$section['ID'] === $current ? ' aria-current="page"' : '' ?>><?= htmlspecialcharsbx($section['NAME']) ?></a>
 <?php } ?>

@@ -56,12 +56,18 @@
 
   add.addEventListener('click', function () {
     if (!current || !current.id) return;
-    var body = new FormData();
-    body.append('sessid', root.getAttribute('data-sessid'));
-    body.append('id', current.id);
-    body.append('qty', clampQty());
+    var id = current.id, count = clampQty();
     add.disabled = true;
-    fetch(root.getAttribute('data-add-url'), { method: 'POST', body: body, credentials: 'same-origin' })
+    /* sessid берём свежий отдельным запросом: HTML страницы товара кешируется */
+    fetch(root.getAttribute('data-sessid-url'), { credentials: 'same-origin', cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (s) {
+        var body = new FormData();
+        body.append('sessid', s.sessid);
+        body.append('id', id);
+        body.append('qty', count);
+        return fetch(root.getAttribute('data-add-url'), { method: 'POST', body: body, credentials: 'same-origin' });
+      })
       .then(function (r) { return r.json(); })
       .then(function (res) {
         if (res && res.ok) {
@@ -95,7 +101,7 @@
     if (m) return 'https://www.youtube.com/embed/' + m[1];
     m = u.match(/rutube\.ru\/(?:video|play\/embed)\/([0-9a-f]{20,})/i);
     if (m) return 'https://rutube.ru/play/embed/' + m[1];
-    return u;
+    return /^https?:\/\//i.test(u) ? u : '';
   }
   var modal = null;
   function closeVideo() {
@@ -117,8 +123,10 @@
       modal.addEventListener('click', function (ev) { if (ev.target === modal || ev.target.closest('.fk-modal__x')) closeVideo(); });
       document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && !modal.hidden) closeVideo(); });
     }
+    var src = embed(v.getAttribute('data-video'));
+    if (!src) return;
     modal._opener = v;
-    modal.querySelector('iframe').src = embed(v.getAttribute('data-video'));
+    modal.querySelector('iframe').src = src;
     modal.hidden = false; document.body.style.overflow = 'hidden';
     modal.querySelector('.fk-modal__x').focus();
   });
