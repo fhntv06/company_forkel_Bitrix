@@ -348,7 +348,7 @@
     }
 
     root.innerHTML =
-        '<div class="fk-pdp__gallery"><div class="fk-pdp__media tone-light"><img data-main-img src="' + o.img + '" alt="' + S.name + ', ' + COLORS[o.color].toLowerCase() + '" style="width:80%;height:80%;object-fit:cover" onerror="this.style.display=\'none\'">' +
+        '<div class="fk-pdp__gallery"><div class="fk-pdp__media tone-light"><img data-main-img src="' + o.img + '" alt="' + S.name + ', ' + COLORS[o.color].toLowerCase() + '" style="width:100%;height:100%;object-fit:contain" onerror="this.style.display=\'none\'">' +
         '<button type="button" class="fk-dl" data-dl aria-label="Скачать фото"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg></button></div>' + thumbsHtml(gal) + '</div>' +
         '<div class="fk-pdp__info">' +
         '<h1 class="fk-pdp__title">' + S.name + '</h1>' +
