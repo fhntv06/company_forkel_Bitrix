@@ -67,6 +67,8 @@ $fkSocial = [
 <?php include __DIR__ . "/partials/feedback_dialog.php"; ?>
 <script src="<?= SITE_TEMPLATE_PATH ?>/js/site.js"></script>
 <script src="<?= SITE_TEMPLATE_PATH ?>/js/feedback.js"></script>
+<script src="<?= SITE_TEMPLATE_PATH ?>/js/catalog.js"></script>
+<script src="<?= SITE_TEMPLATE_PATH ?>/js/pdp.js"></script>
 <script src="<?= SITE_TEMPLATE_PATH ?>/js/social.js"></script>
 </body>
 </html>

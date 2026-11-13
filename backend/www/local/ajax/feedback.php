@@ -33,17 +33,20 @@ if (trim((string)($_POST['website'] ?? '')) !== '') {
     die();
 }
 
-$mode = ($_POST['mode'] ?? '') === 'callback' ? 'callback' : 'feedback';
+$mode = in_array($_POST['mode'] ?? '', ['callback', 'oneclick'], true) ? $_POST['mode'] : 'feedback';
 $name = trim((string)($_POST['name'] ?? ''));
 $contact = trim((string)($_POST['contact'] ?? ''));
 $msg = trim((string)($_POST['msg'] ?? ''));
+if ($mode === 'oneclick') {
+    $msg = mb_substr(trim(strip_tags($msg)), 0, 600); // описание товара собирает страница товара
+}
 
 $errors = [];
 if (mb_strlen($name) < 2) {
     $errors[] = 'Укажите имя.';
 }
 if ($contact === '') {
-    $errors[] = $mode === 'callback' ? 'Укажите телефон.' : 'Укажите телефон или email.';
+    $errors[] = $mode !== 'feedback' ? 'Укажите телефон.' : 'Укажите телефон или email.';
 }
 if ($mode === 'feedback' && mb_strlen($msg) < 5) {
     $errors[] = 'Напишите сообщение.';
@@ -58,6 +61,8 @@ if ($errors) {
 $isEmail = strpos($contact, '@') !== false;
 if ($mode === 'callback') {
     $text = 'Заказ обратного звонка. Телефон: ' . $contact;
+} elseif ($mode === 'oneclick') {
+    $text = 'Покупка в 1 клик. Телефон: ' . $contact . ($msg !== '' ? "\n" . $msg : '');
 } else {
     $text = ($isEmail ? '' : 'Телефон: ' . $contact . "\n\n") . $msg;
 }
