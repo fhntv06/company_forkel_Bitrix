@@ -1,5 +1,11 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+$APPLICATION->SetPageProperty("fk_cta2_link", "/catalog/");
+$APPLICATION->SetPageProperty("fk_cta1_link", "#feedback");
+$APPLICATION->SetPageProperty("fk_cta2_text", "Смотреть каталог");
+$APPLICATION->SetPageProperty("fk_cta1_text", "Стать партнёром");
+$APPLICATION->SetPageProperty("fk_no_hero", "N");
+$APPLICATION->SetPageProperty("fk_lead", "FORKEL — современный бренд электроустановочных изделий, в котором стиль, качество и удобство объединены в одном решении.");
 $APPLICATION->SetTitle("О магазине");
 ?>
 
