@@ -226,7 +226,8 @@
         <div class="hero__stage">
             <svg class="hero__svg" viewBox="0 0 520 200" role="img"
                  aria-label="Временная визуализация: рамка на три поста с выключателем, розеткой и светорегулятором. Это не фотография изделия."
-                 style="--frame:#D8CBB8;--mech:#E9E1D3">
+                 style="--frame:#D8CBB8;--mech:#E9E1D3"
+            >
                 <use href="#set" filter="url(#lift)"/>
             </svg>
             <a class="float float--a" href="#features"><b>Покрытие Soft Touch</b><span>Бархатистая поверхность, приятная на ощупь</span>
@@ -234,8 +235,7 @@
                     <use href="#arrow"/>
                 </svg>
             </a>
-            <a class="float float--b" href="#features"><b>Автозажимной
-                механизм</b><span>Для розеток, быстрее монтаж</span>
+            <a class="float float--b" href="#features"><b>Розетки с защитными шторками</b><span>Для розеток, быстрее монтаж</span>
                 <svg class="ar" aria-hidden="true">
                     <use href="#arrow"/>
                 </svg>
@@ -247,37 +247,53 @@
     <!-- 2. Направления -->
     <section class="sec wrap" aria-labelledby="dir-t">
         <div class="split">
-            <div><h2 id="dir-t">Всё для подключения и управления светом</h2>
-                <p class="muted">Три категории из каталога. Остальные появятся после утверждения ассортимента.</p></div>
+            <div><h2 id="dir-t">Готовые решения для дома и офиса</h2>
+                <p class="muted">Три ключевые категории</p></div>
             <ul class="dirs">
-                <li><a class="dir" href="catalog.html?category=sockets"><span class="dir__img"
-                                                                              style="--frame:#E4E4E2;--mech:#F6F6F4"><svg
-                        viewBox="0 0 120 120" aria-hidden="true"><rect x="10" y="10" width="100" height="100" rx="10"
-                                                                       fill="var(--frame)"/><circle cx="60" cy="60"
-                                                                                                    r="30"
-                                                                                                    fill="var(--mech)"
-                                                                                                    stroke="#2B2B2B"
-                                                                                                    stroke-opacity=".2"/><circle
-                        cx="50" cy="60" r="4" fill="#2B2B2B"/><circle cx="70" cy="60" r="4"
-                                                                      fill="#2B2B2B"/></svg></span><b>Розетки</b><span
-                        class="dir__go"><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
-                <li><a class="dir" href="catalog.html?category=switches"><span class="dir__img"
-                                                                               style="--frame:#D8CBB8;--mech:#F2ECE0"><svg
-                        viewBox="0 0 120 120" aria-hidden="true"><rect x="10" y="10" width="100" height="100" rx="10"
-                                                                       fill="var(--frame)"/><rect x="28" y="28"
-                                                                                                  width="64" height="64"
-                                                                                                  rx="6"
-                                                                                                  fill="var(--mech)"
-                                                                                                  stroke="#2B2B2B"
-                                                                                                  stroke-opacity=".2"/></svg></span><b>Выключатели</b><span
-                        class="dir__go"><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
-                <li><a class="dir" href="catalog.html?category=frames"><span class="dir__img" style="--frame:#9A9DA2"><svg
-                        viewBox="0 0 120 120" aria-hidden="true"><rect x="10" y="10" width="100" height="100" rx="10"
-                                                                       fill="var(--frame)"/><rect x="30" y="30"
-                                                                                                  width="60" height="60"
-                                                                                                  rx="4"
-                                                                                                  fill="#F6F6F4"/></svg></span><b>Рамки</b><span
-                        class="dir__go"><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
+                <li>
+                    <a class="dir" href="catalog.html?category=sockets">
+                        <span class="dir__img" style="--frame:#E4E4E2;--mech:#F6F6F4">
+                            <svg viewBox="0 0 120 120" aria-hidden="true">
+                                <rect x="10" y="10" width="100" height="100" rx="10" fill="var(--frame)"/>
+                                <circle cx="60" cy="60" r="30" fill="var(--mech)" stroke="#2B2B2B" stroke-opacity=".2"/>
+                                <circle cx="50" cy="60" r="4" fill="#2B2B2B"/>
+                                <circle cx="70" cy="60" r="4" fill="#2B2B2B"/>
+                            </svg>
+                        </span>
+                        <b>Розетки</b>
+                        <span class="dir__go">
+                            <svg class="ar" aria-hidden="true"><use href="#arrow"/></svg>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a class="dir" href="catalog.html?category=switches">
+                        <span class="dir__img" style="--frame:#D8CBB8;--mech:#F2ECE0">
+                            <svg viewBox="0 0 120 120" aria-hidden="true">
+                                <rect x="10" y="10" width="100" height="100" rx="10" fill="var(--frame)"/>
+                                <rect x="28" y="28" width="64" height="64" rx="6" fill="var(--mech)" stroke="#2B2B2B" stroke-opacity=".2"/>
+                            </svg>
+                        </span>
+                        <b>Выключатели</b>
+                        <span class="dir__go">
+                            <svg class="ar" aria-hidden="true"><use href="#arrow"/></svg>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a class="dir" href="catalog.html?category=frames">
+                        <span class="dir__img" style="--frame:#9A9DA2">
+                            <svg viewBox="0 0 120 120" aria-hidden="true">
+                                <rect x="10" y="10" width="100" height="100" rx="10" fill="var(--frame)"/>
+                                <rect x="30" y="30" width="60" height="60" rx="4" fill="#F6F6F4"/>
+                            </svg>
+                        </span>
+                        <b>Термостаты</b>
+                        <span class="dir__go">
+                            <svg class="ar" aria-hidden="true"><use href="#arrow"/></svg>
+                        </span>
+                    </a>
+                </li>
             </ul>
         </div>
     </section>
@@ -327,7 +343,7 @@
                 <span class="go"><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span>
             </li>
             <li class="feat__c">
-                <h3>Автозажимной механизм</h3>
+                <h3>Розетки с защитными шторками</h3>
                 <p>Розетки фиксируются без лишних винтов: монтаж проще и быстрее.</p>
                 <svg viewBox="0 0 220 140" aria-hidden="true">
                     <circle cx="110" cy="70" r="54" fill="#E0E0E0" stroke="#B3B3B3" stroke-width="2"/>
@@ -338,7 +354,7 @@
                 <span class="go"><svg class="ar" aria-hidden="true"><use href="#arrow"/></svg></span>
             </li>
             <li class="feat__c feat__c--dark">
-                <h3>Рамка и механизм одной серии</h3>
+                <h3>У нас богатая палитка цветов</h3>
                 <p>Выбирайте цвет рамки и механизма отдельно, комплект подходит друг к другу.</p>
                 <svg viewBox="0 0 220 140" aria-hidden="true">
                     <rect x="22" y="20" width="110" height="100" rx="14" fill="#D8CBB8"/>
