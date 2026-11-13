@@ -102,7 +102,7 @@
       if (d.kind === 'kit') {
         parts = '<details class="fk-cart-item__parts"><summary>Состав комплекта</summary><ul>' + d.parts.map(function (p) {
           return '<li><span class="fk-cart-item__role">' + p.role + '</span> ' + p.name + ', ' + D.COLORS[p.color] +
-            '<span class="fk-cart-item__psku">Арт. <span class="fk-stub">' + p.sku + '</span>  + '</span>' +
+            '<span class="fk-cart-item__psku">Арт. <span class="fk-stub">' + p.sku + '</span>' + '</span>' +
             '<span class="fk-cart-item__pprice">' + fmt(p.price) + ' ' + '</span></li>';
         }).join('') + '</ul></details>';
       }
