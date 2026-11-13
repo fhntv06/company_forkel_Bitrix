@@ -2,7 +2,7 @@
    связанные товары. Разметка формируется shop.js (#pdp). Подключается из styles.css (@import). Данные демонстрационные. */
 
 .fk-pdp { display: grid; gap: 64px var(--fk-col-gap); grid-template-columns: minmax(0, 1fr); margin-bottom: var(--fk-section-gap); }
-.fk-pdp__media { position: relative; aspect-ratio: 1 / 1; background: var(--tone); border-radius: var(--fk-r-lg); overflow: hidden; }
+.fk-pdp__media { position: relative; display: flex;align-items: center;justify-content: center; background: white; border-radius: var(--fk-r-lg); overflow: hidden; }
 .fk-pdp__media svg { width: 100%; height: 100%; }
 .fk-pdp__media .fk-cfg__tag { left: 16px; bottom: 16px; }
 .fk-pdp__proto { margin: 8px 0 16px; }
@@ -51,7 +51,7 @@
 @media (min-width: 768px) { .fk-pdp__info { padding: 32px; } }
 @media (min-width: 1024px) {
   .fk-pdp { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: start; column-gap: 32px; }
-  .fk-pdp__media { grid-column: 1 / span 7; aspect-ratio: 5 / 4; }
+  .fk-pdp__media { grid-column: 1 / span 7; }
   .fk-pdp__info { grid-column: 8 / span 5; padding: 40px; }
   .fk-chars-groups { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: 64px; }
   .fk-chars { padding: 32px; }
@@ -59,7 +59,7 @@
 
 /* Галерея под основным фото: миниатюры 120×120 со стрелками (MORE_PHOTO + картинка анонса). Управляет js/pdp.js. */
 .fk-pdp__gallery { display: grid; gap: 16px; min-width: 0; }
-.fk-pdp__gallery .fk-pdp__media { grid-column: auto; }
+.fk-pdp__gallery .fk-pdp__media { grid-column: auto;max-height: 600px; }
 .fk-pdp__thumbs { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 12px; min-width: 0; }
 .fk-pdp__thumbs[hidden] { display: none; }
 .fk-pdp__thumbs-track { display: flex; gap: 12px; padding: 3px; margin: -3px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 3px; scroll-behavior: smooth; scrollbar-width: none; }

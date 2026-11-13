@@ -160,7 +160,7 @@ $rows = array_merge($rows, $extra);
 <div class="fk-pdp" id="pdp" data-pdp data-sessid-url="/local/ajax/sessid.php" data-add-url="/local/ajax/add2basket.php" data-cart-url="<?= $e($arParams['BASKET_URL'] ?? '/personal/cart/') ?>">
     <div class="fk-pdp__gallery">
         <div class="fk-pdp__media tone-light">
-            <img src="<?= $e($cur['img']) ?>" alt="<?= $e($name) ?>" style="width:100%;height:100%;object-fit:cover;background-color: white;" data-pdp-img>
+            <img src="<?= $e($cur['img']) ?>" alt="<?= $e($name) ?>" style="width:100%;height:100%;object-fit:contain" data-pdp-img>
             <a class="fk-dl" href="<?= $e($cur['img']) ?>" download data-pdp-dl aria-label="Скачать фото"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg></a>
         </div>
         <div class="fk-pdp__thumbs" data-pdp-thumbs role="group" aria-label="Фотографии товара"<?= count($cur['gallery']) > 1 ? '' : ' hidden' ?>>
