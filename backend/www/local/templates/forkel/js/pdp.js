@@ -21,6 +21,61 @@
   var swatches = [].slice.call(root.querySelectorAll('[data-offer]'));
   var current = null;
 
+  var thumbs = root.querySelector('[data-pdp-thumbs]');
+  var track = thumbs && thumbs.querySelector('[data-thumbs-track]');
+  var prevBtn = thumbs && thumbs.querySelector('[data-thumbs-prev]');
+  var nextBtn = thumbs && thumbs.querySelector('[data-thumbs-next]');
+
+  function updateArrows() {
+    if (!track) return;
+    var max = track.scrollWidth - track.clientWidth;
+    prevBtn.hidden = nextBtn.hidden = max <= 1;
+    prevBtn.disabled = track.scrollLeft <= 1;
+    nextBtn.disabled = track.scrollLeft >= max - 1;
+  }
+  function renderThumbs(list) {
+    if (!track) return;
+    list = list || [];
+    track.textContent = '';
+    list.forEach(function (g, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'fk-thumb';
+      b.setAttribute('data-thumb', i);
+      b.setAttribute('data-full', g.f);
+      b.setAttribute('aria-label', 'Фото ' + (i + 1) + ' из ' + list.length);
+      if (i === 0) b.setAttribute('aria-current', 'true');
+      var im = document.createElement('img');
+      im.src = g.t; im.alt = ''; im.width = 120; im.height = 120; im.loading = 'lazy';
+      b.appendChild(im);
+      track.appendChild(b);
+    });
+    thumbs.hidden = list.length < 2;
+    track.scrollLeft = 0;
+    updateArrows();
+  }
+  if (track) {
+    track.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-thumb]');
+      if (!b) return;
+      var full = b.getAttribute('data-full');
+      if (full) { img.src = full; dl.href = full; }
+      [].forEach.call(track.querySelectorAll('[data-thumb]'), function (t) {
+        if (t === b) t.setAttribute('aria-current', 'true'); else t.removeAttribute('aria-current');
+      });
+    });
+    function step(dir) {
+      var w = 132; // 120 + 12 зазор
+      var n = Math.max(1, Math.floor(track.clientWidth / w));
+      track.scrollBy({ left: dir * n * w, behavior: 'smooth' });
+    }
+    prevBtn.addEventListener('click', function () { step(-1); });
+    nextBtn.addEventListener('click', function () { step(1); });
+    track.addEventListener('scroll', updateArrows, { passive: true });
+    window.addEventListener('resize', updateArrows);
+    updateArrows();
+  }
+
   function say(text) { msg.textContent = text; msg.hidden = !text; }
 
   function select(btn) {
@@ -28,7 +83,13 @@
     try { o = JSON.parse(btn.getAttribute('data-offer')); } catch (e) { return; }
     current = o;
     swatches.forEach(function (s) { if (s === btn) s.setAttribute('aria-current', 'true'); else s.removeAttribute('aria-current'); });
-    if (o.img) { img.src = o.img; dl.href = o.img; }
+    if (o.gallery && o.gallery.length) {
+      img.src = o.gallery[0].f; dl.href = o.gallery[0].f;
+      renderThumbs(o.gallery);
+    } else {
+      if (o.img) { img.src = o.img; dl.href = o.img; }
+      renderThumbs([]);
+    }
     price.innerHTML = o.price || '';
     stock.textContent = !o.can ? 'Нет в наличии' : (o.qty > 0 ? 'В наличии: ' + o.qty.toLocaleString('ru-RU') + ' шт.' : 'В наличии');
     if (code) { code.textContent = o.code || ''; codeRow.hidden = !o.code; }
