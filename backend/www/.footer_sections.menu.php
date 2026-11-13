@@ -1,0 +1,32 @@
+<?php
+$aMenuLinks = Array(
+	Array(
+		"Каталог", 
+		"#", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Коллекции", 
+		"#", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Категории", 
+		"#", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Новинки", 
+		"#", 
+		Array(), 
+		Array(), 
+		"" 
+	)
+);
+?>
