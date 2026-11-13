@@ -1,0 +1,26 @@
+/* FORKEL V4 — подбор (I2): вид V4 (.cfg, .sw), логика и данные V3 (configurator.js без изменений).
+   Лежит в корне homepage-v4, как configurator.js: configurator.js задаёт --img: url(assets/images/…), адрес считается от этого файла.
+   Только токены V4 из styles.css; новых цветов нет. Общий для главной и страницы подбора. */
+.cfg__photo { position: relative; width: min(100%, 360px); aspect-ratio: 1; }
+.cfg__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.cfg__step { display: grid; gap: 8px; }
+.cfg__lbl { margin: 0; font-size: .9rem; color: var(--iron); }
+.cfg__lbl b { color: var(--ink); }
+.cfg__types { display: flex; flex-wrap: wrap; gap: 8px; }
+.cfg__type { display: grid; justify-items: center; gap: 4px; min-width: 96px; min-height: 44px; padding: 8px 10px; font: 600 .8rem/1.2 var(--font); color: var(--ink); text-align: center; background: var(--surface); border: 1.5px solid var(--silver); border-radius: var(--r-s); cursor: pointer; }
+.cfg__type svg { width: 48px; height: 48px; }
+.cfg__type:hover { border-color: var(--ink); }
+.cfg__type[aria-checked="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.sw--img button::before { background: var(--img) center / cover no-repeat, var(--veil); }
+.sw--img button[data-fin="fin-lightgray"]::before { filter: brightness(1.32) saturate(.8); }
+.sw button:disabled, .fk-chip:disabled { opacity: .35; cursor: not-allowed; }
+.fk-chip:disabled:hover { border-color: var(--silver); }
+.fk-result { display: grid; gap: 10px; padding-top: 18px; border-top: 1px solid var(--veil); }
+.fk-result h3 { margin: 0; font-size: 1.05rem; }
+.cfg__spec { display: grid; gap: 6px; margin: 0; font-size: .9rem; }
+.cfg__spec > div { display: grid; grid-template-columns: minmax(120px, 40%) 1fr; gap: 12px; }
+.cfg__spec dt { color: var(--iron); }
+.cfg__spec dd { margin: 0; color: var(--ink); }
+.fk-result .actions { margin-top: 6px; }
+.fk-result .note { margin-top: 0; }
+@media (max-width: 480px) { .cfg__spec > div { grid-template-columns: 1fr; gap: 0; } .fk-result .actions .btn { width: 100%; } }

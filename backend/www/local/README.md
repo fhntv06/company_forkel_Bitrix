@@ -24,12 +24,24 @@
 
 ## Стили и скрипты
 
-`template_styles.css` и `js/app.js` созданы из `prototype/homepage-v3` скриптом
-`backend/scripts/sync-template-from-prototype.sh` (запускается один раз). Дальше правки вносятся в шаблон.
-`template_styles.css` Битрикс подключает автоматически через `$APPLICATION->ShowHead()` в `header.php`.
+С TASK-004 шаблон собран из `prototype/homepage-v4` (не V3). Исходники прототипа не менялись, файлы скопированы:
+`styles.css`, `configurator.css`, `css/*.css`, `assets/fonts`, `assets/images/icons`, `js/site.js`, `js/social.js` (в копии `social.js` пути иконок и адреса соцсетей берутся из `window.FK`, которое выводит `header.php`).
+Стили подключаются из `header.php` через `Asset::addCss` в порядке прототипа, `css/v4-skin.css` — последним. `template_styles.css` пустой намеренно.
 
-## Что в шаблоне временное
+## Данные шапки и подвала (создаёт владелец в админке)
 
-- Меню и подвал статические (демонстрационные тексты, DEC-DEV-11); меню переводится на компонент отдельной задачей.
-- Счётчик корзины не подключён: в прототипе он работал на `localStorage`, в Битриксе его заменит компонент корзины.
-- Ссылки `/catalog/`, `/personal/`, `/personal/cart/`, `/search/`, `/about/contacts/`, `/about/delivery/` ведут на страницы демо-сайта «Малый бизнес».
+| Что | Где | Код |
+|---|---|---|
+| Меню шапки | Тип меню `top` | `components/bitrix/menu/fk_top` |
+| Разделы и «Информация» в подвале | Типы меню `footer_sections`, `footer_info` (зарегистрировать в Контент → Структура сайта → Типы меню) | `components/bitrix/menu/fk_footer` |
+| Коллекции в панели «Каталог» | Инфоблок с символьным кодом `collections` (URL детальной страницы задаётся в настройках инфоблока) | `news.list/fk_catalog_panel` |
+| Категории в панели «Каталог» | Разделы 1 уровня инфоблока с кодом `catalog` | `catalog.section.list/fk_catalog_panel` |
+| Телефон, email, адрес, график, реквизиты, ссылка на политику | Области включения `include/fk_phone.php`, `fk_email.php`, `fk_address.php`, `fk_schedule.php`, `fk_requisites.php`, `fk_legal_link.php` | `bitrix:main.include` |
+| Соцсети | `include/fk_social_vk.php`, `fk_social_max.php`, `fk_social_tg.php`: только адрес ссылки (если пусто, иконка не показывается) | `fk_include_text()` |
+
+ID инфоблоков в код не зашиты: `fk_iblock_id('<код>')` из `php_interface/forkel_helpers.php` ищет их по символьному коду. Если инфоблока нет, блок просто не выводится.
+
+## Что ещё временное
+
+- Счётчик корзины не подключён (Этап 5). Кнопка поиска без окна (Этап 4), окна обратной связи и звонка (Этап 1.10, штатные компоненты) и «Избранное» — позже.
+- Заглушки в `include/fk_*.php` («Телефон», «Email» и т. д.) заменяются реальными данными.

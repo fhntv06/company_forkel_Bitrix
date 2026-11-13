@@ -1,0 +1,170 @@
+/* FORKEL V4 — слой оформления (вариант A, docs/design/v3-to-v4-migration.md, раздел 4).
+   Связывает токены V3 (--fk-*) с токенами V4 из ../styles.css. Подключать ПОСЛЕ styles.css V4 и
+   ПОСЛЕ перенесённых компонентов V3 (css/*.css), чтобы значения здесь имели приоритет.
+   Новых цветов нет: все значения — токены V4 или производные от них. Исключение — статусные цвета (см. ниже). */
+
+:root {
+  /* Поверхности и текст */
+  --fk-canvas: var(--bg);
+  --fk-surface: var(--surface);
+  --fk-tint: var(--surface);
+  --fk-line: var(--veil);
+  --fk-edge: var(--fog);
+  --fk-ink: var(--ink);
+  --fk-ink-muted: var(--iron);
+  --fk-ink-inverse: #FFFFFF;
+  --fk-inverse-muted: var(--silver);
+
+  /* Акцент V4: тёмные основные кнопки (.btn--dark), жёлтый — только мелкие детали и выбранное состояние */
+  --fk-accent: var(--ink);
+  --fk-on-accent: #FFFFFF;
+  --fk-action: var(--yellow);
+  --fk-on-action: var(--ink);
+  --fk-action-hover: color-mix(in srgb, var(--yellow) 86%, var(--ink));
+  --fk-bright: var(--yellow);
+  --fk-on-bright: var(--ink);
+
+  /* Статусы (решение владельца 2026-11-04: оттенки под палитру V4, приглушённые, тёплые).
+     Контраст текста: на белом 6.2 / 6.3 / 6.8, на фоне V4 5.7 / 5.8 / 6.3 (WCAG AA) */
+  --fk-ok: #3E6B4B;
+  --fk-warn: #7D5A14;
+  --fk-error: #9E3A31;
+
+  /* Шрифт, радиусы, ритм, фокус */
+  --fk-font: var(--font);
+  --fk-radius: var(--r-s);
+  --fk-r-md: var(--r-s);
+  --fk-r-lg: var(--r-m);
+  --fk-dur: 200ms;
+  --fk-focus: 0 0 0 2px var(--bg), 0 0 0 4px var(--ink);
+  --fk-margin: var(--pad);
+  --fk-col-gap: var(--gap);
+  --fk-section-gap: var(--sec);
+  --fk-header-h: 84px;
+
+  /* Размеры шрифта: как у заголовков V4 */
+  --fk-fs-display: clamp(2.1rem, 1.2rem + 3.6vw, 4.2rem);
+  --fk-fs-h2: clamp(1.6rem, 1.1rem + 1.8vw, 2.6rem);
+  --fk-fs-h3: 1.15rem;
+  --fk-fs-body: 1rem;
+  --fk-fs-small: 0.875rem;
+
+  /* Образцы изделий */
+  --wall: var(--surface);
+  --shade: rgba(43, 43, 43, 0.08);
+}
+
+/* Общие утилиты разметки V3 (классы сохранены, вид — по V4) */
+.fk-container { width: 100%; max-width: 100dvw; margin-inline: auto; padding-inline: var(--pad); }
+.fk-vh { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* I3: на узких экранах подпись кнопки карточки «В корзину» переносится, а не упирается в края (в V3 — nowrap) */
+@media (max-width: 480px) { .fk-btn--card { white-space: normal; line-height: 1.2; padding: 6px 8px; } }
+
+/* P2: на тёмном баннере коллекции главная кнопка — светлая, как .btn--light V4 (тёмная primary сливалась бы с фоном) */
+.fk-colhero .fk-btn--primary { background: #fff; color: var(--ink); }
+.fk-colhero .fk-btn--primary:hover { background: var(--veil); color: var(--ink); }
+
+/* P2: shop.js скрывает недоступные цвета фильтра атрибутом hidden, но .fk-check { display: flex } его перекрывал — в V3 цвета, которых нет у F55, оставались видны */
+.fk-check[hidden] { display: none; }
+
+/* P4: образцы цвета и подпись шага из V3 css/configurator.css (нужны карточке товара); подбор V4 использует свои .sw. Правила перенесены без изменений */
+.fk-step__label { display: flex; align-items: center; gap: 12px; font-size: 1.125rem; font-weight: 600; line-height: 1.3; margin-bottom: 16px; }
+.fk-swatches { display: flex; flex-wrap: wrap; gap: 8px; }
+.fk-swatch { display: grid; place-items: center; width: 52px; height: 52px; padding: 0; background: transparent; border: 0; border-radius: var(--fk-r-md); cursor: pointer; }
+.fk-swatch::before { content: ""; width: 40px; height: 40px; background: var(--finish); border: 1px solid var(--fk-edge); border-radius: 12px; }
+.fk-swatch:hover::before { border-color: var(--fk-ink); }
+.fk-swatch[aria-checked="true"]::before { box-shadow: 0 0 0 2px var(--fk-surface), 0 0 0 5px var(--fk-ink); }
+.fk-swatch:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* P4: правила карточки товара из V3 styles.css (в V4 styles.css — токены, их там нет): отступ секции, кнопки материалов, окно видео, описание. Перенесены без изменений */
+.fk-section { padding-block: 0 var(--fk-section-gap); }
+.fk-res { display: flex; flex-wrap: wrap; gap: 8px; }
+.fk-res .fk-chip { display: inline-flex; align-items: center; padding: 0 14px; font-size: var(--fk-fs-small); color: var(--fk-ink); text-decoration: none; }
+.fk-modal { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 64px 16px 16px; background: rgba(30, 32, 34, 0.72); }
+.fk-modal[hidden] { display: none; }
+.fk-modal__box { position: relative; width: min(960px, 100%); background: #000; border-radius: var(--fk-radius); }
+.fk-modal__frame { aspect-ratio: 16 / 9; }
+.fk-modal__frame iframe { display: block; width: 100%; height: 100%; border: 0; }
+.fk-modal__x { position: absolute; top: -52px; right: 0; width: 44px; height: 44px; padding: 0; font-size: 1.75rem; line-height: 1; color: var(--fk-ink); background: var(--fk-canvas); border: 0; border-radius: 50%; cursor: pointer; }
+
+/* Описание товара: под карточкой, по центру, не шире 900 px */
+.fk-pdp__desc { grid-column: 1 / -1; width: 100%; max-width: 900px; margin-inline: auto; display: grid; gap: 12px; text-align: center; }
+.fk-pdp__desc > h2 { font-size: var(--fk-fs-h2); line-height: 1.15; font-weight: 600; }
+.fk-pdp__desc p { text-align: justify; line-height: 1.6; }
+
+/* P4: колонка информации не должна раздвигаться содержимым (1024 px, V4-отступы) */
+.fk-pdp__info { grid-template-columns: minmax(0, 1fr); }
+.fk-pdp__info > * { min-width: 0; }
+
+/* P7: правила V3, которые жили в configurator.css (шаги формы, спецификация), и светлая кнопка на тёмном итоге */
+.fk-step__n { display: inline-grid; place-items: center; flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--fk-action); color: var(--fk-on-action); font-size: var(--fk-fs-small); font-weight: 700; font-variant-numeric: tabular-nums; }
+.fk-spec { margin: 0; }
+.fk-spec > div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 10px 0; border-top: 1px solid var(--fk-line); }
+.fk-spec dt { color: var(--fk-ink-muted); font-size: var(--fk-fs-small); }
+.fk-spec dd { margin: 0; font-weight: 600; text-align: right; }
+.fk-cart__summary .fk-btn--primary { background: #fff; color: var(--ink); }
+.fk-cart__summary .fk-btn--primary:hover { background: var(--veil); color: var(--ink); }
+
+/* P9: основная кнопка на тёмном блоке «Нужна консультация?» — светлая (как на баннере коллекции) */
+.fk-prj-cta .fk-btn--primary { background: #fff; color: var(--ink); }
+.fk-prj-cta .fk-btn--primary:hover { background: var(--veil); color: var(--ink); }
+
+/* P15: панель «Очистить избранное» (правила V3 favorites.css) */
+.fk-fav-tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; margin-bottom: 24px; }
+.fk-fav-tools[hidden] { display: none; }
+.fk-fav-tools p { margin: 0; }
+
+/* P12: форма «Анкета партнёра» (cooperation.html) */
+.fk-partner { padding: 24px; background: var(--fk-surface, #fff); border-radius: 24px; }
+.fk-partner__head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+.fk-partner__close { display: inline-grid; place-items: center; flex: none; width: 44px; height: 44px; border-radius: 50%; background: var(--surface, #f5f5f3); color: var(--ink, #1a1a1a); font-size: 1.75rem; line-height: 1; text-decoration: none; }
+.fk-partner__close:hover { background: var(--veil, #e8e8e6); }
+.fk-partner__tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.fk-partner__tab { min-height: 44px; padding: 0 20px; border: 1.5px solid var(--veil, #e0e0de); border-radius: 999px; background: transparent; color: var(--ink, #1a1a1a); font: inherit; font-weight: 600; cursor: pointer; }
+.fk-partner__tab:hover { border-color: var(--ink, #1a1a1a); }
+.fk-partner__tab[aria-selected="true"] { background: var(--ink, #1a1a1a); border-color: var(--ink, #1a1a1a); color: #fff; }
+.fk-partner__tab:focus-visible { outline: 2px solid var(--ink, #1a1a1a); outline-offset: 3px; }
+.fk-partner__form { display: grid; gap: 16px; min-width: 0; }
+.fk-partner__row { display: grid; gap: 16px; }
+.fk-partner .fk-co-field { min-width: 0; }
+.fk-partner__counter { margin: 6px 0 0; text-align: right; font-size: var(--fk-fs-small, .875rem); color: var(--fk-ink-muted, #6b6b6b); font-variant-numeric: tabular-nums; }
+.fk-partner__more { border-top: 1px solid var(--veil, #e0e0de); padding-top: 8px; }
+.fk-partner__more > summary { display: flex; align-items: center; min-height: 44px; font-weight: 600; cursor: pointer; }
+.fk-partner__more[open] > summary { margin-bottom: 12px; }
+.fk-partner__more .fk-partner__row + .fk-partner__row { margin-top: 16px; }
+.fk-partner__consent { align-items: flex-start; padding-block: 8px; }
+.fk-partner__consent a { display: inline-block; padding-block: 12px; margin-block: -12px; }
+.fk-partner__consent:hover input[type="checkbox"] { background-color: var(--fk-canvas); }
+.fk-partner__submit { justify-self: start; }
+.fk-partner__note[hidden] { display: none; }
+@media (min-width: 768px) {
+  .fk-partner { padding: 40px; }
+  .fk-partner__row { grid-template-columns: 1fr 1fr; }
+}
+.fk-partner .fk-field { background: var(--bg); }
+.fk-partner .fk-field:focus { background: var(--surface); }
+
+/* F1: «О компании» — тексты владельца длиннее заглушек V3, лид-абзац мельче, чтобы не занимал полэкрана */
+.fk-ab-about__lead { font-size: 1.25rem; line-height: 1.5; font-weight: 500; }
+
+/* P6: счётчик количества в корзине (правила V3 product-page.css; на странице корзины этот css не подключается) */
+.fk-qty { display: inline-flex; align-items: center; background: var(--fk-canvas); border-radius: var(--fk-r-md); padding: 4px; }
+.fk-qty__btn { width: 48px; min-height: 48px; padding: 0; font: inherit; font-size: 1.375rem; background: transparent; color: var(--fk-ink); border: 0; border-radius: 10px; cursor: pointer; }
+.fk-qty__btn:hover { background: var(--fk-action); color: var(--fk-on-action); }
+.fk-qty__input { width: 56px; min-height: 48px; padding: 0; font: inherit; font-weight: 600; text-align: center; color: var(--fk-ink); background: transparent; border: 0; -moz-appearance: textfield; appearance: textfield; }
+.fk-qty__input::-webkit-outer-spin-button, .fk-qty__input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* F2: после правки классов шапки (.fk-header и .fk-header__row оба .fk-container) боковые отступы удваивались — на 360 px шапка шире экрана на 3 px */
+.fk-header.fk-container > .fk-header__row.fk-container { padding-inline: 0; }
+/* F2: точки слайдера «Готовые решения» — цель нажатия не уже 44 px */
+.fk-sol-dot { width: 44px; }
+
+/* F2: крупные заголовки (clamp от 4rem/2.5rem/2rem в styles.css) на узких экранах не должны вылезать за экран: длинные слова переносятся */
+h1, h2, h3 { overflow-wrap: anywhere; }
+
+/* F2: «Проекты» на главной <768 px — база сетки (6 колонок, css/projects.css) оставляла карточки по одной колонке и растягивала страницу (934–1164 px); карточки — на всю ширину */
+@media (max-width: 767px) { .fk-grid--projects { grid-template-columns: minmax(0, 1fr); } .fk-grid--projects > li { grid-column: 1 / -1; } }
+
+/* QA D5: ссылка-название карточки (padding 12 + 1 строка = 43,5 px на 360–390) — цель не меньше 44 px */
+.fk-product-card__name a { min-height: 44px; box-sizing: border-box; }
