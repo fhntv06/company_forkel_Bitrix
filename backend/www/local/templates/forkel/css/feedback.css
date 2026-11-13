@@ -11,7 +11,7 @@ html.fk-fb-open { overflow: hidden; }
 .fk-fb__close:hover { background: var(--fk-ink); color: var(--fk-ink-inverse); }
 .fk-fb__close:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
 .fk-fb__close svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
-.fk-fb__body { min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+.fk-fb__body { min-height: 0; overscroll-behavior: contain; }
 .fk-fb__form { display: grid; gap: 16px; }
 .fk-fb__lead { color: var(--fk-ink-muted); }
 .fk-fb .fk-field[aria-invalid="true"] { border-color: var(--fk-error); }

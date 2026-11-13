@@ -28,7 +28,7 @@
 .fk-qty__input::-webkit-outer-spin-button, .fk-qty__input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
 /* Характеристики: три карточки-группы */
-.fk-pdp__specs { grid-column: 1 / -1; min-width: 0; display: grid; gap: 24px; margin-top: 24px; }
+.fk-pdp__specs { grid-column: 1 / -1; min-width: 0; display: grid; gap: 64px; margin-top: 24px; }
 .fk-pdp__specs > h2 { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-size: var(--fk-fs-h2); line-height: 1.15; font-weight: 700; }
 .fk-chars-groups { display: grid; gap: 16px var(--fk-col-gap); grid-template-columns: minmax(0, 1fr); }
 .fk-chars { padding: 24px; background: var(--fk-surface); border-radius: var(--fk-r-lg); }

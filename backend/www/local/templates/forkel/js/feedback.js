@@ -24,6 +24,7 @@
 
   var MODES = {
     feedback: { title: 'Написать нам', lead: 'Оставьте сообщение — мы свяжемся с вами.', contact: 'Телефон или email', btn: 'Отправить', done: 'Сообщение отправлено. Мы свяжемся с вами.' },
+    oneclick: { title: 'Купить в 1 клик', lead: 'Оставьте номер телефона — мы свяжемся и оформим заказ.', contact: 'Телефон', btn: 'Отправить заявку', done: 'Заявка принята. Мы свяжемся с вами.' },
     callback: { title: 'Заказать звонок', lead: 'Оставьте номер телефона — мы перезвоним.', contact: 'Телефон', btn: 'Заказать звонок', done: 'Заявка принята. Мы перезвоним вам.' }
   };
 
@@ -33,10 +34,11 @@
     modeInput.value = m;
     title.textContent = c.title; lead.textContent = c.lead; contactLabel.textContent = c.contact;
     submit.textContent = c.btn; doneText.textContent = c.done;
-    msgField.hidden = m === 'callback';
-    msgInput.required = m !== 'callback';
-    contactInput.type = m === 'callback' ? 'tel' : 'text';
-    contactInput.setAttribute('autocomplete', m === 'callback' ? 'tel' : 'off');
+    var phoneOnly = m !== 'feedback';
+    msgField.hidden = phoneOnly;
+    msgInput.required = !phoneOnly;
+    contactInput.type = phoneOnly ? 'tel' : 'text';
+    contactInput.setAttribute('autocomplete', phoneOnly ? 'tel' : 'off');
   }
   function setErr(id, msg) {
     var inp = $(id), er = $(id + '-err');
@@ -66,7 +68,7 @@
     var errs = [];
     function chk(id, ok, msg) { setErr(id, ok ? '' : msg); if (!ok) errs.push({ id: id, msg: msg }); }
     chk('fb-name', $('fb-name').value.trim().length >= 2, 'Укажите имя (не короче 2 символов).');
-    chk('fb-contact', validContact(contactInput.value), mode === 'callback' ? 'Укажите телефон (10–15 цифр).' : 'Укажите телефон (10–15 цифр) или email.');
+    chk('fb-contact', validContact(contactInput.value), mode !== 'feedback' ? 'Укажите телефон (10–15 цифр).' : 'Укажите телефон (10–15 цифр) или email.');
     if (mode === 'feedback') chk('fb-msg', msgInput.value.trim().length >= 5, 'Напишите сообщение (не короче 5 символов).');
     chk('fb-consent', $('fb-consent').checked, 'Нужно согласие на обработку данных.');
     showSummary(errs);
@@ -82,6 +84,9 @@
     opener = el; mode = m; reset();
     if (!dlg.open) dlg.showModal();
     document.documentElement.classList.add('fk-fb-open');
+    /* Контекст товара (страница товара): в 1 клик уходит скрытым текстом, в вопрос подставляется в сообщение */
+    var ctx = el && el.hasAttribute('data-fb-context') && typeof window.fkFeedbackContext === 'function' ? window.fkFeedbackContext() : '';
+    if (ctx) msgInput.value = m === 'feedback' ? 'Вопрос по товару. ' + ctx + '\n\n' : ctx;
     $('fb-name').focus();
   }
   function close() { if (dlg.open) dlg.close(); }
@@ -129,9 +134,9 @@
       });
   });
   document.addEventListener('click', function (e) {
-    var t = e.target.closest('[data-feedback], [data-callback]');
+    var t = e.target.closest('[data-feedback], [data-callback], [data-oneclick]');
     if (!t) return;
     e.preventDefault(); e.stopPropagation();
-    open(t, t.hasAttribute('data-callback') ? 'callback' : 'feedback');
+    open(t, t.hasAttribute('data-callback') ? 'callback' : (t.hasAttribute('data-oneclick') ? 'oneclick' : 'feedback'));
   }, true);
 })();
