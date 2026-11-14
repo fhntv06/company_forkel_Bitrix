@@ -278,3 +278,28 @@ if (!function_exists('fk_is_shop_page')) {
         return false;
     }
 }
+
+if (!function_exists('fk_account_open')) {
+    /**
+     * Верх карточки кабинета (V4): вкладки-ссылки «Профиль / История заказов / Адреса доставки / Выйти» и заголовок раздела.
+     * $current — profile | orders | addresses. Закрывает fk_account_close().
+     */
+    function fk_account_open(string $current, string $title): void
+    {
+        global $APPLICATION;
+        $tabs = ['profile' => ['Профиль', '/personal/profile/'], 'orders' => ['История заказов', '/personal/orders/'], 'addresses' => ['Адреса доставки', '/personal/addresses/']];
+        echo '<section class="fk-acc-card fk-shop" aria-labelledby="acc-h"><nav class="fk-acc-tabs" aria-label="Разделы кабинета">';
+        foreach ($tabs as $key => [$label, $url]) {
+            echo '<a class="fk-chip" href="' . $url . '"' . ($key === $current ? ' aria-current="page"' : '') . '>' . htmlspecialcharsbx($label) . '</a>';
+        }
+        $logout = $APPLICATION->GetCurPageParam('logout=yes&' . bitrix_sessid_get(), ['logout', 'sessid']);
+        echo '<a class="fk-chip fk-acc-logout" href="' . htmlspecialcharsbx($logout) . '">Выйти</a></nav>';
+        echo '<h2 id="acc-h">' . htmlspecialcharsbx($title) . '</h2>';
+    }
+}
+if (!function_exists('fk_account_close')) {
+    function fk_account_close(): void
+    {
+        echo '</section>';
+    }
+}
