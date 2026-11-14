@@ -152,10 +152,10 @@ h3 { font-size: clamp(1.5rem, 1rem + 1.4vw, 2.25rem); line-height: 1.25; letter-
 .feat__c--dark p { color: var(--silver); }
 .go { position: absolute; left: 24px; bottom: 24px; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; border: 1px solid currentColor; opacity: .7; }
 .feat__c svg:not(.ar) { margin-left: auto; margin-right: auto; }
-.mini { display: grid; gap: 12px; margin-top: var(--gap); padding: 20px 24px; background: var(--surface); border-radius: var(--r-m); font-size: .85rem; color: var(--iron); }
+.mini { display: flex;justify-content: space-between;align-items: center;flex-wrap: wrap; gap: 12px; margin-top: var(--gap); padding: 20px 24px; background: var(--surface); border-radius: var(--r-m); font-size: .85rem; color: var(--iron); }
 .mini li { padding-left: 14px; position: relative; }
 .mini li::before { content: ""; position: absolute; left: 0; top: .6em; width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); }
-@media (min-width: 768px) { .feat { grid-template-columns: repeat(3, 1fr); } .mini { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 768px) { .feat { grid-template-columns: repeat(3, 1fr); } }
 
 /* Подбор */
 .cfg { display: grid; gap: 28px; padding: var(--pad); background: var(--surface); border-radius: var(--r-l); }
