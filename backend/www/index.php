@@ -107,4 +107,41 @@ if ($fkCols !== "") { ?>
 </section>
 <?php } ?>
 <?php
+// 4. Преимущества: элементы инфоблока features + четыре пункта из области
+$fkFeat = $fkCapture(static function () {
+	global $APPLICATION;
+	$APPLICATION->IncludeComponent("bitrix:news.list", "fk_home_features", array(
+		"IBLOCK_TYPE" => "",
+		"IBLOCK_ID" => fk_iblock_id("features"),
+		"NEWS_COUNT" => "3",
+		"SORT_BY1" => "SORT",
+		"SORT_ORDER1" => "ASC",
+		"SORT_BY2" => "ID",
+		"SORT_ORDER2" => "ASC",
+		"FIELD_CODE" => array("NAME", "PREVIEW_TEXT", "PREVIEW_PICTURE", "DETAIL_PICTURE"),
+		"PROPERTY_CODE" => array(),
+		"CHECK_DATES" => "N",
+		"SET_TITLE" => "N",
+		"SET_BROWSER_TITLE" => "N",
+		"SET_META_KEYWORDS" => "N",
+		"SET_META_DESCRIPTION" => "N",
+		"SET_LAST_MODIFIED" => "N",
+		"ADD_SECTIONS_CHAIN" => "N",
+		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+		"SET_STATUS_404" => "N",
+		"SHOW_404" => "N",
+		"DISPLAY_TOP_PAGER" => "N",
+		"DISPLAY_BOTTOM_PAGER" => "N",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "3600",
+	), false);
+});
+if ($fkFeat !== "") { ?>
+<section class="sec wrap" id="features" aria-labelledby="f-t">
+	<h2 class="big" id="f-t"><?php $fkInclude("fk_home_features_title"); ?></h2>
+	<ul class="feat"><?= $fkFeat ?></ul>
+	<ul class="mini"><?php $fkInclude("fk_home_features_mini"); ?></ul>
+</section>
+<?php } ?>
+<?php
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
