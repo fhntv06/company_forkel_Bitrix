@@ -42,11 +42,16 @@
     color: var(--tone-ink);
 }
 
-.fk-project-card__media svg {
+.fk-project-card__media svg,
+.fk-project-card__media img {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
+}
+
+.fk-project-card__media img {
+    object-fit: cover;
 }
 
 .fk-tag--float {
