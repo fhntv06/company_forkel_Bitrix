@@ -1,0 +1,1 @@
+<img class="hero__photo" src="/local/templates/forkel/assets/images/main_page/hero.jpg" alt="Розетки и выключатели FORKEL разных цветов на каменной столешнице" width="1200" height="896" fetchpriority="high" decoding="async">
