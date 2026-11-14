@@ -344,5 +344,16 @@ if ($fkPro !== "") { ?>
 		<ul class="del"><?php $fkInclude("fk_home_delivery"); ?></ul>
 	</div>
 </section>
+<!-- 13. Финальный призыв: текст из областей; «Связаться с нами» открывает окно обратной связи -->
+<section class="sec wrap" aria-labelledby="fin-t">
+	<div class="fin">
+		<h2 id="fin-t"><?php $fkInclude("fk_home_cta_title"); ?></h2>
+		<p><?php $fkInclude("fk_home_cta_text"); ?></p>
+		<div class="actions">
+			<a class="btn btn--light" href="/catalog/">Смотреть каталог</a>
+			<button class="btn btn--glass" type="button" data-feedback aria-haspopup="dialog">Связаться с нами</button>
+		</div>
+	</div>
+</section>
 <?php
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
