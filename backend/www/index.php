@@ -289,5 +289,12 @@ if ($fkInt !== "") { ?>
 		<div class="show__img"><?php $fkInclude("fk_home_showroom_photo"); ?></div>
 	</div>
 </section>
+<!-- 10. Цифры доверия: заголовок и четыре числа из областей включения (реальные значения заполняет владелец) -->
+<section class="sec wrap" aria-labelledby="tr-t">
+	<div class="split">
+		<h2 id="tr-t"><?php $fkInclude("fk_home_trust_title"); ?></h2>
+		<ul class="nums"><?php $fkInclude("fk_home_trust_nums"); ?></ul>
+	</div>
+</section>
 <?php
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
