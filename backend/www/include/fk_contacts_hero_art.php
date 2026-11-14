@@ -1,0 +1,1 @@
+<img src="/local/templates/forkel/assets/images/designs/2e5a6406cab54b2416d63e19fc1e6c57_ca3ebba6-7e95-47d9-b108-03cc3c814268.jpg" alt="" decoding="async" style="width:100%;height:100%;object-fit:cover">
