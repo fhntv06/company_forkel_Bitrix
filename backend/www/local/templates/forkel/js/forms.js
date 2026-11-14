@@ -77,6 +77,10 @@
         .then(function (res) {
           if (res && res.ok) {
             form.reset();
+            [].forEach.call(form.querySelectorAll('[data-counter]'), function (ta) {
+              var out = document.getElementById(ta.getAttribute('data-counter'));
+              if (out) out.textContent = '0';
+            });
             if (done) { done.hidden = false; done.focus(); }
           } else {
             throw (res && res.errors && res.errors.length ? res.errors : ['Не удалось отправить. Попробуйте позже.']);

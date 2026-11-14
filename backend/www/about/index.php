@@ -7,8 +7,7 @@ $APPLICATION->SetPageProperty("fk_cta1_text", "Стать партнёром");
 $APPLICATION->SetPageProperty("fk_cta1_link", "#feedback");
 $APPLICATION->SetPageProperty("fk_cta2_text", "Смотреть каталог");
 $APPLICATION->SetPageProperty("fk_cta2_link", "/catalog/");
-$APPLICATION->SetPageProperty("fk_hero_img", "/local/templates/forkel/assets/images/about/hero.jpg");
-$APPLICATION->SetPageProperty("fk_hero_alt", "Полка с растением и выключателем-розеткой FORKEL на стене");
+$APPLICATION->SetPageProperty("fk_hero_art", "fk_about_hero_art");
 
 // Область включения /include/<имя>.php (правится в админке).
 $fkInclude = static function (string $name): void {

@@ -1,0 +1,1 @@
+<img src="/local/templates/forkel/assets/images/about/hero.jpg" alt="Полка с растением и выключателем-розеткой FORKEL на стене" decoding="async" style="width:100%;height:100%;object-fit:cover">

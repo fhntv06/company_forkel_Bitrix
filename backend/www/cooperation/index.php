@@ -5,7 +5,7 @@ $APPLICATION->SetTitle("Станьте партнером FORKEL");
 $APPLICATION->SetPageProperty("fk_lead", "FORKEL — это не просто розетки и выключатели. Это современная электрика, которая помогает создавать красивые и продуманные интерьеры.");
 $APPLICATION->SetPageProperty("fk_cta1_text", "Стать партнёром");
 $APPLICATION->SetPageProperty("fk_cta1_link", "#partner-form");
-$APPLICATION->SetPageProperty("fk_hero_img", "/local/templates/forkel/assets/images/about/hero.jpg");
+$APPLICATION->SetPageProperty("fk_hero_art", "fk_coop_hero_art");
 
 // Область включения /include/<имя>.php (правится в админке).
 $fkInclude = static function (string $name): void {

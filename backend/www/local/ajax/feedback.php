@@ -34,12 +34,19 @@ if (trim((string)($_POST['website'] ?? '')) !== '') {
 }
 
 $mode = in_array($_POST['mode'] ?? '', ['callback', 'oneclick', 'lead', 'partner'], true) ? $_POST['mode'] : 'feedback';
-$cut = static function ($v, int $len): string {
-    return mb_substr(trim(strip_tags((string)$v)), 0, $len);
+$cut = static function ($v, int $len, bool $multiline = false): string {
+    if (!is_scalar($v)) {
+        return '';
+    }
+    $v = trim(strip_tags((string)$v));
+    if (!$multiline) {
+        $v = trim(preg_replace('/\s*\R\s*/u', ' ', $v)); // одна строка: нельзя подделать соседние строки письма
+    }
+    return mb_substr($v, 0, $len);
 };
 $name = $cut($_POST['name'] ?? '', 100);
 $contact = $cut($_POST['contact'] ?? '', 100);
-$msg = $cut($_POST['msg'] ?? '', $mode === 'oneclick' ? 600 : 3000); // для oneclick описание товара собирает страница товара
+$msg = $cut($_POST['msg'] ?? '', $mode === 'oneclick' ? 600 : 3000, true); // для oneclick описание товара собирает страница товара
 
 // Дополнительные поля заявок «lead» и «partner»: только из белого списка, подпись → значение.
 $extraLabels = [
@@ -51,7 +58,7 @@ $extraLabels = [
 ];
 $extra = [];
 foreach ($extraLabels[$mode] ?? [] as $key => $label) {
-    $v = $cut($_POST[$key] ?? '', $key === 'task' ? 3000 : 200);
+    $v = $cut($_POST[$key] ?? '', $key === 'task' ? 3000 : 200, $key === 'task');
     if ($v !== '') {
         $extra[$label] = $v;
     }

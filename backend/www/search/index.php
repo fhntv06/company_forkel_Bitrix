@@ -3,7 +3,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 /** @global CMain $APPLICATION */
 $APPLICATION->SetTitle("Результаты поиска");
 $APPLICATION->SetPageProperty("fk_lead", "Найдите изделия по названию, артикулу или цвету.");
-$APPLICATION->SetPageProperty("fk_hero_img", "/local/templates/forkel/assets/images/about/hero.jpg");
+$APPLICATION->SetPageProperty("fk_hero_art", "fk_search_hero_art");
 
 // Поиск только по товарам каталога (проекты — позже). Индексацию каталога включает админка: «Настройки → Поиск → Переиндексация».
 $APPLICATION->IncludeComponent("bitrix:search.page", "fk", array(
