@@ -1,0 +1,1 @@
+https://ledron.ru/local/images/coop_designers/project-fullsize.webp
