@@ -21,7 +21,6 @@ foreach ($items as $i => $item) {
 
     // Координаты точки читаем один раз.
     $coords = $item['PROPERTIES']['COORDS_POINT']['VALUE'] ?? '';
-    $coords = trim((string)(is_array($coords) ? reset($coords) : $coords));
     $x = $y = null;
     if (preg_match('/(\d+(?:[.,]\d+)?)\s*[;:\s]\s*(\d+(?:[.,]\d+)?)/', $coords, $m)) {
         $x = (float)str_replace(',', '.', $m[1]);
