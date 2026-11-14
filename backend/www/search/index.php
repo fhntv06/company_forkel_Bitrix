@@ -1,53 +1,31 @@
-<?
+<?php
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Поиск");
-?>
+/** @global CMain $APPLICATION */
+$APPLICATION->SetTitle("Результаты поиска");
+$APPLICATION->SetPageProperty("fk_lead", "Найдите изделия по названию, артикулу или цвету.");
+$APPLICATION->SetPageProperty("fk_hero_img", "/local/templates/forkel/assets/images/about/hero.jpg");
 
-<?$APPLICATION->IncludeComponent("bitrix:search.page", ".default", array(
+// Поиск только по товарам каталога (проекты — позже). Индексацию каталога включает админка: «Настройки → Поиск → Переиндексация».
+$APPLICATION->IncludeComponent("bitrix:search.page", "fk", array(
 	"RESTART" => "N",
 	"CHECK_DATES" => "N",
 	"USE_TITLE_RANK" => "N",
 	"DEFAULT_SORT" => "rank",
-	"arrFILTER" => array(
-		0 => "main",
-		1 => "iblock_services",
-		2 => "iblock_news",
-		3 => "iblock_catalog",
-	),
-	"arrFILTER_main" => array(
-	),
-	"arrFILTER_iblock_services" => array(
-		0 => "all",
-	),
-	"arrFILTER_iblock_news" => array(
-		0 => "all",
-	),
-	"arrFILTER_iblock_catalog" => array(
-		0 => "all",
-	),
+	"arrFILTER" => array("iblock_catalog"),
+	"arrFILTER_iblock_catalog" => array(fk_iblock_id("catalog")),
 	"SHOW_WHERE" => "N",
 	"SHOW_WHEN" => "N",
-	"PAGE_RESULT_COUNT" => "25",
-	"AJAX_MODE" => "N",
-	"AJAX_OPTION_SHADOW" => "Y",
-	"AJAX_OPTION_JUMP" => "N",
-	"AJAX_OPTION_STYLE" => "Y",
-	"AJAX_OPTION_HISTORY" => "N",
-	"CACHE_TYPE" => "A",
-	"CACHE_TIME" => "36000000",
+	"PAGE_RESULT_COUNT" => "12",
 	"DISPLAY_TOP_PAGER" => "N",
-	"DISPLAY_BOTTOM_PAGER" => "Y",
+	"DISPLAY_BOTTOM_PAGER" => "N",
 	"PAGER_TITLE" => "Результаты поиска",
 	"PAGER_SHOW_ALWAYS" => "N",
-	"PAGER_TEMPLATE" => "arrows",
-	"USE_SUGGEST" => "N",
-	"SHOW_ITEM_TAGS" => "N",
-	"SHOW_ITEM_DATE_CHANGE" => "N",
-	"SHOW_ORDER_BY" => "N",
-	"SHOW_TAGS_CLOUD" => "N",
-	"AJAX_OPTION_ADDITIONAL" => ""
-	),
-	false
-);?>
-
-<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+	"PAGER_TEMPLATE" => "round",
+	"NO_WORD_LOGIC" => "N",
+	"USE_LANGUAGE_GUESS" => "N",
+	"SHOW_RATING" => "N",
+	"AJAX_MODE" => "N",
+	"CACHE_TYPE" => "A",
+	"CACHE_TIME" => "3600",
+), false);
+require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
