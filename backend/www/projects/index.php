@@ -3,6 +3,11 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 /** @global CMain $APPLICATION */
 $APPLICATION->SetTitle("Проекты");
 $APPLICATION->SetPageProperty("fk_lead", "Реализованные проекты с изделиями FORKEL.");
+$APPLICATION->SetPageProperty("fk_hero_art", "fk_projects_hero_art");
+$fkIntro = fk_include_text("fk_projects_intro");
+if ($fkIntro !== "" && $APPLICATION->GetCurPage(false) === "/projects/") {
+	echo '<p class="fk-prj-intro">'.htmlspecialcharsbx($fkIntro).'</p>';
+}
 $APPLICATION->IncludeComponent("bitrix:news", "fk_projects", array(
 	"IBLOCK_TYPE" => "",
 	"IBLOCK_ID" => fk_iblock_id("projects"),

@@ -70,12 +70,18 @@ if (!function_exists('fk_render_page_hero')) {
                 ? '<button class="fk-btn ' . $mod . '" type="button" data-feedback aria-haspopup="dialog">' . htmlspecialcharsbx($t) . '</button>'
                 : '<a class="fk-btn ' . $mod . '" href="' . htmlspecialcharsbx($l) . '">' . htmlspecialcharsbx($t) . '</a>';
         }
+        // Картинка hero: свойство fk_hero_art = имя области включения /include/<имя>.php (разметка <img>).
+        $artName = trim((string)$APPLICATION->GetProperty('fk_hero_art'));
+        $artFile = $artName !== '' ? $_SERVER['DOCUMENT_ROOT'] . '/include/' . basename($artName) . '.php' : '';
+        $art = $artFile !== '' && is_file($artFile) ? trim((string)file_get_contents($artFile)) : '';
         return '<section class="fk-ab-hero" aria-labelledby="fk-page-title"><div class="fk-ab-hero__text">'
             . '<p class="fk-ab-hero__kicker">FORKEL</p>'
             . '<h1 class="fk-ab-hero__title" id="fk-page-title">' . $title . '</h1>'
             . ($lead !== '' ? '<p class="fk-ab-hero__lead">' . htmlspecialcharsbx($lead) . '</p>' : '')
             . ($cta ? '<div class="fk-ab-hero__cta">' . implode('', $cta) . '</div>' : '')
-            . '</div></section>';
+            . '</div>'
+            . ($art !== '' ? '<figure class="fk-ab-hero__art">' . $art . '</figure>' : '')
+            . '</section>';
     }
 }
 
