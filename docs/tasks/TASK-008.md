@@ -49,6 +49,12 @@
 - [ ] Независимый QA (статический) и проверка владельцем на рендере каждого шага.
 
 ## Отчёт
+### Шаг 4.2 — Страница проекта `/projects/<код>/` (код готов, ждёт данных владельца)
+- Файлы: `news/fk_projects/detail.php` (заменил редирект: `news.detail`, блок «Товары проекта» через `fk_product_block()` по `PRODUCTS`, CTA, «Другие проекты» — 3 шт., без текущего), `news.detail/fk_project/template.php` (cover, «О проекте», «Использовано» ROOM/COLLECTION, галерея `GALLERY`), правка `news.list/fk_projects_page` (параметр `FK_GRID_MOD`), `css/projects.css` (фото в cover/галерее), области `include/fk_project_cta_title.php`, `fk_project_cta_text.php` (текст CTA — заглушка из V4).
+- Отличия от V4: V4 показывал заглушки; блоки без данных (текст, факты, галерея, товары) не выводятся. Ссылки на товары даёт блок «Товары проекта» (в V4 связь была не подтверждена).
+- Проверки: `php -l` — OK; рендер шаблона на заглушке (полный и пустой проект) — OK. Не проверено: реальный Bitrix, 404, `fk_product_block`, «Другие проекты». Независимый QA не запускался.
+- Владельцу: свойства `GALLERY` (файл, множ.) и `PRODUCTS` (привязка к `catalog`, множ.) в `projects`; заполнить детальную картинку, анонс (lead), детальное описание.
+
 ### Шаг 4.1 — Проекты `/projects/` (код готов, ждёт данных владельца)
 - Файлы: `backend/www/projects/index.php` (`bitrix:news`, шаблон `fk_projects`, 12 на страницу, пагинация `round`), `local/templates/forkel/components/bitrix/news/fk_projects/{news,detail}.php` (detail — временный редирект на `/projects/` до шага 4.2), `news.list/fk_projects_page/template.php` (`ul.fk-grid.fk-grid--projects-page`, карточки `fk-project-card`, `h2` в названии как в V4, пустое состояние), `urlrewrite.php` (новый ключ 9, `#^/projects/#`).
 - Hero: заголовок «Проекты» и lead «Реализованные проекты с изделиями FORKEL.» через `fk_lead` (код шаблона не менялся). Вводный текст V4 (`fk-prj-intro`) в V4 — заглушка «формулировку предоставит», не выводится.

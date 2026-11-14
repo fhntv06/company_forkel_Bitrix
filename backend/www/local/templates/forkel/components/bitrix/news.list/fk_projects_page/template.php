@@ -3,6 +3,7 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
 }
 /** @var array $arResult */
+/** @var array $arParams */
 /**
  * Страница «Проекты» (V4 projects.html): ul.fk-grid.fk-grid--projects-page > li > a.fk-project-card.
  * Заголовок и lead выводит шаблон сайта (fk_render_page_hero). Мета — «Помещение · Коллекция» из ROOM и COLLECTION.
@@ -20,7 +21,7 @@ if (empty($arResult['ITEMS'])) { ?>
 <?php
     return;
 } ?>
-<ul class="fk-grid fk-grid--projects-page">
+<ul class="fk-grid fk-grid--projects-page<?= !empty($arParams['FK_GRID_MOD']) ? ' ' . htmlspecialcharsbx($arParams['FK_GRID_MOD']) : '' ?>">
 <?php foreach (array_values($arResult['ITEMS']) as $i => $item) {
     $pic = $item['PREVIEW_PICTURE']['SRC'] ?? $item['DETAIL_PICTURE']['SRC'] ?? '';
     $room = $text($item['DISPLAY_PROPERTIES']['ROOM']['DISPLAY_VALUE'] ?? '');

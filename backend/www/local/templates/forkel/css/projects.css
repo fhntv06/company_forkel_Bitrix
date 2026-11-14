@@ -402,3 +402,20 @@
     background: var(--fk-ink-inverse);
     color: var(--fk-ink);
 }
+
+/* Страница проекта: реальные фото (cover и галерея) */
+.fk-prj-cover__media img,
+.fk-prj-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fk-prj-cover__media img {
+    position: absolute;
+    inset: 0;
+}
+
+.fk-prj-tile {
+    overflow: hidden;
+}
