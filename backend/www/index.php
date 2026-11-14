@@ -337,5 +337,12 @@ if ($fkPro !== "") { ?>
 	</div>
 </section>
 <?php } ?>
+<!-- 12. Доставка и оплата: заголовок и пункты из областей включения (условия заполняет владелец) -->
+<section class="sec wrap" id="delivery" aria-labelledby="d-t">
+	<div class="split">
+		<div><h2 id="d-t"><?php $fkInclude("fk_home_delivery_title"); ?></h2></div>
+		<ul class="del"><?php $fkInclude("fk_home_delivery"); ?></ul>
+	</div>
+</section>
 <?php
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
