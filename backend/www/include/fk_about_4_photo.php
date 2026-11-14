@@ -1,0 +1,1 @@
+<img src="/local/templates/forkel/assets/images/about/advantages.jpg" alt="Гостиная с терморегулятором FORKEL на стене" loading="lazy" decoding="async">

@@ -59,6 +59,8 @@ if (!function_exists('fk_render_page_hero')) {
         }
         $title = htmlspecialcharsbx((string)$APPLICATION->GetTitle());
         $lead = trim((string)$APPLICATION->GetProperty('fk_lead'));
+        $heroImg = trim((string)$APPLICATION->GetProperty('fk_hero_img'));
+        $heroAlt = trim((string)$APPLICATION->GetProperty('fk_hero_alt'));
         $cta = [];
         foreach ([1 => 'fk-btn--inverse', 2 => 'fk-btn--ghost'] as $n => $mod) {
             $t = trim((string)$APPLICATION->GetProperty('fk_cta' . $n . '_text'));

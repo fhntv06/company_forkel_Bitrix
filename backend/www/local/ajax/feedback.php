@@ -33,20 +33,41 @@ if (trim((string)($_POST['website'] ?? '')) !== '') {
     die();
 }
 
-$mode = in_array($_POST['mode'] ?? '', ['callback', 'oneclick'], true) ? $_POST['mode'] : 'feedback';
-$name = trim((string)($_POST['name'] ?? ''));
-$contact = trim((string)($_POST['contact'] ?? ''));
-$msg = trim((string)($_POST['msg'] ?? ''));
-if ($mode === 'oneclick') {
-    $msg = mb_substr(trim(strip_tags($msg)), 0, 600); // описание товара собирает страница товара
+$mode = in_array($_POST['mode'] ?? '', ['callback', 'oneclick', 'lead', 'partner'], true) ? $_POST['mode'] : 'feedback';
+$cut = static function ($v, int $len): string {
+    return mb_substr(trim(strip_tags((string)$v)), 0, $len);
+};
+$name = $cut($_POST['name'] ?? '', 100);
+$contact = $cut($_POST['contact'] ?? '', 100);
+$msg = $cut($_POST['msg'] ?? '', $mode === 'oneclick' ? 600 : 3000); // для oneclick описание товара собирает страница товара
+
+// Дополнительные поля заявок «lead» и «partner»: только из белого списка, подпись → значение.
+$extraLabels = [
+    'lead' => ['role' => 'Кто вы'],
+    'partner' => [
+        'direction' => 'Направление', 'company' => 'Компания / специализация', 'city' => 'Город', 'format' => 'Формат работы',
+        'volume' => 'Примерный объём', 'time' => 'Удобное время', 'email' => 'Email', 'task' => 'Задача',
+    ],
+];
+$extra = [];
+foreach ($extraLabels[$mode] ?? [] as $key => $label) {
+    $v = $cut($_POST[$key] ?? '', $key === 'task' ? 3000 : 200);
+    if ($v !== '') {
+        $extra[$label] = $v;
+    }
 }
+
+$digits = preg_replace('/\D/', '', $contact);
+$isEmail = (bool)filter_var($contact, FILTER_VALIDATE_EMAIL);
+$isPhone = !$isEmail && preg_match('/^[+\d][\d\s()\-+]*$/', $contact) && strlen($digits) >= 10 && strlen($digits) <= 15;
+$phoneOnly = in_array($mode, ['callback', 'oneclick'], true); // в этих режимах контакт — только телефон
 
 $errors = [];
 if (mb_strlen($name) < 2) {
     $errors[] = 'Укажите имя.';
 }
-if ($contact === '') {
-    $errors[] = $mode !== 'feedback' ? 'Укажите телефон.' : 'Укажите телефон или email.';
+if ($phoneOnly ? !$isPhone : !($isEmail || $isPhone)) {
+    $errors[] = $phoneOnly ? 'Укажите телефон (10–15 цифр).' : 'Укажите телефон (10–15 цифр) или email.';
 }
 if ($mode === 'feedback' && mb_strlen($msg) < 5) {
     $errors[] = 'Напишите сообщение.';
@@ -58,11 +79,18 @@ if ($errors) {
     $fail($errors);
 }
 
-$isEmail = strpos($contact, '@') !== false;
+$tail = '';
+foreach ($extra as $label => $v) {
+    $tail .= "\n" . $label . ': ' . $v;
+}
 if ($mode === 'callback') {
     $text = 'Заказ обратного звонка. Телефон: ' . $contact;
 } elseif ($mode === 'oneclick') {
     $text = 'Покупка в 1 клик. Телефон: ' . $contact . ($msg !== '' ? "\n" . $msg : '');
+} elseif ($mode === 'lead') {
+    $text = 'Заявка на сотрудничество (страница «О компании»). Контакт: ' . $contact . $tail . ($msg !== '' ? "\nСообщение: " . $msg : '');
+} elseif ($mode === 'partner') {
+    $text = 'Анкета партнёра. Имя: ' . $name . '. Контакт: ' . $contact . $tail;
 } else {
     $text = ($isEmail ? '' : 'Телефон: ' . $contact . "\n\n") . $msg;
 }

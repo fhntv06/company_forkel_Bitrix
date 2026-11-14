@@ -1,0 +1,1 @@
+<img src="/local/templates/forkel/assets/images/about/audience.jpg" alt="Кухня с розеткой FORKEL в рамке на стене" loading="lazy" decoding="async">

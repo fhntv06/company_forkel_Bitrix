@@ -1,0 +1,1 @@
+<img src="/local/templates/forkel/assets/images/about/approach.jpg" alt="Прихожая с выключателем FORKEL на стене" loading="lazy" decoding="async">
