@@ -4,7 +4,7 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
 }
 /** @var array $arResult */
 /** Хлебные крошки в разметке V4. Последняя — текущая страница без ссылки. */
-if (empty($arResult)) {
+if (count((array)$arResult) < 2) { // на главной цепочка из одного пункта: крошки не нужны
     return '';
 }
 $last = count($arResult) - 1;
