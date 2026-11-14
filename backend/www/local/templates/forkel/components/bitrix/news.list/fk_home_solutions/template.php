@@ -14,7 +14,8 @@ $total = count($items);
 $pin = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v12M2 8h12"/></svg>';
 $n = 0; // сквозной номер точки для id всплывающих блоков
 foreach ($items as $i => $item) {
-    $pic = $item['DETAIL_PICTURE'] ?? $item['PREVIEW_PICTURE'] ?? null;
+    // Картинка слайда: детальная, иначе анонс. У пустого поля ключ есть, но значение не массив, поэтому проверяем SRC, а не наличие ключа.
+    $pic = !empty($item['DETAIL_PICTURE']['SRC']) ? $item['DETAIL_PICTURE'] : (!empty($item['PREVIEW_PICTURE']['SRC']) ? $item['PREVIEW_PICTURE'] : null);
     if (empty($pic['SRC'])) {
         continue;
     }
