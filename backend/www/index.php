@@ -70,4 +70,41 @@ if ($fkDirs !== "") { ?>
 </section>
 <?php } ?>
 <?php
+// 3. Коллекции: элементы инфоблока collections
+$fkCols = $fkCapture(static function () {
+	global $APPLICATION;
+	$APPLICATION->IncludeComponent("bitrix:news.list", "fk_home_collections", array(
+		"IBLOCK_TYPE" => "",
+		"IBLOCK_ID" => fk_iblock_id("collections"),
+		"NEWS_COUNT" => "6",
+		"SORT_BY1" => "SORT",
+		"SORT_ORDER1" => "ASC",
+		"SORT_BY2" => "NAME",
+		"SORT_ORDER2" => "ASC",
+		"FIELD_CODE" => array("NAME", "PREVIEW_TEXT", "PREVIEW_PICTURE", "DETAIL_PICTURE"),
+		"PROPERTY_CODE" => array(),
+		"DETAIL_URL" => "/collections/#ELEMENT_CODE#/",
+		"CHECK_DATES" => "N",
+		"SET_TITLE" => "N",
+		"SET_BROWSER_TITLE" => "N",
+		"SET_META_KEYWORDS" => "N",
+		"SET_META_DESCRIPTION" => "N",
+		"SET_LAST_MODIFIED" => "N",
+		"ADD_SECTIONS_CHAIN" => "N",
+		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+		"SET_STATUS_404" => "N",
+		"SHOW_404" => "N",
+		"DISPLAY_TOP_PAGER" => "N",
+		"DISPLAY_BOTTOM_PAGER" => "N",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "3600",
+	), false);
+});
+if ($fkCols !== "") { ?>
+<section class="sec wrap" id="collections" aria-labelledby="col-t">
+	<div class="head2"><h2 id="col-t"><?php $fkInclude("fk_home_collections_title"); ?></h2><a class="btn btn--ghost btn--sm" href="/catalog/">Весь каталог</a></div>
+	<ul class="cols"><?= $fkCols ?></ul>
+</section>
+<?php } ?>
+<?php
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
