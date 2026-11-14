@@ -9,6 +9,7 @@
   if (!slides.length) return;
   var prev = document.querySelector('[data-sol-prev]'), next = document.querySelector('[data-sol-next]');
   var dotsBox = document.querySelector('.fk-sol-dots');
+  if (!prev || !next || !dotsBox) return;
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var openBtn = null, timer = 0;
 

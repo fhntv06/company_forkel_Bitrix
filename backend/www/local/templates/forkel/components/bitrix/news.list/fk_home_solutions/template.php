@@ -14,17 +14,21 @@ $total = count($items);
 $pin = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v12M2 8h12"/></svg>';
 foreach ($items as $i => $item) {
     // Картинка слайда: детальная, иначе анонс (поле картинки анонса обязательное).
-    $picData = !empty($item['DETAIL_PICTURE']) ? $item['DETAIL_PICTURE'] : $item['PREVIEW_PICTURE'];
-    $pic = $picData['SRC'];
+    $picData = !empty($item['DETAIL_PICTURE']['SRC']) ? $item['DETAIL_PICTURE'] : ($item['PREVIEW_PICTURE'] ?? []);
+    $pic = (string)($picData['SRC'] ?? '');
+    if ($pic === '') {
+        continue; // слайд без картинки не выводим
+    }
     $alt = trim(strip_tags((string)$item['PREVIEW_TEXT'])) ?: $item['NAME'];
     $ratio = !empty($picData['WIDTH']) && !empty($picData['HEIGHT']) ? round($picData['WIDTH'] / $picData['HEIGHT'], 4) : 0;
 
     // Координаты точки читаем один раз.
     $coords = $item['PROPERTIES']['COORDS_POINT']['VALUE'] ?? '';
+    $coords = trim((string)(is_array($coords) ? reset($coords) : $coords));
     $x = $y = null;
     if (preg_match('/(\d+(?:[.,]\d+)?)\s*[;:\s]\s*(\d+(?:[.,]\d+)?)/', $coords, $m)) {
-        $x = (float)str_replace(',', '.', $m[1]);
-        $y = (float)str_replace(',', '.', $m[2]);
+        $x = min(100.0, (float)str_replace(',', '.', $m[1]));
+        $y = min(100.0, (float)str_replace(',', '.', $m[2]));
     }
 
     // Товары точки.
