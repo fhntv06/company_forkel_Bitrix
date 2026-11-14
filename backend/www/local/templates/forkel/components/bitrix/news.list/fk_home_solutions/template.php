@@ -6,8 +6,9 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
 /**
  * Слайды «Готовые решения» (V4: .fk-sol__slide). Выводит <li>; каркас карусели и стрелки задаёт index.php, логику — js/solutions.js.
  * Слайд — элемент инфоблока solutions: фото (детальная, иначе анонс), alt — текст анонса, иначе название.
- * Точки — свойство HOTSPOTS (множественная привязка к товарам каталога); в описании значения координаты «x;y» в процентах
- * от левого верхнего угла фото. Товары с одинаковыми координатами собираются в одну точку.
+ * Точки — два множественных свойства с одинаковым порядком значений: HOTSPOTS (привязка к товарам каталога)
+ * и COORDS_POINT (строка «x;y» — координаты в процентах от левого верхнего угла фото). N-й товар стоит в N-й координате;
+ * товары с одинаковыми координатами собираются в одну точку. Если COORDS_POINT пуст, координаты берутся из описания значения HOTSPOTS.
  */
 $items = array_values($arResult['ITEMS']);
 $total = count($items);
@@ -15,21 +16,23 @@ $pin = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v12M2 8h12"/></
 $n = 0; // сквозной номер точки для id всплывающих блоков
 foreach ($items as $i => $item) {
     // Картинка слайда: детальная, иначе анонс. У пустого поля ключ есть, но значение не массив, поэтому проверяем SRC, а не наличие ключа.
-    $pic = !empty($item['DETAIL_PICTURE']['SRC']) ? $item['DETAIL_PICTURE'] : (!empty($item['PREVIEW_PICTURE']['SRC']) ? $item['PREVIEW_PICTURE'] : null);
-    if (empty($pic['SRC'])) {
-        continue;
-    }
+    // Поле картинки анонса обязательное
+    $picData = !empty($item['DETAIL_PICTURE']) ? $item['DETAIL_PICTURE'] : $item['PREVIEW_PICTURE'];
+    $pic = $picData['SRC'];
     $alt = trim(strip_tags((string)$item['PREVIEW_TEXT'])) ?: $item['NAME'];
-    $ratio = !empty($pic['WIDTH']) && !empty($pic['HEIGHT']) ? round($pic['WIDTH'] / $pic['HEIGHT'], 4) : 0;
+    $ratio = !empty($picData['WIDTH']) && !empty($picData['HEIGHT']) ? round($picData['WIDTH'] / $picData['HEIGHT'], 4) : 0;
 
     // группировка товаров по координатам
     $groups = [];
     $hs = $item['PROPERTIES']['HOTSPOTS'] ?? [];
     $ids = (array)($hs['VALUE'] ?? []);
     $desc = (array)($hs['DESCRIPTION'] ?? []);
+    $coords = array_values((array)($item['PROPERTIES']['COORDS_POINT']['VALUE'] ?? []));
+    $ids = array_values($ids);
     foreach ($ids as $k => $productId) {
         $productId = (int)$productId;
-        if ($productId <= 0 || !preg_match('/(\d+(?:[.,]\d+)?)\s*[;:\s]\s*(\d+(?:[.,]\d+)?)/', (string)($desc[$k] ?? ''), $m)) {
+        $raw = (string)($coords[$k] ?? '') !== '' ? (string)$coords[$k] : (string)($desc[$k] ?? '');
+        if ($productId <= 0 || !preg_match('/(\d+(?:[.,]\d+)?)\s*[;:\s]\s*(\d+(?:[.,]\d+)?)/', $raw, $m)) {
             continue;
         }
         $x = (float)str_replace(',', '.', $m[1]);
@@ -41,9 +44,9 @@ foreach ($items as $i => $item) {
     }
     $cx = $groups ? round(reset($groups)['x'] / 100, 3) : 0.5;
     ?>
-<li class="fk-sol__slide" style="--img:url('<?= htmlspecialcharsbx($pic['SRC']) ?>');--cx:<?= $cx ?>" role="group" aria-roledescription="слайд" aria-label="Слайд <?= $i + 1 ?> из <?= $total ?>">
+<li class="fk-sol__slide" style="--img:url('<?= htmlspecialcharsbx($pic) ?>');--cx:<?= $cx ?>" role="group" aria-roledescription="слайд" aria-label="Слайд <?= $i + 1 ?> из <?= $total ?>">
     <div class="fk-sol__art"<?= $ratio ? ' style="--ar:' . $ratio . '"' : '' ?>>
-        <img src="<?= htmlspecialcharsbx($pic['SRC']) ?>" alt="<?= htmlspecialcharsbx($alt) ?>"<?= $i > 0 ? ' loading="lazy"' : '' ?> decoding="async">
+        <img src="<?= htmlspecialcharsbx($pic) ?>" alt="<?= htmlspecialcharsbx($alt) ?>"<?= $i > 0 ? ' loading="lazy"' : '' ?> decoding="async">
         <?php
         $pops = '';
         foreach ($groups as $g) {
