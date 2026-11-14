@@ -171,3 +171,32 @@
         padding: 56px 64px;
     }
 }
+
+.fk-coop-split {
+    display: grid;
+    gap: 32px var(--fk-col-gap);
+}
+
+.fk-coop-steps {
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+    .fk-coop-split {
+        grid-template-columns: repeat(12, 1fr);
+    }
+
+    .fk-coop-adv {
+        grid-column: 1 / span 5;
+    }
+    .fk-partner {
+        grid-column: span 7;
+    }
+    #partner-form {
+        grid-column: 8 / span 5;
+    }
+
+    .fk-coop-steps {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
