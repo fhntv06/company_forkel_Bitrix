@@ -47,7 +47,7 @@ $flat = static function ($v): string {
     <a class="fk-btn fk-btn--primary" href="<?= htmlspecialcharsbx($APPLICATION->GetCurPage(false)) ?>">Сбросить фильтры</a>
 </div>
 <?php return; } ?>
-<ul class="fk-grid fk-grid--products fk-grid--catalog">
+<ul class="fk-grid fk-grid--products<?= ($arParams['FK_PLAIN_GRID'] ?? 'N') === 'Y' ? '' : ' fk-grid--catalog' ?>">
 <?php foreach ($items as $item) {
     $name = htmlspecialcharsbx($item['NAME']);
     $url = htmlspecialcharsbx($item['DETAIL_PAGE_URL']);

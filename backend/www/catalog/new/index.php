@@ -12,6 +12,6 @@ $listResult = [
 	'URL_TEMPLATES' => ['section' => '#SECTION_CODE_PATH#/', 'element' => '#SECTION_CODE_PATH#/#ELEMENT_CODE#/'],
 	'VARIABLES' => ['SECTION_ID' => 0],
 ];
-fk_catalog_list($listParams, $listResult, null, ['!PROPERTY_NEW' => false], ['NEW']);
+fk_catalog_list($listParams, $listResult, null, fk_new_filter(), ['NEW']);
 
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");

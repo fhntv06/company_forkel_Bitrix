@@ -144,4 +144,13 @@ if ($fkFeat !== "") { ?>
 </section>
 <?php } ?>
 <?php
+// 5. Новинки: 8 товаров с флагом NEW (как в V4 по дизайну)
+$fkNew = fk_product_html("home-new", fk_new_filter(), 0, 8, true);
+if ($fkNew !== "") { ?>
+<section class="sec wrap" id="new" aria-labelledby="new-t">
+	<div class="head2"><h2 id="new-t"><?php $fkInclude("fk_home_new_title"); ?></h2><a class="btn btn--ghost btn--sm" href="/catalog/new/">Все новинки</a></div>
+	<?= $fkNew ?>
+</section>
+<?php } ?>
+<?php
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");

@@ -156,16 +156,17 @@ if (!function_exists('fk_catalog_params')) {
     }
 }
 
-if (!function_exists('fk_product_block')) {
+if (!function_exists('fk_product_html')) {
     /**
-     * Блок карточек под товаром («Сопутствующие товары», «Похожие товары»). Пустой результат — ничего не выводит.
-     * $filter — дополнительный фильтр (['ID' => [...]] или ['!ID' => 5]); $sectionId — раздел для выбора (0 = весь каталог).
+     * HTML сетки карточек товаров (без обёртки секции). Пусто, если товаров нет.
+     * $key — уникальный ключ для имени фильтра; $filter — дополнительный фильтр; $sectionId — раздел (0 = весь каталог);
+     * $plain — сетка как в V4 на главной (без «каталожных» колонок).
      */
-    function fk_product_block(string $title, array $filter, int $sectionId = 0, int $count = 4): void
+    function fk_product_html(string $key, array $filter, int $sectionId = 0, int $count = 4, bool $plain = false): string
     {
         global $APPLICATION;
         $p = fk_catalog_params();
-        $filterName = 'arrFkBlock' . substr(md5($title), 0, 6);
+        $filterName = 'arrFkBlock' . substr(md5($key), 0, 6);
         $GLOBALS[$filterName] = $filter;
         ob_start();
         $APPLICATION->IncludeComponent('bitrix:catalog.section', 'fk', [
@@ -208,13 +209,51 @@ if (!function_exists('fk_product_block')) {
             'CACHE_GROUPS' => 'Y',
             'COMPATIBLE_MODE' => 'N',
             'FK_COMPACT' => 'Y',
+            'FK_PLAIN_GRID' => $plain ? 'Y' : 'N',
         ], false);
-        $html = trim((string)ob_get_clean());
+        return trim((string)ob_get_clean());
+    }
+}
+
+if (!function_exists('fk_product_block')) {
+    /**
+     * Блок карточек под товаром («Сопутствующие товары», «Похожие товары»). Пустой результат — ничего не выводит.
+     * $filter — дополнительный фильтр (['ID' => [...]] или ['!ID' => 5]); $sectionId — раздел для выбора (0 = весь каталог).
+     */
+    function fk_product_block(string $title, array $filter, int $sectionId = 0, int $count = 4): void
+    {
+        $html = fk_product_html($title, $filter, $sectionId, $count);
         if ($html === '') {
             return;
         }
         $id = 'fk-block-' . substr(md5($title), 0, 6);
         echo '<section class="fk-section" aria-labelledby="' . $id . '"><div class="fk-section-head"><h2 id="' . $id . '">'
             . htmlspecialcharsbx($title) . '</h2></div>' . $html . '</section>';
+    }
+}
+
+if (!function_exists('fk_new_filter')) {
+    /**
+     * Фильтр «Новинка»: у товара свойство NEW = «Y». NEW — свойство-список (флажок): в фильтр уходит ID значения,
+     * найденного по XML_ID или тексту «Y»/«Да». Если такого значения нет, не показываем ничего (а не весь каталог).
+     */
+    function fk_new_filter(): array
+    {
+        static $filter = null;
+        if ($filter !== null) {
+            return $filter;
+        }
+        $ids = [];
+        if (\Bitrix\Main\Loader::includeModule('iblock')) {
+            $rs = \CIBlockPropertyEnum::GetList([], ['IBLOCK_ID' => fk_iblock_id('catalog'), 'CODE' => 'NEW']);
+            while ($e = $rs->Fetch()) {
+                $xml = mb_strtolower(trim((string)$e['XML_ID']));
+                $val = mb_strtolower(trim((string)$e['VALUE']));
+                if (in_array($xml, ['y', 'yes'], true) || in_array($val, ['y', 'да'], true)) {
+                    $ids[] = (int)$e['ID'];
+                }
+            }
+        }
+        return $filter = ['=PROPERTY_NEW' => $ids ?: [-1]];
     }
 }
