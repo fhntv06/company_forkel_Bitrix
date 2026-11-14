@@ -297,4 +297,45 @@ if ($fkInt !== "") { ?>
 	</div>
 </section>
 <?php
+// 11. Профессионалам: элементы инфоблока pro
+$fkPro = $fkCapture(static function () {
+	global $APPLICATION;
+	$APPLICATION->IncludeComponent("bitrix:news.list", "fk_home_pro", array(
+		"IBLOCK_TYPE" => "",
+		"IBLOCK_ID" => fk_iblock_id("pro"),
+		"NEWS_COUNT" => "6",
+		"SORT_BY1" => "SORT",
+		"SORT_ORDER1" => "ASC",
+		"SORT_BY2" => "ID",
+		"SORT_ORDER2" => "ASC",
+		"FIELD_CODE" => array("NAME", "PREVIEW_TEXT"),
+		"PROPERTY_CODE" => array(),
+		"CHECK_DATES" => "N",
+		"SET_TITLE" => "N",
+		"SET_BROWSER_TITLE" => "N",
+		"SET_META_KEYWORDS" => "N",
+		"SET_META_DESCRIPTION" => "N",
+		"SET_LAST_MODIFIED" => "N",
+		"ADD_SECTIONS_CHAIN" => "N",
+		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+		"SET_STATUS_404" => "N",
+		"SHOW_404" => "N",
+		"DISPLAY_TOP_PAGER" => "N",
+		"DISPLAY_BOTTOM_PAGER" => "N",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "3600",
+	), false);
+});
+if ($fkPro !== "") { ?>
+<section class="sec wrap" id="pro" aria-labelledby="pro-t">
+	<div class="pro">
+		<h2 id="pro-t"><?php $fkInclude("fk_home_pro_title"); ?></h2>
+		<ul><?= $fkPro ?></ul>
+		<a class="btn btn--light" href="/cooperation/">Обсудить сотрудничество
+			<svg class="ar" aria-hidden="true"><use href="#arrow"/></svg>
+		</a>
+	</div>
+</section>
+<?php } ?>
+<?php
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
