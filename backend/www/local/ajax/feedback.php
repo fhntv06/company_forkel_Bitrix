@@ -97,7 +97,11 @@ if ($mode === 'callback') {
 
 // Подставляем данные в формат, который ожидает main.feedback.
 $_POST['user_name'] = $name;
-$_POST['user_email'] = $isEmail ? $contact : '';
+$replyEmail = $isEmail ? $contact : '';
+if ($replyEmail === '' && $mode === 'partner' && filter_var((string)($_POST['email'] ?? ''), FILTER_VALIDATE_EMAIL)) {
+    $replyEmail = (string)$_POST['email'];
+}
+$_POST['user_email'] = $replyEmail;
 $_POST['MESSAGE'] = $text;
 $_POST['submit'] = 'Y';
 

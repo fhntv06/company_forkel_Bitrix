@@ -1,0 +1,3 @@
+<li class="fk-pro__item"><span class="fk-idx" aria-hidden="true">01</span><div><h3>Техническая поддержка</h3><p>Если возникнут вопросы по изделиям FORKEL, вы всегда сможете обратиться к нам.</p></div></li>
+<li class="fk-pro__item"><span class="fk-idx" aria-hidden="true">02</span><div><h3>Помощь в расчете проекта</h3><p>Подберем оборудование и поможем сформировать комплектацию под конкретный объект.</p></div></li>
+<li class="fk-pro__item"><span class="fk-idx" aria-hidden="true">03</span><div><h3>Защита проекта</h3><p>Поддержим вас в работе с заказчиком и поможем сохранить проект за вашей компанией.</p></div></li>

@@ -92,4 +92,31 @@
         });
     });
   });
+
+  /* Вкладки направления анкеты партнёра: переключают скрытое поле direction */
+  (function () {
+    var tabs = [].slice.call(document.querySelectorAll('.fk-partner__tab'));
+    var dir = document.getElementById('partner-direction');
+    if (!tabs.length || !dir) return;
+    function select(tab, focus) {
+      tabs.forEach(function (t) { var on = t === tab; t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1; });
+      dir.value = tab.getAttribute('data-role');
+      if (focus) tab.focus();
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { select(t); });
+      t.addEventListener('keydown', function (e) {
+        var n = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : e.key === 'Home' ? 0 : e.key === 'End' ? tabs.length - 1 : -1;
+        if (n < 0) return;
+        e.preventDefault(); select(tabs[(n + tabs.length) % tabs.length], true);
+      });
+    });
+  })();
+
+  /* Счётчик символов: textarea[data-counter="<id элемента>"] */
+  [].forEach.call(document.querySelectorAll('[data-counter]'), function (ta) {
+    var out = document.getElementById(ta.getAttribute('data-counter'));
+    if (!out) return;
+    ta.addEventListener('input', function () { out.textContent = ta.value.length; });
+  });
 })();
