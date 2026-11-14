@@ -23,36 +23,6 @@
     <link rel="stylesheet" href="css/projects.css">
 </head>
 <body>
-<style>
-    .fk-coop-split {
-        display: grid;
-        gap: 32px var(--fk-col-gap);
-    }
-
-    .fk-coop-steps {
-        grid-template-columns: 1fr;
-    }
-
-    @media (min-width: 1024px) {
-        .fk-coop-split {
-            grid-template-columns: repeat(12, 1fr);
-        }
-
-        .fk-coop-adv {
-            grid-column: 1 / span 5;
-        }
-        .fk-partner {
-            grid-column: span 7;
-        }
-        #partner-form {
-            grid-column: 8 / span 5;
-        }
-
-        .fk-coop-steps {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
-</style>
 
 <!-- Спрайт изделий. Цвета берутся из CSS-переменных (--finish, --finish-2, --edge) — см. styles.css, .fin-* -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
