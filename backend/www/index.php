@@ -239,4 +239,42 @@ if ($fkSol !== "") { ?>
 </section>
 <?php } ?>
 <?php
+// 8. Интерьеры: элементы инфоблока interiors (карточки не ссылки)
+$fkInt = $fkCapture(static function () {
+	global $APPLICATION;
+	$APPLICATION->IncludeComponent("bitrix:news.list", "fk_home_interiors", array(
+		"IBLOCK_TYPE" => "",
+		"IBLOCK_ID" => fk_iblock_id("interiors"),
+		"NEWS_COUNT" => "8",
+		"SORT_BY1" => "SORT",
+		"SORT_ORDER1" => "ASC",
+		"SORT_BY2" => "ID",
+		"SORT_ORDER2" => "ASC",
+		"FIELD_CODE" => array("NAME", "PREVIEW_TEXT", "PREVIEW_PICTURE", "DETAIL_PICTURE"),
+		"PROPERTY_CODE" => array(),
+		"CHECK_DATES" => "N",
+		"SET_TITLE" => "N",
+		"SET_BROWSER_TITLE" => "N",
+		"SET_META_KEYWORDS" => "N",
+		"SET_META_DESCRIPTION" => "N",
+		"SET_LAST_MODIFIED" => "N",
+		"ADD_SECTIONS_CHAIN" => "N",
+		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+		"SET_STATUS_404" => "N",
+		"SHOW_404" => "N",
+		"DISPLAY_TOP_PAGER" => "N",
+		"DISPLAY_BOTTOM_PAGER" => "N",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "3600",
+	), false);
+});
+if ($fkInt !== "") { ?>
+<section class="sec wrap" id="interiors" aria-labelledby="interiors-title">
+	<div class="head2"><h2 id="interiors-title"><?php $fkInclude("fk_home_interiors_title"); ?></h2></div>
+	<div style="margin-top:24px">
+		<ul class="fk-grid fk-grid--interiors"><?= $fkInt ?></ul>
+	</div>
+</section>
+<?php } ?>
+<?php
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
