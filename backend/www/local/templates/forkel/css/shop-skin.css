@@ -1,0 +1,30 @@
+/* FORKEL — оформление V4 для страниц магазина на штатных шаблонах Битрикса (bootstrap_v4):
+   корзина, заказ, оплата, вход, кабинет. Подключается только на этих страницах вместе с bootstrap.css ядра; всё внутри .fk-shop. */
+.fk-shop { margin-bottom: var(--fk-section-gap, 64px); color: var(--fk-ink); }
+.fk-shop a { color: var(--fk-ink); text-decoration-color: var(--fk-bright); text-underline-offset: 3px; }
+.fk-shop a:hover { color: var(--fk-ink); }
+
+/* Кнопки */
+.fk-shop .btn { border-radius: var(--fk-r-md, 12px); font-weight: 600; min-height: 48px; padding: 10px 24px; border-width: 1px; }
+.fk-shop .btn-primary, .fk-shop .btn-buy, .fk-shop .btn-success { background: var(--fk-action); border-color: var(--fk-action); color: var(--fk-on-action); }
+.fk-shop .btn-primary:hover, .fk-shop .btn-buy:hover, .fk-shop .btn-success:hover,
+.fk-shop .btn-primary:focus, .fk-shop .btn-buy:focus { background: var(--fk-ink); border-color: var(--fk-ink); color: var(--fk-ink-inverse); }
+.fk-shop .btn-default, .fk-shop .btn-secondary, .fk-shop .btn-outline-primary { background: transparent; border-color: var(--fk-edge, #C9CDD2); color: var(--fk-ink); }
+.fk-shop .btn-default:hover, .fk-shop .btn-secondary:hover, .fk-shop .btn-outline-primary:hover { border-color: var(--fk-ink); background: transparent; color: var(--fk-ink); }
+.fk-shop .btn:focus-visible { outline: 3px solid var(--fk-ink); outline-offset: 2px; box-shadow: none; }
+
+/* Поля */
+.fk-shop .form-control, .fk-shop input[type="text"], .fk-shop input[type="tel"], .fk-shop input[type="email"],
+.fk-shop input[type="password"], .fk-shop select, .fk-shop textarea { border: 1px solid var(--fk-edge, #C9CDD2); border-radius: var(--fk-r-md, 12px); min-height: 48px; background: var(--fk-canvas, #fff); color: var(--fk-ink); }
+.fk-shop .form-control:focus, .fk-shop input:focus, .fk-shop select:focus, .fk-shop textarea:focus { border-color: var(--fk-ink); box-shadow: 0 0 0 3px rgba(251, 232, 142, .6); outline: none; }
+.fk-shop label, .fk-shop .bx-soa-custom-label { font-weight: 600; color: var(--fk-ink); }
+.fk-shop .alert, .fk-shop .alert-danger { border-radius: var(--fk-r-md, 12px); }
+
+/* Блоки и таблицы */
+.fk-shop .bx-soa-section, .fk-shop .card, .fk-shop .bx-sbb-empty-cart-container, .fk-shop .basket-items-list-wrapper,
+.fk-shop .sale-personal-section-index-block { border-radius: var(--fk-r-lg, 24px); border: 1px solid var(--fk-edge, #C9CDD2); background: var(--fk-surface, #F2F2F2); }
+.fk-shop .bx-soa-section-title-container { border-radius: var(--fk-r-lg, 24px) var(--fk-r-lg, 24px) 0 0; }
+.fk-shop .table { color: var(--fk-ink); }
+.fk-shop .nav-tabs .nav-link.active, .fk-shop .nav-pills .nav-link.active { background: var(--fk-action); color: var(--fk-on-action); border-radius: var(--fk-r-md, 12px); }
+.fk-shop .page-link { color: var(--fk-ink); }
+.fk-shop .page-item.active .page-link { background: var(--fk-action); border-color: var(--fk-action); color: var(--fk-on-action); }

@@ -8,6 +8,9 @@ use Bitrix\Main\Page\Asset;
 
 $asset = Asset::getInstance();
 // Порядок как в прототипе V4; v4-skin.css всегда последний.
+    if (fk_is_shop_page()) {
+    $asset->addCss('/bitrix/css/main/bootstrap.min.css'); // штатные шаблоны корзины, заказа и кабинета рассчитаны на Bootstrap
+}
     $asset->addCss(SITE_TEMPLATE_PATH . '/styles.css');
     $asset->addCss(SITE_TEMPLATE_PATH . '/css/shared.css');
     $asset->addCss(SITE_TEMPLATE_PATH . '/css/header.css');
@@ -35,6 +38,7 @@ $asset = Asset::getInstance();
     $asset->addCss(SITE_TEMPLATE_PATH . '/css/accessories.css');
     $asset->addCss(SITE_TEMPLATE_PATH . '/css/search-page.css');
     $asset->addCss(SITE_TEMPLATE_PATH . '/css/v4-skin.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/shop-skin.css');
 $asset->addString(
     '<script>document.documentElement.className = "js"; window.FK = ' . \Bitrix\Main\Web\Json::encode([
         'tpl' => SITE_TEMPLATE_PATH,

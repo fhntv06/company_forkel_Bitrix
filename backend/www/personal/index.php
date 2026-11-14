@@ -1,6 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Персональный раздел");
+$APPLICATION->SetTitle("Личный кабинет");
+$APPLICATION->SetPageProperty("fk_lead", "Профиль, заказы и сохранённые данные в одном месте.");
 ?><?$APPLICATION->IncludeComponent(
 	"bitrix:sale.personal.section",
 	"bootstrap_v4",

@@ -97,7 +97,7 @@ if (!function_exists('fk_page_has_wrapper')) {
 if (!function_exists('fk_render_page_open')) {
     function fk_render_page_open(): string
     {
-        return fk_page_has_wrapper() ? '<div class="fk-container fk-page">' : '';
+        return fk_page_has_wrapper() ? '<div class="fk-container fk-page' . (fk_is_shop_page() ? ' fk-shop' : '') . '">' : '';
     }
 }
 
@@ -261,5 +261,20 @@ if (!function_exists('fk_new_filter')) {
             }
         }
         return $filter = ['=PROPERTY_NEW' => $ids ?: [-1]];
+    }
+}
+
+if (!function_exists('fk_is_shop_page')) {
+    /** Страницы магазина на штатных шаблонах Битрикса: корзина, заказ, вход, кабинет. Им нужны bootstrap.css ядра и css/shop-skin.css. */
+    function fk_is_shop_page(): bool
+    {
+        global $APPLICATION;
+        $path = (string)$APPLICATION->GetCurPage(false);
+        foreach (['/personal/', '/auth/', '/login/'] as $prefix) {
+            if (strpos($path, $prefix) === 0) {
+                return true;
+            }
+        }
+        return false;
     }
 }

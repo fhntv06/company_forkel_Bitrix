@@ -1,7 +1,8 @@
 <?
 define("HIDE_SIDEBAR", true);
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Заказы");
+$APPLICATION->SetTitle("Оформление заказа");
+$APPLICATION->SetPageProperty("fk_lead", "Контакты, доставка и оплата — последние шаги перед заказом.");
 ?><?$APPLICATION->IncludeComponent("bitrix:sale.order.ajax", "bootstrap_v4", array(
 	"PAY_FROM_ACCOUNT" => "Y",
 	"COUNT_DELIVERY_TAX" => "N",
