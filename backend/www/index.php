@@ -276,5 +276,18 @@ if ($fkInt !== "") { ?>
 	</div>
 </section>
 <?php } ?>
+<!-- 9. Шоурум: тексты и фото из областей включения; кнопка открывает окно обратной связи -->
+<section class="sec wrap" id="showroom" aria-labelledby="sr-t">
+	<div class="show">
+		<div class="show__t">
+			<h2 id="sr-t"><?php $fkInclude("fk_home_showroom_title"); ?></h2>
+			<p><?php $fkInclude("fk_home_showroom_text"); ?></p>
+			<button class="btn btn--light" type="button" data-feedback aria-haspopup="dialog">Записаться на визит
+				<svg class="ar" aria-hidden="true"><use href="#arrow"/></svg>
+			</button>
+		</div>
+		<div class="show__img"><?php $fkInclude("fk_home_showroom_photo"); ?></div>
+	</div>
+</section>
 <?php
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");

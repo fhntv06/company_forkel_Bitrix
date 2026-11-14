@@ -1,0 +1,1 @@
+<img class="ph" src="/local/templates/forkel/assets/images/main_page/showroom.png" alt="Шоурум FORKEL: стенд с розетками и выключателями в зале" width="1536" height="672" loading="lazy" decoding="async">
