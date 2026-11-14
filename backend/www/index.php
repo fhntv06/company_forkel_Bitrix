@@ -44,4 +44,30 @@ $fkCapture = static function (callable $fn): string {
 </section>
 
 <?php
+// 2. Направления: разделы каталога с картинкой раздела
+$fkDirs = $fkCapture(static function () {
+	global $APPLICATION;
+	$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "fk_home_dirs", array(
+		"IBLOCK_TYPE" => "",
+		"IBLOCK_ID" => fk_iblock_id("catalog"),
+		"SECTION_ID" => 0,
+		"SECTION_CODE" => "",
+		"TOP_DEPTH" => 1,
+		"COUNT_ELEMENTS" => "N",
+		"SECTION_FIELDS" => array("PICTURE"),
+		"SECTION_URL" => "/catalog/#SECTION_CODE_PATH#/",
+		"ADD_SECTIONS_CHAIN" => "N",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "3600",
+	), false);
+});
+if ($fkDirs !== "") { ?>
+<section class="sec wrap" aria-labelledby="dir-t">
+	<div class="split">
+		<div><h2 id="dir-t"><?php $fkInclude("fk_home_dirs_title"); ?></h2></div>
+		<ul class="dirs"><?= $fkDirs ?></ul>
+	</div>
+</section>
+<?php } ?>
+<?php
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
