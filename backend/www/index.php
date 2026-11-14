@@ -192,4 +192,51 @@ if ($fkProj !== "") { ?>
 </section>
 <?php } ?>
 <?php
+// 7. Готовые решения: слайды из инфоблока solutions, точки — свойство HOTSPOTS (товар + координаты)
+$fkSol = $fkCapture(static function () {
+	global $APPLICATION;
+	$APPLICATION->IncludeComponent("bitrix:news.list", "fk_home_solutions", array(
+		"IBLOCK_TYPE" => "",
+		"IBLOCK_ID" => fk_iblock_id("solutions"),
+		"NEWS_COUNT" => "8",
+		"SORT_BY1" => "SORT",
+		"SORT_ORDER1" => "ASC",
+		"SORT_BY2" => "ID",
+		"SORT_ORDER2" => "ASC",
+		"FIELD_CODE" => array("NAME", "PREVIEW_TEXT", "PREVIEW_PICTURE", "DETAIL_PICTURE"),
+		"PROPERTY_CODE" => array("HOTSPOTS"),
+		"CHECK_DATES" => "N",
+		"SET_TITLE" => "N",
+		"SET_BROWSER_TITLE" => "N",
+		"SET_META_KEYWORDS" => "N",
+		"SET_META_DESCRIPTION" => "N",
+		"SET_LAST_MODIFIED" => "N",
+		"ADD_SECTIONS_CHAIN" => "N",
+		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+		"SET_STATUS_404" => "N",
+		"SHOW_404" => "N",
+		"DISPLAY_TOP_PAGER" => "N",
+		"DISPLAY_BOTTOM_PAGER" => "N",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "3600",
+	), false);
+});
+if ($fkSol !== "") { ?>
+<section class="sec wrap fk-solutions" id="solutions" aria-labelledby="solutions-title">
+	<div class="head2"><h2 id="solutions-title"><?php $fkInclude("fk_home_solutions_title"); ?></h2></div>
+	<div style="margin-top:24px">
+		<div class="fk-sol" id="solutions-slider" role="region" aria-roledescription="карусель" aria-label="Готовые решения">
+			<button class="fk-sol-btn fk-sol-btn--prev" type="button" data-sol-prev aria-label="Предыдущий слайд">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+			</button>
+			<button class="fk-sol-btn fk-sol-btn--next" type="button" data-sol-next aria-label="Следующий слайд">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+			</button>
+			<ul class="fk-sol__track" tabindex="0" aria-label="Слайды: прокрутка стрелками влево и вправо"><?= $fkSol ?></ul>
+		</div>
+		<div class="fk-sol-dots" role="group" aria-label="Выбор слайда"></div>
+	</div>
+</section>
+<?php } ?>
+<?php
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");

@@ -160,16 +160,16 @@ if (!function_exists('fk_product_html')) {
     /**
      * HTML сетки карточек товаров (без обёртки секции). Пусто, если товаров нет.
      * $key — уникальный ключ для имени фильтра; $filter — дополнительный фильтр; $sectionId — раздел (0 = весь каталог);
-     * $plain — сетка как в V4 на главной (без «каталожных» колонок).
+     * $plain — сетка как в V4 на главной (без «каталожных» колонок); $template — шаблон catalog.section (fk, fk_mini).
      */
-    function fk_product_html(string $key, array $filter, int $sectionId = 0, int $count = 4, bool $plain = false): string
+    function fk_product_html(string $key, array $filter, int $sectionId = 0, int $count = 4, bool $plain = false, string $template = 'fk'): string
     {
         global $APPLICATION;
         $p = fk_catalog_params();
         $filterName = 'arrFkBlock' . substr(md5($key), 0, 6);
         $GLOBALS[$filterName] = $filter;
         ob_start();
-        $APPLICATION->IncludeComponent('bitrix:catalog.section', 'fk', [
+        $APPLICATION->IncludeComponent('bitrix:catalog.section', $template, [
             'IBLOCK_TYPE' => $p['IBLOCK_TYPE'],
             'IBLOCK_ID' => $p['IBLOCK_ID'],
             'ELEMENT_SORT_FIELD' => 'sort',
