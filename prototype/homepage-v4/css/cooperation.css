@@ -201,6 +201,32 @@
     }
 }
 
+/* Блок «Мы приглашаем к сотрудничеству»: текст слева, список слева направо — справа */
+.fk-coop-invite {
+    display: grid;
+    gap: 24px;
+    margin: 64px auto;
+    padding: 32px;
+    background: var(--fk-surface);
+    border-radius: var(--fk-r-lg);
+}
+
+.fk-coop-invite__text { display: grid; gap: 16px; align-content: center; }
+.fk-coop-invite__text h2 { font-size: var(--fk-fs-h2); line-height: 1.2; }
+.fk-coop-invite__text p { max-width: 52ch; color: var(--fk-ink-muted); }
+
+.fk-coop-invite__list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; align-content: center; }
+.fk-coop-invite__list li {
+    padding: 16px 20px;
+    border: 1px solid var(--fk-edge);
+    border-radius: var(--fk-r-md);
+    font-weight: 600;
+}
+
+@media (min-width: 900px) {
+    .fk-coop-invite { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; padding: 48px; }
+}
+
 /* «С кем мы работаем»: две выразительные карточки без изменения исходных абзацев. */
 .fk-coop-audience { grid-template-columns:repeat(2,minmax(0,1fr)); }
 .fk-coop-audience .fk-coop-audience__card { display:flex; flex-direction:column; align-items:flex-start; gap:24px; min-width:0; padding:clamp(24px,4vw,56px); border-radius:32px; background:var(--fk-surface); border:1px solid var(--fk-line); }
