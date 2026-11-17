@@ -4,3 +4,17 @@
 @media (max-width: 1023px) { .fk-acc { grid-auto-columns: calc((100% - var(--fk-col-gap)) / 2.3); } }
 @media (max-width: 599px) { .fk-acc { grid-auto-columns: 72%; } }
 @media (prefers-reduced-motion: no-preference) { .fk-acc { scroll-behavior: smooth; } }
+
+/* F55: табы материалов и схемы компоновок. */
+.fk-acc-tabs { display:flex; flex-wrap:wrap; gap:12px; margin-top:24px; }
+.fk-acc-tab { border:1px solid var(--fk-line); border-radius:999px; background:var(--fk-surface); color:var(--fk-ink); padding:12px 20px; font:inherit; cursor:pointer; min-height:44px; }
+.fk-acc-tab[aria-selected="true"] { background:var(--fk-ink); color:var(--fk-surface); border-color:var(--fk-ink); }
+.fk-acc-tab:focus-visible { outline:2px solid var(--fk-ink); outline-offset:4px; }
+.fk-acc-sec [role="tabpanel"][hidden] { display:none; }
+.fk-acc-option { padding-bottom:24px; }
+.fk-acc-scheme { display:grid; place-items:center; padding:24px; }
+.fk-acc-scheme svg { width:100%; max-height:140px; fill:none; stroke:var(--fk-ink); stroke-width:1.5; }
+.fk-acc-scheme__body { fill:#f4f2ed; }
+.fk-acc-scheme--aluminum .fk-acc-scheme__body { fill:#c9cdd1; }
+.fk-acc-scheme--glass .fk-acc-scheme__body { fill:#e0eced; }
+.fk-acc-scheme__holes { fill:white; }

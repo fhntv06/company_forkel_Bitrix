@@ -200,3 +200,15 @@
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
+/* «С кем мы работаем»: две выразительные карточки без изменения исходных абзацев. */
+.fk-coop-audience { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.fk-coop-audience .fk-coop-audience__card { display:flex; flex-direction:column; align-items:flex-start; gap:24px; min-width:0; padding:clamp(24px,4vw,56px); border-radius:32px; background:var(--fk-surface); border:1px solid var(--fk-line); }
+.fk-coop-audience .fk-coop-audience__card--accent { background:var(--fk-ink); color:var(--fk-surface); border-color:var(--fk-ink); }
+.fk-coop-audience__top { width:100%; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+.fk-coop-audience__top svg { width:64px; height:64px; padding:12px; border-radius:18px; background:var(--fk-bright); color:var(--fk-ink); fill:none; stroke:currentColor; stroke-width:1.5; stroke-linejoin:round; stroke-linecap:round; }
+.fk-coop-audience__top span { font-size:clamp(40px,5vw,72px); line-height:1; opacity:.35; font-weight:500; }
+.fk-coop-audience__card h3 { font-size:clamp(24px,2.4vw,36px); line-height:1.15; max-width:18ch; margin:16px 0 0; }
+.fk-coop-audience__card p { font-size:clamp(16px,1.5vw,20px); line-height:1.6; margin:0; max-width:52ch; }
+.fk-coop-audience__card--accent p { color:inherit; }
+@media(max-width:767px) { .fk-coop-audience { grid-template-columns:1fr; } }

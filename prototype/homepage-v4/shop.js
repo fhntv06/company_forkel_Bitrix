@@ -405,6 +405,45 @@
     update();
   }
 
+
+  /* F55: варианты компоновки, без вымышленных цен и товарных ID. */
+  function initF55Accessories(p) {
+    var section = document.getElementById('pdp-accessories');
+    if (!section || p.col !== 'F55' || p.type === 'frame') return;
+    section.hidden = false;
+    var materials = [['plastic', 'пластик'], ['aluminum', 'алюминий'], ['glass', 'стекло']];
+    section.innerHTML = '<div class="fk-section-head"><h2 id="acc-title">Сопутствующие товары</h2></div>' +
+      '<p class="fk-note">Рамки F55 на 1–5 постов. Выберите материал и компоновку. Изображения — схемы; цены и наличие уточняются.</p>' +
+      '<div class="fk-acc-tabs" role="tablist" aria-label="Материал рамки F55">' +
+      materials.map(function (m, i) {
+        return '<button class="fk-acc-tab" type="button" role="tab" id="acc-tab-' + m[0] + '" aria-controls="acc-panel-' + m[0] + '" aria-selected="' + (i === 0) + '" tabindex="' + (i === 0 ? '0' : '-1') + '">Рамки F55 ' + m[1] + '</button>';
+      }).join('') + '</div>' + materials.map(function (m, i) {
+        return '<div role="tabpanel" id="acc-panel-' + m[0] + '" aria-labelledby="acc-tab-' + m[0] + '" tabindex="0"' + (i ? ' hidden' : '') + '><ul class="fk-acc">' +
+          [1, 2, 3, 4, 5].map(function (n) {
+            var title = 'Рамка на ' + n + (n === 1 ? ' пост' : n < 5 ? ' поста' : ' постов');
+            var holes = '';
+            for (var k = 0; k < n; k++) holes += '<rect x="' + (14 + k * 64) + '" y="14" width="48" height="48" rx="2"/>';
+            return '<li class="fk-product-card fk-acc-option"><div class="fk-product-card__media fk-acc-scheme fk-acc-scheme--' + m[0] + '"><svg viewBox="0 0 ' + (n * 64 + 12) + ' 76" role="img" aria-label="' + title + ', схема"><rect class="fk-acc-scheme__body" x="1" y="1" width="' + (n * 64 + 10) + '" height="74" rx="4"/><g class="fk-acc-scheme__holes">' + holes + '</g></svg></div><h3 class="fk-product-card__name">' + title + ' F55</h3><p class="fk-note">' + m[1].charAt(0).toUpperCase() + m[1].slice(1) + '</p></li>';
+          }).join('') + '</ul></div>';
+      }).join('');
+    var tabs = [].slice.call(section.querySelectorAll('[role="tab"]'));
+    function select(tab) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      });
+    }
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener('click', function () { select(tab); });
+      tab.addEventListener('keydown', function (e) {
+        var next = e.key === 'ArrowRight' ? (i + 1) % tabs.length : e.key === 'ArrowLeft' ? (i + tabs.length - 1) % tabs.length : e.key === 'Home' ? 0 : e.key === 'End' ? tabs.length - 1 : -1;
+        if (next < 0) return;
+        e.preventDefault(); select(tabs[next]); tabs[next].focus();
+      });
+    });
+  }
+
   function initProduct() {
     var root = document.getElementById('pdp');
     var id = parseInt(param('id'), 10);
@@ -423,6 +462,7 @@
 
     if (accDemo && p.type === 'frame') accDemo.hidden = true;
 
+    initF55Accessories(p);
     var cname = catName(p.cat);
     document.title = 'FORKEL — ' + p.name + ' (прототип)';
     document.getElementById('pdp-crumb').textContent = p.name;
