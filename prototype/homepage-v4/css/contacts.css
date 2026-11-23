@@ -28,12 +28,12 @@
 
 /* Контактные данные отдельными карточками. */
 .fk-ct-connection { display:grid; align-content:start; gap:24px; }
-.fk-ct-connection > h2 { font-size:var(--fk-fs-h3); }
+.fk-ct-title { margin:16px 0 24px; font-size:clamp(1.625rem, 1.04rem + 2.253vw, 3.033rem); line-height:1.08; font-weight:700; letter-spacing:-0.02em; overflow-wrap:break-word; }
 .fk-ct-channels { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
 .fk-ct-channel { min-width:0; padding:24px; border-radius:var(--fk-r-lg); background:var(--fk-surface); }
 .fk-ct-channel__icon { display:grid; place-items:center; width:48px; height:48px; border-radius:14px; background:var(--fk-bright); margin-bottom:24px; }
 .fk-ct-channel svg { width:24px; height:24px; fill:none; stroke:var(--fk-ink); stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
-.fk-ct-channel h3 { font-size:var(--fk-fs-small); color:var(--fk-ink-muted); margin:0 0 8px; }
+.fk-ct-channel h2 { font-size:var(--fk-fs-small); line-height:1.25; letter-spacing:-0.01em; font-weight:600; color:var(--fk-ink-muted); margin:0 0 8px; }
 .fk-ct-channel p { margin:0; font-size:1.125rem; font-weight:600; overflow-wrap:anywhere; }
 .fk-ct-channel a { color:inherit; text-decoration:underline; text-underline-offset:4px; }
 @media(min-width:1024px) { .fk-ct > .fk-ct-connection:first-child { padding:0; } }
