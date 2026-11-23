@@ -146,12 +146,6 @@
 }
 
 @media (min-width: 769px) {
-    .fk-coop-card:first-child {
-        grid-column: span 8;
-    }
-    .fk-coop-card:nth-child(2) {
-        grid-column: 9 / -1;
-    }
     .fk-coop-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
@@ -198,5 +192,84 @@
 
     .fk-coop-steps {
         grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Блок «Мы приглашаем к сотрудничеству»: текст слева, список слева направо — справа */
+.fk-coop-invite {
+    display: grid;
+    gap: 24px;
+    margin: 64px auto;
+    padding: 32px;
+    background: var(--fk-surface);
+    border-radius: var(--fk-r-lg);
+}
+
+.fk-coop-invite__text { display: grid; gap: 16px; align-content: center; }
+.fk-coop-invite__text h2 { font-size: var(--fk-fs-h2); line-height: 1.2; }
+.fk-coop-invite__text p { max-width: 52ch; color: var(--fk-ink-muted); }
+
+.fk-coop-invite__list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; align-content: center; }
+.fk-coop-invite__list li {
+    padding: 16px 20px;
+    border: 1px solid var(--fk-edge);
+    border-radius: var(--fk-r-md);
+    font-weight: 600;
+}
+
+@media (min-width: 900px) {
+    .fk-coop-invite { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; padding: 48px; }
+}
+
+/* «С кем мы работаем» (TASK-006): четыре компактные карточки с нумерацией: 4 колонки от 1280 px, 2 — от 768, 1 — меньше. */
+.fk-coop-audience { display:grid; grid-template-columns:minmax(0,1fr); gap:var(--fk-col-gap); margin:0; padding:0; list-style:none; }
+.fk-coop-audience__card { display:flex; flex-direction:column; align-items:flex-start; gap:12px; min-width:0; padding:24px; border-radius:var(--fk-r-lg); background:var(--fk-surface); }
+.fk-coop-audience__num { align-self:stretch; padding-bottom:12px; border-bottom:2px solid var(--fk-bright); font-size:1.75rem; line-height:1; font-weight:700; font-variant-numeric:tabular-nums; color:var(--fk-ink); }
+.fk-coop-audience__card h3 { margin:0; font-size:1.25rem; line-height:1.25; letter-spacing:0; font-weight:700; overflow-wrap:break-word; }
+.fk-coop-audience__card p { margin:0; font-size:1rem; line-height:1.5; color:var(--fk-ink-muted); }
+@media (min-width:768px) { .fk-coop-audience { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (min-width:1280px) { .fk-coop-audience { grid-template-columns:repeat(4,minmax(0,1fr)); } }
+/* TASK-005: секция «Давайте развиваться вместе»: левая колонка (исходный блок + два компактных) и фото.
+   Позиции — по явным классам; от 769 px всегда 12 колонок (без неявных). Фото не растягивается (height: max-content). */
+.fk-coop-terms__col {
+    display: grid;
+    grid-column: 1 / -1;
+    gap: 16px;
+    align-content: start;
+    min-width: 0;
+}
+.fk-coop-terms .fk-coop-card--compact {
+    padding: 24px 32px;
+}
+.fk-coop-terms .fk-coop-card--compact h4 {
+    margin: 0 0 8px;
+    font-size: 1.25rem;
+    line-height: 1.25;
+    font-weight: 700;
+    overflow-wrap: break-word;
+}
+.fk-coop-terms .fk-coop-card--compact p {
+    margin: 0;
+    font-size: 1.125rem;
+    line-height: 1.5;
+    color: var(--fk-ink-muted);
+}
+@media (min-width: 769px) {
+    .fk-coop-terms .fk-grid--coop {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+    .fk-coop-terms__col {
+        grid-column: 1 / span 7;
+    }
+    .fk-coop-terms .fk-coop-card--with-image {
+        grid-column: 8 / -1;
+    }
+}
+@media (min-width: 1025px) {
+    .fk-coop-terms__col {
+        grid-column: 1 / span 8;
+    }
+    .fk-coop-terms .fk-coop-card--with-image {
+        grid-column: 9 / -1;
     }
 }

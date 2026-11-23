@@ -6,7 +6,7 @@
 .fk-header::before { content: ""; position: absolute; inset: 0; z-index: -1; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); }
 .fk-header__row { position: relative; display: flex; align-items: center; gap: 8px; }
 .fk-logo { display: inline-flex; align-items: center; gap: 6px; margin-right: auto; min-height: 44px; font-weight: 800; letter-spacing: .08em; font-size: 1.2rem; text-decoration: none; }
-.fk-logo svg { width: 22px; height: 22px; }
+.fk-logo svg { width: 90px; height: 66px; }
 .fk-actions { display: flex; align-items: center; gap: 4px; }
 
 .fk-icon-btn { position: relative; display: inline-grid; place-items: center; width: 44px; height: 44px; padding: 0; background: transparent; border: 0; border-radius: 50%; color: var(--ink); font: inherit; text-decoration: none; cursor: pointer; }
@@ -23,7 +23,7 @@
 .fk-badge[hidden] { display: none; }
 
 /* Мобильная навигация: полноэкранная панель (верх задаёт site.js по низу шапки) */
-.fk-nav { display: none; position: fixed; inset: 68px 0 0 0; z-index: 39; padding: 20px var(--pad) 40px; background: var(--bg); overflow-y: auto; overscroll-behavior: contain; }
+.fk-nav { display: none; position: fixed; inset: 90px 0 0 0; z-index: 39; padding: 20px var(--pad) 40px; background: var(--bg); overflow-y: auto; overscroll-behavior: contain; }
 .fk-nav[data-open] { display: block; }
 .fk-nav__list { display: flex; flex-direction: column; gap: 4px; }
 .fk-nav__link, .fk-catalog-btn { display: flex; align-items: center; width: 100%; min-height: 52px; padding: 0; font: 600 1.15rem/1.3 var(--font); text-align: left; text-decoration: none; color: var(--ink); background: transparent; border: 0; border-bottom: 1px solid var(--veil); border-radius: 0; cursor: pointer; }
@@ -39,7 +39,8 @@
 .fk-nav-fallback { display: none; }
 
 /* Телефон: номера нет, показана (контакты предоставит) */
-.fk-phone { display: inline-block; padding: 8px 14px; white-space: nowrap; font-size: .875rem; line-height: 1.3; color: var(--ink); border: 1px dashed var(--silver); border-radius: var(--r-s); background: var(--bg); }
+.fk-phone { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; white-space: nowrap; font-size: .875rem; font-weight: 600; line-height: 1.3; color: var(--ink); text-decoration: none; border-radius: 999px; }
+.fk-phone:hover { background: var(--veil); }
 .fk-phone--header { display: none; }
 .fk-nav__phone { margin-top: 16px; }
 
@@ -78,7 +79,7 @@
   .fk-search-btn:hover { background: var(--veil); }
   .fk-search-btn__text { display: inline; font-size: .875rem; }
 }
-@media (min-width: 1536px) { .fk-phone--header { display: inline-block; margin-right: 8px; } }
+@media (min-width: 1536px) { .fk-phone--header { display: inline-flex; margin-right: 8px; } }
 /* Узкие экраны (360): четыре кнопки и «Меню» должны помещаться без горизонтальной прокрутки */
 @media (max-width: 399px) {
   .fk-header__row { gap: 4px; }

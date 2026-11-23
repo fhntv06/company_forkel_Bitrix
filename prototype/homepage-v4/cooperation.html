@@ -73,13 +73,22 @@
 <!-- Шапка V4 с функциями V3 (M2). Одна и та же разметка на всех страницах; aria-current="page" ставится на пункт текущей страницы -->
 <header class="fk-header fk-container" id="top">
     <div class="fk-container fk-header__row">
-        <a class="fk-logo" href="index.html" aria-label="FORKEL, на главную">
-            <svg viewBox="0 0 40 40" aria-hidden="true">
-                <path d="M6 24A16 16 0 0 1 20 4" fill="none" stroke="var(--yellow)" stroke-width="2.4"
-                      stroke-linecap="round"/>
-            </svg>
-            FORKEL
-        </a>
+        <a class="fk-logo" href="index.html" aria-label="FORKEL, на главную"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xodm="http://www.corel.com/coreldraw/odm/2003" xml:space="preserve" width="150" height="44" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 29700 21000">
+                <defs>
+
+                    <linearGradient id="fk-header-gradient-0" gradientUnits="userSpaceOnUse" x1="9604.9" y1="6271.54" x2="22207.98" y2="6271.54">
+                        <stop offset="0" style="stop-opacity:1; stop-color:#FFCC00"/>
+                        <stop offset="1" style="stop-opacity:1; stop-color:white"/>
+                    </linearGradient>
+                    <linearGradient id="fk-header-gradient-1" gradientUnits="userSpaceOnUse" xlink:href="#fk-header-gradient-0" x1="9604.9" y1="14742.68" x2="22207.98" y2="14742.68"></linearGradient>
+                </defs>
+                <g id="fk-header-layer">
+                    <metadata id="fk-header-metadata"/>
+                    <path fill="currentColor" d="M17636.83 10044.03l1910.79 -1415.45 -912.89 0 -2407.59 1787.05 0 -1787.05 -636.27 0 0 3574.04 636.27 0 0 -1118.19 894.27 -659.63 1746.25 1777.82 890.8 0 -2121.63 -2158.59zm-14901.75 49.93l0 638.24 2433.11 0 0 -638.24 -2433.11 0zm-249.34 -827.09l2977.72 0 0 -638.29 -3613.99 0 0 3574.04 636.27 0 0 -2935.75zm5929.88 -679.1l-819.52 0c-992.5,0 -1801.86,811.8 -1801.86,1807.42 0,995.67 809.36,1807.43 1801.86,1807.43l819.52 0c992.61,0 1801.91,-811.76 1801.91,-1807.43 0,-995.62 -809.3,-1807.42 -1801.91,-1807.42zm0 2986.86l-819.52 0c-646.43,0 -1175.8,-531.01 -1175.8,-1179.44 0,-648.42 529.37,-1179.44 1175.8,-1179.44l819.52 0c646.43,0 1175.81,531.02 1175.81,1179.44 0,648.43 -529.38,1179.44 -1175.81,1179.44zm5659.41 -441.71c532,-68.55 882.94,-703.35 889.3,-1201.32 8.35,-658.67 -534.51,-1303.02 -1206.33,-1303.02l-2955.1 0 0 3574.04 636.21 0 0 -2935.75 2323.97 0c325.75,0 564.99,368.6 564.99,664.73 0,301.18 -249.51,664.68 -564.99,664.68l-2084.36 0 0 638.23 1605.72 0 930.91 968.11 895.87 0 -1036.19 -1064.66 0 -5.04zm6872.65 -1038.96l0 638.24 2442.95 0 0 -638.24 -2442.95 0zm-239.55 -827.09l2977.72 0 0 -638.29 -3613.99 0 0 3574.04 3613.99 0 0 -638.18 -2977.72 0 0 -2297.57zm4296.03 -638.29l-636.27 0 0 3574.04 3481.59 0 0 -638.18 -2845.32 0 0 -2935.86z"/>
+                    <path fill="url(#fk-header-gradient-0)" d="M14654.89 4678.29c-2195.47,0 -4183.9,1276.95 -5049.99,3186.55 1058.81,-1648.77 2924.62,-2743.08 5049.99,-2743.08 2125.37,0 3991.18,1094.31 5049.99,2743.08 -866.09,-1909.6 -2854.52,-3186.55 -5049.99,-3186.55z"/>
+                    <path fill="url(#fk-header-gradient-1)" d="M14654.89 16335.98c2195.47,0 4183.9,-1276.95 5049.99,-3186.55 -1058.81,1648.77 -2924.62,2743.08 -5049.99,2743.08 -2125.37,0 -3991.18,-1094.31 -5049.99,-2743.08 866.09,1909.6 2854.52,3186.55 5049.99,3186.55z"/>
+                </g>
+            </svg></a>
 
         <nav class="fk-nav" id="site-nav" aria-label="Основная навигация">
             <ul class="fk-nav__list">
@@ -109,6 +118,7 @@
                                         <li><a href="catalog.html?category=blinds">Управление жалюзи</a></li>
                                         <li><a href="catalog.html?category=thermostats">Терморегуляторы</a></li>
                                         <li><a href="catalog.html?category=dimmers">Диммеры</a></li>
+                                        <li><a href="stands.html">Стенды</a></li>
                                     </ul>
                                     <p class="fk-catalog-all"><a class="fk-link" href="catalog.html">Весь каталог</a>
                                     </p>
@@ -129,7 +139,7 @@
                 <li><a class="fk-nav__link" href="contacts.html">Контакты</a></li>
                 <li class="fk-nav__mobile-only fk-nav__account"><a class="fk-nav__link" href="account.html">Личный
                     кабинет</a></li>
-                <li class="fk-nav__phone"><span class="fk-phone">Телефон</span></li>
+                <li class="fk-nav__phone"><a class="fk-phone" href="tel:+79031541616">+7 (903) 154-16-16</a></li>
             </ul>
         </nav>
 
@@ -164,7 +174,7 @@
                 <span class="fk-vh">Корзина<span data-cart-sr></span></span>
                 <span class="fk-badge" data-cart-count hidden aria-hidden="true">0</span>
             </a>
-            <span class="fk-phone fk-phone--header">Телефон</span>
+            <a class="fk-phone fk-phone--header" href="tel:+79031541616">+7 (903) 154-16-16</a>
             <button class="fk-menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Меню</button>
         </div>
     </div>
@@ -193,21 +203,17 @@
             <figure class="fk-ab-hero__art"><img src="assets/images/designs/2e5a6406cab54b2416d63e19fc1e6c57_ca3ebba6-7e95-47d9-b108-03cc3c814268.jpg" alt="" decoding="async" style="width:100%;height:100%;object-fit:cover"></figure>
         </section>
 
-        <section
-                style="
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin:64px auto;
-                padding:32px;
-                background-color: white;
-                border-radius: var(--fk-r-lg);
-            "
-        >
-            <p style="max-width: 900px; font-size: 32px;">Мы приглашаем к сотрудничеству торгующие компании, магазины,
-                строительные и монтажные компании, интернет-магазины. Нам важно строить долгосрочные отношения, в
-                которых выигрывают обе стороны: вы развиваете продажи, а мы помогаем вам работать с продукцией FORKEL
-                легко и уверенно.</p>
+        <section class="fk-coop-invite" aria-labelledby="coop-invite-title">
+            <div class="fk-coop-invite__text">
+                <h2 id="coop-invite-title">Мы приглашаем к сотрудничеству</h2>
+                <p>Нам важно строить долгосрочные отношения, в которых выигрывают обе стороны: вы развиваете продажи, а мы помогаем вам работать с продукцией FORKEL легко и уверенно.</p>
+            </div>
+            <ul class="fk-coop-invite__list">
+                <li>Торгующие компании</li>
+                <li>Магазины</li>
+                <li>Строительные и монтажные компании</li>
+                <li>Интернет-магазины</li>
+            </ul>
         </section>
 
         <section class="fk-section" aria-labelledby="coop-adv-title">
@@ -323,14 +329,24 @@
             </div>
         </section>
 
-        <section class="fk-section" aria-labelledby="coop-terms">
+        <section class="fk-section fk-coop-terms" aria-labelledby="coop-terms">
             <div class="fk-grid fk-grid--coop">
-                <div class="fk-coop-card">
-                    <h3>Давайте развиваться вместе</h3>
-                    <p>Мы верим, что успешное партнерство строится на доверии, поддержке и общих целях. FORKEL готов стать для вас надежным поставщиком и помощником в развитии бизнеса.</p>
+                <div class="fk-coop-terms__col">
+                    <div class="fk-coop-card">
+                        <h3 id="coop-terms">Давайте развиваться вместе</h3>
+                        <p>Мы верим, что успешное партнерство строится на доверии, поддержке и общих целях. FORKEL готов стать для вас надежным поставщиком и помощником в развитии бизнеса.</p>
+                    </div>
+                    <div class="fk-coop-card fk-coop-card--compact">
+                        <h4>Доверие, основанное на качестве</h4>
+                        <p>Качественные решения FORKEL — основа доверия ваших клиентов.</p>
+                    </div>
+                    <div class="fk-coop-card fk-coop-card--compact">
+                        <h4>Помощь в развитии бизнеса</h4>
+                        <p>Помогаем подобрать ассортимент под задачи вашего бизнеса.</p>
+                    </div>
                 </div>
                 <div class="fk-coop-card fk-coop-card--with-image"
-                     style="background-image: url('https://ledron.ru/local/images/coop_designers/project-fullsize.webp');"
+                     style="background-image: url('assets/images/designs/coop_together.jpg');"
                 >
                 </div>
             </div>
@@ -338,17 +354,28 @@
 
         <section class="fk-section" aria-labelledby="coop-who-title">
             <div class="fk-section-head"><h2 id="coop-who-title">С кем мы работаем</h2></div>
-            <div class="fk-grid fk-grid--projects">
-                <div class="fk-grid--projects__card">
-                    <p>Мы открыты к сотрудничеству с торгующими компаниями, магазинами
-                        электрооборудования, строительными и монтажными компаниями, интернет-магазинами, а также с
-                        дизайнерами и архитекторами.</p>
-                </div>
-                <div class="fk-grid--projects__card">
-                    <p>Если вы цените качественный продукт, современный дизайн и хотите предлагать клиентам решения,
-                        которые действительно украшают интерьер, — нам по пути.</p>
-                </div>
-            </div>
+            <ol class="fk-coop-audience">
+                <li class="fk-coop-audience__card">
+                    <span class="fk-coop-audience__num">01</span>
+                    <h3>Выгодные условия сотрудничества</h3>
+                    <p>Подберём условия сотрудничества с учётом задач и формата вашего бизнеса.</p>
+                </li>
+                <li class="fk-coop-audience__card">
+                    <span class="fk-coop-audience__num">02</span>
+                    <h3>Увеличенная скидка на образцы</h3>
+                    <p>Предоставляем увеличенную скидку на образцы, чтобы вы могли познакомить клиентов с продукцией FORKEL.</p>
+                </li>
+                <li class="fk-coop-audience__card">
+                    <span class="fk-coop-audience__num">03</span>
+                    <h3>Демонстрационные стенды</h3>
+                    <p>Поможем представить продукцию FORKEL на демонстрационных стендах в вашем магазине или шоуруме.</p>
+                </li>
+                <li class="fk-coop-audience__card">
+                    <span class="fk-coop-audience__num">04</span>
+                    <h3>Изготовление по индивидуальным размерам</h3>
+                    <p>Обсудим изготовление по вашим размерам с учётом требований конкретного проекта.</p>
+                </li>
+            </ol>
         </section>
 
         <section class="fk-coop-cta" aria-labelledby="coop-cta">
@@ -373,7 +400,22 @@
         <div class="fk-footer__grid">
             <div class="fk-footer__row">
                 <div class="fk-footer__brand">
-                    <p class="fk-footer__logo"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 24A16 16 0 0 1 20 4" fill="none" stroke="var(--yellow)" stroke-width="2.4" stroke-linecap="round"/></svg>FORKEL</p>
+                    <a class="fk-footer__logo" href="index.html" aria-label="FORKEL, на главную"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xodm="http://www.corel.com/coreldraw/odm/2003" xml:space="preserve" width="150" height="44" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 29700 21000">
+                <defs>
+
+                    <linearGradient id="fk-footer-gradient-0" gradientUnits="userSpaceOnUse" x1="9604.9" y1="6271.54" x2="22207.98" y2="6271.54">
+                        <stop offset="0" style="stop-opacity:1; stop-color:#FFCC00"/>
+                        <stop offset="1" style="stop-opacity:1; stop-color:white"/>
+                    </linearGradient>
+                    <linearGradient id="fk-footer-gradient-1" gradientUnits="userSpaceOnUse" xlink:href="#fk-footer-gradient-0" x1="9604.9" y1="14742.68" x2="22207.98" y2="14742.68"></linearGradient>
+                </defs>
+                <g id="fk-footer-layer">
+                    <metadata id="fk-footer-metadata"/>
+                    <path fill="currentColor" d="M17636.83 10044.03l1910.79 -1415.45 -912.89 0 -2407.59 1787.05 0 -1787.05 -636.27 0 0 3574.04 636.27 0 0 -1118.19 894.27 -659.63 1746.25 1777.82 890.8 0 -2121.63 -2158.59zm-14901.75 49.93l0 638.24 2433.11 0 0 -638.24 -2433.11 0zm-249.34 -827.09l2977.72 0 0 -638.29 -3613.99 0 0 3574.04 636.27 0 0 -2935.75zm5929.88 -679.1l-819.52 0c-992.5,0 -1801.86,811.8 -1801.86,1807.42 0,995.67 809.36,1807.43 1801.86,1807.43l819.52 0c992.61,0 1801.91,-811.76 1801.91,-1807.43 0,-995.62 -809.3,-1807.42 -1801.91,-1807.42zm0 2986.86l-819.52 0c-646.43,0 -1175.8,-531.01 -1175.8,-1179.44 0,-648.42 529.37,-1179.44 1175.8,-1179.44l819.52 0c646.43,0 1175.81,531.02 1175.81,1179.44 0,648.43 -529.38,1179.44 -1175.81,1179.44zm5659.41 -441.71c532,-68.55 882.94,-703.35 889.3,-1201.32 8.35,-658.67 -534.51,-1303.02 -1206.33,-1303.02l-2955.1 0 0 3574.04 636.21 0 0 -2935.75 2323.97 0c325.75,0 564.99,368.6 564.99,664.73 0,301.18 -249.51,664.68 -564.99,664.68l-2084.36 0 0 638.23 1605.72 0 930.91 968.11 895.87 0 -1036.19 -1064.66 0 -5.04zm6872.65 -1038.96l0 638.24 2442.95 0 0 -638.24 -2442.95 0zm-239.55 -827.09l2977.72 0 0 -638.29 -3613.99 0 0 3574.04 3613.99 0 0 -638.18 -2977.72 0 0 -2297.57zm4296.03 -638.29l-636.27 0 0 3574.04 3481.59 0 0 -638.18 -2845.32 0 0 -2935.86z"/>
+                    <path fill="url(#fk-footer-gradient-0)" d="M14654.89 4678.29c-2195.47,0 -4183.9,1276.95 -5049.99,3186.55 1058.81,-1648.77 2924.62,-2743.08 5049.99,-2743.08 2125.37,0 3991.18,1094.31 5049.99,2743.08 -866.09,-1909.6 -2854.52,-3186.55 -5049.99,-3186.55z"/>
+                    <path fill="url(#fk-footer-gradient-1)" d="M14654.89 16335.98c2195.47,0 4183.9,-1276.95 5049.99,-3186.55 -1058.81,1648.77 -2924.62,2743.08 -5049.99,2743.08 -2125.37,0 -3991.18,-1094.31 -5049.99,-2743.08 866.09,1909.6 2854.52,3186.55 5049.99,3186.55z"/>
+                </g>
+            </svg></a>
                 </div>
                 <nav class="fk-footer__social" aria-label="Соцсети">
                     <h2>Мы в соцсетях</h2>
@@ -408,7 +450,8 @@
                 </nav>
                 <div class="fk-footer__contacts">
                     <h2>Контакты</h2>
-                    <p>Телефон, email и адрес.</p>
+                    <p><a href="tel:+79031541616">+7 (903) 154-16-16</a></p>
+                    <p><a href="mailto:forkel.ru@mail.ru">forkel.ru@mail.ru</a></p>
                 </div>
             </div>
         </div>

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FORKEL — контакты (прототип)</title>
-  <meta name="description" content="Прототип страницы контактов FORKEL. Телефон, email, адрес, карта и реквизиты — заглушки до получения данных.">
+  <meta name="description" content="Прототип страницы контактов FORKEL. Телефон, email, адреса магазинов и склада, карта и реквизиты (реквизиты — заглушки до получения данных).">
   <meta name="robots" content="noindex, nofollow">
   <script>document.documentElement.className = 'js';</script>
   <link rel="stylesheet" href="styles.css">
@@ -70,9 +70,22 @@
 <!-- Шапка V4 с функциями V3 (M2). Одна и та же разметка на всех страницах; aria-current="page" ставится на пункт текущей страницы -->
 <header class="fk-header fk-container" id="top">
   <div class="fk-container fk-header__row">
-    <a class="fk-logo" href="index.html" aria-label="FORKEL, на главную">
-      <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 24A16 16 0 0 1 20 4" fill="none" stroke="var(--yellow)" stroke-width="2.4" stroke-linecap="round"/></svg>FORKEL
-    </a>
+    <a class="fk-logo" href="index.html" aria-label="FORKEL, на главную"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xodm="http://www.corel.com/coreldraw/odm/2003" xml:space="preserve" width="150" height="44" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 29700 21000">
+                <defs>
+
+                    <linearGradient id="fk-header-gradient-0" gradientUnits="userSpaceOnUse" x1="9604.9" y1="6271.54" x2="22207.98" y2="6271.54">
+                        <stop offset="0" style="stop-opacity:1; stop-color:#FFCC00"/>
+                        <stop offset="1" style="stop-opacity:1; stop-color:white"/>
+                    </linearGradient>
+                    <linearGradient id="fk-header-gradient-1" gradientUnits="userSpaceOnUse" xlink:href="#fk-header-gradient-0" x1="9604.9" y1="14742.68" x2="22207.98" y2="14742.68"></linearGradient>
+                </defs>
+                <g id="fk-header-layer">
+                    <metadata id="fk-header-metadata"/>
+                    <path fill="currentColor" d="M17636.83 10044.03l1910.79 -1415.45 -912.89 0 -2407.59 1787.05 0 -1787.05 -636.27 0 0 3574.04 636.27 0 0 -1118.19 894.27 -659.63 1746.25 1777.82 890.8 0 -2121.63 -2158.59zm-14901.75 49.93l0 638.24 2433.11 0 0 -638.24 -2433.11 0zm-249.34 -827.09l2977.72 0 0 -638.29 -3613.99 0 0 3574.04 636.27 0 0 -2935.75zm5929.88 -679.1l-819.52 0c-992.5,0 -1801.86,811.8 -1801.86,1807.42 0,995.67 809.36,1807.43 1801.86,1807.43l819.52 0c992.61,0 1801.91,-811.76 1801.91,-1807.43 0,-995.62 -809.3,-1807.42 -1801.91,-1807.42zm0 2986.86l-819.52 0c-646.43,0 -1175.8,-531.01 -1175.8,-1179.44 0,-648.42 529.37,-1179.44 1175.8,-1179.44l819.52 0c646.43,0 1175.81,531.02 1175.81,1179.44 0,648.43 -529.38,1179.44 -1175.81,1179.44zm5659.41 -441.71c532,-68.55 882.94,-703.35 889.3,-1201.32 8.35,-658.67 -534.51,-1303.02 -1206.33,-1303.02l-2955.1 0 0 3574.04 636.21 0 0 -2935.75 2323.97 0c325.75,0 564.99,368.6 564.99,664.73 0,301.18 -249.51,664.68 -564.99,664.68l-2084.36 0 0 638.23 1605.72 0 930.91 968.11 895.87 0 -1036.19 -1064.66 0 -5.04zm6872.65 -1038.96l0 638.24 2442.95 0 0 -638.24 -2442.95 0zm-239.55 -827.09l2977.72 0 0 -638.29 -3613.99 0 0 3574.04 3613.99 0 0 -638.18 -2977.72 0 0 -2297.57zm4296.03 -638.29l-636.27 0 0 3574.04 3481.59 0 0 -638.18 -2845.32 0 0 -2935.86z"/>
+                    <path fill="url(#fk-header-gradient-0)" d="M14654.89 4678.29c-2195.47,0 -4183.9,1276.95 -5049.99,3186.55 1058.81,-1648.77 2924.62,-2743.08 5049.99,-2743.08 2125.37,0 3991.18,1094.31 5049.99,2743.08 -866.09,-1909.6 -2854.52,-3186.55 -5049.99,-3186.55z"/>
+                    <path fill="url(#fk-header-gradient-1)" d="M14654.89 16335.98c2195.47,0 4183.9,-1276.95 5049.99,-3186.55 -1058.81,1648.77 -2924.62,2743.08 -5049.99,2743.08 -2125.37,0 -3991.18,-1094.31 -5049.99,-2743.08 866.09,1909.6 2854.52,3186.55 5049.99,3186.55z"/>
+                </g>
+            </svg></a>
 
     <nav class="fk-nav" id="site-nav" aria-label="Основная навигация">
       <ul class="fk-nav__list">
@@ -100,6 +113,7 @@
                     <li><a href="catalog.html?category=blinds">Управление жалюзи</a></li>
                     <li><a href="catalog.html?category=thermostats">Терморегуляторы</a></li>
                     <li><a href="catalog.html?category=dimmers">Диммеры</a></li>
+                    <li><a href="stands.html">Стенды</a></li>
                   </ul>
                   <p class="fk-catalog-all"><a class="fk-link" href="catalog.html">Весь каталог</a></p>
                 </div>
@@ -117,7 +131,7 @@
         <li class="fk-nav__mobile-only"><a class="fk-nav__link" href="index.html#delivery">Доставка и оплата</a></li>
         <li><a class="fk-nav__link" href="contacts.html" aria-current="page">Контакты</a></li>
         <li class="fk-nav__mobile-only fk-nav__account"><a class="fk-nav__link" href="account.html">Личный кабинет</a></li>
-        <li class="fk-nav__phone"><span class="fk-phone">Телефон</span></li>
+        <li class="fk-nav__phone"><a class="fk-phone" href="tel:+79031541616">+7 (903) 154-16-16</a></li>
       </ul>
     </nav>
 
@@ -140,7 +154,7 @@
         <span class="fk-vh">Корзина<span data-cart-sr></span></span>
         <span class="fk-badge" data-cart-count hidden aria-hidden="true">0</span>
       </a>
-      <span class="fk-phone fk-phone--header">Телефон</span>
+      <a class="fk-phone fk-phone--header" href="tel:+79031541616">+7 (903) 154-16-16</a>
       <button class="fk-menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Меню</button>
     </div>
   </div>
@@ -152,24 +166,16 @@
       <nav class="fk-crumbs" aria-label="Хлебные крошки">
         <ol><li><a href="index.html">Главная</a></li><li aria-current="page">Контакты</li></ol>
       </nav>
-      <section class="fk-ab-hero" aria-labelledby="ct-title">
-        <div class="fk-ab-hero__text">
-          <p class="fk-ab-hero__kicker">FORKEL</p>
-          <h1 class="fk-ab-hero__title" id="ct-title">Контакты</h1>
-          <p class="fk-ab-hero__lead">Способы связи с FORKEL.</p>
-        </div>
-        <figure class="fk-ab-hero__art"><img src="assets/images/designs/2e5a6406cab54b2416d63e19fc1e6c57_ca3ebba6-7e95-47d9-b108-03cc3c814268.jpg" alt="" decoding="async" style="width:100%;height:100%;object-fit:cover"></figure>
-      </section>
+      <h1 class="fk-page-title fk-ct-title" id="ct-title">Контакты</h1>
 
       <div class="fk-ct">
-        <section class="fk-ct-card" aria-labelledby="ct-conn">
-          <h2 id="ct-conn">Связь</h2>
-          <dl class="fk-ct-list">
-            <div><dt>Телефон</dt></div>
-            <div><dt>Email</dt></div>
-            <div><dt>Адрес</dt></div>
-            <div><dt>График работы</dt></div>
-          </dl>
+        <section class="fk-ct-connection" aria-labelledby="ct-title">
+          <div class="fk-ct-channels">
+            <article class="fk-ct-channel"><span class="fk-ct-channel__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h4l2 5-3 2a16 16 0 006 6l2-3 5 2v4c-9 3-21-9-16-16Z"/></svg></span><h2>Телефон</h2><p><a href="tel:+79031541616">+7 (903) 154-16-16</a></p></article>
+            <article class="fk-ct-channel"><span class="fk-ct-channel__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3ZM3 5l9 7 9-7"/></svg></span><h2>Email</h2><p><a href="mailto:forkel.ru@mail.ru">forkel.ru@mail.ru</a></p></article>
+            <article class="fk-ct-channel"><span class="fk-ct-channel__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1114 0ZM15 10a3 3 0 11-6 0 3 3 0 016 0Z"/></svg></span><h2>Адрес</h2><p><a href="#ct-places">Адреса магазинов и склада</a></p></article>
+            <article class="fk-ct-channel"><span class="fk-ct-channel__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0ZM12 7v5l3 2"/></svg></span><h2>График работы</h2><p>Уточняется</p></article>
+          </div>
           <p class="fk-ct-actions"><button class="fk-btn fk-btn--primary" type="button" data-feedback aria-haspopup="dialog">Написать нам</button> <button class="fk-btn fk-btn--secondary" type="button" data-callback aria-haspopup="dialog">Заказать звонок</button></p>
         </section>
         <section class="fk-ct-map" aria-labelledby="ct-map">
@@ -189,6 +195,31 @@
           <p class="fk-ct-links"><a class="fk-link fk-link--tap" href="#" data-stub="Страница политики не создана.">Политика обработки персональных данных</a></p>
         </section>
       </div>
+      <section class="fk-ct-places" id="ct-places" aria-labelledby="ct-places-title">
+        <h2 class="fk-ct-places__title" id="ct-places-title">Магазины и склад</h2>
+        <ul class="fk-ct-places__list">
+          <li class="fk-ct-place">
+            <p class="fk-ct-place__type">Магазин</p>
+            <h3>ЦДиИ «EXPOSTROY», павильон 1</h3>
+            <address>Москва, Нахимовский пр-т, 24, стр. 5, ЦДиИ «EXPOSTROY», павильон 1, 1 этаж, место 3</address>
+          </li>
+          <li class="fk-ct-place">
+            <p class="fk-ct-place__type">Магазин</p>
+            <h3>ЦДиИ «EXPOSTROY», павильон 2</h3>
+            <address>Москва, Нахимовский пр-т, 24, ЦДиИ «EXPOSTROY», павильон 2, 2 этаж, блок 11B, место 251</address>
+          </li>
+          <li class="fk-ct-place">
+            <p class="fk-ct-place__type">Магазин</p>
+            <h3>ТЦ «Каширский двор»</h3>
+            <address>Москва, Каширское шоссе, 19, корп. 1, этаж 4, помещение 4А7</address>
+          </li>
+          <li class="fk-ct-place">
+            <p class="fk-ct-place__type">Склад</p>
+            <h3>ТЦ «Гудзон»</h3>
+            <address>Москва, Каширское шоссе, д. 14, ТЦ «Гудзон», места А51, А52, А79</address>
+          </li>
+        </ul>
+      </section>
     </div>
   </main>
 
@@ -198,7 +229,22 @@
     <div class="fk-footer__grid">
       <div class="fk-footer__row">
         <div class="fk-footer__brand">
-          <p class="fk-footer__logo"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 24A16 16 0 0 1 20 4" fill="none" stroke="var(--yellow)" stroke-width="2.4" stroke-linecap="round"/></svg>FORKEL</p>
+          <a class="fk-footer__logo" href="index.html" aria-label="FORKEL, на главную"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xodm="http://www.corel.com/coreldraw/odm/2003" xml:space="preserve" width="150" height="44" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 29700 21000">
+                <defs>
+
+                    <linearGradient id="fk-footer-gradient-0" gradientUnits="userSpaceOnUse" x1="9604.9" y1="6271.54" x2="22207.98" y2="6271.54">
+                        <stop offset="0" style="stop-opacity:1; stop-color:#FFCC00"/>
+                        <stop offset="1" style="stop-opacity:1; stop-color:white"/>
+                    </linearGradient>
+                    <linearGradient id="fk-footer-gradient-1" gradientUnits="userSpaceOnUse" xlink:href="#fk-footer-gradient-0" x1="9604.9" y1="14742.68" x2="22207.98" y2="14742.68"></linearGradient>
+                </defs>
+                <g id="fk-footer-layer">
+                    <metadata id="fk-footer-metadata"/>
+                    <path fill="currentColor" d="M17636.83 10044.03l1910.79 -1415.45 -912.89 0 -2407.59 1787.05 0 -1787.05 -636.27 0 0 3574.04 636.27 0 0 -1118.19 894.27 -659.63 1746.25 1777.82 890.8 0 -2121.63 -2158.59zm-14901.75 49.93l0 638.24 2433.11 0 0 -638.24 -2433.11 0zm-249.34 -827.09l2977.72 0 0 -638.29 -3613.99 0 0 3574.04 636.27 0 0 -2935.75zm5929.88 -679.1l-819.52 0c-992.5,0 -1801.86,811.8 -1801.86,1807.42 0,995.67 809.36,1807.43 1801.86,1807.43l819.52 0c992.61,0 1801.91,-811.76 1801.91,-1807.43 0,-995.62 -809.3,-1807.42 -1801.91,-1807.42zm0 2986.86l-819.52 0c-646.43,0 -1175.8,-531.01 -1175.8,-1179.44 0,-648.42 529.37,-1179.44 1175.8,-1179.44l819.52 0c646.43,0 1175.81,531.02 1175.81,1179.44 0,648.43 -529.38,1179.44 -1175.81,1179.44zm5659.41 -441.71c532,-68.55 882.94,-703.35 889.3,-1201.32 8.35,-658.67 -534.51,-1303.02 -1206.33,-1303.02l-2955.1 0 0 3574.04 636.21 0 0 -2935.75 2323.97 0c325.75,0 564.99,368.6 564.99,664.73 0,301.18 -249.51,664.68 -564.99,664.68l-2084.36 0 0 638.23 1605.72 0 930.91 968.11 895.87 0 -1036.19 -1064.66 0 -5.04zm6872.65 -1038.96l0 638.24 2442.95 0 0 -638.24 -2442.95 0zm-239.55 -827.09l2977.72 0 0 -638.29 -3613.99 0 0 3574.04 3613.99 0 0 -638.18 -2977.72 0 0 -2297.57zm4296.03 -638.29l-636.27 0 0 3574.04 3481.59 0 0 -638.18 -2845.32 0 0 -2935.86z"/>
+                    <path fill="url(#fk-footer-gradient-0)" d="M14654.89 4678.29c-2195.47,0 -4183.9,1276.95 -5049.99,3186.55 1058.81,-1648.77 2924.62,-2743.08 5049.99,-2743.08 2125.37,0 3991.18,1094.31 5049.99,2743.08 -866.09,-1909.6 -2854.52,-3186.55 -5049.99,-3186.55z"/>
+                    <path fill="url(#fk-footer-gradient-1)" d="M14654.89 16335.98c2195.47,0 4183.9,-1276.95 5049.99,-3186.55 -1058.81,1648.77 -2924.62,2743.08 -5049.99,2743.08 -2125.37,0 -3991.18,-1094.31 -5049.99,-2743.08 866.09,1909.6 2854.52,3186.55 5049.99,3186.55z"/>
+                </g>
+            </svg></a>
         </div>
         <nav class="fk-footer__social" aria-label="Соцсети">
           <h2>Мы в соцсетях</h2>
@@ -233,7 +279,8 @@
         </nav>
         <div class="fk-footer__contacts">
           <h2>Контакты</h2>
-          <p>Телефон, email и адрес.</p>
+          <p><a href="tel:+79031541616">+7 (903) 154-16-16</a></p>
+          <p><a href="mailto:forkel.ru@mail.ru">forkel.ru@mail.ru</a></p>
         </div>
       </div>
     </div>

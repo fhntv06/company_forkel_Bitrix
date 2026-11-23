@@ -127,3 +127,5 @@
 .fk-empty h2 {
     font-size: var(--fk-fs-h3);
 }
+
+.fk-empty__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; }
