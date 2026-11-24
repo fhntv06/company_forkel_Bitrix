@@ -1,6 +1,6 @@
 /* FORKEL V3 — страница «Контакты» (раздел 6): способы связи, адреса с картой, реквизиты. Данных владельца по реквизитам нет —
    значения-заглушки. Подключается из styles.css (@import).
-   Порядок блоков задаётся порядком в HTML (TASK-009), без order и :nth-child. */
+   Порядок блоков задаётся порядком в HTML (TASK-016), без order и :nth-child. */
 
 .fk-ct-title { margin: 16px 0 24px; font-size: clamp(1.625rem, 1.04rem + 2.253vw, 3.033rem); line-height: 1.08; font-weight: 700; letter-spacing: -0.02em; overflow-wrap: break-word; }
 
@@ -18,7 +18,7 @@
 @media (min-width: 480px) { .fk-ct-channels { grid-template-columns: repeat(2, minmax(0, 1fr)); } .fk-ct-channel--wide { grid-column: 1 / -1; } }
 @media (min-width: 1024px) { .fk-ct-channels { grid-template-columns: repeat(3, minmax(0, 1fr)); } .fk-ct-channel--wide { grid-column: auto; } }
 
-/* Адреса магазинов и склада + карта (TASK-007, TASK-009) */
+/* Адреса магазинов и склада + карта (TASK-014, TASK-016) */
 .fk-ct-places { margin-top: 40px; scroll-margin-top: calc(var(--fk-header-h) + 16px); }
 .fk-ct-places__title { margin: 0 0 24px; font-size: var(--fk-fs-h2); line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; overflow-wrap: break-word; }
 .fk-ct-places__body { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--fk-col-gap); }

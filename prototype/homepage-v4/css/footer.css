@@ -9,7 +9,7 @@
 .fk-footer .fk-footer__logo svg { width: 108px; height: 79px; }
 .fk-footer h2 { margin-bottom: 12px; font-size: .8125rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--silver); }
 .fk-footer p, .fk-footer li { color: var(--veil); }
-/* TASK-008: график работы — обычный текст, не ссылка; время не разрывается */
+/* TASK-015: график работы — обычный текст, не ссылка; время не разрывается */
 .fk-footer__time { white-space: nowrap; }
 .fk-footer a { display: inline-flex; align-items: center; min-height: 44px; color: #fff; text-decoration: none; }
 .fk-footer a:hover { text-decoration: underline; text-decoration-color: var(--yellow); text-decoration-thickness: 2px; text-underline-offset: 4px; }
