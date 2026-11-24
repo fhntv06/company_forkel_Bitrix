@@ -40,7 +40,7 @@
   --fk-margin: var(--pad);
   --fk-col-gap: var(--gap);
   --fk-section-gap: var(--sec);
-  --fk-header-h: 106px; /* TASK-004: логотип 90×66 — плашка шапки ≥ 1100 px: 66 + 16 + 24 */
+  --fk-header-h: 119px; /* TASK-004: логотип 108×79 — плашка шапки ≥ 1100 px: 79 + 16 + 24 */
 
   /* Размеры шрифта: как у заголовков V4 */
   --fk-fs-display: clamp(2.1rem, 1.2rem + 3.6vw, 4.2rem);
