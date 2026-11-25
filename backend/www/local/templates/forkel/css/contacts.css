@@ -1,8 +1,50 @@
-/* FORKEL V3 — страница «Контакты» (раздел 6): карточки «Связь» и «Реквизиты», карты. Данных владельца нет — все значения
-   заглушки с пометкой. Подключается из styles.css (@import). */
+/* FORKEL V3 — страница «Контакты» (раздел 6): способы связи, адреса с картой, реквизиты. Данных владельца по реквизитам нет —
+   значения-заглушки. Подключается из styles.css (@import).
+   Порядок блоков задаётся порядком в HTML (TASK-016), без order и :nth-child. */
 
-.fk-ct { display: grid; gap: 16px; }
-.fk-ct-card { display: grid; gap: 20px; align-content: start; padding: 24px; background: var(--fk-surface); border-radius: var(--fk-r-lg); }
+.fk-ct-title { margin: 16px 0 24px; font-size: clamp(1.625rem, 1.04rem + 2.253vw, 3.033rem); line-height: 1.08; font-weight: 700; letter-spacing: -0.02em; overflow-wrap: break-word; }
+
+/* Способы связи: три компактные карточки (иконка слева) + кнопки */
+.fk-ct-connection { display: grid; align-content: start; gap: 16px; }
+.fk-ct-channels { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.fk-ct-channel { display: grid; grid-template-columns: 40px minmax(0, 1fr); column-gap: 14px; align-items: center; min-width: 0; padding: 18px 20px; border-radius: var(--fk-r-lg); background: var(--fk-surface); }
+.fk-ct-channel__icon { grid-row: span 2; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--fk-bright); }
+.fk-ct-channel svg { width: 20px; height: 20px; fill: none; stroke: var(--fk-ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.fk-ct-channel h2 { margin: 0 0 2px; font-size: var(--fk-fs-small); line-height: 1.25; letter-spacing: -0.01em; font-weight: 600; color: var(--fk-ink-muted); }
+.fk-ct-channel p { margin: 0; font-size: 1rem; font-weight: 600; overflow-wrap: anywhere; }
+.fk-ct-channel a { color: inherit; text-decoration: underline; text-underline-offset: 4px; }
+.fk-ct-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 0; }
+/* 480–1023 px: две колонки, третья карточка на всю ширину (без «висячей» строки); от 1024 px — три в ряд */
+@media (min-width: 480px) { .fk-ct-channels { grid-template-columns: repeat(2, minmax(0, 1fr)); } .fk-ct-channel--wide { grid-column: 1 / -1; } }
+@media (min-width: 1024px) { .fk-ct-channels { grid-template-columns: repeat(3, minmax(0, 1fr)); } .fk-ct-channel--wide { grid-column: auto; } }
+
+/* Адреса магазинов и склада + карта (TASK-014, TASK-016) */
+.fk-ct-places { margin-top: 40px; scroll-margin-top: calc(var(--fk-header-h) + 16px); }
+.fk-ct-places__title { margin: 0 0 24px; font-size: var(--fk-fs-h2); line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; overflow-wrap: break-word; }
+.fk-ct-places__body { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--fk-col-gap); }
+.fk-ct-places__list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; margin: 0; padding: 0; list-style: none; counter-reset: place; }
+.fk-ct-place { counter-increment: place; display: grid; grid-template-columns: 28px minmax(0, 1fr); column-gap: 14px; row-gap: 4px; align-content: start; min-width: 0; padding: 16px 20px; border: 2px solid transparent; border-radius: var(--fk-r-lg); background: var(--fk-surface); }
+.fk-ct-place::before { content: counter(place); grid-column: 1; grid-row: 1 / span 3; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--fk-bright); color: var(--fk-ink); font-size: .875rem; font-weight: 700; }
+.fk-ct-place > * { grid-column: 2; }
+.fk-ct-place:hover { border-color: var(--fk-bright); }
+.fk-ct-place__type { margin: 0; font-size: var(--fk-fs-small); font-weight: 600; color: var(--fk-ink-muted); }
+.fk-ct-place h3 { margin: 0; font-size: 1.0625rem; line-height: 1.25; letter-spacing: 0; font-weight: 700; overflow-wrap: break-word; }
+.fk-ct-place address { margin: 0; font-style: normal; font-size: .9375rem; line-height: 1.4; color: var(--fk-ink-muted); overflow-wrap: break-word; }
+
+/* Заглушка карты: четыре маркера 1–4 (позиции условные, номера совпадают с адресами) */
+.fk-ct-map { min-height: 280px; }
+.fk-ct-map__stub { position: relative; display: block; height: 100%; min-height: 280px; overflow: hidden; background: var(--fk-tint); border-radius: var(--fk-r-lg); }
+.fk-ct-map__stub svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: var(--fk-edge); stroke-opacity: .5; stroke-width: 1; }
+.fk-ct-pin { position: absolute; transform: translate(-50%, -50%); display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--fk-canvas); border: 2px solid var(--fk-ink); box-shadow: 0 4px 12px rgba(0, 0, 0, .18); font-size: .875rem; font-weight: 700; }
+.fk-ct-pin--1 { left: 30%; top: 34%; }
+.fk-ct-pin--2 { left: 37%; top: 44%; }
+.fk-ct-pin--3 { left: 63%; top: 60%; }
+.fk-ct-pin--4 { left: 69%; top: 70%; }
+@media (min-width: 768px) { .fk-ct-places__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } .fk-ct-map, .fk-ct-map__stub { min-height: 300px; } }
+@media (min-width: 1024px) { .fk-ct-places__body { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; } }
+
+/* Реквизиты: полоса на всю ширину последним блоком; от 1024 px — 4 поля в один ряд */
+.fk-ct-card { display: grid; gap: 16px; align-content: start; margin-top: 40px; padding: 24px 32px; background: var(--fk-surface); border-radius: var(--fk-r-lg); }
 .fk-ct-card h2 { font-size: var(--fk-fs-h3); line-height: 1.25; font-weight: 700; padding-bottom: 12px; border-bottom: 2px solid var(--fk-bright); }
 .fk-ct-list { margin: 0; }
 .fk-ct-list > div { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 16px; padding: 12px 0; border-top: 1px solid var(--fk-line); }
@@ -10,18 +52,8 @@
 .fk-ct-list dt { color: var(--fk-ink-muted); font-size: var(--fk-fs-small); }
 .fk-ct-list dd { margin: 0; font-weight: 600; text-align: right; }
 .fk-ct-links { margin-top: 4px; }
-.fk-ct-map { min-height: 280px; }
-.fk-ct-map__stub {
-  position: relative; display: grid; place-items: center; height: 100%; min-height: 280px; overflow: hidden;
-  background: var(--fk-tint); border-radius: var(--fk-r-lg);
-}
-.fk-ct-map__stub svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: var(--fk-edge); stroke-opacity: .5; stroke-width: 1; }
-.fk-ct-map__stub circle { fill: var(--fk-bright); stroke: var(--fk-ink); stroke-opacity: 1; stroke-width: 2; }
-.fk-ct-map__stub .fk-tag { position: relative; border-radius: 999px; padding: 6px 16px; background: var(--fk-canvas); }
 @media (min-width: 1024px) {
-  .fk-ct { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px; }
-  .fk-ct > :nth-child(1) { grid-column: 1 / span 5; padding: 40px; }
-  .fk-ct > :nth-child(2) { grid-column: 6 / span 7; grid-row: span 2; }
-  .fk-ct > :nth-child(3) { grid-column: 1 / span 5; padding: 40px; }
+  .fk-ct-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+  .fk-ct-list > div { display: grid; gap: 4px; padding: 0; border: 0; }
+  .fk-ct-list dd { text-align: left; }
 }
-.fk-ct-actions { display: flex; flex-wrap: wrap; gap: 12px; }

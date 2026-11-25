@@ -160,8 +160,9 @@ foreach ($arResult['DISPLAY_PROPERTIES'] ?? [] as $code => $p) {
     }
 }
 $rows = ['Бренд' => 'FORKEL'];
-if ($flat($arResult['DISPLAY_PROPERTIES']['COLLECTION']['DISPLAY_VALUE'] ?? '') !== '') {
-    $rows['Серия'] = $flat($arResult['DISPLAY_PROPERTIES']['COLLECTION']['DISPLAY_VALUE']);
+$collectionName = $flat($arResult['DISPLAY_PROPERTIES']['COLLECTION']['DISPLAY_VALUE'] ?? '');
+if ($collectionName !== '') {
+    $rows['Серия'] = $collectionName;
 }
 if ($article !== '') {
     $rows['Артикул'] = $article;
@@ -246,9 +247,59 @@ $rows = array_merge($rows, $extra);
 </div>
 
 <?php
-// Сопутствующие товары: свойство ACCESSORIES (привязка к товарам каталога, множественное). Похожие — из того же раздела.
+// Сопутствующие товары: свойство ACCESSORIES (привязка к товарам каталога, множественное).
+// Для серии F55, если привязанных товаров ещё нет и это не рамка — показываем схемы компоновок рамок по 3 материалам (TASK-010 / TASK-017).
 $accIds = array_values(array_filter(array_map('intval', (array)($arResult['PROPERTIES']['ACCESSORIES']['VALUE'] ?? []))));
+$sectionCode = mb_strtolower((string)($arResult['SECTION']['CODE'] ?? ''));
+$sectionName = mb_strtolower((string)($arResult['SECTION']['NAME'] ?? ''));
+$isFrameSection = $sectionCode === 'frames' || $sectionCode === 'ramki' || mb_strpos($sectionName, 'рамк') !== false;
+$isF55 = stripos($collectionName, 'F55') !== false;
+
 if ($accIds) {
     fk_product_block('Сопутствующие товары', ['ID' => $accIds], 0, 8);
+} elseif ($isF55 && !$isFrameSection) {
+    $f55Materials = [
+        ['plastic', 'пластик', 'Пластик'],
+        ['aluminum', 'алюминий', 'Алюминий'],
+        ['glass', 'стекло', 'Стекло'],
+    ];
+    ?>
+<section class="fk-section fk-acc-sec" id="pdp-accessories" aria-labelledby="acc-title" data-acc-tabs>
+    <div class="fk-section-head"><h2 id="acc-title">Сопутствующие товары</h2></div>
+    <p class="fk-note">Рамки F55 на 1–5 постов. Выберите материал и компоновку. Изображения — схемы; цены и наличие уточняются.</p>
+    <div class="fk-acc-tabs" role="tablist" aria-label="Материал рамки F55">
+        <?php foreach ($f55Materials as $idx => [$key, $label, $cap]) { ?>
+        <button class="fk-acc-tab" type="button" role="tab" id="acc-tab-<?= $key ?>" aria-controls="acc-panel-<?= $key ?>" aria-selected="<?= $idx === 0 ? 'true' : 'false' ?>" tabindex="<?= $idx === 0 ? '0' : '-1' ?>">Рамки F55 <?= $label ?></button>
+        <?php } ?>
+    </div>
+    <?php foreach ($f55Materials as $idx => [$key, $label, $cap]) { ?>
+    <div role="tabpanel" id="acc-panel-<?= $key ?>" aria-labelledby="acc-tab-<?= $key ?>" tabindex="0"<?= $idx > 0 ? ' hidden' : '' ?>>
+        <ul class="fk-acc">
+            <?php for ($n = 1; $n <= 5; $n++) {
+                $postWord = $n === 1 ? 'пост' : ($n < 5 ? 'поста' : 'постов');
+                $schemeTitle = 'Рамка на ' . $n . ' ' . $postWord;
+                $vw = $n * 64 + 12;
+                $bw = $n * 64 + 10;
+                ?>
+            <li class="fk-product-card fk-acc-option">
+                <div class="fk-product-card__media fk-acc-scheme fk-acc-scheme--<?= $key ?>">
+                    <svg viewBox="0 0 <?= $vw ?> 76" role="img" aria-label="<?= $e($schemeTitle) ?>, схема">
+                        <rect class="fk-acc-scheme__body" x="1" y="1" width="<?= $bw ?>" height="74" rx="4"/>
+                        <g class="fk-acc-scheme__holes">
+                            <?php for ($k = 0; $k < $n; $k++) { ?>
+                            <rect x="<?= 14 + $k * 64 ?>" y="14" width="48" height="48" rx="2"/>
+                            <?php } ?>
+                        </g>
+                    </svg>
+                </div>
+                <h3 class="fk-product-card__name"><?= $e($schemeTitle) ?> F55</h3>
+                <p class="fk-note"><?= $e($cap) ?></p>
+            </li>
+            <?php } ?>
+        </ul>
+    </div>
+    <?php } ?>
+</section>
+    <?php
 }
 fk_product_block('Похожие товары', ['!ID' => (int)$arResult['ID']], (int)($arResult['IBLOCK_SECTION_ID'] ?? 0), 4);

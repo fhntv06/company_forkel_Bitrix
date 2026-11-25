@@ -2,34 +2,63 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 /** @global CMain $APPLICATION */
 $APPLICATION->SetTitle("Контакты");
-$APPLICATION->SetPageProperty("fk_lead", "Способы связи с FORKEL.");
-$APPLICATION->SetPageProperty("fk_hero_art", "fk_contacts_hero_art");
+$APPLICATION->SetPageProperty("fk_no_hero", "Y"); // TASK-013 / TASK-017: без баннера-героя, крошки + h1
 
-/** Строка списка: значение — из области включения; пока там остался текст-заглушка (равен подписи), значение не выводим. */
+/** Строка реквизитов: значение из области включения; если пусто или равно подписи — выводим «Уточняется». */
 $fkRow = static function (string $label, string $area): string {
 	$v = fk_include_text($area);
-	return '<div><dt>'.htmlspecialcharsbx($label).'</dt>'
-		.($v !== '' && $v !== $label ? '<dd>'.nl2br(htmlspecialcharsbx($v)).'</dd>' : '').'</div>';
+	$text = ($v !== '' && $v !== $label) ? nl2br(htmlspecialcharsbx($v)) : 'Уточняется';
+	return '<div><dt>'.htmlspecialcharsbx($label).'</dt><dd>'.$text.'</dd></div>';
 };
-// Координаты карты: область fk_map_coords.php, формат «широта, долгота» (например 55.75, 37.62). Пусто — показываем заглушку V4.
+
+$fkInclude = static function (string $name): void {
+	global $APPLICATION;
+	$APPLICATION->IncludeComponent("bitrix:main.include", "", array(
+		"AREA_FILE_SHOW" => "file",
+		"PATH" => "/include/" . $name . ".php",
+	), false);
+};
+
+// Координаты карты: область fk_map_coords.php, формат «широта, долгота» (например 55.75, 37.62). Пусто — показываем заглушку V4 с 4 маркерами.
 $fkCoords = array();
 if (preg_match('/^\s*(-?\d{1,2}(?:\.\d+)?)\s*[,;]\s*(-?\d{1,3}(?:\.\d+)?)\s*$/', fk_include_text("fk_map_coords"), $m)) {
 	$fkCoords = array("lat" => (float)$m[1], "lon" => (float)$m[2]);
 }
 ?>
-<div class="fk-ct">
-	<section class="fk-ct-card" aria-labelledby="ct-conn">
-		<h2 id="ct-conn">Связь</h2>
-		<dl class="fk-ct-list">
-			<?= $fkRow("Телефон", "fk_phone") ?>
-			<?= $fkRow("Email", "fk_email") ?>
-			<?= $fkRow("Адрес", "fk_address") ?>
-			<?= $fkRow("График работы", "fk_schedule") ?>
-		</dl>
-		<p class="fk-ct-actions"><button class="fk-btn fk-btn--primary" type="button" data-feedback aria-haspopup="dialog">Написать нам</button> <button class="fk-btn fk-btn--secondary" type="button" data-callback aria-haspopup="dialog">Заказать звонок</button></p>
-	</section>
-	<section class="fk-ct-map" aria-labelledby="ct-map">
-		<h2 id="ct-map" class="fk-vh">Карта</h2>
+<h1 class="fk-page-title fk-ct-title" id="ct-title">Контакты</h1>
+
+<section class="fk-ct-connection" aria-labelledby="ct-title">
+	<div class="fk-ct-channels">
+		<article class="fk-ct-channel">
+			<span class="fk-ct-channel__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h4l2 5-3 2a16 16 0 006 6l2-3 5 2v4c-9 3-21-9-16-16Z"/></svg></span>
+			<h2>Телефон</h2>
+			<p><?php $fkInclude("fk_phone"); ?></p>
+		</article>
+		<article class="fk-ct-channel">
+			<span class="fk-ct-channel__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3ZM3 5l9 7 9-7"/></svg></span>
+			<h2>Email</h2>
+			<p><?php $fkInclude("fk_email"); ?></p>
+		</article>
+		<article class="fk-ct-channel fk-ct-channel--wide">
+			<span class="fk-ct-channel__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0ZM12 7v5l3 2"/></svg></span>
+			<h2>График работы</h2>
+			<p><?php $fkInclude("fk_schedule"); ?></p>
+		</article>
+	</div>
+	<p class="fk-ct-actions">
+		<button class="fk-btn fk-btn--primary" type="button" data-feedback aria-haspopup="dialog">Написать нам</button>
+		<button class="fk-btn fk-btn--secondary" type="button" data-callback aria-haspopup="dialog">Заказать звонок</button>
+	</p>
+</section>
+
+<section class="fk-ct-places" id="ct-places" aria-labelledby="ct-places-title">
+	<h2 class="fk-ct-places__title" id="ct-places-title">Магазины и склад</h2>
+	<div class="fk-ct-places__body">
+		<ol class="fk-ct-places__list">
+			<?php $fkInclude("fk_contacts_places"); ?>
+		</ol>
+		<div class="fk-ct-map">
+			<h3 class="fk-vh">Карта</h3>
 <?php if ($fkCoords) {
 	$APPLICATION->IncludeComponent("bitrix:map.yandex.view", "", array(
 		"INIT_MAP_TYPE" => "MAP",
@@ -46,20 +75,26 @@ if (preg_match('/^\s*(-?\d{1,2}(?:\.\d+)?)\s*[,;]\s*(-?\d{1,3}(?:\.\d+)?)\s*$/',
 		"MAP_ID" => "fk_contacts_map",
 	), false);
 } else { ?>
-		<div class="fk-ct-map__stub" role="img" aria-label="Карта">
-			<svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><path d="M0 70h400M0 150h400M0 215h400M90 0v260M200 0v260M310 0v260" /><path d="M20 240L380 20" /><circle cx="200" cy="150" r="14" /></svg>
-		</div>
+			<div class="fk-ct-map__stub" role="img" aria-label="Карта: 4 точки — магазины и склад">
+				<svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><path d="M0 70h400M0 150h400M0 215h400M90 0v260M200 0v260M310 0v260" /><path d="M20 240L380 20" /></svg>
+				<span class="fk-ct-pin fk-ct-pin--1">1</span>
+				<span class="fk-ct-pin fk-ct-pin--2">2</span>
+				<span class="fk-ct-pin fk-ct-pin--3">3</span>
+				<span class="fk-ct-pin fk-ct-pin--4">4</span>
+			</div>
 <?php } ?>
-	</section>
-	<section class="fk-ct-card" aria-labelledby="ct-legal">
-		<h2 id="ct-legal">Реквизиты</h2>
-		<dl class="fk-ct-list">
-			<?= $fkRow("Юридическое наименование", "fk_req_name") ?>
-			<?= $fkRow("ИНН", "fk_req_inn") ?>
-			<?= $fkRow("ОГРН / ОГРНИП", "fk_req_ogrn") ?>
-			<?= $fkRow("Юридический адрес", "fk_req_address") ?>
-		</dl>
-		<p class="fk-ct-links"><a class="fk-link fk-link--tap" href="/about/privacy/">Политика обработки персональных данных</a></p>
-	</section>
-</div>
+		</div>
+	</div>
+</section>
+
+<section class="fk-ct-card" aria-labelledby="ct-legal">
+	<h2 id="ct-legal">Реквизиты</h2>
+	<dl class="fk-ct-list">
+		<?= $fkRow("Юридическое наименование", "fk_req_name") ?>
+		<?= $fkRow("ИНН", "fk_req_inn") ?>
+		<?= $fkRow("ОГРН / ОГРНИП", "fk_req_ogrn") ?>
+		<?= $fkRow("Юридический адрес", "fk_req_address") ?>
+	</dl>
+	<p class="fk-ct-links"><a class="fk-link fk-link--tap" href="/about/privacy/">Политика обработки персональных данных</a></p>
+</section>
 <?php require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");

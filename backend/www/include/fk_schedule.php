@@ -1,1 +1,1 @@
-Пн-Пт, 9.00 - 18.00
+<time datetime="10:00">10:00</time> - <time datetime="20:00">20:00</time>

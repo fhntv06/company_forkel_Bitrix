@@ -1,0 +1,1 @@
+/local/templates/forkel/assets/images/designs/coop_together.jpg

@@ -17,8 +17,12 @@ $fkInclude = static function (string $name): void {
 };
 $fkCardImage = trim((string)@file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/include/fk_coop_card_image.php"));
 ?>
-<section style="display:flex;align-items:center;justify-content:center;margin:64px auto;padding:32px;background-color:white;border-radius:var(--fk-r-lg)">
-	<p style="max-width:900px;font-size:32px"><?php $fkInclude("fk_coop_intro"); ?></p>
+<section class="fk-coop-invite" aria-labelledby="coop-invite-title">
+	<div class="fk-coop-invite__text">
+		<h2 id="coop-invite-title">Мы приглашаем к сотрудничеству</h2>
+		<p><?php $fkInclude("fk_coop_intro"); ?></p>
+	</div>
+	<ul class="fk-coop-invite__list"><?php $fkInclude("fk_coop_invite_list"); ?></ul>
 </section>
 
 <section class="fk-section" aria-labelledby="coop-adv-title">
@@ -86,11 +90,14 @@ $fkCardImage = trim((string)@file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/inc
 	</div>
 </section>
 
-<section class="fk-section" aria-labelledby="coop-terms">
+<section class="fk-section fk-coop-terms" aria-labelledby="coop-terms">
 	<div class="fk-grid fk-grid--coop">
-		<div class="fk-coop-card">
-			<h3 id="coop-terms"><?php $fkInclude("fk_coop_card_title"); ?></h3>
-			<p><?php $fkInclude("fk_coop_card_text"); ?></p>
+		<div class="fk-coop-terms__col">
+			<div class="fk-coop-card">
+				<h3 id="coop-terms"><?php $fkInclude("fk_coop_card_title"); ?></h3>
+				<p><?php $fkInclude("fk_coop_card_text"); ?></p>
+			</div>
+			<?php $fkInclude("fk_coop_terms_extra"); ?>
 		</div>
 		<?php if ($fkCardImage !== "") { ?>
 		<div class="fk-coop-card fk-coop-card--with-image" style="background-image:url('<?= htmlspecialcharsbx($fkCardImage) ?>')"></div>
@@ -100,10 +107,7 @@ $fkCardImage = trim((string)@file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/inc
 
 <section class="fk-section" aria-labelledby="coop-who-title">
 	<div class="fk-section-head"><h2 id="coop-who-title"><?php $fkInclude("fk_coop_who_title"); ?></h2></div>
-	<div class="fk-grid fk-grid--projects">
-		<div class="fk-grid--projects__card"><p><?php $fkInclude("fk_coop_who_1"); ?></p></div>
-		<div class="fk-grid--projects__card"><p><?php $fkInclude("fk_coop_who_2"); ?></p></div>
-	</div>
+	<ol class="fk-coop-audience"><?php $fkInclude("fk_coop_audience"); ?></ol>
 </section>
 
 <section class="fk-coop-cta" aria-labelledby="coop-cta">
