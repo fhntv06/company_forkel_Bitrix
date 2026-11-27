@@ -5,7 +5,6 @@ $APPLICATION->SetTitle("Результаты поиска");
 $APPLICATION->SetPageProperty("fk_lead", "Найдите изделия по названию, артикулу или цвету.");
 $APPLICATION->SetPageProperty("fk_hero_art", "fk_search_hero_art");
 
-// Поиск только по товарам каталога (проекты — позже). Индексацию каталога включает админка: «Настройки → Поиск → Переиндексация».
 $APPLICATION->IncludeComponent("bitrix:search.page", "fk", array(
 	"RESTART" => "N",
 	"CHECK_DATES" => "N",
@@ -17,7 +16,7 @@ $APPLICATION->IncludeComponent("bitrix:search.page", "fk", array(
 	"SHOW_WHEN" => "N",
 	"PAGE_RESULT_COUNT" => "12",
 	"DISPLAY_TOP_PAGER" => "N",
-	"DISPLAY_BOTTOM_PAGER" => "N",
+	"DISPLAY_BOTTOM_PAGER" => "Y",
 	"PAGER_TITLE" => "Результаты поиска",
 	"PAGER_SHOW_ALWAYS" => "N",
 	"PAGER_TEMPLATE" => "round",

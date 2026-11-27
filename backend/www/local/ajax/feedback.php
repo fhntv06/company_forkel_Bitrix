@@ -1,7 +1,8 @@
 <?php
 /**
- * AJAX-обработчик окон «Написать нам» и «Заказать звонок». Письмо отправляет штатный bitrix:main.feedback
- * (почтовое событие FEEDBACK_FORM), своего хранилища нет. Ответ — JSON {ok, errors[]}.
+ * AJAX-обработчик окон «Написать нам», «Заказать звонок», «Купить в 1 клик», «Сотрудничество».
+ * Письмо отправляет штатный bitrix:main.feedback (почтовое событие FEEDBACK_FORM),
+ * дублирование менеджеру — через \Forkel\MaxNotifier. Ответ — JSON {ok, errors[]}.
  */
 define('NO_KEEP_STATISTIC', true);
 define('NO_AGENT_STATISTIC', true);
@@ -16,7 +17,6 @@ $fail = static function (array $errors): void {
     die();
 };
 
-// После успешной отправки main.feedback сам делает редирект на «?success=<хэш>»; fetch идёт по нему обычным GET — это и есть успех.
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && !empty($_GET['success'])) {
     echo \Bitrix\Main\Web\Json::encode(['ok' => true, 'errors' => []]);
     die();
@@ -24,10 +24,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && !empty($_GET['success'])) {
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     $fail(['Неверный запрос.']);
 }
+if (!\Forkel\RateLimiter::check('feedback', 10, 60)) {
+    http_response_code(429);
+    $fail(['Слишком много отправок. Повторите через минуту.']);
+}
 if (!check_bitrix_sessid()) {
     $fail(['Сессия устарела. Обновите страницу и попробуйте снова.']);
 }
-// Ловушка для ботов: поле скрыто от людей. Отвечаем «успехом», письмо не отправляем.
 if (trim((string)($_POST['website'] ?? '')) !== '') {
     echo \Bitrix\Main\Web\Json::encode(['ok' => true, 'errors' => []]);
     die();
@@ -40,15 +43,14 @@ $cut = static function ($v, int $len, bool $multiline = false): string {
     }
     $v = trim(strip_tags((string)$v));
     if (!$multiline) {
-        $v = trim(preg_replace('/\s*\R\s*/u', ' ', $v)); // одна строка: нельзя подделать соседние строки письма
+        $v = trim(preg_replace('/\s*\R\s*/u', ' ', $v));
     }
     return mb_substr($v, 0, $len);
 };
 $name = $cut($_POST['name'] ?? '', 100);
 $contact = $cut($_POST['contact'] ?? '', 100);
-$msg = $cut($_POST['msg'] ?? '', $mode === 'oneclick' ? 600 : 3000, true); // для oneclick описание товара собирает страница товара
+$msg = $cut($_POST['msg'] ?? '', $mode === 'oneclick' ? 600 : 3000, true);
 
-// Дополнительные поля заявок «lead» и «partner»: только из белого списка, подпись → значение.
 $extraLabels = [
     'lead' => ['role' => 'Кто вы'],
     'partner' => [
@@ -67,7 +69,7 @@ foreach ($extraLabels[$mode] ?? [] as $key => $label) {
 $digits = preg_replace('/\D/', '', $contact);
 $isEmail = (bool)filter_var($contact, FILTER_VALIDATE_EMAIL);
 $isPhone = !$isEmail && preg_match('/^[+\d][\d\s()\-+]*$/', $contact) && strlen($digits) >= 10 && strlen($digits) <= 15;
-$phoneOnly = in_array($mode, ['callback', 'oneclick'], true); // в этих режимах контакт — только телефон
+$phoneOnly = in_array($mode, ['callback', 'oneclick'], true);
 
 $errors = [];
 if (mb_strlen($name) < 2) {
@@ -102,7 +104,9 @@ if ($mode === 'callback') {
     $text = ($isEmail ? '' : 'Телефон: ' . $contact . "\n\n") . $msg;
 }
 
-// Подставляем данные в формат, который ожидает main.feedback.
+// Дублируем заявку в MAX (в Beta-режиме логируется в local/logs/max_notifications.log)
+\Forkel\MaxNotifier::notifyFeedback($mode, $name, $contact, $text);
+
 $_POST['user_name'] = $name;
 $replyEmail = $isEmail ? $contact : '';
 if ($replyEmail === '' && $mode === 'partner' && filter_var((string)($_POST['email'] ?? ''), FILTER_VALIDATE_EMAIL)) {
@@ -115,9 +119,9 @@ $_POST['submit'] = 'Y';
 $APPLICATION->IncludeComponent('bitrix:main.feedback', 'fk_ajax', [
     'USE_CAPTCHA' => 'N',
     'OK_TEXT' => 'Спасибо, сообщение отправлено.',
-    'EMAIL_TO' => '',               // пусто = «E-mail по умолчанию» из настроек сайта
+    'EMAIL_TO' => '',
     'REQUIRED_FIELDS' => ['NAME', 'MESSAGE'],
-    'EVENT_MESSAGE_ID' => [],       // пусто = штатный шаблон события FEEDBACK_FORM
+    'EVENT_MESSAGE_ID' => [],
 ], false);
 
 require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/epilog_after.php';

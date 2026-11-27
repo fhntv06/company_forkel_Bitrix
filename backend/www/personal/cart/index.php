@@ -1,4 +1,4 @@
-<?
+<?php
 define("HIDE_SIDEBAR", true);
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Корзина");
@@ -27,9 +27,7 @@ $APPLICATION->SetPageProperty("fk_lead", "Проверьте состав зак
 	"SET_TITLE" => "Y",
 	"AJAX_OPTION_ADDITIONAL" => "",
 	"OFFERS_PROPS" => array(
-		0 => "SIZES_SHOES",
-		1 => "SIZES_CLOTHES",
-		2 => "COLOR_REF",
+		0 => "COLOR",
 	),
 	),
 	false

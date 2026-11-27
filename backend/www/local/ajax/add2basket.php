@@ -16,6 +16,10 @@ $answer = static function (bool $ok, array $errors = [], int $count = 0): void {
     die();
 };
 
+if (!\Forkel\RateLimiter::check('add2basket', 40, 60)) {
+    http_response_code(429);
+    $answer(false, ['Слишком много запросов. Повторите через минуту.']);
+}
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !check_bitrix_sessid()) {
     $answer(false, ['Сессия устарела. Обновите страницу и попробуйте снова.']);
 }
