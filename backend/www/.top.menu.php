@@ -1,46 +1,45 @@
 <?php
-$aMenuLinks = Array(
-	Array(
-		"О компании", 
-		"about/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Новинки", 
-		"news/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Подбор", 
-		"configurator/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Проекты", 
-		"projects/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Сотрудничество", 
-		"cooperation/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Контакты", 
-		"contacts/", 
-		Array(), 
-		Array(), 
-		"\$USER->IsAuthorized()" 
-	)
-);
-?>
+$aMenuLinks = [
+	[
+		"О компании",
+		"/about/",
+		[],
+		[],
+		""
+	],
+	[
+		"Новинки",
+		"/catalog/new/",
+		[],
+		[],
+		""
+	],
+	[
+		"Подбор",
+		"/configurator/",
+		[],
+		[],
+		""
+	],
+	[
+		"Проекты",
+		"/projects/",
+		[],
+		[],
+		""
+	],
+	[
+		"Сотрудничество",
+		"/cooperation/",
+		[],
+		[],
+		""
+	],
+	[
+		"Контакты",
+		"/about/contacts/",
+		[],
+		[],
+		""
+	],
+];
