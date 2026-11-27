@@ -8,7 +8,11 @@ use Bitrix\Main\Page\Asset;
 
 $asset = Asset::getInstance();
 // Порядок как в прототипе V4; v4-skin.css всегда последний.
-    $asset->addCss(SITE_TEMPLATE_PATH . '/styles.css');
+if (fk_is_shop_page()) {
+    // штатные шаблоны корзины, заказа и кабинета рассчитаны на Bootstrap
+    $asset->addCss('/bitrix/css/main/bootstrap.min.css');
+}
+$asset->addCss(SITE_TEMPLATE_PATH . '/styles.css');
     $asset->addCss(SITE_TEMPLATE_PATH . '/css/shared.css');
     $asset->addCss(SITE_TEMPLATE_PATH . '/css/header.css');
     $asset->addCss(SITE_TEMPLATE_PATH . '/css/footer.css');
@@ -35,6 +39,7 @@ $asset = Asset::getInstance();
     $asset->addCss(SITE_TEMPLATE_PATH . '/css/accessories.css');
     $asset->addCss(SITE_TEMPLATE_PATH . '/css/search-page.css');
     $asset->addCss(SITE_TEMPLATE_PATH . '/css/v4-skin.css');
+    $asset->addCss(SITE_TEMPLATE_PATH . '/css/shop-skin.css');
 $asset->addString(
     '<script>document.documentElement.className = "js"; window.FK = ' . \Bitrix\Main\Web\Json::encode([
         'tpl' => SITE_TEMPLATE_PATH,
@@ -169,7 +174,7 @@ $catalogId = fk_iblock_id('catalog');
                 <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
                 <span class="fk-search-btn__text" aria-hidden="true">Поиск по товарам</span>
             </a>
-            <a class="fk-icon-btn fk-icon-btn--account" href="/personal/" data-account>
+            <a class="fk-icon-btn fk-icon-btn--account" href="<?= \Bitrix\Main\Engine\CurrentUser::get()->getId() ? '/personal/' : '/auth/' ?>" data-account>
                 <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.75"/><path d="M4.5 20c.9-3.6 3.8-5.5 7.5-5.5s6.6 1.9 7.5 5.5"/></svg>
                 <span class="fk-vh">Личный кабинет</span>
             </a>
