@@ -19,11 +19,21 @@ $fkInclude = static function (string $name): void {
 	), false);
 };
 
-// Координаты карты: область fk_map_coords.php, формат «широта, долгота» (например 55.75, 37.62). Пусто — показываем заглушку V4 с 4 маркерами.
-$fkCoords = array();
-if (preg_match('/^\s*(-?\d{1,2}(?:\.\d+)?)\s*[,;]\s*(-?\d{1,3}(?:\.\d+)?)\s*$/', fk_include_text("fk_map_coords"), $m)) {
-	$fkCoords = array("lat" => (float)$m[1], "lon" => (float)$m[2]);
-}
+// 4 точки на карте (3 магазина + склад, INT-002 / TASK-018 Block 4.3).
+// При наличии YANDEX_MAPS_API_KEY в env или заполненного fk_map_coords.php рендерится bitrix:map.yandex.view с 4 метками;
+// иначе — аккуратная заглушка V4.
+$fkYandexKey = \Forkel\Env::get('YANDEX_MAPS_API_KEY');
+$fkHasCustomCoords = (bool)preg_match('/^\s*(-?\d{1,2}(?:\.\d+)?)\s*[,;]\s*(-?\d{1,3}(?:\.\d+)?)\s*$/', fk_include_text("fk_map_coords"), $mCoords);
+$fkShowMap = ($fkYandexKey !== '' || $fkHasCustomCoords);
+
+$fkPlacemarks = array(
+	array("LON" => 37.584426, "LAT" => 55.672512, "TEXT" => "1. Магазин — ЦДиИ «EXPOSTROY», павильон 1 (Нахимовский пр-т, 24, стр. 5, 1 эт., место 3)"),
+	array("LON" => 37.585100, "LAT" => 55.672100, "TEXT" => "2. Магазин — ЦДиИ «EXPOSTROY», павильон 2 (Нахимовский пр-т, 24, 2 эт., блок 11B, место 251)"),
+	array("LON" => 37.630502, "LAT" => 55.662614, "TEXT" => "3. Магазин — ТЦ «Каширский двор» (Каширское шоссе, 19, корп. 1, эт. 4, пом. 4А7)"),
+	array("LON" => 37.624900, "LAT" => 55.664180, "TEXT" => "4. Склад — ТЦ «Гудзон» (Каширское шоссе, д. 14, места А51, А52, А79)"),
+);
+$fkCenterLat = $fkHasCustomCoords ? (float)$mCoords[1] : 55.6678;
+$fkCenterLon = $fkHasCustomCoords ? (float)$mCoords[2] : 37.6075;
 ?>
 <h1 class="fk-page-title fk-ct-title" id="ct-title">Контакты</h1>
 
@@ -59,14 +69,15 @@ if (preg_match('/^\s*(-?\d{1,2}(?:\.\d+)?)\s*[,;]\s*(-?\d{1,3}(?:\.\d+)?)\s*$/',
 		</ol>
 		<div class="fk-ct-map">
 			<h3 class="fk-vh">Карта</h3>
-<?php if ($fkCoords) {
+<?php if ($fkShowMap) {
 	$APPLICATION->IncludeComponent("bitrix:map.yandex.view", "", array(
+		"API_KEY" => $fkYandexKey,
 		"INIT_MAP_TYPE" => "MAP",
 		"MAP_DATA" => serialize(array(
-			"yandex_lat" => $fkCoords["lat"],
-			"yandex_lon" => $fkCoords["lon"],
-			"yandex_scale" => 16,
-			"PLACEMARKS" => array(array("LON" => $fkCoords["lon"], "LAT" => $fkCoords["lat"], "TEXT" => "FORKEL")),
+			"yandex_lat" => $fkCenterLat,
+			"yandex_lon" => $fkCenterLon,
+			"yandex_scale" => 13,
+			"PLACEMARKS" => $fkPlacemarks,
 		)),
 		"MAP_WIDTH" => "100%",
 		"MAP_HEIGHT" => "400",
