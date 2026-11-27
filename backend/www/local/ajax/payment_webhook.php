@@ -1,28 +1,29 @@
 <?php
 /**
- * Webhook / Callback endpoint for online payment confirmation (FR-008 / INT-006).
- * Supports YooKassa JSON notification format and Beta Sandbox test confirmation.
- * Verifies HMAC-SHA256 signature (X-Webhook-Signature) against YOOKASSA_WEBHOOK_SECRET.
- * Logs safely to local/logs/payment_webhook.log without exposing secrets.
+ * Уведомления об оплате (FR-008 / INT-006, DEC-013 / TASK-019).
+ *
+ * 1. Callback Альфа-Банка (GET/POST: mdOrder, orderNumber, operation, status[, checksum]):
+ *    - доступы банка не заданы -> 403;
+ *    - задан ALFABANK_CALLBACK_SECRET и checksum не совпал (или отсутствует) -> 403;
+ *    - далее обработчик forkelalfabank перепроверяет статус через getOrderStatusExtended.do и отмечает
+ *      оплату только при orderStatus = 2 (списание прошло) и совпадении суммы.
+ * 2. Песочница Beta (доступы банка не заданы и PAYMENT_SANDBOX=1): POST JSON {"order_id": N}
+ *    с действующим sessid и только для своего заказа (или администратора). Во всех остальных случаях -> 403.
+ * Журнал: local/logs/payment_webhook.log (без ключей и персональных данных).
  */
 define('NO_KEEP_STATISTIC', true);
 define('NO_AGENT_STATISTIC', true);
 define('NOT_CHECK_PERMISSIONS', true);
 require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
 
+use Bitrix\Main\Application;
 use Bitrix\Main\Loader;
 use Bitrix\Main\Web\Json;
 use Bitrix\Sale\Order;
+use Bitrix\Sale\PaySystem;
+use Forkel\AlfaBank;
 
 header('Content-Type: application/json; charset=UTF-8');
-
-$logWebhook = static function (string $status, string $msg): void {
-    $dir = ($_SERVER['DOCUMENT_ROOT'] ?: '/var/www/html') . '/local/logs';
-    if (!is_dir($dir)) {
-        @mkdir($dir, 0775, true);
-    }
-    @file_put_contents($dir . '/payment_webhook.log', '[' . date('Y-m-d H:i:s') . '] [' . $status . '] ' . $msg . PHP_EOL, FILE_APPEND | LOCK_EX);
-};
 
 $respond = static function (int $code, array $data): void {
     http_response_code($code);
@@ -31,104 +32,106 @@ $respond = static function (int $code, array $data): void {
 };
 
 if (!\Forkel\RateLimiter::check('payment_webhook', 60, 60)) {
-    $logWebhook('RATE_LIMIT', 'Too many requests');
+    AlfaBank::log('RATE_LIMIT', 'Too many requests');
     $respond(429, ['ok' => false, 'error' => 'Too many requests']);
-}
-
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    $respond(405, ['ok' => false, 'error' => 'Method not allowed']);
 }
 
 if (!Loader::includeModule('sale')) {
     $respond(500, ['ok' => false, 'error' => 'Sale module unavailable']);
 }
 
-$rawBody = (string)file_get_contents('php://input');
-$payload = [];
-if ($rawBody !== '') {
-    try {
-        $payload = Json::decode($rawBody);
-    } catch (\Throwable $e) {
-        $payload = $_POST;
+$request = Application::getInstance()->getContext()->getRequest();
+
+// --- 1. Callback Альфа-Банка ---
+if ((string)$request->get('mdOrder') !== '' && (string)$request->get('orderNumber') !== '') {
+    $mdOrder = substr(preg_replace('/[^a-zA-Z0-9-]/', '', (string)$request->get('mdOrder')), 0, 64);
+
+    if (!AlfaBank::isConfigured()) {
+        AlfaBank::log('NO_CREDENTIALS', "Callback mdOrder=$mdOrder rejected: ALFABANK_* not configured");
+        $respond(403, ['ok' => false, 'error' => 'Payment gateway not configured']);
     }
-} else {
-    $payload = $_POST;
+    if (!AlfaBank::verifyCallback($request->toArray())) {
+        AlfaBank::log('BAD_CHECKSUM', "Callback mdOrder=$mdOrder: checksum mismatch");
+        $respond(403, ['ok' => false, 'error' => 'Invalid checksum']);
+    }
+
+    $item = PaySystem\Manager::searchByRequest($request);
+    if ($item === false || $item['ACTION_FILE'] !== AlfaBank::HANDLER) {
+        AlfaBank::log('NOT_FOUND', "Callback mdOrder=$mdOrder: pay system not found");
+        $respond(404, ['ok' => false, 'error' => 'Payment not found']);
+    }
+
+    $service = new PaySystem\Service($item);
+    $result = $service->processRequest($request);
+    if (!$result->isSuccess()) {
+        AlfaBank::log('CALLBACK_ERR', "mdOrder=$mdOrder: " . implode('; ', $result->getErrorMessages()));
+        $respond(400, ['ok' => false, 'error' => 'Callback not accepted']);
+    }
+    AlfaBank::log('CALLBACK_OK', "mdOrder=$mdOrder operation=" . preg_replace('/[^a-z_]/i', '', (string)$request->get('operation')) . ' status=' . (int)$request->get('status'));
+    $respond(200, ['ok' => true]);
 }
 
-$secret = \Forkel\Env::get('YOOKASSA_WEBHOOK_SECRET');
-$sandbox = \Forkel\Env::get('PAYMENT_SANDBOX', '1') === '1';
-
-if ($secret !== '') {
-    $sig = (string)($_SERVER['HTTP_X_WEBHOOK_SIGNATURE'] ?? '');
-    $expected = hash_hmac('sha256', $rawBody, $secret);
-    if (!hash_equals($expected, $sig)) {
-        $logWebhook('BAD_SIGNATURE', 'Signature mismatch');
-        $respond(403, ['ok' => false, 'error' => 'Invalid signature']);
-    }
-} elseif (!$sandbox) {
-    $logWebhook('NO_SECRET', 'Webhook secret missing in non-sandbox mode');
-    $respond(403, ['ok' => false, 'error' => 'Webhook secret not configured']);
-} else {
-    // In sandbox mode, require either valid sessid (browser test) or X-Sandbox-Token header
-    $isSandboxTest = check_bitrix_sessid() || !empty($_SERVER['HTTP_X_SANDBOX_TEST']);
-    if (!$isSandboxTest) {
-        $logWebhook('SANDBOX_DENIED', 'Missing sessid or X-Sandbox-Test header');
-        $respond(403, ['ok' => false, 'error' => 'Sandbox authorization required']);
-    }
+// --- 2. Песочница Beta ---
+if (!AlfaBank::isSandbox()) {
+    AlfaBank::log('DENIED', 'Non-bank request outside sandbox mode');
+    $respond(403, ['ok' => false, 'error' => 'Forbidden']);
+}
+if ($request->getRequestMethod() !== 'POST') {
+    $respond(405, ['ok' => false, 'error' => 'Method not allowed']);
+}
+if (!check_bitrix_sessid()) {
+    AlfaBank::log('SANDBOX_DENIED', 'Missing or invalid sessid');
+    $respond(403, ['ok' => false, 'error' => 'Sandbox authorization required']);
 }
 
-$event = (string)($payload['event'] ?? 'payment.succeeded');
-$obj = is_array($payload['object'] ?? null) ? $payload['object'] : $payload;
-$orderId = (int)($obj['metadata']['order_id'] ?? $obj['order_id'] ?? 0);
-$paymentId = (int)($obj['metadata']['payment_id'] ?? $obj['payment_id'] ?? 0);
-$externalId = (string)($obj['id'] ?? 'sandbox_' . time());
-
+try {
+    $payload = Json::decode((string)file_get_contents('php://input'));
+} catch (\Throwable $e) {
+    $payload = [];
+}
+$orderId = (int)($payload['order_id'] ?? 0);
 if ($orderId <= 0) {
-    $logWebhook('BAD_PAYLOAD', 'Missing order_id');
     $respond(400, ['ok' => false, 'error' => 'Missing order_id']);
 }
 
 $order = Order::load($orderId);
-if (!$order) {
-    $logWebhook('NOT_FOUND', "Order #$orderId not found");
-    $respond(404, ['ok' => false, 'error' => 'Order not found']);
+global $USER;
+$sessionOrders = array_map('intval', (array)($_SESSION['SALE_ORDER_ID'] ?? []));
+$isOwner = $order && (
+    ($USER->IsAuthorized() && (int)$order->getUserId() === (int)$USER->GetID())
+    || in_array($orderId, $sessionOrders, true)
+    || $USER->IsAdmin()
+);
+if (!$isOwner) {
+    AlfaBank::log('SANDBOX_DENIED', "Order #$orderId: not found or not owned by current user");
+    $respond(403, ['ok' => false, 'error' => 'Forbidden']);
 }
 
-if ($event === 'payment.succeeded') {
-    $paymentCollection = $order->getPaymentCollection();
-    $targetPayment = null;
-    foreach ($paymentCollection as $p) {
-        if ($paymentId > 0 && (int)$p->getId() === $paymentId) {
-            $targetPayment = $p;
-            break;
-        }
-        if (!$p->isPaid()) {
-            $targetPayment = $p;
-        }
+$target = null;
+foreach ($order->getPaymentCollection() as $payment) {
+    if (!$payment->isPaid() && !$payment->isInner()) {
+        $target = $payment;
+        break;
     }
-    if ($targetPayment) {
-        $targetPayment->setPaid('Y');
-        $targetPayment->setField('PS_STATUS', 'Y');
-        $targetPayment->setField('PS_STATUS_CODE', 'succeeded');
-        $targetPayment->setField('PS_INVOICE_ID', $externalId);
-        $targetPayment->setField('PS_SUM', $targetPayment->getSum());
-        $order->setField('STATUS_ID', 'P');
-        $saveRes = $order->save();
-        if (!$saveRes->isSuccess()) {
-            $logWebhook('SAVE_ERR', "Order #$orderId: " . implode('; ', $saveRes->getErrorMessages()));
-            $respond(500, ['ok' => false, 'error' => 'Order save failed']);
-        }
-        $logWebhook('PAID', "Order #$orderId payment #{$targetPayment->getId()} marked PAID (ext=$externalId)");
-        $respond(200, ['ok' => true, 'order_id' => $orderId, 'status' => 'P', 'paid' => true]);
-    }
-    $logWebhook('NO_UNPAID', "Order #$orderId already paid");
+}
+if (!$target) {
     $respond(200, ['ok' => true, 'order_id' => $orderId, 'paid' => true]);
 }
 
-if ($event === 'payment.canceled') {
-    $logWebhook('CANCELED', "Order #$orderId payment canceled (ext=$externalId)");
-    $respond(200, ['ok' => true, 'order_id' => $orderId, 'canceled' => true]);
+$target->setFields([
+    'PS_STATUS' => 'Y',
+    'PS_STATUS_CODE' => 'sandbox',
+    'PS_STATUS_DESCRIPTION' => 'Beta Sandbox: тестовая оплата без банка',
+    'PS_INVOICE_ID' => 'sandbox_' . time(),
+    'PS_SUM' => $target->getSum(),
+    'PS_CURRENCY' => $target->getField('CURRENCY'),
+    'PS_RESPONSE_DATE' => new \Bitrix\Main\Type\DateTime(),
+]);
+$paidResult = $target->setPaid('Y');
+$saveResult = $paidResult->isSuccess() ? $order->save() : $paidResult;
+if (!$saveResult->isSuccess()) {
+    AlfaBank::log('SAVE_ERR', "Order #$orderId: " . implode('; ', $saveResult->getErrorMessages()));
+    $respond(500, ['ok' => false, 'error' => 'Order save failed']);
 }
-
-$logWebhook('IGNORED', "Event=$event order=#$orderId");
-$respond(200, ['ok' => true, 'ignored' => true]);
+AlfaBank::log('SANDBOX_PAID', "Order #$orderId payment #{$target->getId()} marked PAID (sandbox)");
+$respond(200, ['ok' => true, 'order_id' => $orderId, 'paid' => true]);

@@ -7,6 +7,7 @@ require_once __DIR__ . '/classes/Env.php';
 require_once __DIR__ . '/classes/RateLimiter.php';
 require_once __DIR__ . '/classes/MaxNotifier.php';
 require_once __DIR__ . '/classes/Wishlist.php';
+require_once __DIR__ . '/classes/AlfaBank.php';
 require_once __DIR__ . '/forkel_helpers.php';
 
 use Bitrix\Main\Event;

@@ -21,6 +21,8 @@ services:
     restart: unless-stopped
     working_dir: /var/www/html
     # Пароль root MySQL в PHP-контейнер не передаётся: приложению нужны только данные его пользователя.
+    # Настройки интеграций передаются явно из backend/.env (читаются через \Forkel\Env); пустое значение = не задано.
+    # После изменения .env: docker compose up -d php
     environment:
       DB_HOST: db
       MYSQL_DATABASE: ${MYSQL_DATABASE:?Set MYSQL_DATABASE in backend/.env}
@@ -28,6 +30,30 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in backend/.env}
       APP_ENV: ${APP_ENV:-local}
       APP_DEBUG: ${APP_DEBUG:-1}
+      SITE_EMAIL: ${SITE_EMAIL:-}
+      SITE_URL: ${SITE_URL:-}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_FROM: ${SMTP_FROM:-}
+      MAX_BOT_TOKEN: ${MAX_BOT_TOKEN:-}
+      MAX_CHAT_ID: ${MAX_CHAT_ID:-}
+      MAX_API_URL: ${MAX_API_URL:-}
+      ALFABANK_USER: ${ALFABANK_USER:-}
+      ALFABANK_PASSWORD: ${ALFABANK_PASSWORD:-}
+      ALFABANK_TOKEN: ${ALFABANK_TOKEN:-}
+      ALFABANK_TEST_MODE: ${ALFABANK_TEST_MODE:-1}
+      ALFABANK_CALLBACK_SECRET: ${ALFABANK_CALLBACK_SECRET:-}
+      ALFABANK_API_URL: ${ALFABANK_API_URL:-}
+      ALFABANK_TEST_API_URL: ${ALFABANK_TEST_API_URL:-}
+      ALFABANK_FFD_ENABLED: ${ALFABANK_FFD_ENABLED:-0}
+      PAYMENT_SANDBOX: ${PAYMENT_SANDBOX:-1}
+      CDEK_CLIENT_ID: ${CDEK_CLIENT_ID:-}
+      CDEK_CLIENT_SECRET: ${CDEK_CLIENT_SECRET:-}
+      CDEK_SANDBOX: ${CDEK_SANDBOX:-1}
+      YANDEX_MAPS_API_KEY: ${YANDEX_MAPS_API_KEY:-}
+      ONEC_EXCHANGE_PASSWORD: ${ONEC_EXCHANGE_PASSWORD:-}
     volumes:
       - ./www:/var/www/html
       - ./docker/php/php.ini:/usr/local/etc/php/conf.d/99-forkel.ini:ro
