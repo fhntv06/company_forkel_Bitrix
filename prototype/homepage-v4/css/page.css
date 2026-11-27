@@ -64,6 +64,8 @@
     letter-spacing: -0.02em;
 }
 
+.fk-ct-title { margin: 16px 0 24px; font-size: clamp(1.625rem, 1.04rem + 2.253vw, 3.033rem); line-height: 1.08; font-weight: 700; letter-spacing: -0.02em; overflow-wrap: break-word; }
+
 .fk-coop-title,
 .fk-coop-intro {
     color: white;
