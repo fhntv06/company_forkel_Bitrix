@@ -2,8 +2,10 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 /** @global CMain $APPLICATION */
 $APPLICATION->SetTitle("Новинки");
-$APPLICATION->SetPageProperty("fk_lead", "Свежие позиции каталога FORKEL.");
-
+$APPLICATION->SetPageProperty("fk_no_hero", "Y"); // как на «Контактах»: без баннера-героя, крошки + h1
+?>
+<h1 class="fk-page-title fk-ct-title" id="new-title">Новинки</h1>
+<?php
 // Товары с отмеченным флагом «Новинка» (свойство NEW). Список, фильтр и карточки — как в каталоге.
 $listParams = fk_catalog_params();
 $listParams['FK_NO_CHIPS'] = true; // в V4 на странице «Новинки» нет ссылок на категории

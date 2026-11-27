@@ -5,7 +5,7 @@ Docker-окружение для локального развёртывания
 
 ## 1. Состав окружения
 
-- **Nginx** — HTTP-сервер, порт `8080` на хосте.
+- **Nginx** — HTTP-сервер, порт `9090` на хосте.
 - **PHP-FPM** — выполнение PHP-кода сайта.
 - **MySQL 8.0** — база данных.
 - **Docker Compose** — запуск и управление сервисами.
@@ -113,7 +113,7 @@ docker compose logs --tail=100 nginx php db
 Открой в браузере:
 
 ```text
-http://localhost:8080
+http://localhost:9090
 ```
 
 Пока установка сайта не завершена, приложение может быть недоступно — это ожидаемо.
@@ -121,7 +121,7 @@ http://localhost:8080
 ## 7. Установка 1С-Битрикс
 
 1. Убедись, что контейнеры запущены и MySQL прошёл healthcheck.
-2. Открой `http://localhost:8080/bitrixsetup.php`.
+2. Открой `http://localhost:9090/bitrixsetup.php`.
 3. Следуй официальной инструкции установщика.
 4. Для подключения к базе укажи:
     - **Сервер БД:** `db`
@@ -208,3 +208,14 @@ docker compose exec db sh -c 'mysqladmin ping -h 127.0.0.1 -uroot -p"$MYSQL_ROOT
 Это базовое локальное окружение. Оно само по себе не содержит кода сайта, ядра 1С-Битрикс, каталога товаров или интеграции с 1С.
 
 Перед фактической установкой необходимо проверить совместимость версий PHP и MySQL, набор расширений и дополнительные требования конкретной редакции Битрикс.
+
+## Миграции и выкладка на боевой
+
+Структура данных и настройки меняются только миграциями **sprint.migration** (`www/local/php_interface/migrations/`), тестовые данные — в `migrations.testdata/` (только при `APP_ENV=local`).
+
+```bash
+docker exec -w /var/www/html forkel-php php local/modules/sprint.migration/tools/migrate.php ls
+docker exec -w /var/www/html forkel-php php local/modules/sprint.migration/tools/migrate.php up
+```
+
+Полный регламент (первый перенос, выкладка, правила): [docs/development/deployment.md](../docs/development/deployment.md).

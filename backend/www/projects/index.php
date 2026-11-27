@@ -2,8 +2,10 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 /** @global CMain $APPLICATION */
 $APPLICATION->SetTitle("Проекты");
-$APPLICATION->SetPageProperty("fk_lead", "Реализованные проекты с изделиями FORKEL.");
-$APPLICATION->SetPageProperty("fk_hero_art", "fk_projects_hero_art");
+$APPLICATION->SetPageProperty("fk_no_hero", "Y"); // как на «Контактах»: без баннера-героя, крошки + h1
+if ($APPLICATION->GetCurPage(false) === "/projects/") {
+	echo '<h1 class="fk-page-title fk-ct-title" id="prj-list-title">Проекты</h1>';
+}
 $fkIntro = fk_include_text("fk_projects_intro");
 if ($fkIntro !== "" && $APPLICATION->GetCurPage(false) === "/projects/") {
 	echo '<p class="fk-prj-intro">'.htmlspecialcharsbx($fkIntro).'</p>';

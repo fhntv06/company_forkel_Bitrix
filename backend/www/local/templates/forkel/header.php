@@ -66,7 +66,9 @@ $fkWishlistCount = class_exists('\Forkel\Wishlist') ? \Forkel\Wishlist::count() 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php $APPLICATION->ShowTitle(); ?></title>
+    <?php if (!defined('ERROR_404') || ERROR_404 !== 'Y'): ?>
     <link rel="canonical" href="<?= htmlspecialcharsbx($fkCanonicalUrl) ?>">
+    <?php endif; ?>
     <?php $APPLICATION->ShowHead(); ?>
 </head>
 <body>

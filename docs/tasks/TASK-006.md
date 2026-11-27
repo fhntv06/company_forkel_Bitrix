@@ -4,7 +4,7 @@
 
 - **ID:** TASK-006
 - **Название:** Миниатюры фото под основным фото на странице товара
-- **Статус:** REVIEW
+- **Статус:** DONE
 - **Приоритет:** P2
 - **Ответственная роль:** UI Implementation / Bitrix Developer (шаблон `catalog.element/fk`)
 - **Зависимости:** TASK-005 (страница товара). Ветка `role/implementation/TASK-006-pdp-thumbs` создана поверх `role/bitrix-developer/TASK-005-stage2-catalog`, т. к. TASK-005 ещё не в `main`.
